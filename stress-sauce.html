@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JS-XLS and JS-XLSX Test Runner (Mocha)</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="mocha.css" />
+    <link rel="icon" type="image/png" href="logo.png" />
+    <style>
+      #t { font: 20px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif; margin: 0px 60px; font-weight: bold; }
+      #tt{ font: 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif; margin: 0px 60px; }
+      th { font: 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif; margin: 0px 60px; font-weight: bold; text-align: left; }
+    </style>
+  </head>
+  <body>
+    <h1 id="t">JS-XLS and JS-XLSX Browser-based Parsing Tests</h1>
+    <table id="tt">
+      <tr>
+        <th>XLS</th>
+        <td><a href="http://github.com/SheetJS/js-xls">Library Source</a></td>
+        <td><a href="http://SheetJS.github.io/js-xls">Interactive Demo</a></td>
+        <td><a href="http://npm.im/xlsjs">"xlsjs" on npm</a></td>
+        <td><a href="https://travis-ci.org/SheetJS/js-xls">node CI status</a></td>
+      </tr>
+      <tr>
+        <th>XLSX</th>
+        <td><a href="http://github.com/SheetJS/js-xlsx">Library Source</a></td>
+        <td><a href="http://SheetJS.github.io/js-xls">Interactive Demo</a></td>
+        <td><a href="http://npm.im/xlsx">"xlsx" on npm</a></td>
+        <td><a href="https://travis-ci.org/SheetJS/js-xlsx">node CI status</a></td>
+      </tr>
+      <tr><td colspan="5">Tests compiled from <a href="http://github.com/SheetJS/test_files">test_files repo</a> and are located at /test_files<br /></td></tr>
+      <tr><td colspan="5"><a href="http://visionmedia.github.io/mocha">Mocha test runner</a> used here and in the node modules</td></tr>
+    </table>
+    <script src="shim.js"></script>
+    <script src="jszip.js"></script>
+    <script src="xlsx.js"></script>
+    <script src="cptable.js"></script>
+    <script src="cputils.js"></script>
+    <script src="xls.js"></script>
+    <script src="mocha-sauce-client.js"></script>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-36810333-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    <div id="mocha"></div>
+    <script src="mocha.js"></script>
+    <script>mocha.setup('bdd')</script>
+    <script src="test.js"></script>
+    <script>
+      if(typeof mochaSaucePlease !== "undefined") mochaSaucePlease();
+      else if(window.mochaPhantomJS) mochaPhantomJS.run(); 
+      else mocha.run();
+    </script>
+  </body>
+</html>

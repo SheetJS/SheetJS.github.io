@@ -437,15 +437,23 @@ describe('should parse test files', function() {
 "חישוב_נקודות_זיכוי.xlsx"
 	].forEach(function(x) {
 		it(x, x.substr(-8) == ".pending" ? null : function(done) {
-			var oReq = new XMLHttpRequest();
+			var oReq;
+			if(window.XMLHttpRequest || XMLHttpRequest) oReq = new XMLHttpRequest();
+			else oReq = new ActiveXObject("Microsoft.XMLHTTP");
 			oReq.open("GET", '/test_files/' + x, true);
-			oReq.overrideMimeType('text\/plain; charset=x-user-defined');
-			oReq.responseType = "arraybuffer";
+			if(oReq.overrideMimeType) oReq.overrideMimeType('text\/plain; charset=x-user-defined');
+			if(typeof oReq.responseType !== "undefined") oReq.responseType = "arraybuffer";
 			oReq.onload = function(e) {
-				var arraybuffer = oReq.response;
-				var data = new Uint8Array(arraybuffer);
 				var arr = new Array();
-				for(var i = 0; i != data.length; ++i) arr[i] = data[i];
+				if(typeof oReq.responseType !== "undefined") {
+					var arraybuffer = oReq.response;
+					var data = new Uint8Array(arraybuffer);
+					for(var i = 0; i != data.length; ++i) arr[i] = data[i];
+				} else {
+					console.log("else"); 
+					var data = oReq.responseText;
+					for(var i = 0; i != data.length; ++i) arr[i] = data.charCodeAt(i) & 0xff;
+				}
 				var wb = x.substr(-1) == "s" ? XLS.read(arr, {type:'array'})
 					: XLSX.read(arr.map(function(x) { return String.fromCharCode(x); }).join(""), {type:'binary'});
 				parsetest(x, wb);
