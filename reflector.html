@@ -1,0 +1,130 @@
+<!-- reflector.html (C) 2014 SheetJS - http://sheetjs.com -->
+<!-- vim: set ts=2: -->
+<pre id="out"></pre>
+<div id="hot"></div>
+<style>
+table, td, th { border-width: 1px; border-style: dotted; }
+td, th { white-space: pre; padding: 3px; }
+</style>
+<br />
+<script src="shim.js"></script>
+<script src="xls.js"></script>
+<script src="jszip.js"></script>
+<script src="xlsx.js"></script>
+<script>
+
+var XL;
+
+function to_json(workbook) {
+	var result = {};
+	workbook.SheetNames.forEach(function(sheetName) {
+		var roa = XL.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
+		if(roa.length > 0) result[sheetName] = roa;
+	});
+	return result;
+}
+
+function to_csv(workbook, FS) {
+	var result = [];
+	console.log(workbook);
+	workbook.SheetNames.forEach(function(sheetName) {
+		var csv = XL.utils.make_csv(workbook.Sheets[sheetName], {FS:FS||","});
+		if(csv.length > 0){
+			result.push("SHEET: " + sheetName);
+			result.push("");
+			result.push(csv);
+		}
+	});
+	return result.join("\n");
+}
+
+function get_columns(sheet) {
+	var val, rowObject, range, columnHeaders, emptyRow, C;
+	range = XL.utils.decode_range(sheet["!ref"]);
+	columnHeaders = [];
+	for (C = range.s.c; C <= range.e.c; ++C) {
+		val = sheet[XL.utils.encode_cell({c: C, r: range.s.r})];
+		if(val){
+			switch(val.t) {
+				case 's': case 'str': columnHeaders[C] = val.v; break;
+				case 'n': columnHeaders[C] = val.v; break;
+			}
+		}
+	}
+	return columnHeaders;
+}
+
+function to_html(wb) {
+	var json = to_json(wb);
+	wb.SheetNames.forEach(function(sheet) {
+		var cols = get_columns(wb.Sheets[sheet]);
+		var tbl = document.createElement('div');
+		var src = "<h3>" + sheet + "</h3>";
+		src += "<table>";
+		src += "<thead><tr>";
+		cols.forEach(function(c) { src += "<th>" + (typeof c !== "undefined" ? c : "") + "</th>"; });
+		src += "</tr></thead>";
+		(json[sheet]||[]).forEach(function(row) {
+			src += "<tr>";
+			cols.forEach(function(c) { src += "<td>" + (typeof row[c] !== "undefined" ? row[c] : "") + "</c>"; });
+			src += "</tr>";
+		});
+		src += "</table>";
+		tbl.innerHTML = src;
+		document.getElementById('hot').appendChild(tbl);
+	});
+};
+
+function process_wb(wb, fmt) {
+	var output = "";
+	switch(fmt) {
+		case "json": output = JSON.stringify(to_json(wb),2,2); break;
+		case "csv": output = to_csv(wb); break;
+		case "tsv": output = to_csv(wb, "\t"); break;
+		default: output = to_html(wb); return;
+	}
+	console.log(output);
+	var out = document.getElementById('out');
+	if(out.innerText === undefined) out.textContent = output;
+	else out.innerText = output;
+}
+
+/* from http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript */
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+var url=getParameterByName("file");
+var fmt=getParameterByName("fmt");
+var oReq = new XMLHttpRequest();
+oReq.open("GET", url, true);
+oReq.responseType = "arraybuffer";
+oReq.onload = function(e) {
+	var arraybuffer = oReq.response;
+	var data = new Uint8Array(arraybuffer);
+	var arr = new Array();
+	for(var i = 0; i != data.length; ++i) arr[i] = data[i];
+	var wb;
+	if(arr[0] == 0xd0) wb = (XL=XLS).read(arr, {type:"array"});
+	else wb = (XL=XLSX).read(arr, {type:"binary"});
+	console.log(wb);
+	process_wb(wb, fmt);
+}
+oReq.send();
+</script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36810333-1']);
+  _gaq.push(['_setDomainName', 'sheetjs.com']);
+  _gaq.push(['_setAllowLinker', true]);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>

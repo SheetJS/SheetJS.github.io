@@ -1,0 +1,26 @@
+/* sheetjs.css (C) 2014 SheetJS -- http://sheetjs.com */
+/* vim: set ts=2: */
+#drop{
+  border:2px dashed #bbb;
+  -moz-border-radius:5px;
+  -webkit-border-radius:5px;
+  border-radius:5px;
+  padding:25px;
+  text-align:center;
+  width:128px;
+  font:20pt bold,"Vollkorn";color:#bbb
+}
+
+#left {
+  width:188px;
+  float:left;
+}
+#right {
+  float:left;
+}
+#logo {
+  padding:25px;
+}
+#header {
+  height:168px;
+}

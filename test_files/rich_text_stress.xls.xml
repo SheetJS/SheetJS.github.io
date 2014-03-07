@@ -1,0 +1,302 @@
+<?xml version="1.0"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:html="http://www.w3.org/TR/REC-html40">
+ <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+  <Created>2014-01-30T09:17:06Z</Created>
+  <LastSaved>2014-01-31T07:32:33Z</LastSaved>
+  <Version>15.00</Version>
+ </DocumentProperties>
+ <OfficeDocumentSettings xmlns="urn:schemas-microsoft-com:office:office">
+  <AllowPNG/>
+  <RemovePersonalInformation/>
+  <Colors>
+   <Color>
+    <Index>2</Index>
+    <RGB>#DD0806</RGB>
+   </Color>
+   <Color>
+    <Index>3</Index>
+    <RGB>#1FB714</RGB>
+   </Color>
+   <Color>
+    <Index>4</Index>
+    <RGB>#0000D4</RGB>
+   </Color>
+   <Color>
+    <Index>5</Index>
+    <RGB>#FCF305</RGB>
+   </Color>
+   <Color>
+    <Index>6</Index>
+    <RGB>#F20884</RGB>
+   </Color>
+   <Color>
+    <Index>7</Index>
+    <RGB>#00ABEA</RGB>
+   </Color>
+   <Color>
+    <Index>8</Index>
+    <RGB>#900000</RGB>
+   </Color>
+   <Color>
+    <Index>9</Index>
+    <RGB>#006411</RGB>
+   </Color>
+   <Color>
+    <Index>10</Index>
+    <RGB>#000090</RGB>
+   </Color>
+   <Color>
+    <Index>11</Index>
+    <RGB>#90713A</RGB>
+   </Color>
+   <Color>
+    <Index>12</Index>
+    <RGB>#4600A5</RGB>
+   </Color>
+   <Color>
+    <Index>16</Index>
+    <RGB>#63AAFE</RGB>
+   </Color>
+   <Color>
+    <Index>17</Index>
+    <RGB>#DD2D32</RGB>
+   </Color>
+   <Color>
+    <Index>18</Index>
+    <RGB>#FFF58C</RGB>
+   </Color>
+   <Color>
+    <Index>19</Index>
+    <RGB>#4EE257</RGB>
+   </Color>
+   <Color>
+    <Index>20</Index>
+    <RGB>#6711FF</RGB>
+   </Color>
+   <Color>
+    <Index>21</Index>
+    <RGB>#FEA746</RGB>
+   </Color>
+   <Color>
+    <Index>22</Index>
+    <RGB>#865357</RGB>
+   </Color>
+   <Color>
+    <Index>23</Index>
+    <RGB>#A2BD90</RGB>
+   </Color>
+   <Color>
+    <Index>24</Index>
+    <RGB>#63AAFE</RGB>
+   </Color>
+   <Color>
+    <Index>25</Index>
+    <RGB>#DD2D32</RGB>
+   </Color>
+   <Color>
+    <Index>26</Index>
+    <RGB>#FFF58C</RGB>
+   </Color>
+   <Color>
+    <Index>27</Index>
+    <RGB>#4EE257</RGB>
+   </Color>
+   <Color>
+    <Index>28</Index>
+    <RGB>#6711FF</RGB>
+   </Color>
+   <Color>
+    <Index>29</Index>
+    <RGB>#FEA746</RGB>
+   </Color>
+   <Color>
+    <Index>30</Index>
+    <RGB>#865357</RGB>
+   </Color>
+   <Color>
+    <Index>31</Index>
+    <RGB>#A2BD90</RGB>
+   </Color>
+  </Colors>
+ </OfficeDocumentSettings>
+ <ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
+  <WindowHeight>12300</WindowHeight>
+  <WindowWidth>10725</WindowWidth>
+  <WindowTopX>13725</WindowTopX>
+  <WindowTopY>3720</WindowTopY>
+  <TabRatio>500</TabRatio>
+  <ProtectStructure>False</ProtectStructure>
+  <ProtectWindows>False</ProtectWindows>
+ </ExcelWorkbook>
+ <Styles>
+  <Style ss:ID="Default" ss:Name="Normal">
+   <Alignment ss:Vertical="Bottom"/>
+   <Borders/>
+   <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="12" ss:Color="#000000"/>
+   <Interior/>
+   <NumberFormat/>
+   <Protection/>
+  </Style>
+  <Style ss:ID="s62">
+   <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="12" ss:Color="#000000"
+    ss:Bold="1"/>
+  </Style>
+  <Style ss:ID="s63">
+   <Font ss:FontName="Calibri" ss:Color="#000000"/>
+  </Style>
+  <Style ss:ID="s64">
+   <Font ss:FontName="Calibri" ss:Size="12" ss:Color="#000000"
+    ss:Underline="Single"/>
+  </Style>
+  <Style ss:ID="s65">
+   <Font ss:FontName="Calibri" ss:Size="12" ss:Color="#000000" ss:Italic="1"/>
+  </Style>
+  <Style ss:ID="s66">
+   <Font ss:FontName="Calibri" ss:Size="12" ss:Color="#000000" ss:StrikeThrough="1"/>
+  </Style>
+  <Style ss:ID="s67">
+   <Font ss:FontName="Calibri" ss:Size="12" ss:Color="#000000"
+    ss:VerticalAlign="Subscript"/>
+  </Style>
+  <Style ss:ID="s68">
+   <Font ss:FontName="Calibri" ss:Size="12" ss:Color="#000000"
+    ss:VerticalAlign="Superscript"/>
+  </Style>
+  <Style ss:ID="s69">
+   <Font ss:FontName="Calibri" ss:Size="12" ss:Color="#000000" ss:Outline="1"/>
+  </Style>
+  <Style ss:ID="s70">
+   <Font ss:FontName="Calibri" ss:Size="12" ss:Color="#000000" ss:Shadow="1"/>
+  </Style>
+  <Style ss:ID="s71">
+   <Font ss:FontName="Calibri" ss:Size="12" ss:Color="#000000"
+    ss:Underline="Double"/>
+  </Style>
+  <Style ss:ID="s72">
+   <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="12" ss:Color="#000000"/>
+  </Style>
+  <Style ss:ID="s73">
+   <Font ss:FontName="Calibri" ss:Size="12" ss:Color="#000000"
+    ss:Underline="SingleAccounting"/>
+  </Style>
+  <Style ss:ID="s74">
+   <Font ss:FontName="Calibri" ss:Size="12" ss:Color="#000000"
+    ss:Underline="DoubleAccounting"/>
+  </Style>
+  <Style ss:ID="s75">
+   <Font ss:FontName="Calibri" ss:Size="12" ss:Color="#000000" ss:Bold="1"
+    ss:Italic="1" ss:Underline="Single"/>
+  </Style>
+ </Styles>
+ <Worksheet ss:Name="Sheet1">
+  <Table ss:ExpandedColumnCount="256" ss:ExpandedRowCount="15" x:FullColumns="1"
+   x:FullRows="1" ss:DefaultColumnWidth="54" ss:DefaultRowHeight="15.75">
+   <Column ss:AutoFitWidth="0" ss:Width="66" ss:Span="255"/>
+   <Row>
+    <Cell><Data ss:Type="String">normal</Data></Cell>
+    <Cell><Data ss:Type="String">this text is normal, sure enough</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">bold</Data></Cell>
+    <Cell><ss:Data ss:Type="String" xmlns="http://www.w3.org/TR/REC-html40"><Font
+       html:Color="#000000">this text is </Font><B><Font html:Color="#000000">bold</Font></B><Font
+       html:Color="#000000">, sure enough</Font></ss:Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s65"><Data ss:Type="String">italic</Data></Cell>
+    <Cell><ss:Data ss:Type="String" xmlns="http://www.w3.org/TR/REC-html40"><Font
+       html:Color="#000000">this text is </Font><I><Font html:Color="#000000">italicized</Font></I><Font
+       html:Color="#000000"> sure enough</Font></ss:Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">underline</Data></Cell>
+    <Cell><ss:Data ss:Type="String" xmlns="http://www.w3.org/TR/REC-html40"><Font
+       html:Color="#000000">this text is </Font><U><Font html:Color="#000000">underlined</Font></U><Font
+       html:Color="#000000">, sure enough</Font></ss:Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">sz10</Data></Cell>
+    <Cell><ss:Data ss:Type="String" xmlns="http://www.w3.org/TR/REC-html40"><Font
+       html:Color="#000000">this text is </Font><Font html:Size="10"
+       html:Color="#000000">sz10,</Font><Font html:Color="#000000"> sure enough</Font></ss:Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">strike</Data></Cell>
+    <Cell ss:StyleID="s72"><ss:Data ss:Type="String"
+      xmlns="http://www.w3.org/TR/REC-html40"><Font html:Color="#000000">this text is </Font><S><Font
+        html:Color="#000000">stricken</Font></S><Font html:Color="#000000"> sure enough</Font></ss:Data></Cell>
+   </Row>
+   <Row ss:Height="18.75">
+    <Cell ss:StyleID="s67"><Data ss:Type="String">subscript</Data></Cell>
+    <Cell ss:StyleID="s72"><ss:Data ss:Type="String"
+      xmlns="http://www.w3.org/TR/REC-html40"><Font html:Color="#000000">this text is </Font><Sub><Font
+        html:Color="#000000">subscripted</Font></Sub><Font html:Color="#000000"> sure enough</Font></ss:Data></Cell>
+   </Row>
+   <Row ss:Height="18">
+    <Cell ss:StyleID="s68"><Data ss:Type="String">superscript</Data></Cell>
+    <Cell ss:StyleID="s72"><ss:Data ss:Type="String"
+      xmlns="http://www.w3.org/TR/REC-html40"><Font html:Color="#000000">this text is </Font><Sup><Font
+        html:Color="#000000">superscripted</Font></Sup><Font html:Color="#000000"> sure enough</Font></ss:Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">outline</Data></Cell>
+    <Cell ss:StyleID="s72"><ss:Data ss:Type="String"
+      xmlns="http://www.w3.org/TR/REC-html40"><Font html:Color="#000000">this text is </Font><Span
+       html:Style="text-effect:outline"><Font html:Color="#000000">outlined</Font></Span><Font
+       html:Color="#000000"> sure enough</Font></ss:Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s70"><Data ss:Type="String">shadow</Data></Cell>
+    <Cell ss:StyleID="s72"><ss:Data ss:Type="String"
+      xmlns="http://www.w3.org/TR/REC-html40"><Font html:Color="#000000">this text is </Font><Span
+       html:Style="text-shadow:auto"><Font html:Color="#000000">shadowed</Font></Span><Font
+       html:Color="#000000"> sure enough</Font></ss:Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s71"><Data ss:Type="String">2underline</Data></Cell>
+    <Cell><ss:Data ss:Type="String" xmlns="http://www.w3.org/TR/REC-html40"><Font
+       html:Color="#000000">this text is </Font><U html:Style="text-underline:double"><Font
+        html:Color="#000000">double</Font></U><Font html:Color="#000000"> underlined sure enough</Font></ss:Data></Cell>
+   </Row>
+   <Row ss:Height="18">
+    <Cell ss:StyleID="s73"><Data ss:Type="String">accounting</Data></Cell>
+    <Cell><ss:Data ss:Type="String" xmlns="http://www.w3.org/TR/REC-html40"><Font
+       html:Color="#000000">this text is </Font><U
+       html:Style="text-underline:single-accounting"><Font html:Color="#000000">accounting underlined</Font></U><Font
+       html:Color="#000000"> sure enough</Font></ss:Data></Cell>
+   </Row>
+   <Row ss:Height="18">
+    <Cell ss:StyleID="s74"><Data ss:Type="String">2accounting</Data></Cell>
+    <Cell><ss:Data ss:Type="String" xmlns="http://www.w3.org/TR/REC-html40"><Font
+       html:Color="#000000">this text is </Font><U
+       html:Style="text-underline:double-accounting"><Font html:Color="#000000">double accounting underlined</Font></U><Font
+       html:Color="#000000"> sure enough</Font></ss:Data></Cell>
+   </Row>
+   <Row ss:Index="15">
+    <Cell ss:StyleID="s75"><Data ss:Type="String">BIU</Data></Cell>
+    <Cell><ss:Data ss:Type="String" xmlns="http://www.w3.org/TR/REC-html40"><Font
+       html:Color="#000000">lets </Font><I><Font html:Color="#000000">try</Font></I><Font
+       html:Color="#000000"> </Font><U><Font html:Color="#000000">all </Font></U><I><U><Font
+         html:Color="#000000">combinations</Font></U></I><Font html:Color="#000000"> </Font><B><Font
+        html:Color="#000000">of </Font><I><Font html:Color="#000000">BIU</Font></I><Font
+        html:Color="#000000"> </Font><U><Font html:Color="#000000">in </Font></U><I><U><Font
+          html:Color="#000000">cell</Font></U></I></B></ss:Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <Print>
+    <ValidPrinterInfo/>
+    <HorizontalResolution>-4</HorizontalResolution>
+    <VerticalResolution>-4</VerticalResolution>
+   </Print>
+   <Selected/>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+</Workbook>

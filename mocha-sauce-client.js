@@ -18,7 +18,7 @@ function FancyJSON(runner) {
 				result.specs.push({
 					"description": suite.tests[i].title,
 					"durationSec": (suite.tests[i].duration / 1000) || 0, // duration of spec run in seconds
-					"passed": suite.tests[i].state === "passed" // did the spec pass?
+					"passed": suite.tests[i].state !== "failed" // did the spec pass?
 					//"passedCount": 1, // passed assertions in spec
 					//"failedCount": 0, // failed assertions in spec
 					//"totalCount": 1 // total assertions in spec
@@ -26,7 +26,7 @@ function FancyJSON(runner) {
 
 				result.durationSec += (suite.tests[i].duration / 1000) || 0;
 
-				if(suite.tests[i].state !== "passed")
+				if(suite.tests[i].state === "failed")
 					result.passed = false;
 
 			}

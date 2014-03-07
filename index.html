@@ -5,32 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/png" href="logo.png" />
-<style>
-#drop{
-  border:2px dashed #bbb;
-  -moz-border-radius:5px;
-  -webkit-border-radius:5px;
-  border-radius:5px;
-  padding:25px;
-  text-align:center;
-  width:128px;
-  font:20pt bold,"Vollkorn";color:#bbb
-}
-
-#left {
-  width:188px;
-  float:left;
-}
-#right {
-  float:left;
-}
-#logo {
-  padding:25px;
-}
-#header {
-  height:168px;
-}
-</style>
+<link rel="stylesheet" media="screen" href="sheetjs.css">
 </head>
 <body>
 <script src="alertify.js"></script>
@@ -43,7 +18,7 @@
 <div id="body">
 <div id="left">
 <div id="logo"><a href="http://sheetjs.com"><img src="logo.png" class="logo" alt="SheetJS Logo" width=128px height=128px /></a></div>
-<div id="drop">Drop an XLS or XLSX file here</div>
+<div id="drop">Drop a file here</div>
 <h3> Choose a worksheet:</h3>
 <div id="buttons"></div>
 </div>
@@ -51,11 +26,12 @@
 <div id="header">
 <pre id="out"></pre>
 <h2>SheetJS In-Browser Live Grid Demo</h2>
-<h3>Drop an XLS or XLSX file in the box to the left to see a preview.<br/>
+<h3>Drop a spreadsheet (XLS/XLSX/XLSM/XLSB/XML) in the box to the left to see a preview.<br/>
 Need a file?  Why not the <a href="http://www.whitehouse.gov/sites/default/files/omb/budget/fy2014/assets/receipts.xls">OMB FY 2014 Federal Receipts?</a></h3>
     <table id="tt">
+      <tr><td colspan="6"><a href="osstatus.html">SheetJS Libraries</a> (for parsing) and <a href="http://handsontable.com">Handsontable</a> (grid component)</td></tr>
       <tr>
-        <th>XLS</th>
+        <th>XLS/XML</th>
         <td><a href="http://github.com/SheetJS/js-xls">Library Source</a></td>
         <td><a href="http://SheetJS.github.io/js-xls">Interactive Demo</a></td>
         <td><a href="http://npm.im/xlsjs">"xlsjs" on npm</a></td>
@@ -63,14 +39,13 @@ Need a file?  Why not the <a href="http://www.whitehouse.gov/sites/default/files
         <td><a href="stress.html">browser stress test</a></td>
       </tr>
       <tr>
-        <th>XLSX</th>
+        <th>XLSX/M/B</th>
         <td><a href="http://github.com/SheetJS/js-xlsx">Library Source</a></td>
         <td><a href="http://SheetJS.github.io/js-xlsx">Interactive Demo</a></td>
         <td><a href="http://npm.im/xlsx">"xlsx" on npm</a></td>
         <td><a href="https://travis-ci.org/SheetJS/js-xlsx">node CI status</a></td>
         <td><a href="stress.html">browser stress test</a></td>
       </tr>
-      <tr><td colspan="6"><a href="http://handsontable.com">Handsontable</a> Grid component</td></tr>
     </table>
 </div>
 <div id="hot" style="overflow: scroll" class="handsontable"></div>
@@ -82,70 +57,49 @@ For parsing a more general file, check the Interactive Demos</h3><br/>
 <h3>Follow us on Twitter <a href="https://twitter.com/SheetJS">@SheetJS</a></h3>
 </div>
 </div>
+
+<script src="xls.js"></script>
 <script src="jszip.js"></script>
 <script src="xlsx.js"></script>
-<script src="xls.js"></script>
+<script src="shim.js"></script>
+<script src="others/spin.js"></script>
+<script src="dropsheet.js"></script>
+
 <script>
+/** drop target **/
+var _target = document.getElementById('drop');
 
-var last_wb, last_type;
+/** Spinner **/
+var spinner;
 
-function to_json(workbook, type) {
-  var XL = type === 'XLS' ? XLS : XLSX;
-  var result = {};
-  workbook.SheetNames.forEach(function(sheetName) {
-    var roa = XL.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
-    if(roa.length > 0){
-      result[sheetName] = roa;
-    }
-  });
-  return result;
-}
+var _workstart = function() { spinner = new Spinner().spin(_target); }
+var _workend = function() { spinner.stop(); }
 
-function get_columns_xls(sheet) {
-  var val, rowObject, range, columnHeaders, emptyRow, C;
-  range = XLS.utils.decode_range(sheet["!ref"]);
-  columnHeaders = [];
-  for (C = range.s.c; C <= range.e.c; ++C) {
-    val = sheet[XLS.utils.encode_cell({
-      c: C,
-      r: range.s.r
-    })];
-    if(val){
-      switch(val.t) {
-        case 's': case 'str': columnHeaders[C] = JSON.parse(val.v); break;
-        case 'n': columnHeaders[C] = val.v; break;
-      }
-    }
-  }
-  return columnHeaders;
-}
+/** Alerts **/
+var _badfile = function() {
+  alertify.alert('This file does not appear to be a valid Excel file.  If we made a mistake, please send this file to <a href="mailto:dev@sheetjs.com?subject=I+broke+your+stuff">dev@sheetjs.com</a> so we can take a look.', function(){});
+};
 
-function get_columns_xlsx(sheet) {
-  var val, rowObject, range, columnHeaders, emptyRow, C;
-  range = XLSX.utils.decode_range(sheet["!ref"]);
-  columnHeaders = [];
-  for (C = range.s.c; C <= range.e.c; ++C) {
-    val = sheet[XLSX.utils.encode_cell({
-      c: C,
-      r: range.s.r
-    })];
-    if(val){
-      switch(val.t) {
-        case 's': case 'str': columnHeaders[C] = val.v; break;
-        case 'n': columnHeaders[C] = val.v; break;
-      }
-    }
-  }
-  return columnHeaders;
-}
+var _pending = function() {
+  alertify.alert('Please wait until the current file is processed.', function(){});
+};
 
-function get_columns(sheet, type) {
-  return (type === 'XLS' ? get_columns_xls : get_columns_xlsx)(sheet);
-}
+var _large = function(len, cb) {
+  alertify.confirm("This file is " + len + " bytes and may take a few moments.  Your browser may lock up during this process.  Shall we play?", cb);
+};
 
+var _failed = function(e) {
+  console.log(e, e.stack);
+  alertify.alert('We unfortunately dropped the ball here.  We noticed some issues with the grid recently, so please test the file using the direct parsers for <a href="/js-xls/">XLS</a> and <a href="/js-xlsx/">XLSX</a> files.  If there are issues with the direct parsers, please send this file to <a href="mailto:dev@sheetjs.com?subject=I+broke+your+stuff">dev@sheetjs.com</a> so we can make things right.', function(){});
+};
 
-/* Trying to learn jQuery, please forgive my potential sins */ 
-var $container, $parent, $window, $buttons, availableWidth, availableHeight;
+/** Handsontable magic **/
+var boldRenderer = function (instance, td, row, col, prop, value, cellProperties) {
+  Handsontable.TextCell.renderer.apply(this, arguments);
+  $(td).css({'font-weight': 'bold'});
+};
+
+var $container, $parent, $window, availableWidth, availableHeight;
 var calculateSize = function () {
   var offset = $container.offset();
   availableWidth = $window.width() - offset.left + $window.scrollLeft();
@@ -156,44 +110,34 @@ $(document).ready(function() {
   $container = $("#hot"); $parent = $container.parent();
   $window = $(window);
   $window.on('resize', calculateSize);
-  $buttons = $('#buttons');
 });
 
-var boldRenderer = function (instance, td, row, col, prop, value, cellProperties) {
-  Handsontable.TextCell.renderer.apply(this, arguments);
-  $(td).css({
-    'font-weight': 'bold'
-  });
-};
-
-function choose_sheet(sheetidx) { process_wb(last_wb, last_type, sheetidx); }
-
-function process_wb(wb, type, sheetidx) {
-  $('#footnote').hide();
-  var output = "";
-  last_wb = wb;
-  last_type = type;
-  var sheet = wb.SheetNames[sheetidx||0];
-  var d = to_json(wb, type)[sheet], cols = get_columns(wb.Sheets[sheet], type);
-  if(!d) d = [];
-  d.unshift(function(head){var o = {}; for(i=0;i!=head.length;++i) o[head[i]] = head[i]; return o;}(cols));
+/* make the buttons for the sheets */
+var make_buttons = function(sheetnames, cb) {
+  var $buttons = $('#buttons');
   $buttons.html("");
-  wb.SheetNames.forEach(function(s,idx) { var button = $('<button/>').attr({
-      type: 'button',
-      name: 'btn' + idx,
-      text: s
-    })
-    button.append('<h3>' + s + '</h3>')
-    button.click(function() { 
-      console.log(s);
-      choose_sheet(idx);
-    });
+  sheetnames.forEach(function(s,idx) {
+    var button= $('<button/>').attr({ type:'button', name:'btn' +idx, text:s });
+    button.append('<h3>' + s + '</h3>');
+    button.click(function() { cb(idx); });
     $buttons.append(button);
     $buttons.append('<br/>');
   });
+};
+
+var _onsheet = function(json, cols, sheetnames, select_sheet_cb) {
+  $('#footnote').hide();
+
+  make_buttons(sheetnames, select_sheet_cb);
   calculateSize();
+
+  /* add header row for table */
+  if(!json) json = [];
+  json.unshift(function(head){var o = {}; for(i=0;i!=head.length;++i) o[head[i]] = head[i]; return o;}(cols));
+
+  /* showtime! */
   $("#hot").handsontable({
-    data: d,
+    data: json,
     startRows: 5,
     startCols: 3,
     fixedRowsTop: 1,
@@ -204,64 +148,34 @@ function process_wb(wb, type, sheetidx) {
     cells: function (r,c,p) {
       if(r === 0) this.renderer = boldRenderer;
     },
-    width: function () { 
+    width: function () {
       return availableWidth || (calculateSize(),availableWidth);
     },
-    height: function () { 
+    height: function () {
       return availableHeight || (calculateSize(),availableHeight);
     },
     stretchH: 'all'
   });
-}
+};
 
-var drop = document.getElementById('drop');
-function handleDrop(e) {
-  e.stopPropagation();
-  e.preventDefault();
-  var files = e.dataTransfer.files;
-  var i,f;
-  for (i = 0, f = files[i]; i != files.length; ++i) {
-    var reader = new FileReader();
-    var name = f.name;
-    reader.onload = function(e) {
-      console.log("start");
-      var data = e.target.result;
-      var cfb, wb;
-      
-      function doit() {
-      try {
-        if(e.target.result.charCodeAt(0) == 0xd0) {
-          cfb = XLS.CFB.read(data, {type: 'binary'});
-          wb = XLS.parse_xlscfb(cfb);
-          process_wb(wb, 'XLS');
-        } else {
-          wb = XLSX.read(data, {type: 'binary'});
-          process_wb(wb, 'XLSX');
-        }
-      } catch(e) {
-        console.log(e, e.stack);
-        alertify.alert('We unfortunately dropped the ball here.  We noticed some issues with the grid recently, so please test the file using the direct parsers for <a href="/js-xls/">XLS</a> and <a href="/js-xlsx/">XLSX</a> files.  If there are issues with the direct parsers, please send this file to <a href="mailto:dev@sheetjs.com?subject=I+broke+your+stuff">dev@sheetjs.com</a> so we can make things right.', function(){});
-      }
-      console.log("stop");
-      }
-      if(e.target.result.length > 500000) alertify.confirm("This file is " + e.target.result.length + " bytes and may take a few moments.  Your browser may lock up during this process.  Shall we play?", function(e) { if(e) doit(); else console.log("stop"); });
-      else { doit(); console.log("stop"); }
-    };
-    reader.readAsBinaryString(f);
+/** Drop it like it's hot **/
+DropSheet({
+  drop: _target,
+  on: {
+    workstart: _workstart,
+    workend: _workend,
+    sheet: _onsheet,
+    foo: 'bar'
+  },
+  errors: {
+    badfile: _badfile,
+    pending: _pending,
+    failed: _failed,
+    large: _large,
+    foo: 'bar'
   }
-}
+})
 
-function handleDragover(e) {
-  e.stopPropagation();
-  e.preventDefault();
-  e.dataTransfer.dropEffect = 'copy';
-}
-
-if(drop.addEventListener) {
-  drop.addEventListener('dragenter', handleDragover, false);
-  drop.addEventListener('dragover', handleDragover, false);
-  drop.addEventListener('drop', handleDrop, false);
-}
 </script>
 <script type="text/javascript">
   var _gaq = _gaq || [];

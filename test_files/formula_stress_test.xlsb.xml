@@ -1,0 +1,3324 @@
+<?xml version="1.0"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:dt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882"
+ xmlns:s="uuid:BDC6E3F0-6DA3-11d1-A2A3-00AA00C14882"
+ xmlns:rs="urn:schemas-microsoft-com:rowset" xmlns:z="#RowsetSchema"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:html="http://www.w3.org/TR/REC-html40">
+ <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+  <Created>2013-04-24T14:55:11Z</Created>
+  <LastSaved>2014-01-25T23:10:52Z</LastSaved>
+  <Version>15.00</Version>
+ </DocumentProperties>
+ <OfficeDocumentSettings xmlns="urn:schemas-microsoft-com:office:office">
+  <AllowPNG/>
+  <RemovePersonalInformation/>
+ </OfficeDocumentSettings>
+ <ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
+  <WindowHeight>19020</WindowHeight>
+  <WindowWidth>15420</WindowWidth>
+  <WindowTopX>17295</WindowTopX>
+  <WindowTopY>0</WindowTopY>
+  <TabRatio>500</TabRatio>
+  <ActiveSheet>9</ActiveSheet>
+  <FirstVisibleSheet>5</FirstVisibleSheet>
+  <ProtectStructure>False</ProtectStructure>
+  <ProtectWindows>False</ProtectWindows>
+  <DisplayInkNotes>False</DisplayInkNotes>
+ </ExcelWorkbook>
+ <Styles>
+  <Style ss:ID="Default" ss:Name="Normal">
+   <Alignment ss:Vertical="Bottom"/>
+   <Borders/>
+   <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="12" ss:Color="#000000"/>
+   <Interior/>
+   <NumberFormat/>
+   <Protection/>
+  </Style>
+  <Style ss:ID="s16" ss:Name="Hyperlink">
+   <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="12" ss:Color="#0000FF"
+    ss:Underline="Single"/>
+  </Style>
+  <Style ss:ID="s17">
+   <NumberFormat ss:Format="Medium Date"/>
+  </Style>
+  <Style ss:ID="s18">
+   <NumberFormat ss:Format="Percent"/>
+  </Style>
+  <Style ss:ID="s19">
+   <NumberFormat ss:Format="0%"/>
+  </Style>
+  <Style ss:ID="s20">
+   <NumberFormat ss:Format="Currency"/>
+  </Style>
+  <Style ss:ID="s21">
+   <NumberFormat ss:Format="Short Date"/>
+  </Style>
+  <Style ss:ID="s22">
+   <NumberFormat/>
+  </Style>
+  <Style ss:ID="s25">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Bottom"/>
+  </Style>
+  <Style ss:ID="s26">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Bottom" ss:Indent="1"/>
+  </Style>
+  <Style ss:ID="s27">
+   <NumberFormat ss:Format="Medium Time"/>
+  </Style>
+  <Style ss:ID="s28">
+   <NumberFormat ss:Format="General Date"/>
+  </Style>
+  <Style ss:ID="s29">
+   <NumberFormat ss:Format="Long Time"/>
+  </Style>
+  <Style ss:ID="s31" ss:Parent="s16">
+   <Font ss:FontName="Calibri" ss:Size="12" ss:Color="#0000FF"/>
+  </Style>
+  <Style ss:ID="s32">
+   <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="13" ss:Color="#000000"/>
+  </Style>
+  <Style ss:ID="s33">
+   <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="12" ss:Color="#000000"/>
+  </Style>
+ </Styles>
+ <Worksheet ss:Name="Database">
+  <Table ss:ExpandedColumnCount="15" ss:ExpandedRowCount="45" x:FullColumns="1"
+   x:FullRows="1" ss:DefaultColumnWidth="66" ss:DefaultRowHeight="15.75">
+   <Column ss:Width="84"/>
+   <Row>
+    <Cell><Data ss:Type="String">Database</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">DAVERAGE</Data></Cell>
+    <Cell ss:Formula="=DAVERAGE(R[22]C[-1]:R[28]C[3],RC[2],R[17]C[-1]:R[19]C[1])"><Data
+      ss:Type="Number">11.666666666666666</Data></Cell>
+    <Cell ss:Index="4"><Data ss:Type="Number">3</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">DCOUNT</Data></Cell>
+    <Cell ss:Formula="=DCOUNT(R[21]C[-1]:R[27]C[3],R[-1]C[2],R[16]C[-1]:R[18]C[1])"><Data
+      ss:Type="Number">3</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">DCOUNTA</Data></Cell>
+    <Cell
+     ss:Formula="=DCOUNTA(R[20]C[-1]:R[26]C[3],R[-2]C[2],R[15]C[-1]:R[17]C[1])"><Data
+      ss:Type="Number">3</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">DGET</Data></Cell>
+    <Cell ss:Formula="=DGET(R[19]C[-1]:R[25]C[3],R[-3]C[2],R[14]C[-1]:R[15]C[1])"><Data
+      ss:Type="Number">15</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">DMAX</Data></Cell>
+    <Cell ss:Formula="=DMAX(R[18]C[-1]:R[24]C[3],R[-4]C[2],R[13]C[-1]:R[15]C[1])"><Data
+      ss:Type="Number">15</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">DMIN</Data></Cell>
+    <Cell ss:Formula="=DMIN(R[17]C[-1]:R[23]C[3],R[-5]C[2],R[12]C[-1]:R[14]C[1])"><Data
+      ss:Type="Number">8</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">DPRODUCT</Data></Cell>
+    <Cell
+     ss:Formula="=DPRODUCT(R[16]C[-1]:R[22]C[3],R[-6]C[2],R[11]C[-1]:R[13]C[1])"><Data
+      ss:Type="Number">1440</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">DSTDEV</Data></Cell>
+    <Cell
+     ss:Formula="=DSTDEV(R[15]C[-1]:R[21]C[3],R[-7]C[2],R[10]C[-1]:R[12]C[-1])"><Data
+      ss:Type="Number">5.0579969684978394</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">DSTDEVP</Data></Cell>
+    <Cell
+     ss:Formula="=DSTDEVP(R[14]C[-1]:R[20]C[3],R[-8]C[2],R[9]C[-1]:R[11]C[-1])"><Data
+      ss:Type="Number">4.3803538669838078</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">DSUM</Data></Cell>
+    <Cell ss:Formula="=DSUM(R[13]C[-1]:R[19]C[3],R[-9]C[2],R[8]C[-1]:R[10]C[1])"><Data
+      ss:Type="Number">35</Data></Cell>
+    <Cell ss:Index="4" ss:Formula="=RC[-2]-R[-9]C[-2]*R[-8]C[-2]"><Data
+      ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">DVAR</Data></Cell>
+    <Cell ss:Formula="=DVAR(R[12]C[-1]:R[18]C[3],R[-10]C[2],R[7]C[-1]:R[9]C[1])"><Data
+      ss:Type="Number">12.333333333333343</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">DVARP</Data></Cell>
+    <Cell ss:Formula="=DVARP(R[11]C[-1]:R[17]C[3],R[-11]C[2],R[6]C[-1]:R[8]C[1])"><Data
+      ss:Type="Number">8.2222222222222214</Data></Cell>
+   </Row>
+   <Row ss:Index="15">
+    <Cell><Data ss:Type="String">Pivot Table</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">GETPIVOTDATA</Data></Cell>
+    <Cell ss:Formula="=GETPIVOTDATA(&quot;Sum of Qux&quot;,R[16]C)"><Data
+      ss:Type="Number">57</Data></Cell>
+   </Row>
+   <Row ss:Index="18">
+    <Cell><Data ss:Type="String">Conditions</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">Foo</Data></Cell>
+    <Cell><Data ss:Type="String">Bar</Data></Cell>
+    <Cell><Data ss:Type="String">Bar</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">V8</Data></Cell>
+    <Cell><Data ss:Type="String">&gt;10</Data></Cell>
+    <Cell><Data ss:Type="String">&lt;16</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SM</Data></Cell>
+   </Row>
+   <Row ss:Index="23">
+    <Cell><Data ss:Type="String">Data</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">Foo</Data></Cell>
+    <Cell><Data ss:Type="String">Bar</Data></Cell>
+    <Cell><Data ss:Type="String">Baz</Data></Cell>
+    <Cell><Data ss:Type="String">Qux</Data></Cell>
+    <Cell><Data ss:Type="String">Sna</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">V8</Data></Cell>
+    <Cell><Data ss:Type="Number">18</Data></Cell>
+    <Cell><Data ss:Type="Number">20</Data></Cell>
+    <Cell><Data ss:Type="Number">14</Data></Cell>
+    <Cell><Data ss:Type="Number">105</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SM</Data></Cell>
+    <Cell><Data ss:Type="Number">12</Data></Cell>
+    <Cell><Data ss:Type="Number">12</Data></Cell>
+    <Cell><Data ss:Type="Number">10</Data></Cell>
+    <Cell><Data ss:Type="Number">96</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">Nitro</Data></Cell>
+    <Cell><Data ss:Type="Number">13</Data></Cell>
+    <Cell><Data ss:Type="Number">14</Data></Cell>
+    <Cell><Data ss:Type="Number">9</Data></Cell>
+    <Cell><Data ss:Type="Number">105</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">V8</Data></Cell>
+    <Cell><Data ss:Type="Number">14</Data></Cell>
+    <Cell><Data ss:Type="Number">15</Data></Cell>
+    <Cell><Data ss:Type="Number">10</Data></Cell>
+    <Cell><Data ss:Type="Number">75</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SM</Data></Cell>
+    <Cell><Data ss:Type="Number">9</Data></Cell>
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+    <Cell><Data ss:Type="Number">76.8</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">V*</Data></Cell>
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+    <Cell><Data ss:Type="Number">9</Data></Cell>
+    <Cell><Data ss:Type="Number">6</Data></Cell>
+    <Cell><Data ss:Type="Number">45</Data></Cell>
+   </Row>
+   <Row ss:Index="32">
+    <Cell ss:Index="2"><Data ss:Type="String">Sum of Qux</Data></Cell>
+    <Cell><Data ss:Type="String">Column Labels</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="3"><Data ss:Type="Number">8</Data></Cell>
+    <Cell><Data ss:Type="String">8 Total</Data></Cell>
+    <Cell><Data ss:Type="Number">9</Data></Cell>
+    <Cell><Data ss:Type="String">9 Total</Data></Cell>
+    <Cell><Data ss:Type="Number">12</Data></Cell>
+    <Cell><Data ss:Type="String">12 Total</Data></Cell>
+    <Cell><Data ss:Type="Number">13</Data></Cell>
+    <Cell><Data ss:Type="String">13 Total</Data></Cell>
+    <Cell><Data ss:Type="Number">14</Data></Cell>
+    <Cell><Data ss:Type="String">14 Total</Data></Cell>
+    <Cell><Data ss:Type="Number">18</Data></Cell>
+    <Cell><Data ss:Type="String">18 Total</Data></Cell>
+    <Cell><Data ss:Type="String">Grand Total</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">Row Labels</Data></Cell>
+    <Cell><Data ss:Type="Number">45</Data></Cell>
+    <Cell ss:Index="5"><Data ss:Type="Number">76.8</Data></Cell>
+    <Cell ss:Index="7"><Data ss:Type="Number">96</Data></Cell>
+    <Cell ss:Index="9"><Data ss:Type="Number">105</Data></Cell>
+    <Cell ss:Index="11"><Data ss:Type="Number">75</Data></Cell>
+    <Cell ss:Index="13"><Data ss:Type="Number">105</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s25"><Data ss:Type="String">Nitro</Data></Cell>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">9</Data></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">9</Data></Cell>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">9</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s26"><Data ss:Type="Number">14</Data></Cell>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">9</Data></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">9</Data></Cell>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">9</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s25"><Data ss:Type="String">SM</Data></Cell>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">8</Data></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">8</Data></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">10</Data></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">10</Data></Cell>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">18</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s26"><Data ss:Type="Number">8</Data></Cell>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">8</Data></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">8</Data></Cell>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">8</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s26"><Data ss:Type="Number">12</Data></Cell>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">10</Data></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">10</Data></Cell>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">10</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s25"><Data ss:Type="String">V*</Data></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">6</Data></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">6</Data></Cell>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">6</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s26"><Data ss:Type="Number">9</Data></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">6</Data></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">6</Data></Cell>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">6</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s25"><Data ss:Type="String">V8</Data></Cell>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">10</Data></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">10</Data></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">14</Data></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">14</Data></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">24</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s26"><Data ss:Type="Number">15</Data></Cell>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">10</Data></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">10</Data></Cell>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">10</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s26"><Data ss:Type="Number">20</Data></Cell>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"/>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">14</Data></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">14</Data></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">14</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s25"><Data ss:Type="String">Grand Total</Data></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">6</Data></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">6</Data></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">8</Data></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">8</Data></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">10</Data></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">10</Data></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">9</Data></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">9</Data></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">10</Data></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">10</Data></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">14</Data></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">14</Data></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">57</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <Print>
+    <ValidPrinterInfo/>
+    <HorizontalResolution>-4</HorizontalResolution>
+    <VerticalResolution>-4</VerticalResolution>
+   </Print>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+ <Worksheet ss:Name="Date">
+  <Table ss:ExpandedColumnCount="5" ss:ExpandedRowCount="28" x:FullColumns="1"
+   x:FullRows="1" ss:DefaultColumnWidth="66" ss:DefaultRowHeight="15.75">
+   <Column ss:Index="2" ss:Width="77.25"/>
+   <Column ss:Width="69.75"/>
+   <Row>
+    <Cell><Data ss:Type="String">Core</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">DATE</Data></Cell>
+    <Cell ss:StyleID="s21" ss:Formula="=DATE(RC[1],RC[2],RC[3])"><Data
+      ss:Type="DateTime">2013-06-09T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="Number">2013</Data></Cell>
+    <Cell><Data ss:Type="Number">6</Data></Cell>
+    <Cell><Data ss:Type="Number">9</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">DATEVALUE</Data></Cell>
+    <Cell ss:Formula="=DATEVALUE(RC[1])"><Data ss:Type="Number">25363</Data></Cell>
+    <Cell><Data ss:Type="String" x:Ticked="1">June 9, 1969</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">TIME</Data></Cell>
+    <Cell ss:StyleID="s27" ss:Formula="=TIME(RC[1],RC[2],RC[3])"><Data
+      ss:Type="DateTime">1899-12-31T06:09:23.000</Data></Cell>
+    <Cell><Data ss:Type="Number">6</Data></Cell>
+    <Cell><Data ss:Type="Number">9</Data></Cell>
+    <Cell><Data ss:Type="Number">23</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">TIMEVALUE</Data></Cell>
+    <Cell ss:Formula="=TIMEVALUE(RC[1])"><Data ss:Type="Number">0.97482638888888884</Data></Cell>
+    <Cell ss:StyleID="s29"><Data ss:Type="String" x:Ticked="1">11:23:45 PM</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">NOW</Data></Cell>
+    <Cell ss:StyleID="s28" ss:Formula="=NOW()"><Data ss:Type="DateTime">2014-02-20T18:46:09.860</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">TODAY</Data></Cell>
+    <Cell ss:StyleID="s21" ss:Formula="=TODAY()"><Data ss:Type="DateTime">2014-02-20T00:00:00.000</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s27"/>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">Field Extraction</Data></Cell>
+    <Cell ss:StyleID="s27"/>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">YEAR</Data></Cell>
+    <Cell ss:Formula="=YEAR(R[-8]C)"><Data ss:Type="Number">2013</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">MONTH</Data></Cell>
+    <Cell ss:Formula="=MONTH(R[-9]C)"><Data ss:Type="Number">6</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">DAY</Data></Cell>
+    <Cell ss:Formula="=DAY(R[-10]C)"><Data ss:Type="Number">9</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">HOUR</Data></Cell>
+    <Cell ss:Formula="=HOUR(R[-9]C)"><Data ss:Type="Number">6</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">MINUTE</Data></Cell>
+    <Cell ss:Formula="=MINUTE(R[-10]C)"><Data ss:Type="Number">9</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SECOND</Data></Cell>
+    <Cell ss:Formula="=SECOND(R[-11]C)"><Data ss:Type="Number">23</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">WEEKDAY</Data></Cell>
+    <Cell ss:Formula="=WEEKDAY(R[-14]C)"><Data ss:Type="Number">1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">WEEKNUM</Data></Cell>
+    <Cell ss:Formula="=WEEKNUM(R[-15]C)"><Data ss:Type="Number">24</Data></Cell>
+   </Row>
+   <Row ss:Index="19">
+    <Cell><Data ss:Type="String">Relative</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">DATEDIF</Data></Cell>
+    <Cell ss:Formula="=DATEDIF(RC[1],RC[2],RC[3])"><Data ss:Type="Number">395</Data></Cell>
+    <Cell ss:StyleID="s21" ss:Formula="=R[-18]C[-1]"><Data ss:Type="DateTime">2013-06-09T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s21"><Data ss:Type="DateTime">2014-07-09T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="String">D</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">DAYS360</Data></Cell>
+    <Cell ss:Formula="=DAYS360(R[-1]C[1],R[-1]C[2])"><Data ss:Type="Number">390</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">EDATE</Data></Cell>
+    <Cell ss:Formula="=EDATE(R[-20]C,RC[1])"><Data ss:Type="Number">41526</Data></Cell>
+    <Cell><Data ss:Type="Number">3</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">EOMONTH</Data></Cell>
+    <Cell ss:Formula="=EOMONTH(R[-21]C,RC[1])"><Data ss:Type="Number">41547</Data></Cell>
+    <Cell><Data ss:Type="Number">3</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">NETWORKDAYS</Data></Cell>
+    <Cell ss:Formula="=NETWORKDAYS(R[-4]C[1],R[-4]C[2])"><Data ss:Type="Number">283</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">NETWORKDAYS.INTL</Data></Cell>
+    <Cell ss:Formula="=NETWORKDAYS.INTL(R[-5]C[1],R[-5]C[2],RC[1])"><Data
+      ss:Type="Number">340</Data></Cell>
+    <Cell><Data ss:Type="Number">17</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">WORKDAY</Data></Cell>
+    <Cell ss:Formula="=WORKDAY(R[-6]C[1],RC[1])"><Data ss:Type="Number">41605</Data></Cell>
+    <Cell><Data ss:Type="Number">123</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">WORKDAY.INTL</Data></Cell>
+    <Cell ss:Formula="=WORKDAY.INTL(R[-7]C[1],123,17)"><Data ss:Type="Number">41577</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">YEARFRAC</Data></Cell>
+    <Cell ss:Formula="=YEARFRAC(R[-8]C[1],R[-8]C[2])"><Data ss:Type="Number">1.0833333333333333</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <Print>
+    <ValidPrinterInfo/>
+    <HorizontalResolution>-4</HorizontalResolution>
+    <VerticalResolution>-4</VerticalResolution>
+   </Print>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+ <Worksheet ss:Name="Engineering">
+  <Table ss:ExpandedColumnCount="5" ss:ExpandedRowCount="50" x:FullColumns="1"
+   x:FullRows="1" ss:DefaultColumnWidth="66" ss:DefaultRowHeight="15.75">
+   <Row>
+    <Cell><Data ss:Type="String">Bessel</Data></Cell>
+    <Cell ss:Index="3"><Data ss:Type="String">* FACTDOUBLE moved to Math</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">BESSELI</Data></Cell>
+    <Cell ss:Formula="=BESSELI(RC[1],RC[2])"><Data ss:Type="Number">0.21273995970273565</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">3</Data></Cell>
+    <Cell ss:Formula="=BESSELI(-1,-1)"><Data ss:Type="Error">#NUM!</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">BESSELJ</Data></Cell>
+    <Cell ss:Formula="=BESSELJ(RC[1],RC[2])"><Data ss:Type="Number">0.12894324997562717</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">3</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">BESSELK</Data></Cell>
+    <Cell ss:Formula="=BESSELK(RC[1],RC[2])"><Data ss:Type="Number">0.6473854</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">3</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">BESSELY</Data></Cell>
+    <Cell ss:Formula="=BESSELY(RC[1],RC[2])"><Data ss:Type="Number">-1.1277837651220644</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">3</Data></Cell>
+   </Row>
+   <Row ss:Index="7">
+    <Cell><Data ss:Type="String">Error Function</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ERF</Data></Cell>
+    <Cell ss:Formula="=BESSELI(RC[1],RC[2])"><Data ss:Type="Number">1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ERF.PRECISE</Data></Cell>
+    <Cell ss:Formula="=BESSELI(RC[1],RC[2])"><Data ss:Type="Number">1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ERFC</Data></Cell>
+    <Cell ss:Formula="=BESSELI(RC[1],RC[2])"><Data ss:Type="Number">1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ERFC.PRECISE</Data></Cell>
+    <Cell ss:Formula="=BESSELI(RC[1],RC[2])"><Data ss:Type="Number">1</Data></Cell>
+   </Row>
+   <Row ss:Index="13">
+    <Cell><Data ss:Type="String">Conversion</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">CONVERT</Data></Cell>
+    <Cell ss:Formula="=CONVERT(RC[1],RC[2],RC[3])"><Data ss:Type="Number">-273.14999999999998</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell><Data ss:Type="String">K</Data></Cell>
+    <Cell><Data ss:Type="String">C</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">BIN2DEC</Data></Cell>
+    <Cell ss:Formula="=BIN2DEC(10)"><Data ss:Type="Number">2</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">BIN2HEX</Data></Cell>
+    <Cell ss:Formula="=BIN2HEX(10)"><Data ss:Type="String">2</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">BIN2OCT</Data></Cell>
+    <Cell ss:Formula="=BIN2OCT(10)"><Data ss:Type="String">2</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">DEC2BIN</Data></Cell>
+    <Cell ss:Formula="=DEC2BIN(10)"><Data ss:Type="String">1010</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">DEC2HEX</Data></Cell>
+    <Cell ss:Formula="=DEC2HEX(10)"><Data ss:Type="String">A</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">DEC2OCT</Data></Cell>
+    <Cell ss:Formula="=DEC2OCT(10)"><Data ss:Type="String">12</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">OCT2BIN</Data></Cell>
+    <Cell ss:Formula="=OCT2BIN(10)"><Data ss:Type="String">1000</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">OCT2DEC</Data></Cell>
+    <Cell ss:Formula="=OCT2DEC(10)"><Data ss:Type="Number">8</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">OCT2HEX</Data></Cell>
+    <Cell ss:Formula="=OCT2HEX(10)"><Data ss:Type="String">8</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">HEX2BIN</Data></Cell>
+    <Cell ss:Formula="=HEX2BIN(10)"><Data ss:Type="String">10000</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">HEX2DEC</Data></Cell>
+    <Cell ss:Formula="=HEX2DEC(10)"><Data ss:Type="Number">16</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">HEX2OCT</Data></Cell>
+    <Cell ss:Formula="=HEX2OCT(10)"><Data ss:Type="String">20</Data></Cell>
+   </Row>
+   <Row ss:Index="28">
+    <Cell><Data ss:Type="String">Dirac and Heaviside</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">DELTA</Data></Cell>
+    <Cell ss:Formula="=DELTA(5)"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">GESTEP</Data></Cell>
+    <Cell ss:Formula="=GESTEP(5)"><Data ss:Type="Number">1</Data></Cell>
+   </Row>
+   <Row ss:Index="32">
+    <Cell><Data ss:Type="String">Complex</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">COMPLEX</Data></Cell>
+    <Cell ss:Formula="=COMPLEX(2,3)"><Data ss:Type="String">2+3i</Data></Cell>
+    <Cell ss:Formula="=COMPLEX(2,3,&quot;j&quot;)"><Data ss:Type="String">2+3j</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">IMABS</Data></Cell>
+    <Cell ss:Formula="=IMABS(RC[1])"><Data ss:Type="Number">3.6055512754639896</Data></Cell>
+    <Cell ss:Formula="=COMPLEX(2,3,&quot;j&quot;)"><Data ss:Type="String">2+3j</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">IMAGINARY</Data></Cell>
+    <Cell ss:Formula="=IMAGINARY(RC[1])"><Data ss:Type="Number">3</Data></Cell>
+    <Cell ss:Formula="=COMPLEX(2,3,&quot;j&quot;)"><Data ss:Type="String">2+3j</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">IMARGUMENT</Data></Cell>
+    <Cell ss:Formula="=IMARGUMENT(RC[1])"><Data ss:Type="Number">0.98279372324732905</Data></Cell>
+    <Cell ss:Formula="=COMPLEX(2,3,&quot;j&quot;)"><Data ss:Type="String">2+3j</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">IMCONJUGATE</Data></Cell>
+    <Cell ss:Formula="=IMCONJUGATE(RC[1])"><Data ss:Type="String">2-3j</Data></Cell>
+    <Cell ss:Formula="=COMPLEX(2,3,&quot;j&quot;)"><Data ss:Type="String">2+3j</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">IMCOS</Data></Cell>
+    <Cell ss:Formula="=IMCOS(RC[1])"><Data ss:Type="String">-4.18962569096881-9.10922789375534j</Data></Cell>
+    <Cell ss:Formula="=COMPLEX(2,3,&quot;j&quot;)"><Data ss:Type="String">2+3j</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">IMDIV</Data></Cell>
+    <Cell ss:Formula="=IMDIV(R[4]C,R[3]C)"><Data ss:Type="String">3.32192809488737-8.28846662730513E-15j</Data></Cell>
+    <Cell ss:Formula="=COMPLEX(2,3,&quot;j&quot;)"><Data ss:Type="String">2+3j</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">IMEXP</Data></Cell>
+    <Cell ss:Formula="=IMEXP(RC[1])"><Data ss:Type="String">-7.3151100949011+1.0427436562359j</Data></Cell>
+    <Cell ss:Formula="=COMPLEX(2,3,&quot;j&quot;)"><Data ss:Type="String">2+3j</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">IMLN</Data></Cell>
+    <Cell ss:Formula="=IMLN(RC[1])"><Data ss:Type="String">1.28247467873077+0.982793723247329j</Data></Cell>
+    <Cell ss:Formula="=COMPLEX(2,3,&quot;j&quot;)"><Data ss:Type="String">2+3j</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">IMLOG10</Data></Cell>
+    <Cell ss:Formula="=IMLOG10(RC[1])"><Data ss:Type="String">0.556971676153418+0.426821890855467j</Data></Cell>
+    <Cell ss:Formula="=COMPLEX(2,3,&quot;j&quot;)"><Data ss:Type="String">2+3j</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">IMLOG2</Data></Cell>
+    <Cell ss:Formula="=IMLOG2(RC[1])"><Data ss:Type="String">1.85021985907055+1.41787163074572j</Data></Cell>
+    <Cell ss:Formula="=COMPLEX(2,3,&quot;j&quot;)"><Data ss:Type="String">2+3j</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">IMPOWER</Data></Cell>
+    <Cell ss:Formula="=IMPOWER(RC[1],2)"><Data ss:Type="String">-5+12j</Data></Cell>
+    <Cell ss:Formula="=COMPLEX(2,3,&quot;j&quot;)"><Data ss:Type="String">2+3j</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">IMPRODUCT</Data></Cell>
+    <Cell ss:Formula="=IMPRODUCT(RC[1],RC[2])"><Data ss:Type="String">-10+24j</Data></Cell>
+    <Cell ss:Formula="=COMPLEX(2,3,&quot;j&quot;)"><Data ss:Type="String">2+3j</Data></Cell>
+    <Cell ss:Formula="=COMPLEX(4,6,&quot;j&quot;)"><Data ss:Type="String">4+6j</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">IMREAL</Data></Cell>
+    <Cell ss:Formula="=IMREAL(RC[1])"><Data ss:Type="Number">2</Data></Cell>
+    <Cell ss:Formula="=COMPLEX(2,3,&quot;j&quot;)"><Data ss:Type="String">2+3j</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">IMSIN</Data></Cell>
+    <Cell ss:Formula="=IMSIN(RC[1])"><Data ss:Type="String">9.15449914691143-4.16890695996656j</Data></Cell>
+    <Cell ss:Formula="=COMPLEX(2,3,&quot;j&quot;)"><Data ss:Type="String">2+3j</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">IMSQRT</Data></Cell>
+    <Cell ss:Formula="=IMSQRT(RC[1])"><Data ss:Type="String">1.67414922803554+0.895977476129838j</Data></Cell>
+    <Cell ss:Formula="=COMPLEX(2,3,&quot;j&quot;)"><Data ss:Type="String">2+3j</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">IMSUB</Data></Cell>
+    <Cell ss:Formula="=IMSUB(RC[1],RC[2])"><Data ss:Type="String">-2-2j</Data></Cell>
+    <Cell ss:Formula="=COMPLEX(2,3,&quot;j&quot;)"><Data ss:Type="String">2+3j</Data></Cell>
+    <Cell ss:Formula="=COMPLEX(4,5,&quot;j&quot;)"><Data ss:Type="String">4+5j</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">IMSUM</Data></Cell>
+    <Cell ss:Formula="=IMSUM(R[-17]C[1]:RC[2])"><Data ss:Type="String">48+70j</Data></Cell>
+    <Cell ss:Formula="=COMPLEX(2,3,&quot;j&quot;)"><Data ss:Type="String">2+3j</Data></Cell>
+    <Cell ss:Formula="=COMPLEX(4,5,&quot;j&quot;)"><Data ss:Type="String">4+5j</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <Print>
+    <ValidPrinterInfo/>
+    <HorizontalResolution>-4</HorizontalResolution>
+    <VerticalResolution>-4</VerticalResolution>
+   </Print>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+ <Worksheet ss:Name="Finance">
+  <Table ss:ExpandedColumnCount="12" ss:ExpandedRowCount="62" x:FullColumns="1"
+   x:FullRows="1" ss:DefaultColumnWidth="66" ss:DefaultRowHeight="15.75">
+   <Column ss:Index="2" ss:Width="77.25"/>
+   <Column ss:Index="7" ss:Width="71.25"/>
+   <Row>
+    <Cell><Data ss:Type="String">Conversion</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">DOLLARDE </Data></Cell>
+    <Cell ss:Formula="=DOLLARDE(RC[2],RC[3])"><Data ss:Type="Number">1.125</Data></Cell>
+    <Cell ss:Index="4"><Data ss:Type="Number">1.02</Data></Cell>
+    <Cell><Data ss:Type="Number">16</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">DOLLARFR </Data></Cell>
+    <Cell ss:Formula="=DOLLARFR(R[-1]C,R[-1]C[3])"><Data ss:Type="Number">1.02</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">EFFECT </Data></Cell>
+    <Cell ss:Formula="=EFFECT(RC[2],RC[3])"><Data ss:Type="Number">5.3542667370758412E-2</Data></Cell>
+    <Cell ss:Index="4" ss:StyleID="s18"><Data ss:Type="Number">5.2499999999999998E-2</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">NOMINAL </Data></Cell>
+    <Cell ss:Formula="=NOMINAL(R[-1]C,R[-1]C[3])"><Data ss:Type="Number">5.2500000000000213E-2</Data></Cell>
+   </Row>
+   <Row ss:Index="7">
+    <Cell><Data ss:Type="String">Cash Flows</Data></Cell>
+    <Cell ss:Index="3" ss:StyleID="s19"/>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">IRR </Data></Cell>
+    <Cell ss:StyleID="s19" ss:Formula="=IRR(RC[2]:RC[7],0.1)"><Data
+      ss:Type="Number">8.663094803652216E-2</Data></Cell>
+    <Cell ss:Index="4"><Data ss:Type="Number">-70000</Data></Cell>
+    <Cell><Data ss:Type="Number">12000</Data></Cell>
+    <Cell><Data ss:Type="Number">15000</Data></Cell>
+    <Cell><Data ss:Type="Number">18000</Data></Cell>
+    <Cell><Data ss:Type="Number">21000</Data></Cell>
+    <Cell><Data ss:Type="Number">26000</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">MIRR </Data></Cell>
+    <Cell ss:StyleID="s19" ss:Formula="=MIRR(RC[2]:RC[7],RC[8],RC[9])"><Data
+      ss:Type="Number">0.12609413036590511</Data></Cell>
+    <Cell ss:Index="4"><Data ss:Type="Number">-120000</Data></Cell>
+    <Cell><Data ss:Type="Number">39000</Data></Cell>
+    <Cell><Data ss:Type="Number">30000</Data></Cell>
+    <Cell><Data ss:Type="Number">21000</Data></Cell>
+    <Cell><Data ss:Type="Number">37000</Data></Cell>
+    <Cell><Data ss:Type="Number">46000</Data></Cell>
+    <Cell ss:StyleID="s19"><Data ss:Type="Number">0.1</Data></Cell>
+    <Cell ss:StyleID="s19"><Data ss:Type="Number">0.12</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">NPV </Data></Cell>
+    <Cell ss:StyleID="s20" ss:Formula="=NPV(RC[2],RC[3],RC[4],RC[5],RC[6])"><Data
+      ss:Type="Number">1188.4434123352207</Data></Cell>
+    <Cell ss:Index="4" ss:StyleID="s19"><Data ss:Type="Number">0.1</Data></Cell>
+    <Cell><Data ss:Type="Number">-10000</Data></Cell>
+    <Cell><Data ss:Type="Number">3000</Data></Cell>
+    <Cell><Data ss:Type="Number">4200</Data></Cell>
+    <Cell><Data ss:Type="Number">6800</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">XIRR </Data></Cell>
+    <Cell ss:Formula="=XIRR(R[-1]C[3]:R[-1]C[6],RC[3]:RC[6])"><Data
+      ss:Type="Number">5.3152377605438241</Data></Cell>
+    <Cell ss:Index="5" ss:StyleID="s17"><Data ss:Type="DateTime">2013-01-01T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="DateTime">2013-02-01T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="DateTime">2013-03-01T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="DateTime">2013-04-01T00:00:00.000</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">XNPV </Data></Cell>
+    <Cell ss:Formula="=XNPV(R[-1]C,R[-2]C[3]:R[-2]C[6],R[-1]C[3]:R[-1]C[6])"><Data
+      ss:Type="Number">-6.2115468608681113E-6</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">FVSCHEDULE </Data></Cell>
+    <Cell ss:Formula="=FVSCHEDULE(1,{0.09,0.11,0.1})"><Data ss:Type="Number">1.3308900000000004</Data></Cell>
+    <Cell ss:Formula="=FVSCHEDULE(1,RC[1]:RC[3])"><Data ss:Type="Number">1.3308900000000004</Data></Cell>
+    <Cell><Data ss:Type="Number">0.09</Data></Cell>
+    <Cell><Data ss:Type="Number">0.11</Data></Cell>
+    <Cell><Data ss:Type="Number">0.1</Data></Cell>
+   </Row>
+   <Row ss:Index="15">
+    <Cell><Data ss:Type="String">Annuities</Data></Cell>
+    <Cell ss:Index="4"><Data ss:Type="String">rate</Data></Cell>
+    <Cell><Data ss:Type="String">nper</Data></Cell>
+    <Cell><Data ss:Type="String">pmt</Data></Cell>
+    <Cell><Data ss:Type="String">pv</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">FV </Data></Cell>
+    <Cell ss:StyleID="s20" ss:Formula="=FV(RC[2]/12,RC[3],RC[4],RC[5],1)"><Data
+      ss:Type="Number">2581.4033740601185</Data></Cell>
+    <Cell ss:Index="4" ss:StyleID="s19"><Data ss:Type="Number">0.06</Data></Cell>
+    <Cell><Data ss:Type="Number">10</Data></Cell>
+    <Cell><Data ss:Type="Number">-200</Data></Cell>
+    <Cell><Data ss:Type="Number">-500</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">IPMT </Data></Cell>
+    <Cell ss:StyleID="s20" ss:Formula="=IPMT(RC[2]/12,3,RC[3],RC[5])"><Data
+      ss:Type="Number">-22.406893015924034</Data></Cell>
+    <Cell ss:Index="4" ss:StyleID="s19"><Data ss:Type="Number">0.1</Data></Cell>
+    <Cell><Data ss:Type="Number">3</Data></Cell>
+    <Cell ss:Index="7"><Data ss:Type="Number">8000</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ISPMT </Data></Cell>
+    <Cell ss:StyleID="s20" ss:Formula="=ISPMT(RC[2]/12,1,RC[3]*12,RC[5])"><Data
+      ss:Type="Number">-64.814814814814824</Data></Cell>
+    <Cell ss:Index="4" ss:StyleID="s19"><Data ss:Type="Number">0.1</Data></Cell>
+    <Cell><Data ss:Type="Number">3</Data></Cell>
+    <Cell ss:Index="7"><Data ss:Type="Number">8000</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">NPER </Data></Cell>
+    <Cell ss:Formula="=NPER(RC[2]/12,RC[4],RC[5])"><Data ss:Type="Number">-9.5785940398131615</Data></Cell>
+    <Cell ss:Index="4" ss:StyleID="s19"><Data ss:Type="Number">0.12</Data></Cell>
+    <Cell ss:Index="6"><Data ss:Type="Number">-100</Data></Cell>
+    <Cell><Data ss:Type="Number">-1000</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">PMT </Data></Cell>
+    <Cell ss:StyleID="s20" ss:Formula="=PMT(R[-3]C[2]/12,R[-3]C[3],R[-3]C[5])"><Data
+      ss:Type="Number">-2711.2340549268079</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">PPMT </Data></Cell>
+    <Cell ss:StyleID="s20" ss:Formula="=PPMT(R[-4]C[2]/12,3,R[-4]C[3],R[-4]C[5])"><Data
+      ss:Type="Number">-2688.8271619108841</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">PV </Data></Cell>
+    <Cell ss:StyleID="s20" ss:Formula="=PV(RC[2]/12,12*RC[3],RC[4])"><Data
+      ss:Type="Number">-59777.145851187823</Data></Cell>
+    <Cell ss:Index="4" ss:StyleID="s19"><Data ss:Type="Number">0.08</Data></Cell>
+    <Cell><Data ss:Type="Number">20</Data></Cell>
+    <Cell><Data ss:Type="Number">500</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">RATE </Data></Cell>
+    <Cell ss:StyleID="s19" ss:Formula="=RATE(RC[3]*12,RC[4],RC[5])*12"><Data
+      ss:Type="Number">9.2417669858416415E-2</Data></Cell>
+    <Cell ss:Index="5"><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">-200</Data></Cell>
+    <Cell><Data ss:Type="Number">8000</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">CUMIPMT </Data></Cell>
+    <Cell ss:Formula="=CUMIPMT(RC[2]/12,RC[3]*12,RC[4],RC[5],RC[6],0)"><Data
+      ss:Type="Number">-11135.232130750841</Data></Cell>
+    <Cell ss:Index="4" ss:StyleID="s19"><Data ss:Type="Number">0.09</Data></Cell>
+    <Cell><Data ss:Type="Number">30</Data></Cell>
+    <Cell><Data ss:Type="Number">125000</Data></Cell>
+    <Cell><Data ss:Type="Number">13</Data></Cell>
+    <Cell><Data ss:Type="Number">24</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">CUMPRINC </Data></Cell>
+    <Cell
+     ss:Formula="=CUMPRINC(R[-1]C[2]/12,R[-1]C[3]*12,R[-1]C[4],R[-1]C[5],R[-1]C[6],0)"><Data
+      ss:Type="Number">-934.10712342089789</Data></Cell>
+   </Row>
+   <Row ss:Index="27">
+    <Cell><Data ss:Type="String">Securities</Data></Cell>
+    <Cell ss:Index="4"><Data ss:Type="String">settlement</Data></Cell>
+    <Cell><Data ss:Type="String">maturity</Data></Cell>
+    <Cell><Data ss:Type="String">discount</Data></Cell>
+    <Cell><Data ss:Type="String">pr</Data></Cell>
+    <Cell><Data ss:Type="String">redemption</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">TBILLEQ </Data></Cell>
+    <Cell ss:Formula="=TBILLEQ(R[1]C[2],R[1]C[3],RC[4])"><Data ss:Type="Number">9.4151493565943017E-2</Data></Cell>
+    <Cell ss:Index="6" ss:StyleID="s18"><Data ss:Type="Number">9.1399999999999995E-2</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">TBILLPRICE </Data></Cell>
+    <Cell ss:Formula="=TBILLPRICE(RC[2],RC[3],RC[4])"><Data ss:Type="Number">98.45</Data></Cell>
+    <Cell ss:Index="4" ss:StyleID="s17"><Data ss:Type="DateTime">2008-03-31T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="DateTime">2008-06-01T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s19"><Data ss:Type="Number">0.09</Data></Cell>
+    <Cell><Data ss:Type="Number">98.45</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">TBILLYIELD </Data></Cell>
+    <Cell ss:Formula="=TBILLYIELD(R[-1]C[2],R[-1]C[3],R[-1]C[5])"><Data
+      ss:Type="Number">9.141696292534264E-2</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">PRICE </Data></Cell>
+    <Cell ss:Formula="=PRICE(RC[2],RC[3],RC[4],RC[5],RC[6],RC[7])"><Data
+      ss:Type="Number">94.634361621322128</Data></Cell>
+    <Cell ss:Index="4" ss:StyleID="s17"><Data ss:Type="DateTime">2008-02-15T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="DateTime">2017-11-15T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s18"><Data ss:Type="Number">5.7500000000000002E-2</Data></Cell>
+    <Cell ss:StyleID="s18"><Data ss:Type="Number">6.5000000000000002E-2</Data></Cell>
+    <Cell><Data ss:Type="Number">100</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">YIELD </Data></Cell>
+    <Cell ss:Formula="=YIELD(RC[2],RC[3],RC[4],RC[5],RC[6],RC[7])"><Data
+      ss:Type="Number">6.5000006880731431E-2</Data></Cell>
+    <Cell ss:Index="4" ss:StyleID="s17"><Data ss:Type="DateTime">2008-02-15T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="DateTime">2016-11-15T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s18"><Data ss:Type="Number">5.7500000000000002E-2</Data></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">95.042869999999994</Data></Cell>
+    <Cell><Data ss:Type="Number">100</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">DISC </Data></Cell>
+    <Cell ss:Formula="=DISC(RC[2],RC[3],RC[5],RC[6])"><Data ss:Type="Number">5.2071428571428838E-2</Data></Cell>
+    <Cell ss:Index="4" ss:StyleID="s17"><Data ss:Type="DateTime">2007-01-25T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="DateTime">2007-06-15T00:00:00.000</Data></Cell>
+    <Cell ss:Index="7"><Data ss:Type="Number">97.974999999999994</Data></Cell>
+    <Cell><Data ss:Type="Number">100</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">PRICEDISC </Data></Cell>
+    <Cell ss:Formula="=PRICEDISC(RC[2],RC[3],RC[4],RC[6],SQRT(4))"><Data
+      ss:Type="Number">99.795833333333334</Data></Cell>
+    <Cell ss:Index="4" ss:StyleID="s17"><Data ss:Type="DateTime">2008-02-16T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="DateTime">2008-03-01T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s18"><Data ss:Type="Number">5.2499999999999998E-2</Data></Cell>
+    <Cell ss:Index="8"><Data ss:Type="Number">100</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">YIELDDISC </Data></Cell>
+    <Cell
+     ss:Formula="=YIELDDISC(R[-1]C[2],R[-1]C[3],RC[5],R[-1]C[6],LOG(100)/LOG(10))"><Data
+      ss:Type="Number">5.2822571986858337E-2</Data></Cell>
+    <Cell ss:Index="7"><Data ss:Type="Number">99.795000000000002</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">PRICEMAT </Data></Cell>
+    <Cell ss:Formula="=PRICEMAT(RC[2],RC[3],RC[4],RC[5],RC[5],RC[6])"><Data
+      ss:Type="Number">99.984498875556937</Data></Cell>
+    <Cell ss:Index="4" ss:StyleID="s17"><Data ss:Type="DateTime">2008-02-15T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="DateTime">2008-04-13T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="DateTime">2007-11-11T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s18"><Data ss:Type="Number">6.0999999999999999E-2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="DateTime">1899-12-31T00:00:00.000</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">YIELDMAT </Data></Cell>
+    <Cell ss:Formula="=YIELDMAT(RC[2],RC[3],RC[4],RC[5],RC[6],RC[7])"><Data
+      ss:Type="Number">6.0954333691538673E-2</Data></Cell>
+    <Cell ss:Index="4" ss:StyleID="s17"><Data ss:Type="DateTime">2008-03-15T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="DateTime">2008-11-03T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="DateTime">2007-11-08T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s18"><Data ss:Type="Number">6.25E-2</Data></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">100.0123</Data></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">DURATION </Data></Cell>
+    <Cell ss:Formula="=DURATION(RC[2],RC[3],RC[4],RC[5],RC[6],RC[7])"><Data
+      ss:Type="Number">5.9937749555451862</Data></Cell>
+    <Cell ss:Index="4" ss:StyleID="s17"><Data ss:Type="DateTime">2008-01-01T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="DateTime">2016-01-01T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s19"><Data ss:Type="Number">0.08</Data></Cell>
+    <Cell ss:StyleID="s19"><Data ss:Type="Number">0.09</Data></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">MDURATION </Data></Cell>
+    <Cell
+     ss:Formula="=MDURATION(R[-1]C[2],R[-1]C[3],R[-1]C[4],R[-1]C[5],R[-1]C[6],R[-1]C[7])"><Data
+      ss:Type="Number">5.7356698139188387</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ACCRINT </Data></Cell>
+    <Cell ss:Formula="=ACCRINT(RC[2],RC[3],RC[4],RC[5],RC[6],RC[7],RC[8])"><Data
+      ss:Type="Number">16.666666666666664</Data></Cell>
+    <Cell ss:Index="4" ss:StyleID="s21"><Data ss:Type="DateTime">2008-03-01T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s21"><Data ss:Type="DateTime">2008-08-31T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s21"><Data ss:Type="DateTime">2008-05-01T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s19"><Data ss:Type="Number">0.1</Data></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1000</Data></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ACCRINTM </Data></Cell>
+    <Cell ss:Formula="=ACCRINTM(RC[2],RC[3],RC[5],RC[6],RC[7])"><Data
+      ss:Type="Number">20.547945205479451</Data></Cell>
+    <Cell ss:Index="4" ss:StyleID="s21"><Data ss:Type="DateTime">2008-04-01T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s21"><Data ss:Type="DateTime">2008-06-15T00:00:00.000</Data></Cell>
+    <Cell ss:Index="7" ss:StyleID="s19"><Data ss:Type="Number">0.1</Data></Cell>
+    <Cell><Data ss:Type="Number">1000</Data></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">3</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">INTRATE </Data></Cell>
+    <Cell ss:Formula="=INTRATE(RC[2],RC[3],RC[4],RC[5],RC[6])"><Data
+      ss:Type="Number">5.7680000000000002E-2</Data></Cell>
+    <Cell ss:Index="4" ss:StyleID="s21"><Data ss:Type="DateTime">2008-02-15T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s21"><Data ss:Type="DateTime">2008-05-15T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="Number">1000000</Data></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1014420</Data></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">RECEIVED </Data></Cell>
+    <Cell ss:Formula="=RECEIVED(RC[2],RC[3],RC[4],RC[5],RC[6])"><Data
+      ss:Type="Number">1014584.6544071021</Data></Cell>
+    <Cell ss:Index="4" ss:StyleID="s21"><Data ss:Type="DateTime">2008-02-15T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s21"><Data ss:Type="DateTime">2008-05-15T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="Number">1000000</Data></Cell>
+    <Cell ss:StyleID="s18"><Data ss:Type="Number">5.7500000000000002E-2</Data></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ODDFPRICE </Data></Cell>
+    <Cell
+     ss:Formula="=ODDFPRICE(RC[2],RC[3],RC[4],RC[5],RC[6],RC[7],RC[8],RC[9],RC[10])"><Data
+      ss:Type="Number">113.59771747407883</Data></Cell>
+    <Cell ss:Index="4" ss:StyleID="s17"><Data ss:Type="DateTime">2008-11-11T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="DateTime">2021-03-01T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="DateTime">2008-10-15T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="DateTime">2009-03-01T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s18"><Data ss:Type="Number">7.85E-2</Data></Cell>
+    <Cell ss:StyleID="s18"><Data ss:Type="Number">6.25E-2</Data></Cell>
+    <Cell><Data ss:Type="Number">100</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ODDFYIELD </Data></Cell>
+    <Cell
+     ss:Formula="=ODDFYIELD(RC[2],RC[3],RC[4],RC[5],RC[6],RC[7],RC[8],RC[9],RC[10])"><Data
+      ss:Type="Number">7.7245541597298878E-2</Data></Cell>
+    <Cell ss:Index="4" ss:StyleID="s17"><Data ss:Type="DateTime">2008-11-11T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="DateTime">2021-03-01T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="DateTime">2008-10-15T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="DateTime">2009-03-01T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s18"><Data ss:Type="Number">5.7500000000000002E-2</Data></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">84.5</Data></Cell>
+    <Cell><Data ss:Type="Number">100</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ODDLPRICE </Data></Cell>
+    <Cell ss:Formula="=ODDLPRICE(RC[2],RC[3],RC[4],RC[5],RC[6],RC[7],RC[8],RC[9])"><Data
+      ss:Type="Number">110.88286909824446</Data></Cell>
+    <Cell ss:Index="4" ss:StyleID="s17"><Data ss:Type="DateTime">2008-11-11T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="DateTime">2021-03-01T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="DateTime">2008-10-15T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s18"><Data ss:Type="Number">7.85E-2</Data></Cell>
+    <Cell ss:StyleID="s18"><Data ss:Type="Number">6.25E-2</Data></Cell>
+    <Cell><Data ss:Type="Number">100</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ODDLYIELD </Data></Cell>
+    <Cell ss:Formula="=ODDLYIELD(RC[2],RC[3],RC[4],RC[5],RC[6],RC[7],RC[8],RC[9])"><Data
+      ss:Type="Number">8.2548086314953334E-2</Data></Cell>
+    <Cell ss:Index="4" ss:StyleID="s17"><Data ss:Type="DateTime">2008-11-11T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="DateTime">2021-03-01T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="DateTime">2008-10-15T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s18"><Data ss:Type="Number">5.7500000000000002E-2</Data></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">84.5</Data></Cell>
+    <Cell><Data ss:Type="Number">100</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">COUPDAYBS </Data></Cell>
+    <Cell ss:Formula="=COUPDAYBS(RC[2],RC[3],RC[4],RC[5])"><Data ss:Type="Number">71</Data></Cell>
+    <Cell ss:Index="4" ss:StyleID="s21" ss:Formula="=DATE(2007,1,25)"><Data
+      ss:Type="DateTime">2007-01-25T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s21" ss:Formula="=DATE(2008,11,15)"><Data ss:Type="DateTime">2008-11-15T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">COUPDAYS </Data></Cell>
+    <Cell ss:Formula="=COUPDAYS(R[-1]C[2],R[-1]C[3],R[-1]C[4],R[-1]C[5])"><Data
+      ss:Type="Number">181</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">COUPDAYSNC </Data></Cell>
+    <Cell ss:Formula="=COUPDAYSNC(R[-2]C[2],R[-2]C[3],R[-2]C[4],R[-2]C[5])"><Data
+      ss:Type="Number">110</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">COUPNCD </Data></Cell>
+    <Cell ss:StyleID="s21"
+     ss:Formula="=COUPNCD(R[-3]C[2],R[-3]C[3],R[-3]C[4],R[-3]C[5])"><Data
+      ss:Type="DateTime">2007-05-15T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s21"/>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">COUPNUM </Data></Cell>
+    <Cell ss:Formula="=COUPNUM(R[-4]C[2],R[-4]C[3],R[-4]C[4],R[-4]C[5])"><Data
+      ss:Type="Number">4</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">COUPPCD </Data></Cell>
+    <Cell ss:Formula="=COUPPCD(R[-5]C[2],R[-5]C[3],R[-5]C[4],R[-5]C[5])"><Data
+      ss:Type="Number">39036</Data></Cell>
+   </Row>
+   <Row ss:Index="55">
+    <Cell><Data ss:Type="String">Depreciation</Data></Cell>
+    <Cell ss:Index="4"><Data ss:Type="String">cost</Data></Cell>
+    <Cell><Data ss:Type="String">salvage</Data></Cell>
+    <Cell><Data ss:Type="String">life</Data></Cell>
+    <Cell><Data ss:Type="String">period</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">DB </Data></Cell>
+    <Cell ss:StyleID="s20" ss:Formula="=DB(RC[2],RC[3],RC[4],RC[5],RC[6])"><Data
+      ss:Type="Number">55841.756736028445</Data></Cell>
+    <Cell ss:Index="4"><Data ss:Type="Number">1000000</Data></Cell>
+    <Cell><Data ss:Type="Number">100000</Data></Cell>
+    <Cell><Data ss:Type="Number">6</Data></Cell>
+    <Cell><Data ss:Type="Number">6</Data></Cell>
+    <Cell><Data ss:Type="Number">7</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">DDB </Data></Cell>
+    <Cell ss:StyleID="s20" ss:Formula="=DDB(RC[2],RC[3],RC[4]*365,RC[5])"><Data
+      ss:Type="Number">1.3143479076749858</Data></Cell>
+    <Cell ss:Index="4"><Data ss:Type="Number">2400</Data></Cell>
+    <Cell><Data ss:Type="Number">300</Data></Cell>
+    <Cell><Data ss:Type="Number">10</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SLN </Data></Cell>
+    <Cell ss:StyleID="s20" ss:Formula="=SLN(R[1]C[2],R[1]C[3],R[1]C[4])"><Data
+      ss:Type="Number">2250</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SYD </Data></Cell>
+    <Cell ss:StyleID="s20" ss:Formula="=SYD(RC[2],RC[3],RC[4],RC[5])"><Data
+      ss:Type="Number">409.09090909090907</Data></Cell>
+    <Cell ss:Index="4"><Data ss:Type="Number">30000</Data></Cell>
+    <Cell><Data ss:Type="Number">7500</Data></Cell>
+    <Cell><Data ss:Type="Number">10</Data></Cell>
+    <Cell><Data ss:Type="Number">10</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">VDB </Data></Cell>
+    <Cell ss:StyleID="s20" ss:Formula="=VDB(R[-3]C[2],R[-3]C[3],R[-3]C[4]*365,5,9)"><Data
+      ss:Type="Number">5.2415679423312396</Data></Cell>
+    <Cell ss:Index="4"><Data ss:Type="String">cost</Data></Cell>
+    <Cell><Data ss:Type="String">salvage</Data></Cell>
+    <Cell><Data ss:Type="String">rate</Data></Cell>
+    <Cell><Data ss:Type="String">period</Data></Cell>
+    <Cell><Data ss:Type="String">datepurc</Data></Cell>
+    <Cell><Data ss:Type="String">datefirst</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">AMORDEGRC </Data></Cell>
+    <Cell
+     ss:Formula="=AMORDEGRC(R[1]C[2],R[1]C[6],R[1]C[7],R[1]C[3],R[1]C[5],R[1]C[4])"><Data
+      ss:Type="Number">767</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">AMORLINC </Data></Cell>
+    <Cell ss:Formula="=AMORLINC(RC[2],RC[6],RC[7],RC[3],RC[5],RC[4])"><Data
+      ss:Type="Number">360</Data></Cell>
+    <Cell ss:Index="4"><Data ss:Type="Number">2400</Data></Cell>
+    <Cell><Data ss:Type="Number">300</Data></Cell>
+    <Cell ss:StyleID="s19"><Data ss:Type="Number">0.15</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s21"><Data ss:Type="DateTime">2008-08-09T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s21"><Data ss:Type="DateTime">2008-12-31T00:00:00.000</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <Print>
+    <ValidPrinterInfo/>
+    <HorizontalResolution>-4</HorizontalResolution>
+    <VerticalResolution>-4</VerticalResolution>
+   </Print>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+ <Worksheet ss:Name="Information">
+  <Table ss:ExpandedColumnCount="3" ss:ExpandedRowCount="17" x:FullColumns="1"
+   x:FullRows="1" ss:DefaultColumnWidth="66" ss:DefaultRowHeight="15.75">
+   <Row>
+    <Cell><Data ss:Type="String">CELL</Data></Cell>
+    <Cell ss:Formula="=CELL(RC[1],RC[2])"><Data ss:Type="String">$D$1</Data></Cell>
+    <Cell><Data ss:Type="String">address</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ERROR.TYPE</Data></Cell>
+    <Cell ss:Formula="=ERROR.TYPE(#VALUE!)"><Data ss:Type="Number">3</Data></Cell>
+    <Cell ss:Formula="=0/0"><Data ss:Type="Error">#DIV/0!</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">INFO</Data></Cell>
+    <Cell ss:Formula="=INFO(RC[1])"><Data ss:Type="String">15.0</Data></Cell>
+    <Cell><Data ss:Type="String">release</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ISBLANK</Data></Cell>
+    <Cell ss:Formula="=ISBLANK(RC[1])"><Data ss:Type="Boolean">1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ISERR</Data></Cell>
+    <Cell ss:Formula="=ISERR(RC[1])"><Data ss:Type="Boolean">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ISERROR</Data></Cell>
+    <Cell ss:Formula="=ISERROR(R[-4]C[1])"><Data ss:Type="Boolean">1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ISEVEN</Data></Cell>
+    <Cell ss:Formula="=ISEVEN(RC[1])"><Data ss:Type="Boolean">0</Data></Cell>
+    <Cell><Data ss:Type="Number">7</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ISLOGICAL</Data></Cell>
+    <Cell ss:Formula="=ISLOGICAL(RC[1])"><Data ss:Type="Boolean">1</Data></Cell>
+    <Cell><Data ss:Type="Boolean">1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ISNA</Data></Cell>
+    <Cell ss:Formula="=ISNA(RC[1])"><Data ss:Type="Boolean">1</Data></Cell>
+    <Cell ss:Formula="=NA()"><Data ss:Type="Error">#N/A</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ISNONTEXT</Data></Cell>
+    <Cell ss:Formula="=ISNONTEXT(RC[1])"><Data ss:Type="Boolean">1</Data></Cell>
+    <Cell><Data ss:Type="Number">3</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ISNUMBER</Data></Cell>
+    <Cell ss:Formula="=ISNUMBER(RC[1])"><Data ss:Type="Boolean">0</Data></Cell>
+    <Cell><Data ss:Type="String" x:Ticked="1">3</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ISODD</Data></Cell>
+    <Cell ss:Formula="=ISODD(RC[1])"><Data ss:Type="Boolean">1</Data></Cell>
+    <Cell><Data ss:Type="String" x:Ticked="1">3</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ISREF</Data></Cell>
+    <Cell ss:Formula="=ISREF(&quot;address&quot;)"><Data ss:Type="Boolean">0</Data></Cell>
+    <Cell><Data ss:Type="String">A5</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ISTEXT</Data></Cell>
+    <Cell ss:Formula="=ISTEXT(RC[1])"><Data ss:Type="Boolean">0</Data></Cell>
+    <Cell><Data ss:Type="Number">3</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">N</Data></Cell>
+    <Cell ss:Formula="=N(RC[1])"><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Boolean">1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">NA</Data></Cell>
+    <Cell ss:Formula="=NA()"><Data ss:Type="Error">#N/A</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">TYPE</Data></Cell>
+    <Cell ss:Formula="=TYPE({1,2;3,4})"><Data ss:Type="Number">64</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+ <Worksheet ss:Name="Logical">
+  <Table ss:ExpandedColumnCount="4" ss:ExpandedRowCount="12" x:FullColumns="1"
+   x:FullRows="1" ss:DefaultColumnWidth="66" ss:DefaultRowHeight="15.75">
+   <Row>
+    <Cell><Data ss:Type="String">Singletons</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String" x:Ticked="1">FALSE</Data></Cell>
+    <Cell ss:Formula="=FALSE()"><Data ss:Type="Boolean">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String" x:Ticked="1">TRUE</Data></Cell>
+    <Cell ss:Formula="=TRUE()"><Data ss:Type="Boolean">1</Data></Cell>
+   </Row>
+   <Row ss:Index="5">
+    <Cell><Data ss:Type="String" x:Ticked="1">Operators</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">AND</Data></Cell>
+    <Cell ss:Formula="=AND(RC[1],RC[2])"><Data ss:Type="Boolean">0</Data></Cell>
+    <Cell><Data ss:Type="Boolean">1</Data></Cell>
+    <Cell><Data ss:Type="Boolean">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">NOT</Data></Cell>
+    <Cell ss:Formula="=NOT(R[-1]C[1])"><Data ss:Type="Boolean">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">OR</Data></Cell>
+    <Cell ss:Formula="=OR(R[-2]C[1],R[-2]C[2])"><Data ss:Type="Boolean">1</Data></Cell>
+   </Row>
+   <Row ss:Index="10">
+    <Cell><Data ss:Type="String">Conditionals</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">IF</Data></Cell>
+    <Cell ss:Formula="=IF(R[-3]C,RC[1],RC[2])"><Data ss:Type="Number">123</Data></Cell>
+    <Cell><Data ss:Type="Number">123</Data></Cell>
+    <Cell><Data ss:Type="Number">456</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">IFERROR</Data></Cell>
+    <Cell ss:Formula="=IFERROR(RC[1],RC[2])"><Data ss:Type="Number">456</Data></Cell>
+    <Cell ss:Formula="=0/0"><Data ss:Type="Error">#DIV/0!</Data></Cell>
+    <Cell><Data ss:Type="Number">456</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <Print>
+    <ValidPrinterInfo/>
+    <HorizontalResolution>-4</HorizontalResolution>
+    <VerticalResolution>-4</VerticalResolution>
+   </Print>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+ <Worksheet ss:Name="Lookup">
+  <Table ss:ExpandedColumnCount="5" ss:ExpandedRowCount="26" x:FullColumns="1"
+   x:FullRows="1" ss:DefaultColumnWidth="66" ss:DefaultRowHeight="15.75">
+   <Row>
+    <Cell><Data ss:Type="String">Reference Info</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">COLUMN</Data></Cell>
+    <Cell ss:Formula="=COLUMN(RC[1])"><Data ss:Type="Number">3</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ROW</Data></Cell>
+    <Cell ss:Formula="=ROW(RC[1])"><Data ss:Type="Number">3</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">COLUMNS</Data></Cell>
+    <Cell ss:Formula="=COLUMNS(R[6]C[-1]:R[17]C[2])"><Data ss:Type="Number">4</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ROWS</Data></Cell>
+    <Cell ss:Formula="=ROWS(R[5]C[-1]:R[16]C[2])"><Data ss:Type="Number">12</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">INDIRECT</Data></Cell>
+    <Cell ss:Formula="=INDIRECT(RC[1])"><Data ss:Type="String">ADDRESS</Data></Cell>
+    <Cell><Data ss:Type="String">A10</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">AREAS</Data></Cell>
+    <Cell ss:Formula="=AREAS((RC:R[7]C[2],R[-5]C[3],R[-3]C[4]:R[9]C[6]))"><Data
+      ss:Type="Number">3</Data></Cell>
+   </Row>
+   <Row ss:Index="9">
+    <Cell><Data ss:Type="String">Relative</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ADDRESS</Data></Cell>
+    <Cell ss:Formula="=ADDRESS(2,2)"><Data ss:Type="String">$B$2</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">OFFSET</Data></Cell>
+    <Cell ss:Formula="=OFFSET(RC[1],RC[2],RC[3])"><Data ss:Type="Number">0</Data></Cell>
+    <Cell><Data ss:Type="String">C14</Data></Cell>
+    <Cell><Data ss:Type="Number">-1</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row ss:Index="13">
+    <Cell><Data ss:Type="String">Lookup</Data></Cell>
+    <Cell ss:StyleID="s31"/>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">CHOOSE</Data></Cell>
+    <Cell
+     ss:Formula="=CHOOSE(RC[1],R[-4]C[-1],R[-7]C[-1],RC[-1],#REF!,R[-12]C[-1],R[-10]C[-1],R[1]C[-1],R[9]C[-1],R[2]C[-1],R[3]C[-1])"><Data
+      ss:Type="String">CHOOSE</Data></Cell>
+    <Cell><Data ss:Type="Number">3</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">HLOOKUP</Data></Cell>
+    <Cell ss:Formula="=HLOOKUP(RC[1],R[-5]C[-1]:R[6]C[1],10,FALSE)"><Data
+      ss:Type="String">LOOKUP (arr)</Data></Cell>
+    <Cell><Data ss:Type="String">ADDRESS</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">INDEX (ref)</Data></Cell>
+    <Cell ss:Formula="=INDEX(R[-15]C[-1]:R[5]C[2],RC[1],RC[2])"><Data
+      ss:Type="String">ADDRESS</Data></Cell>
+    <Cell><Data ss:Type="Number">6</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">INDEX (arr)</Data></Cell>
+    <Cell ss:Formula="=INDEX({1,2;3,4},RC[1],RC[2])"><Data ss:Type="Number">3</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">LOOKUP (ref)</Data></Cell>
+    <Cell ss:Formula="=LOOKUP(RC[1],R[-8]C[-1]:R[3]C[-1])"><Data ss:Type="String">MATCH</Data></Cell>
+    <Cell><Data ss:Type="String">NIGGLER</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">LOOKUP (arr)</Data></Cell>
+    <Cell ss:Formula="=LOOKUP(3,{1,2,2.5,4,5,6,7,8,9})"><Data ss:Type="Number">2.5</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">MATCH</Data></Cell>
+    <Cell ss:Formula="=MATCH(RC[1],R[-10]C[-1]:R[1]C[-1])"><Data ss:Type="Number">11</Data></Cell>
+    <Cell><Data ss:Type="String">NIGGLER</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">VLOOKUP</Data></Cell>
+    <Cell ss:Formula="=VLOOKUP(RC[1],R[-11]C[-1]:RC[3],RC[2])"><Data
+      ss:Type="String">MATCH</Data></Cell>
+    <Cell><Data ss:Type="String">NIGGLER</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+   </Row>
+   <Row ss:Index="23">
+    <Cell><Data ss:Type="String">HYPERLINK</Data></Cell>
+    <Cell ss:StyleID="s16" ss:Formula="=HYPERLINK(&quot;http://nig.gl&quot;,&quot;niggler&quot;)"
+     ss:HRef="http://nig.gl"><Data ss:Type="String">niggler</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s16"/>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">Array Formula</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">TRANSPOSE</Data></Cell>
+    <Cell ss:ArrayRange="RC:RC[2]" ss:Formula="=TRANSPOSE(R[-24]C[-1]:R[-22]C[-1])"><Data
+      ss:Type="String">COLUMN</Data></Cell>
+    <Cell><Data ss:Type="String">ROW</Data></Cell>
+    <Cell><Data ss:Type="String">COLUMNS</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <Print>
+    <ValidPrinterInfo/>
+    <HorizontalResolution>-4</HorizontalResolution>
+    <VerticalResolution>-4</VerticalResolution>
+   </Print>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+     <ActiveRow>25</ActiveRow>
+     <ActiveCol>1</ActiveCol>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+ <Worksheet ss:Name="Math">
+  <Table ss:ExpandedColumnCount="11" ss:ExpandedRowCount="70" x:FullColumns="1"
+   x:FullRows="1" ss:DefaultColumnWidth="66" ss:DefaultRowHeight="15.75">
+   <Column ss:Index="2" ss:Width="72.75"/>
+   <Row>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">3</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">5</Data></Cell>
+    <Cell><Data ss:Type="Number">6</Data></Cell>
+    <Cell><Data ss:Type="Number">7</Data></Cell>
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+    <Cell><Data ss:Type="Number">9</Data></Cell>
+    <Cell><Data ss:Type="Number">10</Data></Cell>
+    <Cell><Data ss:Type="Number">11</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ABS</Data></Cell>
+    <Cell ss:Formula="=ABS(R[-1]C)"><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">5</Data></Cell>
+    <Cell><Data ss:Type="Number">6</Data></Cell>
+    <Cell><Data ss:Type="Number">7</Data></Cell>
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ACOS</Data></Cell>
+    <Cell ss:Formula="=ACOS(1/R[-2]C)"><Data ss:Type="Number">1.0471975511965976</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ACOSH</Data></Cell>
+    <Cell ss:Formula="=ACOSH(R[-3]C)"><Data ss:Type="Number">1.3169578969248166</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">AGGREGATE</Data></Cell>
+    <Cell ss:Formula="=AGGREGATE(R[-4]C[-1],R[-4]C,R[-4]C[1]:R[-4]C[9])"><Data
+      ss:Type="Number">7</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASIN</Data></Cell>
+    <Cell ss:Formula="=ASIN(1/R[-5]C)"><Data ss:Type="Number">0.52359877559829893</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASINH</Data></Cell>
+    <Cell ss:Formula="=ASINH(R[-6]C)"><Data ss:Type="Number">1.4436354751788103</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ATAN</Data></Cell>
+    <Cell ss:Formula="=ATAN(R[-7]C)"><Data ss:Type="Number">1.1071487177940904</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ATAN2</Data></Cell>
+    <Cell ss:Formula="=ATAN2(R[-8]C[-1],R[-8]C)"><Data ss:Type="Number">1.1071487177940904</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ATANH</Data></Cell>
+    <Cell ss:Formula="=ATANH(1/R[-9]C)"><Data ss:Type="Number">0.54930614433405489</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">CEILING</Data></Cell>
+    <Cell ss:Formula="=CEILING(R[-10]C,R[-10]C[1])"><Data ss:Type="Number">3</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">CEILING.PRECISE</Data></Cell>
+    <Cell ss:Formula="=CEILING.PRECISE(R[-11]C,R[-11]C[1])"><Data ss:Type="Number">3</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">COMBIN</Data></Cell>
+    <Cell ss:Formula="=COMBIN(R[-12]C[2],R[-12]C[1])"><Data ss:Type="Number">4</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">COS</Data></Cell>
+    <Cell ss:Formula="=COS(R[-13]C)"><Data ss:Type="Number">-0.41614683654714241</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">COSH</Data></Cell>
+    <Cell ss:Formula="=COSH(R[-14]C)"><Data ss:Type="Number">3.7621956910836314</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">DEGREES</Data></Cell>
+    <Cell ss:Formula="=DEGREES(R[-15]C)"><Data ss:Type="Number">114.59155902616465</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ECMA.CEILING</Data></Cell>
+    <Cell ss:Formula="=ECMA.CEILING(R[-15]C,2)"><Data ss:Type="Number">2</Data></Cell>
+    <Cell ss:Index="6"><Data ss:Type="String">* not mentioned in summary</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">EVEN</Data></Cell>
+    <Cell ss:Formula="=EVEN(R[-17]C)"><Data ss:Type="Number">2</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">EXP</Data></Cell>
+    <Cell ss:Formula="=EXP(R[-18]C)"><Data ss:Type="Number">7.3890560989306504</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">FACT</Data></Cell>
+    <Cell ss:Formula="=FACT(R[-19]C)"><Data ss:Type="Number">2</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">FACTDOUBLE</Data></Cell>
+    <Cell ss:Formula="=FACTDOUBLE(R[-20]C[3])"><Data ss:Type="Number">15</Data></Cell>
+    <Cell ss:Index="6"><Data ss:Type="String">* originally in engineering</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">FLOOR</Data></Cell>
+    <Cell ss:Formula="=FLOOR(R[-21]C,R[-21]C[1])"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">FLOOR.PRECISE</Data></Cell>
+    <Cell ss:Formula="=FLOOR.PRECISE(R[-22]C,R[-22]C[1])"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">GAMMALN</Data></Cell>
+    <Cell ss:Formula="=GAMMALN(RC[1])"><Data ss:Type="Number">3.1780538303479458</Data></Cell>
+    <Cell><Data ss:Type="Number">5</Data></Cell>
+    <Cell ss:Index="6"><Data ss:Type="String">* originally in statistical</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">GAMMALN.PRECISE</Data></Cell>
+    <Cell ss:Formula="=GAMMALN.PRECISE(R[-1]C[1])"><Data ss:Type="Number">3.1780538303479458</Data></Cell>
+    <Cell ss:Index="6"><Data ss:Type="String">* originally in statistical</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">GCD</Data></Cell>
+    <Cell ss:Formula="=GCD(R[-25]C[4],R[-25]C[8])"><Data ss:Type="Number">2</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">INT</Data></Cell>
+    <Cell ss:Formula="=INT(R[-26]C)"><Data ss:Type="Number">2</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ISO.CEILING</Data></Cell>
+    <Cell ss:Formula="=ISO.CEILING(R[-27]C[4])"><Data ss:Type="Number">6</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">LCM</Data></Cell>
+    <Cell ss:Formula="=LCM(R[-28]C[4],R[-28]C[7])"><Data ss:Type="Number">18</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">LN</Data></Cell>
+    <Cell ss:Formula="=LN(R[-29]C[7])"><Data ss:Type="Number">2.1972245773362196</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">LOG</Data></Cell>
+    <Cell ss:Formula="=LOG(R[-30]C[8])"><Data ss:Type="Number">1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">LOG10</Data></Cell>
+    <Cell ss:Formula="=LOG10(R[-31]C[3])"><Data ss:Type="Number">0.69897000433601886</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">MDETERM</Data></Cell>
+    <Cell ss:Formula="=MDETERM(R[-32]C[1]:R[-31]C[2])"><Data ss:Type="Number">-2.0000000000000018</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">MINVERSE</Data></Cell>
+    <Cell ss:Formula="=MINVERSE(R[-33]C[1]:R[-32]C[2])"><Data ss:Type="Number">-2.9999999999999973</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">MMULT</Data></Cell>
+    <Cell ss:Formula="=MMULT(R[-34]C[1]:R[-33]C[2],R[-34]C[3]:R[-33]C[4])"><Data
+      ss:Type="Number">43</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">MOD</Data></Cell>
+    <Cell ss:Formula="=MOD(R[-34]C[3],R[-35]C[3])"><Data ss:Type="Number">2</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">MROUND</Data></Cell>
+    <Cell ss:Formula="=MROUND(R[-36]C[1],R[-36]C[2])"><Data ss:Type="Number">4</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">MULTINOMIAL</Data></Cell>
+    <Cell ss:Formula="=MULTINOMIAL(R[-37]C[8],R[-37]C[3],R[-37]C[1])"><Data
+      ss:Type="Number">2450448</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ODD</Data></Cell>
+    <Cell ss:Formula="=ODD(R[-38]C[4])"><Data ss:Type="Number">7</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">PERMUT</Data></Cell>
+    <Cell ss:Formula="=PERMUT(R[-38]C[4],R[-39]C[3])"><Data ss:Type="Number">6720</Data></Cell>
+    <Cell ss:Index="6"><Data ss:Type="String">* originally in statistical</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">PI</Data></Cell>
+    <Cell ss:Formula="=PI()"><Data ss:Type="Number">3.1415926535897931</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">POWER</Data></Cell>
+    <Cell ss:Formula="=POWER(R[-41]C[1],R[-41]C[2])"><Data ss:Type="Number">81</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">PRODUCT</Data></Cell>
+    <Cell ss:Formula="=PRODUCT(R[-42]C[1],R[-42]C[2],R[-42]C[3])"><Data
+      ss:Type="Number">60</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">QUOTIENT</Data></Cell>
+    <Cell ss:Formula="=QUOTIENT(R[-42]C[3],R[-43]C[1])"><Data ss:Type="Number">2</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">RADIANS</Data></Cell>
+    <Cell ss:Formula="=RADIANS(R[-44]C[3])"><Data ss:Type="Number">8.7266462599716474E-2</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">RAND</Data></Cell>
+    <Cell ss:Formula="=RAND()"><Data ss:Type="Number">0.76589042390530837</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">RANDBETWEEN</Data></Cell>
+    <Cell ss:Formula="=RANDBETWEEN(R[-46]C[2],R[-45]C[3])"><Data ss:Type="Number">7</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ROMAN</Data></Cell>
+    <Cell ss:Formula="=ROMAN(R[-47]C)"><Data ss:Type="String">II</Data></Cell>
+    <Cell ss:Formula="=ROMAN(R[-47]C[-1],R[-47]C)"><Data ss:Type="String">II</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ROUND</Data></Cell>
+    <Cell ss:Formula="=ROUND(R[-48]C[3],R[-47]C[2])"><Data ss:Type="Number">5</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ROUNDDOWN</Data></Cell>
+    <Cell ss:Formula="=ROUNDDOWN(R[-49]C[4],R[-49]C[6])"><Data ss:Type="Number">6</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ROUNDUP</Data></Cell>
+    <Cell ss:Formula="=ROUNDUP(R[-50]C[1],R[-49]C)"><Data ss:Type="Number">3</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SERIESSUM</Data></Cell>
+    <Cell
+     ss:Formula="=SERIESSUM(R[-51]C[1],R[-50]C[1],R[-50]C[2],R[-51]C[2]:R[-51]C[9])"><Data
+      ss:Type="Number">2.928421387459129E+23</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SIGN</Data></Cell>
+    <Cell ss:Formula="=SIGN(R[-51]C[2])"><Data ss:Type="Number">1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SIN</Data></Cell>
+    <Cell ss:Formula="=SIN(R[-53]C[3])"><Data ss:Type="Number">-0.95892427466313845</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SINH</Data></Cell>
+    <Cell ss:Formula="=SINH(R[-53]C[2])"><Data ss:Type="Number">201.71315737027922</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SQRT</Data></Cell>
+    <Cell ss:Formula="=SQRT(R[-55]C[1])"><Data ss:Type="Number">1.7320508075688772</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SQRTPI</Data></Cell>
+    <Cell ss:Formula="=SQRTPI(R[-55]C)"><Data ss:Type="Number">2.5066282746310002</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">STANDARDIZE</Data></Cell>
+    <Cell ss:Formula="=STANDARDIZE(RC[1],RC[2],RC[3])"><Data ss:Type="Number">0.2</Data></Cell>
+    <Cell><Data ss:Type="Number">3</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">5</Data></Cell>
+    <Cell><Data ss:Type="String">* originally in statistical</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SUBTOTAL</Data></Cell>
+    <Cell ss:Formula="=SUBTOTAL(R[-58]C[-1],R[-58]C,R[-58]C[1]:R[-58]C[9])"><Data
+      ss:Type="Number">6.5</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SUM</Data></Cell>
+    <Cell ss:Formula="=SUM(R[-59]C)"><Data ss:Type="Number">2</Data></Cell>
+    <Cell ss:Formula="=SUM(R[-59]C[-1]:R[-59]C[8])"><Data ss:Type="Number">65</Data></Cell>
+    <Cell ss:Formula="=SUM(R[-59]C[-2]:R[-59]C[7],R[-58]C[-2]:R[-58]C[2])"><Data
+      ss:Type="Number">93</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SUMIF</Data></Cell>
+    <Cell ss:Formula="=SUMIF(R[-60]C[1]:R[-59]C[1],&quot;&gt;3&quot;)"><Data
+      ss:Type="Number">5</Data></Cell>
+    <Cell ss:Formula="=SUMIF(R[-60]C:R[-59]C,&quot;&gt;3&quot;,R[-60]C[1]:R[-59]C[1])"><Data
+      ss:Type="Number">6</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SUMIFS</Data></Cell>
+    <Cell
+     ss:Formula="=SUMIFS(R[-61]C[1]:R[-60]C[1],R[-61]C[2]:R[-60]C[2],&quot;&gt;0&quot;,R[-61]C[3]:R[-60]C[3],&quot;&lt;7&quot;)"><Data
+      ss:Type="Number">3</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SUMPRODUCT</Data></Cell>
+    <Cell ss:Formula="=SUMPRODUCT(R[-62]C[1]:R[-62]C[9])"><Data ss:Type="Number">63</Data></Cell>
+    <Cell ss:Formula="=SUMPRODUCT(R[-62]C:R[-62]C[3],R[-61]C:R[-61]C[3])"><Data
+      ss:Type="Number">122</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SUMSQ</Data></Cell>
+    <Cell ss:Formula="=SUMSQ(R[-63]C[1],R[-62]C[2])"><Data ss:Type="Number">45</Data></Cell>
+    <Cell ss:Formula="=SUMSQ(R[-62]C[1],R[-63]C[2],R[-62]C[3])"><Data
+      ss:Type="Number">125</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SUMX2MY2</Data></Cell>
+    <Cell ss:Formula="=SUMX2MY2(R[-64]C[1]:R[-64]C[4],R[-63]C[1]:R[-63]C[4])"><Data
+      ss:Type="Number">-88</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SUMX2PY2</Data></Cell>
+    <Cell ss:Formula="=SUMX2PY2(R[-65]C[1]:R[-65]C[4],R[-64]C[1]:R[-64]C[4])"><Data
+      ss:Type="Number">260</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SUMXMY2</Data></Cell>
+    <Cell ss:Formula="=SUMXMY2(R[-66]C[1]:R[-66]C[4],R[-65]C[1]:R[-65]C[4])"><Data
+      ss:Type="Number">16</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">TAN</Data></Cell>
+    <Cell ss:Formula="=TAN(R[-66]C[1])"><Data ss:Type="Number">-3.3805150062465859</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">TANH</Data></Cell>
+    <Cell ss:Formula="=TANH(R[-68]C[1])"><Data ss:Type="Number">0.99505475368673058</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">TRUNC</Data></Cell>
+    <Cell ss:Formula="=TRUNC(R[-69]C[1],R[-68]C[4])"><Data ss:Type="Number">3</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <Print>
+    <ValidPrinterInfo/>
+    <HorizontalResolution>-4</HorizontalResolution>
+    <VerticalResolution>-4</VerticalResolution>
+   </Print>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+ <Worksheet ss:Name="Statistical">
+  <Table ss:ExpandedColumnCount="10" ss:ExpandedRowCount="144" x:FullColumns="1"
+   x:FullRows="1" ss:DefaultColumnWidth="66" ss:DefaultRowHeight="15.75">
+   <Column ss:Width="108"/>
+   <Column ss:Width="72.75"/>
+   <Row>
+    <Cell><Data ss:Type="String">Distributions</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">BETA.DIST</Data></Cell>
+    <Cell ss:Formula="=BETA.DIST(RC[1],RC[2],RC[3],RC[4])"><Data ss:Type="Number">1.5</Data></Cell>
+    <Cell><Data ss:Type="Number">0.5</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Boolean">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">BETA.INV</Data></Cell>
+    <Cell ss:Formula="=BETA.INV(RC[1],RC[2],RC[3])"><Data ss:Type="Number">0.5</Data></Cell>
+    <Cell><Data ss:Type="Number">0.5</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">BETADIST</Data></Cell>
+    <Cell ss:Formula="=BETADIST(RC[1],RC[2],RC[3])"><Data ss:Type="Number">0.5</Data></Cell>
+    <Cell><Data ss:Type="Number">0.5</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">BETAINV</Data></Cell>
+    <Cell ss:Formula="=BETAINV(RC[1],RC[2],RC[3])"><Data ss:Type="Number">0.5</Data></Cell>
+    <Cell><Data ss:Type="Number">0.5</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">BINOM.DIST</Data></Cell>
+    <Cell ss:Formula="=BINOM.DIST(RC[1],RC[2],RC[3],RC[4])"><Data ss:Type="Number">0.95265101260000007</Data></Cell>
+    <Cell><Data ss:Type="Number">5</Data></Cell>
+    <Cell><Data ss:Type="Number">10</Data></Cell>
+    <Cell><Data ss:Type="Number">0.3</Data></Cell>
+    <Cell><Data ss:Type="Boolean">1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">BINOM.INV</Data></Cell>
+    <Cell ss:Formula="=BINOM.INV(RC[1],RC[2],RC[3])"><Data ss:Type="Number">7</Data></Cell>
+    <Cell><Data ss:Type="Number">20</Data></Cell>
+    <Cell><Data ss:Type="Number">0.5</Data></Cell>
+    <Cell><Data ss:Type="Number">0.1</Data></Cell>
+    <Cell><Data ss:Type="Boolean">1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">BINOMDIST</Data></Cell>
+    <Cell ss:Formula="=BINOMDIST(RC[1],RC[2],RC[3],RC[4])"><Data ss:Type="Number">0.10291934520000003</Data></Cell>
+    <Cell><Data ss:Type="Number">5</Data></Cell>
+    <Cell><Data ss:Type="Number">10</Data></Cell>
+    <Cell><Data ss:Type="Number">0.3</Data></Cell>
+    <Cell><Data ss:Type="Boolean">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">CHIDIST</Data></Cell>
+    <Cell ss:Formula="=CHIDIST(RC[1],RC[2])"><Data ss:Type="Number">0.65996322969428256</Data></Cell>
+    <Cell><Data ss:Type="Number">5</Data></Cell>
+    <Cell><Data ss:Type="Number">7</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">CHIINV</Data></Cell>
+    <Cell ss:Formula="=CHIINV(R[-1]C,R[-1]C[2])"><Data ss:Type="Number">5</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">CHISQ.DIST</Data></Cell>
+    <Cell ss:Formula="=CHISQ.DIST(RC[1],RC[2],RC[3])"><Data ss:Type="Number">0.34003677030571738</Data></Cell>
+    <Cell><Data ss:Type="Number">5</Data></Cell>
+    <Cell><Data ss:Type="Number">7</Data></Cell>
+    <Cell><Data ss:Type="Boolean">1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">CHISQ.DIST.RT</Data></Cell>
+    <Cell ss:Formula="=CHISQ.DIST.RT(R[-1]C[1],R[-1]C[2])"><Data ss:Type="Number">0.65996322969428256</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">CHISQ.INV</Data></Cell>
+    <Cell ss:Formula="=CHISQ.INV(R[-2]C,R[-2]C[2])"><Data ss:Type="Number">5</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">CHISQ.INV.RT</Data></Cell>
+    <Cell ss:Formula="=CHISQ.INV.RT(R[-2]C,R[-3]C[2])"><Data ss:Type="Number">5</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">CONFIDENCE</Data></Cell>
+    <Cell ss:Formula="=CONFIDENCE(RC[1],RC[2],RC[3])"><Data ss:Type="Number">0.10364333894937899</Data></Cell>
+    <Cell><Data ss:Type="Number">0.3</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">100</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">CONFIDENCE.NORM</Data></Cell>
+    <Cell ss:Formula="=CONFIDENCE.NORM(RC[1],RC[2],RC[3])"><Data ss:Type="Number">0.10364333894937899</Data></Cell>
+    <Cell><Data ss:Type="Number">0.3</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">100</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">CONFIDENCE.T</Data></Cell>
+    <Cell ss:Formula="=CONFIDENCE.T(RC[1],RC[2],RC[3])"><Data ss:Type="Number">0.10418907592517826</Data></Cell>
+    <Cell><Data ss:Type="Number">0.3</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">100</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">CRITBINOM</Data></Cell>
+    <Cell ss:Formula="=CRITBINOM(RC[1],RC[2],RC[3])"><Data ss:Type="Number">64</Data></Cell>
+    <Cell><Data ss:Type="Number">120</Data></Cell>
+    <Cell><Data ss:Type="Number">0.5</Data></Cell>
+    <Cell><Data ss:Type="Number">0.75</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">EXPON.DIST</Data></Cell>
+    <Cell ss:Formula="=EXPON.DIST(RC[1],RC[2],RC[3])"><Data ss:Type="Number">0.8646647167633873</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Boolean">1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">EXPONDIST</Data></Cell>
+    <Cell ss:Formula="=EXPONDIST(RC[1],RC[2],RC[3])"><Data ss:Type="Number">0.2706705664732254</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Boolean">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">F.DIST</Data></Cell>
+    <Cell ss:Formula="=F.DIST(RC[1],RC[2],RC[3],RC[4])"><Data ss:Type="Number">0.53524199845511</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">3</Data></Cell>
+    <Cell><Data ss:Type="Boolean">1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">F.DIST.RT</Data></Cell>
+    <Cell ss:Formula="=F.DIST.RT(R[-1]C[1],R[-1]C[2],R[-1]C[3])"><Data
+      ss:Type="Number">0.46475800154489</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">F.INV</Data></Cell>
+    <Cell ss:Formula="=F.INV(R[-2]C,R[-2]C[2],R[-2]C[3])"><Data ss:Type="Number">1.0000000000000002</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">F.INV.RT</Data></Cell>
+    <Cell ss:Formula="=F.INV.RT(R[-2]C,R[-3]C[2],R[-3]C[3])"><Data ss:Type="Number">1.0000000000000002</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">FDIST</Data></Cell>
+    <Cell ss:Formula="=FDIST(RC[1],RC[2],RC[3])"><Data ss:Type="Number">0.17355371900826444</Data></Cell>
+    <Cell><Data ss:Type="Number">5</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">FINV</Data></Cell>
+    <Cell ss:Formula="=FINV(R[-1]C,R[-1]C[2],R[-1]C[3])"><Data ss:Type="Number">5.0000000000000009</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">FISHER</Data></Cell>
+    <Cell ss:Formula="=FISHER(RC[1])"><Data ss:Type="Number">0.54930614433405489</Data></Cell>
+    <Cell><Data ss:Type="Number">0.5</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">FISHERINV</Data></Cell>
+    <Cell ss:Formula="=FISHERINV(R[-1]C)"><Data ss:Type="Number">0.50000000000000011</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">GAMMA.DIST</Data></Cell>
+    <Cell ss:Formula="=GAMMA.DIST(RC[1],RC[2],RC[3],RC[4])"><Data ss:Type="Number">0.38494001106330422</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">3</Data></Cell>
+    <Cell><Data ss:Type="Boolean">1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">GAMMA.INV</Data></Cell>
+    <Cell ss:Formula="=GAMMA.INV(R[-1]C,R[-1]C[2],R[-1]C[3])"><Data
+      ss:Type="Number">3.9999999999999991</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">GAMMADIST</Data></Cell>
+    <Cell ss:Formula="=GAMMADIST(R[-2]C[1],R[-2]C[2],R[-2]C[3],R[-2]C[4])"><Data
+      ss:Type="Number">0.38494001106330422</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">GAMMAINV</Data></Cell>
+    <Cell ss:Formula="=GAMMAINV(R[-1]C,R[-3]C[2],R[-3]C[3])"><Data ss:Type="Number">3.9999999999999991</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">HYPGEOM.DIST</Data></Cell>
+    <Cell ss:Formula="=HYPGEOM.DIST(RC[1],RC[2],RC[3],RC[4],RC[5])"><Data
+      ss:Type="Number">0.41666666666666635</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">7</Data></Cell>
+    <Cell><Data ss:Type="Number">9</Data></Cell>
+    <Cell><Data ss:Type="Number">5</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">HYPGEOMDIST</Data></Cell>
+    <Cell ss:Formula="=HYPGEOMDIST(RC[1],RC[2],RC[3],RC[4])"><Data ss:Type="Number">0.5357142857142857</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">3</Data></Cell>
+    <Cell><Data ss:Type="Number">6</Data></Cell>
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">LOGINV</Data></Cell>
+    <Cell ss:Formula="=LOGINV(RC[1],RC[2],RC[3])"><Data ss:Type="Number">148.4131591025766</Data></Cell>
+    <Cell><Data ss:Type="Number">0.5</Data></Cell>
+    <Cell><Data ss:Type="Number">5</Data></Cell>
+    <Cell><Data ss:Type="Number">5</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">LOGNORM.DIST</Data></Cell>
+    <Cell ss:Formula="=LOGNORM.DIST(RC[1],RC[2],RC[3],RC[4])"><Data
+      ss:Type="Number">0.34457825838967576</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">5</Data></Cell>
+    <Cell><Data ss:Type="Boolean">1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">LOGNORM.INV</Data></Cell>
+    <Cell ss:Formula="=LOGNORM.INV(R[-1]C,R[-1]C[2],R[-1]C[3])"><Data
+      ss:Type="Number">0.99999999999999867</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">LOGNORMDIST</Data></Cell>
+    <Cell ss:Formula="=LOGNORMDIST(R[-2]C[1],R[-2]C[2],R[-2]C[3])"><Data
+      ss:Type="Number">0.34457825838967576</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">NEGBINOM.DIST</Data></Cell>
+    <Cell ss:Formula="=NEGBINOM.DIST(RC[1],RC[2],RC[3],RC[4])"><Data
+      ss:Type="Number">3.860084305800001E-2</Data></Cell>
+    <Cell><Data ss:Type="Number">5</Data></Cell>
+    <Cell><Data ss:Type="Number">7</Data></Cell>
+    <Cell><Data ss:Type="Number">0.3</Data></Cell>
+    <Cell><Data ss:Type="Boolean">1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">NEGBINOMDIST</Data></Cell>
+    <Cell ss:Formula="=NEGBINOMDIST(R[-1]C[1],R[-1]C[2],R[-1]C[3])"><Data
+      ss:Type="Number">1.6981691958000006E-2</Data></Cell>
+    <Cell><Data ss:Type="Number">5</Data></Cell>
+    <Cell><Data ss:Type="Number">7</Data></Cell>
+    <Cell><Data ss:Type="Number">0.3</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">NORM.DIST</Data></Cell>
+    <Cell ss:Formula="=NORM.DIST(RC[1],RC[2],RC[3],RC[4])"><Data ss:Type="Number">0.63055865981823644</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell><Data ss:Type="Number">-1</Data></Cell>
+    <Cell><Data ss:Type="Number">3</Data></Cell>
+    <Cell><Data ss:Type="Boolean">1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">NORM.INV</Data></Cell>
+    <Cell ss:Formula="=NORM.INV(R[-1]C,R[-1]C[2],R[-1]C[3])"><Data ss:Type="Number">8.8817841970012523E-16</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">NORM.S.DIST</Data></Cell>
+    <Cell ss:Formula="=NORM.S.DIST(RC[1],RC[2])"><Data ss:Type="Number">0.9986501019683699</Data></Cell>
+    <Cell><Data ss:Type="Number">3</Data></Cell>
+    <Cell><Data ss:Type="Boolean">1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">NORM.S.INV</Data></Cell>
+    <Cell ss:Formula="=NORM.S.INV(R[-1]C)"><Data ss:Type="Number">2.9999999999999969</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">NORMDIST</Data></Cell>
+    <Cell ss:Formula="=NORMDIST(R[-4]C[1],R[-4]C[2],R[-4]C[3],R[-4]C[4])"><Data
+      ss:Type="Number">0.63055865981823644</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">NORMINV</Data></Cell>
+    <Cell ss:Formula="=NORMINV(R[-1]C,R[-5]C[2],R[-5]C[3])"><Data ss:Type="Number">8.8817841970012523E-16</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">NORMSDIST</Data></Cell>
+    <Cell ss:Formula="=NORMSDIST(RC[1])"><Data ss:Type="Number">0.97724986805182079</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">NORMSINV</Data></Cell>
+    <Cell ss:Formula="=NORMSINV(R[-1]C)"><Data ss:Type="Number">2</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">POISSON</Data></Cell>
+    <Cell ss:Formula="=POISSON(RC[1],RC[2],RC[3])"><Data ss:Type="Number">0.40600584970983811</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Boolean">1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">POISSON.DIST</Data></Cell>
+    <Cell ss:Formula="=POISSON.DIST(RC[1],RC[2],RC[3])"><Data ss:Type="Number">0.27067056647322535</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Boolean">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">T.DIST</Data></Cell>
+    <Cell ss:Formula="=T.DIST(RC[1],RC[2],RC[3])"><Data ss:Type="Number">0.99002893693400373</Data></Cell>
+    <Cell><Data ss:Type="Number">3</Data></Cell>
+    <Cell><Data ss:Type="Number">7</Data></Cell>
+    <Cell><Data ss:Type="Boolean">1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">T.DIST.2T</Data></Cell>
+    <Cell ss:Formula="=T.DIST.2T(R[-1]C[1],R[-1]C[2])"><Data ss:Type="Number">1.9942126131992539E-2</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">T.DIST.RT</Data></Cell>
+    <Cell ss:Formula="=T.DIST.RT(R[-2]C[1],R[-2]C[2])"><Data ss:Type="Number">9.9710630659962697E-3</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">T.INV</Data></Cell>
+    <Cell ss:Formula="=T.INV(R[-3]C,R[-3]C[2])"><Data ss:Type="Number">3</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">T.INV.2T</Data></Cell>
+    <Cell ss:Formula="=T.INV.2T(R[-3]C,R[-4]C[2])"><Data ss:Type="Number">3</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">TDIST</Data></Cell>
+    <Cell ss:Formula="=TDIST(RC[1],RC[2],RC[3])"><Data ss:Type="Number">1.9942126131992539E-2</Data></Cell>
+    <Cell><Data ss:Type="Number">3</Data></Cell>
+    <Cell><Data ss:Type="Number">7</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">TINV</Data></Cell>
+    <Cell ss:Formula="=TINV(R[-1]C,R[-1]C[2])"><Data ss:Type="Number">3</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">WEIBULL</Data></Cell>
+    <Cell ss:Formula="=WEIBULL(RC[1],RC[2],RC[3],RC[4])"><Data ss:Type="Number">0.22119921692859512</Data></Cell>
+    <Cell><Data ss:Type="Number">0.5</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Boolean">1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">WEIBULL.DIST</Data></Cell>
+    <Cell ss:Formula="=WEIBULL.DIST(RC[1],RC[2],RC[3],RC[4])"><Data
+      ss:Type="Number">0.77880078307140488</Data></Cell>
+    <Cell><Data ss:Type="Number">0.5</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Boolean">0</Data></Cell>
+   </Row>
+   <Row ss:Index="61">
+    <Cell><Data ss:Type="String">Descriptive Statistics</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">AVEDEV</Data></Cell>
+    <Cell ss:Formula="=AVEDEV(RC[1]:RC[7],RC[8],ROW(RC))"><Data ss:Type="Number">31.78125</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+    <Cell><Data ss:Type="Number">16</Data></Cell>
+    <Cell><Data ss:Type="Number">32</Data></Cell>
+    <Cell><Data ss:Type="Boolean">1</Data></Cell>
+    <Cell><Data ss:Type="Number">128</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">AVERAGE</Data></Cell>
+    <Cell ss:Formula="=AVERAGE(RC[1]:RC[7],RC[8],ROW(RC))"><Data ss:Type="Number">31.75</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+    <Cell><Data ss:Type="Number">16</Data></Cell>
+    <Cell><Data ss:Type="Number">32</Data></Cell>
+    <Cell><Data ss:Type="Boolean">1</Data></Cell>
+    <Cell><Data ss:Type="Number">128</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">AVERAGEA</Data></Cell>
+    <Cell ss:Formula="=AVERAGEA(RC[1]:RC[7],RC[8],ROW(RC))"><Data ss:Type="Number">28.444444444444443</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+    <Cell><Data ss:Type="Number">16</Data></Cell>
+    <Cell><Data ss:Type="Number">32</Data></Cell>
+    <Cell><Data ss:Type="Boolean">1</Data></Cell>
+    <Cell><Data ss:Type="Number">128</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">AVERAGEIF</Data></Cell>
+    <Cell ss:Formula="=AVERAGEIF(RC[1]:RC[7],RC[8])"><Data ss:Type="Number">3.75</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+    <Cell><Data ss:Type="Number">16</Data></Cell>
+    <Cell><Data ss:Type="Number">32</Data></Cell>
+    <Cell><Data ss:Type="Boolean">1</Data></Cell>
+    <Cell><Data ss:Type="String">&lt;10</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">AVERAGEIFS</Data></Cell>
+    <Cell ss:Formula="=AVERAGEIFS(RC[1]:RC[7],RC[1]:RC[7],&quot;&gt;3&quot;,RC[1]:RC[7],&quot;&lt;20&quot;)"><Data
+      ss:Type="Number">9.3333333333333339</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+    <Cell><Data ss:Type="Number">16</Data></Cell>
+    <Cell><Data ss:Type="Number">32</Data></Cell>
+    <Cell><Data ss:Type="Boolean">1</Data></Cell>
+    <Cell><Data ss:Type="String">&lt;10</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">CORREL</Data></Cell>
+    <Cell ss:Formula="=CORREL({2,1,3,4,7,11},RC[1]:RC[6])"><Data ss:Type="Number">0.98624138261245542</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">3</Data></Cell>
+    <Cell><Data ss:Type="Number">5</Data></Cell>
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+    <Cell><Data ss:Type="Number">13</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">COUNT</Data></Cell>
+    <Cell ss:Formula="=COUNT(RC[1]:RC[8])"><Data ss:Type="Number">6</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+    <Cell><Data ss:Type="Number">16</Data></Cell>
+    <Cell><Data ss:Type="Number">32</Data></Cell>
+    <Cell><Data ss:Type="Boolean">1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">COUNTA</Data></Cell>
+    <Cell ss:Formula="=COUNTA(RC[1]:RC[8])"><Data ss:Type="Number">7</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+    <Cell><Data ss:Type="Number">16</Data></Cell>
+    <Cell><Data ss:Type="Number">32</Data></Cell>
+    <Cell><Data ss:Type="Boolean">1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">COUNTBLANK</Data></Cell>
+    <Cell ss:Formula="=COUNTBLANK(RC[1]:RC[8])"><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+    <Cell><Data ss:Type="Number">16</Data></Cell>
+    <Cell><Data ss:Type="Number">32</Data></Cell>
+    <Cell><Data ss:Type="Boolean">1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">COUNTIF</Data></Cell>
+    <Cell ss:Formula="=COUNTIF(RC[1]:RC[7],RC[8])"><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+    <Cell><Data ss:Type="Number">16</Data></Cell>
+    <Cell><Data ss:Type="Number">32</Data></Cell>
+    <Cell><Data ss:Type="Boolean">1</Data></Cell>
+    <Cell><Data ss:Type="String">&gt;10</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">COUNTIFS</Data></Cell>
+    <Cell ss:Formula="=COUNTIFS(RC[1]:RC[7],RC[8],RC[1]:RC[7],R[-1]C[8])"><Data
+      ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+    <Cell><Data ss:Type="Number">16</Data></Cell>
+    <Cell><Data ss:Type="Number">32</Data></Cell>
+    <Cell><Data ss:Type="Boolean">1</Data></Cell>
+    <Cell><Data ss:Type="String">&lt;30</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">COVAR</Data></Cell>
+    <Cell ss:Formula="=COVAR(RC[1]:RC[6],R[1]C[1]:R[1]C[6])"><Data ss:Type="Number">36.333333333333336</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+    <Cell><Data ss:Type="Number">16</Data></Cell>
+    <Cell><Data ss:Type="Number">32</Data></Cell>
+    <Cell><Data ss:Type="Boolean">1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">COVARIANCE.P</Data></Cell>
+    <Cell ss:Formula="=COVARIANCE.P(R[-1]C[1]:R[-1]C[6],RC[1]:RC[6])"><Data
+      ss:Type="Number">36.333333333333336</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">3</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">7</Data></Cell>
+    <Cell><Data ss:Type="Number">11</Data></Cell>
+    <Cell><Data ss:Type="Number">18</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">COVARIANCE.S</Data></Cell>
+    <Cell ss:Formula="=COVARIANCE.S(R[-2]C[1]:R[-2]C[6],R[-1]C[1]:R[-1]C[6])"><Data
+      ss:Type="Number">43.6</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">DEVSQ</Data></Cell>
+    <Cell ss:Formula="=DEVSQ(RC[1]:RC[7])"><Data ss:Type="Number">703.5</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+    <Cell><Data ss:Type="Number">16</Data></Cell>
+    <Cell><Data ss:Type="Number">32</Data></Cell>
+    <Cell><Data ss:Type="Boolean">1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">GEOMEAN</Data></Cell>
+    <Cell ss:Formula="=GEOMEAN(RC[1]:RC[7])"><Data ss:Type="Number">5.6568542494923797</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+    <Cell><Data ss:Type="Number">16</Data></Cell>
+    <Cell><Data ss:Type="Number">32</Data></Cell>
+    <Cell><Data ss:Type="Boolean">1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">HARMEAN</Data></Cell>
+    <Cell ss:Formula="=HARMEAN(RC[1]:RC[7])"><Data ss:Type="Number">3.0476190476190474</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+    <Cell><Data ss:Type="Number">16</Data></Cell>
+    <Cell><Data ss:Type="Number">32</Data></Cell>
+    <Cell><Data ss:Type="Boolean">1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">KURT</Data></Cell>
+    <Cell ss:Formula="=KURT(RC[1]:RC[7])"><Data ss:Type="Number">1.8749535902576664</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+    <Cell><Data ss:Type="Number">16</Data></Cell>
+    <Cell><Data ss:Type="Number">32</Data></Cell>
+    <Cell><Data ss:Type="Boolean">1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">LARGE</Data></Cell>
+    <Cell ss:Formula="=LARGE(RC[1]:RC[6],RC[7])"><Data ss:Type="Number">8</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+    <Cell><Data ss:Type="Number">16</Data></Cell>
+    <Cell><Data ss:Type="Number">32</Data></Cell>
+    <Cell><Data ss:Type="Number">3</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">MAX</Data></Cell>
+    <Cell ss:Formula="=MAX(RC[1]:RC[6],RC[7])"><Data ss:Type="Number">32</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+    <Cell><Data ss:Type="Number">16</Data></Cell>
+    <Cell><Data ss:Type="Number">32</Data></Cell>
+    <Cell><Data ss:Type="Number">3</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">MAXA</Data></Cell>
+    <Cell ss:Formula="=MAXA(RC[1]:RC[6],RC[7])"><Data ss:Type="Number">32</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+    <Cell><Data ss:Type="Number">16</Data></Cell>
+    <Cell><Data ss:Type="Number">32</Data></Cell>
+    <Cell><Data ss:Type="Number">3</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">MEDIAN</Data></Cell>
+    <Cell ss:StyleID="s33" ss:Formula="=MEDIAN(RC[1]:RC[7])"><Data ss:Type="Number">4</Data></Cell>
+    <Cell ss:StyleID="s33"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s33"><Data ss:Type="Number">2</Data></Cell>
+    <Cell ss:StyleID="s33"><Data ss:Type="Number">4</Data></Cell>
+    <Cell ss:StyleID="s33"><Data ss:Type="Number">8</Data></Cell>
+    <Cell ss:StyleID="s33"><Data ss:Type="Number">16</Data></Cell>
+    <Cell ss:StyleID="s33"><Data ss:Type="Number">32</Data></Cell>
+    <Cell ss:StyleID="s33"><Data ss:Type="Number">3</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">MIN</Data></Cell>
+    <Cell ss:Formula="=MIN(RC[1]:RC[7])"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s33"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s33"><Data ss:Type="Number">2</Data></Cell>
+    <Cell ss:StyleID="s33"><Data ss:Type="Number">4</Data></Cell>
+    <Cell ss:StyleID="s33"><Data ss:Type="Number">8</Data></Cell>
+    <Cell ss:StyleID="s33"><Data ss:Type="Number">16</Data></Cell>
+    <Cell ss:StyleID="s33"><Data ss:Type="Number">32</Data></Cell>
+    <Cell ss:StyleID="s33"><Data ss:Type="Number">3</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">MINA</Data></Cell>
+    <Cell ss:Formula="=MINA(RC[1]:RC[7])"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s33"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s33"><Data ss:Type="Number">2</Data></Cell>
+    <Cell ss:StyleID="s33"><Data ss:Type="Number">4</Data></Cell>
+    <Cell ss:StyleID="s33"><Data ss:Type="Number">8</Data></Cell>
+    <Cell ss:StyleID="s33"><Data ss:Type="Number">16</Data></Cell>
+    <Cell ss:StyleID="s33"><Data ss:Type="Number">32</Data></Cell>
+    <Cell ss:StyleID="s33"><Data ss:Type="Number">3</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">MODE</Data></Cell>
+    <Cell ss:Formula="=MODE(RC[1]:RC[7])"><Data ss:Type="Number">16</Data></Cell>
+    <Cell ss:StyleID="s33"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s33"><Data ss:Type="Number">2</Data></Cell>
+    <Cell ss:StyleID="s33"><Data ss:Type="Number">4</Data></Cell>
+    <Cell ss:StyleID="s33"><Data ss:Type="Number">8</Data></Cell>
+    <Cell ss:StyleID="s33"><Data ss:Type="Number">16</Data></Cell>
+    <Cell ss:StyleID="s33"><Data ss:Type="Number">16</Data></Cell>
+    <Cell ss:StyleID="s33"><Data ss:Type="Number">3</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">MODE.MULT</Data></Cell>
+    <Cell ss:Formula="=MODE.MULT(RC[1]:RC[7])"><Data ss:Type="Number">8</Data></Cell>
+    <Cell ss:StyleID="s33"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s33"><Data ss:Type="Number">2</Data></Cell>
+    <Cell ss:StyleID="s33"><Data ss:Type="Number">4</Data></Cell>
+    <Cell ss:StyleID="s33"><Data ss:Type="Number">8</Data></Cell>
+    <Cell ss:StyleID="s33"><Data ss:Type="Number">8</Data></Cell>
+    <Cell ss:StyleID="s33"><Data ss:Type="Number">32</Data></Cell>
+    <Cell ss:StyleID="s33"><Data ss:Type="Number">3</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">MODE.SNGL</Data></Cell>
+    <Cell ss:Formula="=MODE.SNGL(1,2,3,4,3,2,1,2,1,2,2)"><Data ss:Type="Number">2</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">PERCENTILE</Data></Cell>
+    <Cell ss:Formula="=PERCENTILE(RC[1]:RC[6],RC[7])"><Data ss:Type="Number">3</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+    <Cell><Data ss:Type="Number">16</Data></Cell>
+    <Cell><Data ss:Type="Number">32</Data></Cell>
+    <Cell><Data ss:Type="Number">0.3</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">PERCENTILE.EXC</Data></Cell>
+    <Cell ss:Formula="=PERCENTILE.EXC(RC[1]:RC[6],RC[7])"><Data ss:Type="Number">6</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+    <Cell><Data ss:Type="Number">16</Data></Cell>
+    <Cell><Data ss:Type="Number">32</Data></Cell>
+    <Cell><Data ss:Type="Number">0.5</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">PERCENTILE.INC</Data></Cell>
+    <Cell ss:Formula="=PERCENTILE.INC(RC[1]:RC[6],RC[7])"><Data ss:Type="Number">12</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+    <Cell><Data ss:Type="Number">16</Data></Cell>
+    <Cell><Data ss:Type="Number">32</Data></Cell>
+    <Cell><Data ss:Type="Number">0.7</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">PERCENTRANK</Data></Cell>
+    <Cell ss:Formula="=PERCENTRANK(RC[1]:RC[6],RC[7])"><Data ss:Type="Number">0.65</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+    <Cell><Data ss:Type="Number">16</Data></Cell>
+    <Cell><Data ss:Type="Number">32</Data></Cell>
+    <Cell><Data ss:Type="Number">10</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">PERCENTRANK.EXC</Data></Cell>
+    <Cell ss:Formula="=PERCENTRANK.EXC(RC[1]:RC[6],RC[7])"><Data ss:Type="Number">0.75</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+    <Cell><Data ss:Type="Number">16</Data></Cell>
+    <Cell><Data ss:Type="Number">32</Data></Cell>
+    <Cell><Data ss:Type="Number">20</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">PERCENTRANK.INC</Data></Cell>
+    <Cell ss:Formula="=PERCENTRANK.INC(RC[1]:RC[6],RC[7])"><Data ss:Type="Number">0.97499999999999998</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+    <Cell><Data ss:Type="Number">16</Data></Cell>
+    <Cell><Data ss:Type="Number">32</Data></Cell>
+    <Cell><Data ss:Type="Number">30</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">QUARTILE</Data></Cell>
+    <Cell ss:Formula="=QUARTILE(RC[1]:RC[6],RC[7])"><Data ss:Type="Number">14</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+    <Cell><Data ss:Type="Number">16</Data></Cell>
+    <Cell><Data ss:Type="Number">32</Data></Cell>
+    <Cell><Data ss:Type="Number">3</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">QUARTILE.EXC</Data></Cell>
+    <Cell ss:Formula="=QUARTILE.EXC(RC[1]:RC[6],RC[7])"><Data ss:Type="Number">6</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+    <Cell><Data ss:Type="Number">16</Data></Cell>
+    <Cell><Data ss:Type="Number">32</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">QUARTILE.INC</Data></Cell>
+    <Cell ss:Formula="=QUARTILE.INC(RC[1]:RC[6],RC[7])"><Data ss:Type="Number">2.5</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+    <Cell><Data ss:Type="Number">16</Data></Cell>
+    <Cell><Data ss:Type="Number">32</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">RANK</Data></Cell>
+    <Cell ss:Formula="=RANK(4,RC[1]:RC[6])"><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+    <Cell><Data ss:Type="Number">16</Data></Cell>
+    <Cell><Data ss:Type="Number">32</Data></Cell>
+    <Cell ss:StyleID="s33"><Data ss:Type="String">RANK(2,{4,6,8,7,5,3,1,2},2)</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">RANK.AVG</Data></Cell>
+    <Cell ss:Formula="=RANK.AVG(4,RC[1]:RC[6])"><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+    <Cell><Data ss:Type="Number">16</Data></Cell>
+    <Cell><Data ss:Type="Number">32</Data></Cell>
+    <Cell><Data ss:Type="String">* note that the docs say you can specify an array</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">RANK.EQ</Data></Cell>
+    <Cell ss:Formula="=RANK.EQ(4,RC[1]:RC[6])"><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+    <Cell><Data ss:Type="Number">16</Data></Cell>
+    <Cell><Data ss:Type="Number">32</Data></Cell>
+    <Cell><Data ss:Type="String">* but it appears that excel 2011 falters on those</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SKEW</Data></Cell>
+    <Cell ss:Formula="=SKEW(RC[1]:RC[6])"><Data ss:Type="Number">1.4996929578604361</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+    <Cell><Data ss:Type="Number">16</Data></Cell>
+    <Cell><Data ss:Type="Number">32</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SMALL</Data></Cell>
+    <Cell ss:Formula="=SMALL(RC[1]:RC[6],RC[7])"><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+    <Cell><Data ss:Type="Number">16</Data></Cell>
+    <Cell><Data ss:Type="Number">32</Data></Cell>
+    <Cell><Data ss:Type="Number">3</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">STDEV</Data></Cell>
+    <Cell ss:Formula="=STDEV(RC[1]:RC[6],RC[7])"><Data ss:Type="Number">13.098527725337247</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+    <Cell><Data ss:Type="Number">16</Data></Cell>
+    <Cell><Data ss:Type="Number">32</Data></Cell>
+    <Cell><Data ss:Type="Number">30</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">STDEV.P</Data></Cell>
+    <Cell ss:Formula="=STDEV.P(RC[1]:RC[6],RC[7])"><Data ss:Type="Number">12.126880245545262</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+    <Cell><Data ss:Type="Number">16</Data></Cell>
+    <Cell><Data ss:Type="Number">32</Data></Cell>
+    <Cell><Data ss:Type="Number">30</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">STDEV.S</Data></Cell>
+    <Cell ss:Formula="=STDEV.S(RC[1]:RC[6],RC[7])"><Data ss:Type="Number">13.098527725337247</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+    <Cell><Data ss:Type="Number">16</Data></Cell>
+    <Cell><Data ss:Type="Number">32</Data></Cell>
+    <Cell><Data ss:Type="Number">30</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">STDEVA</Data></Cell>
+    <Cell ss:Formula="=STDEVA(RC[1]:RC[6],RC[7])"><Data ss:Type="Number">13.098527725337247</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+    <Cell><Data ss:Type="Number">16</Data></Cell>
+    <Cell><Data ss:Type="Number">32</Data></Cell>
+    <Cell><Data ss:Type="Number">30</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">STDEVP</Data></Cell>
+    <Cell ss:Formula="=STDEVP(RC[1]:RC[6],RC[7])"><Data ss:Type="Number">12.126880245545262</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+    <Cell><Data ss:Type="Number">16</Data></Cell>
+    <Cell><Data ss:Type="Number">32</Data></Cell>
+    <Cell><Data ss:Type="Number">30</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">STDEVPA</Data></Cell>
+    <Cell ss:Formula="=STDEVPA(RC[1]:RC[6],RC[7])"><Data ss:Type="Number">12.126880245545262</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+    <Cell><Data ss:Type="Number">16</Data></Cell>
+    <Cell><Data ss:Type="Number">32</Data></Cell>
+    <Cell><Data ss:Type="Number">30</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">TRIMMEAN</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">VAR</Data></Cell>
+    <Cell ss:Formula="=VAR(RC[1]:RC[6],RC[7])"><Data ss:Type="Number">171.57142857142856</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+    <Cell><Data ss:Type="Number">16</Data></Cell>
+    <Cell><Data ss:Type="Number">32</Data></Cell>
+    <Cell><Data ss:Type="Number">30</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">VAR.P</Data></Cell>
+    <Cell ss:Formula="=VAR.P(RC[1]:RC[6],RC[7])"><Data ss:Type="Number">147.0612244897959</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+    <Cell><Data ss:Type="Number">16</Data></Cell>
+    <Cell><Data ss:Type="Number">32</Data></Cell>
+    <Cell><Data ss:Type="Number">30</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">VAR.S</Data></Cell>
+    <Cell ss:Formula="=VAR.S(RC[1]:RC[6],RC[7])"><Data ss:Type="Number">171.57142857142856</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+    <Cell><Data ss:Type="Number">16</Data></Cell>
+    <Cell><Data ss:Type="Number">32</Data></Cell>
+    <Cell><Data ss:Type="Number">30</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">VARA</Data></Cell>
+    <Cell ss:Formula="=VARA(RC[1]:RC[6],RC[7])"><Data ss:Type="Number">171.57142857142856</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+    <Cell><Data ss:Type="Number">16</Data></Cell>
+    <Cell><Data ss:Type="Number">32</Data></Cell>
+    <Cell><Data ss:Type="Number">30</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">VARP</Data></Cell>
+    <Cell ss:Formula="=VARP(RC[1]:RC[6],RC[7])"><Data ss:Type="Number">147.0612244897959</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+    <Cell><Data ss:Type="Number">16</Data></Cell>
+    <Cell><Data ss:Type="Number">32</Data></Cell>
+    <Cell><Data ss:Type="Number">30</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">VARPA</Data></Cell>
+    <Cell ss:Formula="=VARPA(RC[1]:RC[6],RC[7])"><Data ss:Type="Number">147.0612244897959</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+    <Cell><Data ss:Type="Number">16</Data></Cell>
+    <Cell><Data ss:Type="Number">32</Data></Cell>
+    <Cell><Data ss:Type="Number">30</Data></Cell>
+   </Row>
+   <Row ss:Index="117">
+    <Cell><Data ss:Type="String">Statistical Tests</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">CHISQ.TEST</Data></Cell>
+    <Cell ss:Formula="=CHISQ.TEST(RC[2]:RC[7],R[1]C[2]:R[1]C[7])"><Data
+      ss:Type="Number">0.76649193674651417</Data></Cell>
+    <Cell ss:Index="4"><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">3</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">5</Data></Cell>
+    <Cell><Data ss:Type="Number">6</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">CHITEST</Data></Cell>
+    <Cell ss:Formula="=CHITEST(RC[2]:RC[7],R[-1]C[2]:R[-1]C[7])"><Data
+      ss:Type="Number">0.55181804073002705</Data></Cell>
+    <Cell ss:Index="4"><Data ss:Type="Number">1.1000000000000001</Data></Cell>
+    <Cell><Data ss:Type="Number">2.2000000000000002</Data></Cell>
+    <Cell><Data ss:Type="Number">3.1</Data></Cell>
+    <Cell><Data ss:Type="Number">7</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">9</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">F.TEST</Data></Cell>
+    <Cell ss:Formula="=F.TEST(R[-2]C[2]:R[-2]C[7],R[-1]C[2]:R[-1]C[7])"><Data
+      ss:Type="Number">0.31774423874816832</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">FTEST</Data></Cell>
+    <Cell ss:Formula="=FTEST(R[-2]C[2]:R[-2]C[7],R[-3]C[2]:R[-3]C[7])"><Data
+      ss:Type="Number">0.31774423874816832</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">T.TEST</Data></Cell>
+    <Cell ss:Formula="=T.TEST(R[-4]C[2]:R[-4]C[7],R[-3]C[2]:R[-3]C[7],RC[1],RC[2])"><Data
+      ss:Type="Number">0.55113345694457505</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">3</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">TTEST</Data></Cell>
+    <Cell
+     ss:Formula="=TTEST(R[-5]C[2]:R[-5]C[7],R[-4]C[2]:R[-4]C[7],R[-1]C[1],R[-1]C[2])"><Data
+      ss:Type="Number">0.55113345694457505</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">Z.TEST</Data></Cell>
+    <Cell ss:Formula="=Z.TEST(RC[2]:RC[7],RC[1])"><Data ss:Type="Number">0.39075564749935676</Data></Cell>
+    <Cell><Data ss:Type="Number">3</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">3</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">5</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ZTEST</Data></Cell>
+    <Cell ss:Formula="=ZTEST(R[-1]C[2]:R[-1]C[7],R[-1]C[1],RC[1])"><Data
+      ss:Type="Number">0.46746265582105867</Data></Cell>
+    <Cell><Data ss:Type="Number">5</Data></Cell>
+   </Row>
+   <Row ss:Index="127">
+    <Cell><Data ss:Type="String">Regression and Friends</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">FORECAST</Data></Cell>
+    <Cell ss:Formula="=FORECAST(RC[1],R[1]C[2]:R[1]C[7],RC[2]:RC[7])"><Data
+      ss:Type="Number">19.628571428571426</Data></Cell>
+    <Cell><Data ss:Type="Number">10</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">3</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">5</Data></Cell>
+    <Cell><Data ss:Type="Number">6</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">FREQUENCY</Data></Cell>
+    <Cell ss:Formula="=FREQUENCY(R[-1]C[2]:R[-1]C[7],RC[2]:RC[7])"><Data
+      ss:Type="Number">2</Data></Cell>
+    <Cell ss:Index="4"><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">6</Data></Cell>
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+    <Cell><Data ss:Type="Number">11</Data></Cell>
+    <Cell><Data ss:Type="Number">11</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">GROWTH</Data></Cell>
+    <Cell ss:Formula="=GROWTH(R[-1]C[2]:R[-1]C[7],R[-2]C[2]:R[-2]C[7])"><Data
+      ss:Type="Number">2.5725901588088202</Data></Cell>
+    <Cell ss:Index="4"><Data ss:Type="Number">0.1</Data></Cell>
+    <Cell><Data ss:Type="Number">0.1</Data></Cell>
+    <Cell><Data ss:Type="Number">0.2</Data></Cell>
+    <Cell><Data ss:Type="Number">0.2</Data></Cell>
+    <Cell><Data ss:Type="Number">0.2</Data></Cell>
+    <Cell><Data ss:Type="Number">0.2</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">INTERCEPT</Data></Cell>
+    <Cell ss:Formula="=INTERCEPT(R[-2]C[2]:R[-2]C[7],R[-3]C[2]:R[-3]C[7])"><Data
+      ss:Type="Number">0.20000000000000018</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">PROB</Data></Cell>
+    <Cell ss:Formula="=PROB(R[-4]C[2]:R[-4]C[7],R[-2]C[2]:R[-2]C[7],RC[1],RC[2])"><Data
+      ss:Type="Number">0.4</Data></Cell>
+    <Cell><Data ss:Type="Number">2.1</Data></Cell>
+    <Cell><Data ss:Type="Number">4.5</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">PEARSON</Data></Cell>
+    <Cell ss:Formula="=PEARSON(R[-15]C[2]:R[-15]C[7],R[-14]C[2]:R[-14]C[7])"><Data
+      ss:Type="Number">0.86469929256476752</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">RSQ</Data></Cell>
+    <Cell ss:Formula="=RSQ(R[-5]C[2]:R[-5]C[7],R[-6]C[2]:R[-6]C[7])"><Data
+      ss:Type="Number">0.97142857142857142</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SLOPE</Data></Cell>
+    <Cell ss:Formula="=SLOPE(R[-6]C[2]:R[-6]C[7],R[-7]C[2]:R[-7]C[7])"><Data
+      ss:Type="Number">1.9428571428571428</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">STEYX</Data></Cell>
+    <Cell ss:Formula="=STEYX(R[-7]C[2]:R[-7]C[7],R[-8]C[2]:R[-8]C[7])"><Data
+      ss:Type="Number">0.69693205243716838</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="4"><Data ss:Type="String">LINEST (n+1 by 5)</Data></Cell>
+    <Cell ss:Index="8"><Data ss:Type="String">LOGEST (n+1 by 5)</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">LINEST</Data></Cell>
+    <Cell ss:Formula="=LINEST(R[-9]C[2]:R[-9]C[7],R[-10]C[2]:R[-10]C[7])"><Data
+      ss:Type="Number">1.9428571428571431</Data></Cell>
+    <Cell ss:Index="4" ss:ArrayRange="RC:R[4]C[1]"
+     ss:Formula="=LINEST(R[-9]C:R[-9]C[5],R[-10]C:R[-10]C[5],TRUE,TRUE)"><Data
+      ss:Type="Number">1.9428571428571431</Data></Cell>
+    <Cell><Data ss:Type="Number">0.19999999999999929</Data></Cell>
+    <Cell ss:Index="8" ss:ArrayRange="RC:R[4]C[1]"
+     ss:Formula="=LOGEST(R[-9]C[-4]:R[-9]C[1],R[-10]C[-4]:R[-10]C[1],TRUE,TRUE)"><Data
+      ss:Type="Number">1.4027906571323456</Data></Cell>
+    <Cell><Data ss:Type="Number">1.8339088200571829</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">LOGEST</Data></Cell>
+    <Cell ss:Formula="=LOGEST(R[-10]C[2]:R[-10]C[7],R[-11]C[2]:R[-11]C[7])"><Data
+      ss:Type="Number">1.4027906571323456</Data></Cell>
+    <Cell ss:Index="4"><Data ss:Type="Number">0.16659862556700861</Data></Cell>
+    <Cell><Data ss:Type="Number">0.64880843162861335</Data></Cell>
+    <Cell ss:Index="8"><Data ss:Type="Number">5.1290820456947078E-2</Data></Cell>
+    <Cell><Data ss:Type="Number">0.1997490475347993</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">TREND</Data></Cell>
+    <Cell ss:Formula="=TREND(R[-11]C[2]:R[-11]C[7],R[-12]C[2]:R[-12]C[7])"><Data
+      ss:Type="Number">2.1428571428571423</Data></Cell>
+    <Cell ss:Index="4"><Data ss:Type="Number">0.97142857142857131</Data></Cell>
+    <Cell><Data ss:Type="Number">0.69693205243716971</Data></Cell>
+    <Cell ss:Index="8"><Data ss:Type="Number">0.91587029395585617</Data></Cell>
+    <Cell><Data ss:Type="Number">0.21456489602231923</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="4"><Data ss:Type="Number">135.99999999999994</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell ss:Index="8"><Data ss:Type="Number">43.545631478863783</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="4"><Data ss:Type="Number">66.05714285714285</Data></Cell>
+    <Cell><Data ss:Type="Number">1.9428571428571435</Data></Cell>
+    <Cell ss:Index="8"><Data ss:Type="Number">2.004757901661387</Data></Cell>
+    <Cell><Data ss:Type="Number">0.18415237842027465</Data></Cell>
+   </Row>
+   <Row ss:Index="144">
+    <Cell><Data ss:Type="String">TREND</Data></Cell>
+    <Cell ss:Index="4" ss:ArrayRange="RC:RC[5]"
+     ss:Formula="=TREND(R[-15]C:R[-15]C[5],R[-16]C:R[-16]C[5])"><Data
+      ss:Type="Number">2.1428571428571423</Data></Cell>
+    <Cell><Data ss:Type="Number">4.0857142857142854</Data></Cell>
+    <Cell><Data ss:Type="Number">6.0285714285714285</Data></Cell>
+    <Cell><Data ss:Type="Number">7.9714285714285715</Data></Cell>
+    <Cell><Data ss:Type="Number">9.9142857142857146</Data></Cell>
+    <Cell><Data ss:Type="Number">11.857142857142858</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <Print>
+    <ValidPrinterInfo/>
+    <HorizontalResolution>-4</HorizontalResolution>
+    <VerticalResolution>-4</VerticalResolution>
+   </Print>
+   <TopRowVisible>103</TopRowVisible>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+     <ActiveRow>133</ActiveRow>
+     <ActiveCol>5</ActiveCol>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+ <Worksheet ss:Name="Text">
+  <Table ss:ExpandedColumnCount="6" ss:ExpandedRowCount="49" x:FullColumns="1"
+   x:FullRows="1" ss:DefaultColumnWidth="66" ss:DefaultRowHeight="15.75">
+   <Row>
+    <Cell><Data ss:Type="String">Operators</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">CONCATENATE</Data></Cell>
+    <Cell ss:Formula="=CONCATENATE(RC[1],RC[2],RC[3],RC[4])"><Data ss:Type="String">Foobarbazqux</Data></Cell>
+    <Cell><Data ss:Type="String">Foo</Data></Cell>
+    <Cell><Data ss:Type="String">bar</Data></Cell>
+    <Cell><Data ss:Type="String">baz</Data></Cell>
+    <Cell><Data ss:Type="String">qux</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">EXACT</Data></Cell>
+    <Cell ss:Formula="=EXACT(RC[1],RC[2])"><Data ss:Type="Boolean">0</Data></Cell>
+    <Cell><Data ss:Type="String">foo</Data></Cell>
+    <Cell><Data ss:Type="String">Foo</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">LEN</Data></Cell>
+    <Cell ss:Formula="=LEN(RC[1])"><Data ss:Type="Number">15</Data></Cell>
+    <Cell><Data ss:Type="String">foo bar baz qux</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">LENB</Data></Cell>
+    <Cell ss:Formula="=LENB(R[-1]C[1])"><Data ss:Type="Number">15</Data></Cell>
+   </Row>
+   <Row ss:Index="7">
+    <Cell><Data ss:Type="String">Casing</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">LOWER</Data></Cell>
+    <Cell ss:Formula="=LOWER(RC[1])"><Data ss:Type="String">foo bar baz qux</Data></Cell>
+    <Cell><Data ss:Type="String">foo bAR BAZ Qux</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">PROPER</Data></Cell>
+    <Cell ss:Formula="=PROPER(RC[1])"><Data ss:Type="String">Foo Bar Baz Qux</Data></Cell>
+    <Cell><Data ss:Type="String">foo bAR BAZ Qux</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">UPPER</Data></Cell>
+    <Cell ss:Formula="=UPPER(RC[1])"><Data ss:Type="String">FOO BAR BAZ QUX</Data></Cell>
+    <Cell><Data ss:Type="String">foo bAR BAZ Qux</Data></Cell>
+   </Row>
+   <Row ss:Index="12">
+    <Cell><Data ss:Type="String">Formatting</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">DOLLAR</Data></Cell>
+    <Cell ss:Formula="=DOLLAR(RC[1])"><Data ss:Type="String">$4.57</Data></Cell>
+    <Cell><Data ss:Type="Number">4.5670000000000002</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">FIXED</Data></Cell>
+    <Cell ss:Formula="=FIXED(RC[1],5)"><Data ss:Type="String">0.12346</Data></Cell>
+    <Cell><Data ss:Type="Number">0.12345679</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">TEXT</Data></Cell>
+    <Cell ss:Formula="=TEXT(RC[1],RC[2])"><Data ss:Type="String">1977-07-07</Data></Cell>
+    <Cell ss:StyleID="s21"><Data ss:Type="DateTime">1977-07-07T00:00:00.000</Data></Cell>
+    <Cell><Data ss:Type="String">ee-mm-dd</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">T</Data></Cell>
+    <Cell ss:Formula="=T(RC[1])"><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="Boolean">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">VALUE</Data></Cell>
+    <Cell ss:Formula="=VALUE(RC[1])"><Data ss:Type="Number">12</Data></Cell>
+    <Cell><Data ss:Type="String" x:Ticked="1">12</Data></Cell>
+   </Row>
+   <Row ss:Index="19">
+    <Cell><Data ss:Type="String">Codepoints</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">CHAR</Data></Cell>
+    <Cell ss:Formula="=CHAR(RC[1])"><Data ss:Type="String">ð</Data></Cell>
+    <Cell><Data ss:Type="Number">240</Data></Cell>
+   </Row>
+   <Row ss:Height="17.25">
+    <Cell><Data ss:Type="String">CODE</Data></Cell>
+    <Cell ss:Formula="=CODE(RC[1])"><Data ss:Type="Number">63</Data></Cell>
+    <Cell ss:StyleID="s32"><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row ss:Height="17.25">
+    <Cell ss:Index="3" ss:StyleID="s32"/>
+   </Row>
+   <Row ss:Height="17.25">
+    <Cell><Data ss:Type="String">Extracting Text</Data></Cell>
+    <Cell ss:Index="3" ss:StyleID="s32"/>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">LEFT</Data></Cell>
+    <Cell ss:Formula="=LEFT(RC[1],RC[2])"><Data ss:Type="String">foo</Data></Cell>
+    <Cell><Data ss:Type="String">foo bar baz qux</Data></Cell>
+    <Cell><Data ss:Type="Number">3</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">LEFTB</Data></Cell>
+    <Cell ss:Formula="=LEFTB(R[-1]C[1],R[-1]C[2])"><Data ss:Type="String">foo</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">MID</Data></Cell>
+    <Cell ss:Formula="=MID(RC[1],RC[2],RC[3])"><Data ss:Type="String">bar</Data></Cell>
+    <Cell><Data ss:Type="String">foo bar baz qux</Data></Cell>
+    <Cell><Data ss:Type="Number">5</Data></Cell>
+    <Cell><Data ss:Type="Number">3</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">MIDB</Data></Cell>
+    <Cell ss:Formula="=MIDB(RC[1],RC[2],RC[3])"><Data ss:Type="String">baz</Data></Cell>
+    <Cell><Data ss:Type="String">foo bar baz qux</Data></Cell>
+    <Cell><Data ss:Type="Number">9</Data></Cell>
+    <Cell><Data ss:Type="Number">3</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">RIGHT</Data></Cell>
+    <Cell ss:Formula="=RIGHT(R[-4]C[1],R[-4]C[2])"><Data ss:Type="String">qux</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">RIGHTB</Data></Cell>
+    <Cell ss:Formula="=RIGHT(R[-5]C[1],R[-5]C[2])"><Data ss:Type="String">qux</Data></Cell>
+   </Row>
+   <Row ss:Height="17.25">
+    <Cell ss:Index="3" ss:StyleID="s32"/>
+   </Row>
+   <Row ss:Height="17.25">
+    <Cell><Data ss:Type="String">Searching</Data></Cell>
+    <Cell ss:Index="3" ss:StyleID="s32"/>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">FIND</Data></Cell>
+    <Cell ss:Formula="=FIND(RC[1],RC[2])"><Data ss:Type="Number">9</Data></Cell>
+    <Cell><Data ss:Type="String">b</Data></Cell>
+    <Cell><Data ss:Type="String">foo Bar baz qux</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">FINDB</Data></Cell>
+    <Cell ss:Formula="=FINDB(R[-1]C[1],R[-1]C[2])"><Data ss:Type="Number">9</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SEARCH</Data></Cell>
+    <Cell ss:Formula="=SEARCH(R[-2]C[1],R[-2]C[2])"><Data ss:Type="Number">5</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SEARCHB</Data></Cell>
+    <Cell ss:Formula="=SEARCHB(R[-3]C[1],R[-3]C[2])"><Data ss:Type="Number">5</Data></Cell>
+   </Row>
+   <Row ss:Index="37">
+    <Cell><Data ss:Type="String">Manipulating Text</Data></Cell>
+    <Cell ss:Formula="=REPT(&quot;badger &quot;,12)&amp;REPT(&quot;MUSHROOM! &quot;,2)"><Data
+      ss:Type="String">badger badger badger badger badger badger badger badger badger badger badger badger MUSHROOM! MUSHROOM! </Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">CLEAN</Data></Cell>
+    <Cell ss:Formula="=CLEAN(RC[1])"><Data ss:Type="String">7</Data></Cell>
+    <Cell ss:Formula="=CHAR(7)&amp;&quot;7&quot;&amp;CHAR(7)"><Data
+      ss:Type="String">&#7;7&#7;</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">REPT</Data></Cell>
+    <Cell ss:Formula="=REPT(RC[1],RC[2])"><Data ss:Type="String">badgerbadgerbadger</Data></Cell>
+    <Cell><Data ss:Type="String">badger</Data></Cell>
+    <Cell><Data ss:Type="Number">3</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">REPLACE</Data></Cell>
+    <Cell ss:Formula="=REPLACE(RC[1],RC[2],RC[3],RC[4])"><Data ss:Type="String">foo FOO baz qux</Data></Cell>
+    <Cell><Data ss:Type="String">foo bar baz qux</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="String" x:Ticked="1"> FOO</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">REPLACEB</Data></Cell>
+    <Cell ss:Formula="=REPLACEB(R[-1]C[1],R[-1]C[2],R[-1]C[3],R[-1]C[4])"><Data
+      ss:Type="String">foo FOO baz qux</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SUBSTITUTE</Data></Cell>
+    <Cell ss:Formula="=SUBSTITUTE(RC[1],RC[2],RC[3],RC[4])"><Data ss:Type="String">foo bor baz qux</Data></Cell>
+    <Cell><Data ss:Type="String">foo bar baz qux</Data></Cell>
+    <Cell><Data ss:Type="String">a</Data></Cell>
+    <Cell><Data ss:Type="String">o</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">TRIM</Data></Cell>
+    <Cell ss:Formula="=TRIM(RC[1])"><Data ss:Type="String">there are two spaces here</Data></Cell>
+    <Cell><Data ss:Type="String" x:Ticked="1">  there are two spaces here  </Data></Cell>
+   </Row>
+   <Row ss:Index="45">
+    <Cell><Data ss:Type="String">Asian Features</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ASC</Data></Cell>
+    <Cell ss:Formula="=ASC(RC[1])"><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">PHONETIC</Data></Cell>
+    <Cell ss:Formula="=PHONETIC(RC[1])"><Data ss:Type="Error">#N/A</Data></Cell>
+    <Cell><Data ss:Type="String">foo bar baz qux</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">JIS</Data></Cell>
+    <Cell ss:Formula="=JIS(RC[1])"><Data ss:Type="Error">#NAME?</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">YEN</Data></Cell>
+    <Cell ss:Formula="=YEN(RC[1])"><Data ss:Type="Error">#NAME?</Data></Cell>
+    <Cell><Data ss:Type="Number">5</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <Print>
+    <ValidPrinterInfo/>
+    <HorizontalResolution>-4</HorizontalResolution>
+    <VerticalResolution>-4</VerticalResolution>
+   </Print>
+   <Selected/>
+   <TopRowVisible>8</TopRowVisible>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+     <ActiveRow>39</ActiveRow>
+     <ActiveCol>5</ActiveCol>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+</Workbook>

@@ -1,0 +1,606 @@
+<?xml version="1.0"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:html="http://www.w3.org/TR/REC-html40">
+ <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+  <Revision>1</Revision>
+  <TotalTime>354</TotalTime>
+  <Created>2014-01-12T11:29:19Z</Created>
+  <LastSaved>2014-01-12T17:04:29Z</LastSaved>
+  <Version>15.00</Version>
+ </DocumentProperties>
+ <OfficeDocumentSettings xmlns="urn:schemas-microsoft-com:office:office">
+  <AllowPNG/>
+  <RemovePersonalInformation/>
+ </OfficeDocumentSettings>
+ <ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
+  <WindowHeight>8205</WindowHeight>
+  <WindowWidth>16380</WindowWidth>
+  <WindowTopX>0</WindowTopX>
+  <WindowTopY>0</WindowTopY>
+  <TabRatio>287</TabRatio>
+  <ProtectStructure>False</ProtectStructure>
+  <ProtectWindows>False</ProtectWindows>
+ </ExcelWorkbook>
+ <Styles>
+  <Style ss:ID="Default" ss:Name="Normal">
+   <Alignment ss:Vertical="Bottom"/>
+   <Borders/>
+   <Font ss:FontName="Arial" x:Family="Swiss"/>
+   <Interior/>
+   <NumberFormat/>
+   <Protection/>
+  </Style>
+  <Style ss:ID="s17">
+   <NumberFormat ss:Format="yy"/>
+  </Style>
+  <Style ss:ID="s18">
+   <NumberFormat ss:Format="yyyy"/>
+  </Style>
+  <Style ss:ID="s19">
+   <NumberFormat ss:Format="yym"/>
+  </Style>
+  <Style ss:ID="s20">
+   <NumberFormat ss:Format="yymm"/>
+  </Style>
+  <Style ss:ID="s21">
+   <NumberFormat ss:Format="yymmm"/>
+  </Style>
+  <Style ss:ID="s22">
+   <NumberFormat ss:Format="yymmmm"/>
+  </Style>
+  <Style ss:ID="s23">
+   <NumberFormat ss:Format="yymmmmm"/>
+  </Style>
+  <Style ss:ID="s24">
+   <NumberFormat ss:Format="d"/>
+  </Style>
+  <Style ss:ID="s25">
+   <NumberFormat ss:Format="dd"/>
+  </Style>
+  <Style ss:ID="s26">
+   <NumberFormat ss:Format="ddd"/>
+  </Style>
+  <Style ss:ID="s27">
+   <NumberFormat ss:Format="dddd"/>
+  </Style>
+  <Style ss:ID="s28">
+   <NumberFormat ss:Format="h"/>
+  </Style>
+  <Style ss:ID="s29">
+   <NumberFormat ss:Format="[hh]"/>
+  </Style>
+  <Style ss:ID="s30">
+   <NumberFormat ss:Format="[h]"/>
+  </Style>
+  <Style ss:ID="s31">
+   <NumberFormat ss:Format="hhm"/>
+  </Style>
+  <Style ss:ID="s32">
+   <NumberFormat ss:Format="hhmm"/>
+  </Style>
+  <Style ss:ID="s35">
+   <NumberFormat ss:Format="s"/>
+  </Style>
+  <Style ss:ID="s36">
+   <NumberFormat ss:Format="ss"/>
+  </Style>
+  <Style ss:ID="s37">
+   <NumberFormat ss:Format="[s]"/>
+  </Style>
+  <Style ss:ID="s38">
+   <NumberFormat ss:Format="[ss]"/>
+  </Style>
+  <Style ss:ID="s39">
+   <NumberFormat ss:Format="[Black]@"/>
+  </Style>
+  <Style ss:ID="s40">
+   <NumberFormat ss:Format="[Blue]General"/>
+  </Style>
+  <Style ss:ID="s41">
+   <NumberFormat ss:Format="[Cyan]@"/>
+  </Style>
+  <Style ss:ID="s42">
+   <NumberFormat ss:Format="[Green]#,###"/>
+  </Style>
+  <Style ss:ID="s43">
+   <NumberFormat ss:Format="[Magenta]0.00"/>
+  </Style>
+  <Style ss:ID="s44">
+   <NumberFormat ss:Format="[Red]#.##"/>
+  </Style>
+  <Style ss:ID="s45">
+   <NumberFormat ss:Format="[White]0.0"/>
+  </Style>
+  <Style ss:ID="s46">
+   <NumberFormat ss:Format="[Yellow]@"/>
+  </Style>
+  <Style ss:ID="s47">
+   <NumberFormat ss:Format="A/P"/>
+  </Style>
+  <Style ss:ID="s48">
+   <NumberFormat ss:Format="AM/PM"/>
+  </Style>
+  <Style ss:ID="s49">
+   <NumberFormat ss:Format="hh:mm:ss\ AM/PM"/>
+  </Style>
+ </Styles>
+ <Worksheet ss:Name="Sheet1">
+  <Table ss:ExpandedColumnCount="10" ss:ExpandedRowCount="38" x:FullColumns="1"
+   x:FullRows="1" ss:DefaultColumnWidth="46.5">
+   <Row>
+    <Cell><Data ss:Type="String">General</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">-1.2</Data></Cell>
+    <Cell><Data ss:Type="Number">12.3</Data></Cell>
+    <Cell><Data ss:Type="Number">-12.34</Data></Cell>
+    <Cell><Data ss:Type="Number">123.45</Data></Cell>
+    <Cell><Data ss:Type="Number">-123.456</Data></Cell>
+    <Cell><Data ss:Type="Number">1234.567</Data></Cell>
+    <Cell><Data ss:Type="Number">-1234.5678</Data></Cell>
+    <Cell><Data ss:Type="Number">12345.678900000001</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">GENERAL</Data></Cell>
+    <Cell ss:Formula="=R[-1]C"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:Formula="=R[-1]C"><Data ss:Type="Number">-1.2</Data></Cell>
+    <Cell ss:Formula="=R[-1]C"><Data ss:Type="Number">12.3</Data></Cell>
+    <Cell ss:Formula="=R[-1]C"><Data ss:Type="Number">-12.34</Data></Cell>
+    <Cell ss:Formula="=R[-1]C"><Data ss:Type="Number">123.45</Data></Cell>
+    <Cell ss:Formula="=R[-1]C"><Data ss:Type="Number">-123.456</Data></Cell>
+    <Cell ss:Formula="=R[-1]C"><Data ss:Type="Number">1234.567</Data></Cell>
+    <Cell ss:Formula="=R[-1]C"><Data ss:Type="Number">-1234.5678</Data></Cell>
+    <Cell ss:Formula="=R[-1]C"><Data ss:Type="Number">12345.678900000001</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">YY</Data></Cell>
+    <Cell ss:StyleID="s17" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-01-01T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s17" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-12-29T19:12:00.000</Data></Cell>
+    <Cell ss:StyleID="s17" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-01-12T07:12:00.000</Data></Cell>
+    <Cell ss:StyleID="s17" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-12-18T15:50:24.000</Data></Cell>
+    <Cell ss:StyleID="s17" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-05-02T10:48:00.000</Data></Cell>
+    <Cell ss:StyleID="s17" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-08-29T13:03:21.600</Data></Cell>
+    <Cell ss:StyleID="s17" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1903-05-18T13:36:28.800</Data></Cell>
+    <Cell ss:StyleID="s17" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1896-08-13T10:22:22.080</Data></Cell>
+    <Cell ss:StyleID="s17" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1933-10-18T16:17:36.960</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">YYYY</Data></Cell>
+    <Cell ss:StyleID="s18" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-01-01T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s18" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-12-29T19:12:00.000</Data></Cell>
+    <Cell ss:StyleID="s18" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-01-12T07:12:00.000</Data></Cell>
+    <Cell ss:StyleID="s18" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-12-18T15:50:24.000</Data></Cell>
+    <Cell ss:StyleID="s18" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-05-02T10:48:00.000</Data></Cell>
+    <Cell ss:StyleID="s18" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-08-29T13:03:21.600</Data></Cell>
+    <Cell ss:StyleID="s18" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1903-05-18T13:36:28.800</Data></Cell>
+    <Cell ss:StyleID="s18" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1896-08-13T10:22:22.080</Data></Cell>
+    <Cell ss:StyleID="s18" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1933-10-18T16:17:36.960</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">YYM</Data></Cell>
+    <Cell ss:StyleID="s19" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-01-01T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s19" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-12-29T19:12:00.000</Data></Cell>
+    <Cell ss:StyleID="s19" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-01-12T07:12:00.000</Data></Cell>
+    <Cell ss:StyleID="s19" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-12-18T15:50:24.000</Data></Cell>
+    <Cell ss:StyleID="s19" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-05-02T10:48:00.000</Data></Cell>
+    <Cell ss:StyleID="s19" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-08-29T13:03:21.600</Data></Cell>
+    <Cell ss:StyleID="s19" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1903-05-18T13:36:28.800</Data></Cell>
+    <Cell ss:StyleID="s19" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1896-08-13T10:22:22.080</Data></Cell>
+    <Cell ss:StyleID="s19" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1933-10-18T16:17:36.960</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">YYMM</Data></Cell>
+    <Cell ss:StyleID="s20" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-01-01T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s20" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-12-29T19:12:00.000</Data></Cell>
+    <Cell ss:StyleID="s20" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-01-12T07:12:00.000</Data></Cell>
+    <Cell ss:StyleID="s20" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-12-18T15:50:24.000</Data></Cell>
+    <Cell ss:StyleID="s20" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-05-02T10:48:00.000</Data></Cell>
+    <Cell ss:StyleID="s20" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-08-29T13:03:21.600</Data></Cell>
+    <Cell ss:StyleID="s20" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1903-05-18T13:36:28.800</Data></Cell>
+    <Cell ss:StyleID="s20" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1896-08-13T10:22:22.080</Data></Cell>
+    <Cell ss:StyleID="s20" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1933-10-18T16:17:36.960</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">YYMMM</Data></Cell>
+    <Cell ss:StyleID="s21" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-01-01T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s21" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-12-29T19:12:00.000</Data></Cell>
+    <Cell ss:StyleID="s21" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-01-12T07:12:00.000</Data></Cell>
+    <Cell ss:StyleID="s21" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-12-18T15:50:24.000</Data></Cell>
+    <Cell ss:StyleID="s21" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-05-02T10:48:00.000</Data></Cell>
+    <Cell ss:StyleID="s21" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-08-29T13:03:21.600</Data></Cell>
+    <Cell ss:StyleID="s21" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1903-05-18T13:36:28.800</Data></Cell>
+    <Cell ss:StyleID="s21" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1896-08-13T10:22:22.080</Data></Cell>
+    <Cell ss:StyleID="s21" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1933-10-18T16:17:36.960</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">YYMMMM</Data></Cell>
+    <Cell ss:StyleID="s22" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-01-01T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s22" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-12-29T19:12:00.000</Data></Cell>
+    <Cell ss:StyleID="s22" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-01-12T07:12:00.000</Data></Cell>
+    <Cell ss:StyleID="s22" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-12-18T15:50:24.000</Data></Cell>
+    <Cell ss:StyleID="s22" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-05-02T10:48:00.000</Data></Cell>
+    <Cell ss:StyleID="s22" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-08-29T13:03:21.600</Data></Cell>
+    <Cell ss:StyleID="s22" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1903-05-18T13:36:28.800</Data></Cell>
+    <Cell ss:StyleID="s22" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1896-08-13T10:22:22.080</Data></Cell>
+    <Cell ss:StyleID="s22" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1933-10-18T16:17:36.960</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">YYMMMMM</Data></Cell>
+    <Cell ss:StyleID="s23" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-01-01T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s23" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-12-29T19:12:00.000</Data></Cell>
+    <Cell ss:StyleID="s23" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-01-12T07:12:00.000</Data></Cell>
+    <Cell ss:StyleID="s23" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-12-18T15:50:24.000</Data></Cell>
+    <Cell ss:StyleID="s23" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-05-02T10:48:00.000</Data></Cell>
+    <Cell ss:StyleID="s23" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-08-29T13:03:21.600</Data></Cell>
+    <Cell ss:StyleID="s23" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1903-05-18T13:36:28.800</Data></Cell>
+    <Cell ss:StyleID="s23" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1896-08-13T10:22:22.080</Data></Cell>
+    <Cell ss:StyleID="s23" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1933-10-18T16:17:36.960</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">D</Data></Cell>
+    <Cell ss:StyleID="s24" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-01-01T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s24" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-12-29T19:12:00.000</Data></Cell>
+    <Cell ss:StyleID="s24" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-01-12T07:12:00.000</Data></Cell>
+    <Cell ss:StyleID="s24" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-12-18T15:50:24.000</Data></Cell>
+    <Cell ss:StyleID="s24" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-05-02T10:48:00.000</Data></Cell>
+    <Cell ss:StyleID="s24" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-08-29T13:03:21.600</Data></Cell>
+    <Cell ss:StyleID="s24" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1903-05-18T13:36:28.800</Data></Cell>
+    <Cell ss:StyleID="s24" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1896-08-13T10:22:22.080</Data></Cell>
+    <Cell ss:StyleID="s24" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1933-10-18T16:17:36.960</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">DD</Data></Cell>
+    <Cell ss:StyleID="s25" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-01-01T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s25" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-12-29T19:12:00.000</Data></Cell>
+    <Cell ss:StyleID="s25" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-01-12T07:12:00.000</Data></Cell>
+    <Cell ss:StyleID="s25" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-12-18T15:50:24.000</Data></Cell>
+    <Cell ss:StyleID="s25" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-05-02T10:48:00.000</Data></Cell>
+    <Cell ss:StyleID="s25" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-08-29T13:03:21.600</Data></Cell>
+    <Cell ss:StyleID="s25" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1903-05-18T13:36:28.800</Data></Cell>
+    <Cell ss:StyleID="s25" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1896-08-13T10:22:22.080</Data></Cell>
+    <Cell ss:StyleID="s25" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1933-10-18T16:17:36.960</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">DDD</Data></Cell>
+    <Cell ss:StyleID="s26" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-01-01T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s26" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-12-29T19:12:00.000</Data></Cell>
+    <Cell ss:StyleID="s26" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-01-12T07:12:00.000</Data></Cell>
+    <Cell ss:StyleID="s26" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-12-18T15:50:24.000</Data></Cell>
+    <Cell ss:StyleID="s26" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-05-02T10:48:00.000</Data></Cell>
+    <Cell ss:StyleID="s26" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-08-29T13:03:21.600</Data></Cell>
+    <Cell ss:StyleID="s26" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1903-05-18T13:36:28.800</Data></Cell>
+    <Cell ss:StyleID="s26" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1896-08-13T10:22:22.080</Data></Cell>
+    <Cell ss:StyleID="s26" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1933-10-18T16:17:36.960</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">DDDD</Data></Cell>
+    <Cell ss:StyleID="s27" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-01-01T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s27" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-12-29T19:12:00.000</Data></Cell>
+    <Cell ss:StyleID="s27" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-01-12T07:12:00.000</Data></Cell>
+    <Cell ss:StyleID="s27" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-12-18T15:50:24.000</Data></Cell>
+    <Cell ss:StyleID="s27" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-05-02T10:48:00.000</Data></Cell>
+    <Cell ss:StyleID="s27" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-08-29T13:03:21.600</Data></Cell>
+    <Cell ss:StyleID="s27" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1903-05-18T13:36:28.800</Data></Cell>
+    <Cell ss:StyleID="s27" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1896-08-13T10:22:22.080</Data></Cell>
+    <Cell ss:StyleID="s27" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1933-10-18T16:17:36.960</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">H</Data></Cell>
+    <Cell ss:StyleID="s28" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-01-01T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s28" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-12-29T19:12:00.000</Data></Cell>
+    <Cell ss:StyleID="s28" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-01-12T07:12:00.000</Data></Cell>
+    <Cell ss:StyleID="s28" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-12-18T15:50:24.000</Data></Cell>
+    <Cell ss:StyleID="s28" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-05-02T10:48:00.000</Data></Cell>
+    <Cell ss:StyleID="s28" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-08-29T13:03:21.600</Data></Cell>
+    <Cell ss:StyleID="s28" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1903-05-18T13:36:28.800</Data></Cell>
+    <Cell ss:StyleID="s28" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1896-08-13T10:22:22.080</Data></Cell>
+    <Cell ss:StyleID="s28" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1933-10-18T16:17:36.960</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">HH</Data></Cell>
+    <Cell ss:StyleID="s29" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-01-01T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s29" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-12-29T19:12:00.000</Data></Cell>
+    <Cell ss:StyleID="s29" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-01-12T07:12:00.000</Data></Cell>
+    <Cell ss:StyleID="s29" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-12-18T15:50:24.000</Data></Cell>
+    <Cell ss:StyleID="s29" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-05-02T10:48:00.000</Data></Cell>
+    <Cell ss:StyleID="s29" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-08-29T13:03:21.600</Data></Cell>
+    <Cell ss:StyleID="s29" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1903-05-18T13:36:28.800</Data></Cell>
+    <Cell ss:StyleID="s29" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1896-08-13T10:22:22.080</Data></Cell>
+    <Cell ss:StyleID="s29" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1933-10-18T16:17:36.960</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">[H]</Data></Cell>
+    <Cell ss:StyleID="s30" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-01-01T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s30" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-12-29T19:12:00.000</Data></Cell>
+    <Cell ss:StyleID="s30" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-01-12T07:12:00.000</Data></Cell>
+    <Cell ss:StyleID="s30" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-12-18T15:50:24.000</Data></Cell>
+    <Cell ss:StyleID="s30" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-05-02T10:48:00.000</Data></Cell>
+    <Cell ss:StyleID="s30" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-08-29T13:03:21.600</Data></Cell>
+    <Cell ss:StyleID="s30" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1903-05-18T13:36:28.800</Data></Cell>
+    <Cell ss:StyleID="s30" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1896-08-13T10:22:22.080</Data></Cell>
+    <Cell ss:StyleID="s30" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1933-10-18T16:17:36.960</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">[HH]</Data></Cell>
+    <Cell ss:StyleID="s29" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-01-01T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s29" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-12-29T19:12:00.000</Data></Cell>
+    <Cell ss:StyleID="s29" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-01-12T07:12:00.000</Data></Cell>
+    <Cell ss:StyleID="s29" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-12-18T15:50:24.000</Data></Cell>
+    <Cell ss:StyleID="s29" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-05-02T10:48:00.000</Data></Cell>
+    <Cell ss:StyleID="s29" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-08-29T13:03:21.600</Data></Cell>
+    <Cell ss:StyleID="s29" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1903-05-18T13:36:28.800</Data></Cell>
+    <Cell ss:StyleID="s29" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1896-08-13T10:22:22.080</Data></Cell>
+    <Cell ss:StyleID="s29" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1933-10-18T16:17:36.960</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">HHM</Data></Cell>
+    <Cell ss:StyleID="s31" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-01-01T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s31" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-12-29T19:12:00.000</Data></Cell>
+    <Cell ss:StyleID="s31" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-01-12T07:12:00.000</Data></Cell>
+    <Cell ss:StyleID="s31" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-12-18T15:50:24.000</Data></Cell>
+    <Cell ss:StyleID="s31" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-05-02T10:48:00.000</Data></Cell>
+    <Cell ss:StyleID="s31" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-08-29T13:03:21.600</Data></Cell>
+    <Cell ss:StyleID="s31" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1903-05-18T13:36:28.800</Data></Cell>
+    <Cell ss:StyleID="s31" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1896-08-13T10:22:22.080</Data></Cell>
+    <Cell ss:StyleID="s31" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1933-10-18T16:17:36.960</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">HHMM</Data></Cell>
+    <Cell ss:StyleID="s32" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-01-01T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s32" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-12-29T19:12:00.000</Data></Cell>
+    <Cell ss:StyleID="s32" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-01-12T07:12:00.000</Data></Cell>
+    <Cell ss:StyleID="s32" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-12-18T15:50:24.000</Data></Cell>
+    <Cell ss:StyleID="s32" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-05-02T10:48:00.000</Data></Cell>
+    <Cell ss:StyleID="s32" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-08-29T13:03:21.600</Data></Cell>
+    <Cell ss:StyleID="s32" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1903-05-18T13:36:28.800</Data></Cell>
+    <Cell ss:StyleID="s32" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1896-08-13T10:22:22.080</Data></Cell>
+    <Cell ss:StyleID="s32" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1933-10-18T16:17:36.960</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">HH[M]</Data></Cell>
+    <Cell ss:Formula="=R[-1]C"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:Formula="=R[-1]C"><Data ss:Type="Number">-1.2</Data></Cell>
+    <Cell ss:Formula="=R[-1]C"><Data ss:Type="Number">12.3</Data></Cell>
+    <Cell ss:Formula="=R[-1]C"><Data ss:Type="Number">-12.34</Data></Cell>
+    <Cell ss:Formula="=R[-1]C"><Data ss:Type="Number">123.45</Data></Cell>
+    <Cell ss:Formula="=R[-1]C"><Data ss:Type="Number">-123.456</Data></Cell>
+    <Cell ss:Formula="=R[-1]C"><Data ss:Type="Number">1234.567</Data></Cell>
+    <Cell ss:Formula="=R[-1]C"><Data ss:Type="Number">-1234.5678</Data></Cell>
+    <Cell ss:Formula="=R[-1]C"><Data ss:Type="Number">12345.678900000001</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">HH[MM]</Data></Cell>
+    <Cell ss:Formula="=R[-1]C"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:Formula="=R[-1]C"><Data ss:Type="Number">-1.2</Data></Cell>
+    <Cell ss:Formula="=R[-1]C"><Data ss:Type="Number">12.3</Data></Cell>
+    <Cell ss:Formula="=R[-1]C"><Data ss:Type="Number">-12.34</Data></Cell>
+    <Cell ss:Formula="=R[-1]C"><Data ss:Type="Number">123.45</Data></Cell>
+    <Cell ss:Formula="=R[-1]C"><Data ss:Type="Number">-123.456</Data></Cell>
+    <Cell ss:Formula="=R[-1]C"><Data ss:Type="Number">1234.567</Data></Cell>
+    <Cell ss:Formula="=R[-1]C"><Data ss:Type="Number">-1234.5678</Data></Cell>
+    <Cell ss:Formula="=R[-1]C"><Data ss:Type="Number">12345.678900000001</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">S</Data></Cell>
+    <Cell ss:StyleID="s35" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-01-01T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s35" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-12-29T19:12:00.000</Data></Cell>
+    <Cell ss:StyleID="s35" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-01-12T07:12:00.000</Data></Cell>
+    <Cell ss:StyleID="s35" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-12-18T15:50:24.000</Data></Cell>
+    <Cell ss:StyleID="s35" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-05-02T10:48:00.000</Data></Cell>
+    <Cell ss:StyleID="s35" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-08-29T13:03:21.600</Data></Cell>
+    <Cell ss:StyleID="s35" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1903-05-18T13:36:28.800</Data></Cell>
+    <Cell ss:StyleID="s35" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1896-08-13T10:22:22.080</Data></Cell>
+    <Cell ss:StyleID="s35" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1933-10-18T16:17:36.960</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SS</Data></Cell>
+    <Cell ss:StyleID="s36" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-01-01T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s36" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-12-29T19:12:00.000</Data></Cell>
+    <Cell ss:StyleID="s36" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-01-12T07:12:00.000</Data></Cell>
+    <Cell ss:StyleID="s36" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-12-18T15:50:24.000</Data></Cell>
+    <Cell ss:StyleID="s36" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-05-02T10:48:00.000</Data></Cell>
+    <Cell ss:StyleID="s36" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-08-29T13:03:21.600</Data></Cell>
+    <Cell ss:StyleID="s36" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1903-05-18T13:36:28.800</Data></Cell>
+    <Cell ss:StyleID="s36" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1896-08-13T10:22:22.080</Data></Cell>
+    <Cell ss:StyleID="s36" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1933-10-18T16:17:36.960</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">[S]</Data></Cell>
+    <Cell ss:StyleID="s37" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-01-01T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s37" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-12-29T19:12:00.000</Data></Cell>
+    <Cell ss:StyleID="s37" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-01-12T07:12:00.000</Data></Cell>
+    <Cell ss:StyleID="s37" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-12-18T15:50:24.000</Data></Cell>
+    <Cell ss:StyleID="s37" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-05-02T10:48:00.000</Data></Cell>
+    <Cell ss:StyleID="s37" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-08-29T13:03:21.600</Data></Cell>
+    <Cell ss:StyleID="s37" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1903-05-18T13:36:28.800</Data></Cell>
+    <Cell ss:StyleID="s37" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1896-08-13T10:22:22.080</Data></Cell>
+    <Cell ss:StyleID="s37" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1933-10-18T16:17:36.960</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">[SS]</Data></Cell>
+    <Cell ss:StyleID="s38" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-01-01T00:00:00.000</Data></Cell>
+    <Cell ss:StyleID="s38" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-12-29T19:12:00.000</Data></Cell>
+    <Cell ss:StyleID="s38" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-01-12T07:12:00.000</Data></Cell>
+    <Cell ss:StyleID="s38" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-12-18T15:50:24.000</Data></Cell>
+    <Cell ss:StyleID="s38" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-05-02T10:48:00.000</Data></Cell>
+    <Cell ss:StyleID="s38" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-08-29T13:03:21.600</Data></Cell>
+    <Cell ss:StyleID="s38" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1903-05-18T13:36:28.800</Data></Cell>
+    <Cell ss:StyleID="s38" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1896-08-13T10:22:22.080</Data></Cell>
+    <Cell ss:StyleID="s38" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1933-10-18T16:17:36.960</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">[BLACK]</Data></Cell>
+    <Cell ss:StyleID="s39" ss:Formula="=R[-1]C"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s39" ss:Formula="=R[-1]C"><Data ss:Type="Number">-1.2</Data></Cell>
+    <Cell ss:StyleID="s39" ss:Formula="=R[-1]C"><Data ss:Type="Number">12.3</Data></Cell>
+    <Cell ss:StyleID="s39" ss:Formula="=R[-1]C"><Data ss:Type="Number">-12.34</Data></Cell>
+    <Cell ss:StyleID="s39" ss:Formula="=R[-1]C"><Data ss:Type="Number">123.45</Data></Cell>
+    <Cell ss:StyleID="s39" ss:Formula="=R[-1]C"><Data ss:Type="Number">-123.456</Data></Cell>
+    <Cell ss:StyleID="s39" ss:Formula="=R[-1]C"><Data ss:Type="Number">1234.567</Data></Cell>
+    <Cell ss:StyleID="s39" ss:Formula="=R[-1]C"><Data ss:Type="Number">-1234.5678</Data></Cell>
+    <Cell ss:StyleID="s39" ss:Formula="=R[-1]C"><Data ss:Type="Number">12345.678900000001</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">[BLUE]</Data></Cell>
+    <Cell ss:StyleID="s40" ss:Formula="=R[-1]C"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s40" ss:Formula="=R[-1]C"><Data ss:Type="Number">-1.2</Data></Cell>
+    <Cell ss:StyleID="s40" ss:Formula="=R[-1]C"><Data ss:Type="Number">12.3</Data></Cell>
+    <Cell ss:StyleID="s40" ss:Formula="=R[-1]C"><Data ss:Type="Number">-12.34</Data></Cell>
+    <Cell ss:StyleID="s40" ss:Formula="=R[-1]C"><Data ss:Type="Number">123.45</Data></Cell>
+    <Cell ss:StyleID="s40" ss:Formula="=R[-1]C"><Data ss:Type="Number">-123.456</Data></Cell>
+    <Cell ss:StyleID="s40" ss:Formula="=R[-1]C"><Data ss:Type="Number">1234.567</Data></Cell>
+    <Cell ss:StyleID="s40" ss:Formula="=R[-1]C"><Data ss:Type="Number">-1234.5678</Data></Cell>
+    <Cell ss:StyleID="s40" ss:Formula="=R[-1]C"><Data ss:Type="Number">12345.678900000001</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">[CYAN]</Data></Cell>
+    <Cell ss:StyleID="s41" ss:Formula="=R[-1]C"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s41" ss:Formula="=R[-1]C"><Data ss:Type="Number">-1.2</Data></Cell>
+    <Cell ss:StyleID="s41" ss:Formula="=R[-1]C"><Data ss:Type="Number">12.3</Data></Cell>
+    <Cell ss:StyleID="s41" ss:Formula="=R[-1]C"><Data ss:Type="Number">-12.34</Data></Cell>
+    <Cell ss:StyleID="s41" ss:Formula="=R[-1]C"><Data ss:Type="Number">123.45</Data></Cell>
+    <Cell ss:StyleID="s41" ss:Formula="=R[-1]C"><Data ss:Type="Number">-123.456</Data></Cell>
+    <Cell ss:StyleID="s41" ss:Formula="=R[-1]C"><Data ss:Type="Number">1234.567</Data></Cell>
+    <Cell ss:StyleID="s41" ss:Formula="=R[-1]C"><Data ss:Type="Number">-1234.5678</Data></Cell>
+    <Cell ss:StyleID="s41" ss:Formula="=R[-1]C"><Data ss:Type="Number">12345.678900000001</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">[GREEN]</Data></Cell>
+    <Cell ss:StyleID="s42" ss:Formula="=R[-1]C"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s42" ss:Formula="=R[-1]C"><Data ss:Type="Number">-1.2</Data></Cell>
+    <Cell ss:StyleID="s42" ss:Formula="=R[-1]C"><Data ss:Type="Number">12.3</Data></Cell>
+    <Cell ss:StyleID="s42" ss:Formula="=R[-1]C"><Data ss:Type="Number">-12.34</Data></Cell>
+    <Cell ss:StyleID="s42" ss:Formula="=R[-1]C"><Data ss:Type="Number">123.45</Data></Cell>
+    <Cell ss:StyleID="s42" ss:Formula="=R[-1]C"><Data ss:Type="Number">-123.456</Data></Cell>
+    <Cell ss:StyleID="s42" ss:Formula="=R[-1]C"><Data ss:Type="Number">1234.567</Data></Cell>
+    <Cell ss:StyleID="s42" ss:Formula="=R[-1]C"><Data ss:Type="Number">-1234.5678</Data></Cell>
+    <Cell ss:StyleID="s42" ss:Formula="=R[-1]C"><Data ss:Type="Number">12345.678900000001</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">[MAGENTA]</Data></Cell>
+    <Cell ss:StyleID="s43" ss:Formula="=R[-1]C"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s43" ss:Formula="=R[-1]C"><Data ss:Type="Number">-1.2</Data></Cell>
+    <Cell ss:StyleID="s43" ss:Formula="=R[-1]C"><Data ss:Type="Number">12.3</Data></Cell>
+    <Cell ss:StyleID="s43" ss:Formula="=R[-1]C"><Data ss:Type="Number">-12.34</Data></Cell>
+    <Cell ss:StyleID="s43" ss:Formula="=R[-1]C"><Data ss:Type="Number">123.45</Data></Cell>
+    <Cell ss:StyleID="s43" ss:Formula="=R[-1]C"><Data ss:Type="Number">-123.456</Data></Cell>
+    <Cell ss:StyleID="s43" ss:Formula="=R[-1]C"><Data ss:Type="Number">1234.567</Data></Cell>
+    <Cell ss:StyleID="s43" ss:Formula="=R[-1]C"><Data ss:Type="Number">-1234.5678</Data></Cell>
+    <Cell ss:StyleID="s43" ss:Formula="=R[-1]C"><Data ss:Type="Number">12345.678900000001</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">[RED]</Data></Cell>
+    <Cell ss:StyleID="s44" ss:Formula="=R[-1]C"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s44" ss:Formula="=R[-1]C"><Data ss:Type="Number">-1.2</Data></Cell>
+    <Cell ss:StyleID="s44" ss:Formula="=R[-1]C"><Data ss:Type="Number">12.3</Data></Cell>
+    <Cell ss:StyleID="s44" ss:Formula="=R[-1]C"><Data ss:Type="Number">-12.34</Data></Cell>
+    <Cell ss:StyleID="s44" ss:Formula="=R[-1]C"><Data ss:Type="Number">123.45</Data></Cell>
+    <Cell ss:StyleID="s44" ss:Formula="=R[-1]C"><Data ss:Type="Number">-123.456</Data></Cell>
+    <Cell ss:StyleID="s44" ss:Formula="=R[-1]C"><Data ss:Type="Number">1234.567</Data></Cell>
+    <Cell ss:StyleID="s44" ss:Formula="=R[-1]C"><Data ss:Type="Number">-1234.5678</Data></Cell>
+    <Cell ss:StyleID="s44" ss:Formula="=R[-1]C"><Data ss:Type="Number">12345.678900000001</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">[WHITE]</Data></Cell>
+    <Cell ss:StyleID="s45" ss:Formula="=R[-1]C"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s45" ss:Formula="=R[-1]C"><Data ss:Type="Number">-1.2</Data></Cell>
+    <Cell ss:StyleID="s45" ss:Formula="=R[-1]C"><Data ss:Type="Number">12.3</Data></Cell>
+    <Cell ss:StyleID="s45" ss:Formula="=R[-1]C"><Data ss:Type="Number">-12.34</Data></Cell>
+    <Cell ss:StyleID="s45" ss:Formula="=R[-1]C"><Data ss:Type="Number">123.45</Data></Cell>
+    <Cell ss:StyleID="s45" ss:Formula="=R[-1]C"><Data ss:Type="Number">-123.456</Data></Cell>
+    <Cell ss:StyleID="s45" ss:Formula="=R[-1]C"><Data ss:Type="Number">1234.567</Data></Cell>
+    <Cell ss:StyleID="s45" ss:Formula="=R[-1]C"><Data ss:Type="Number">-1234.5678</Data></Cell>
+    <Cell ss:StyleID="s45" ss:Formula="=R[-1]C"><Data ss:Type="Number">12345.678900000001</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">[YELLOW]</Data></Cell>
+    <Cell ss:StyleID="s46" ss:Formula="=R[-1]C"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s46" ss:Formula="=R[-1]C"><Data ss:Type="Number">-1.2</Data></Cell>
+    <Cell ss:StyleID="s46" ss:Formula="=R[-1]C"><Data ss:Type="Number">12.3</Data></Cell>
+    <Cell ss:StyleID="s46" ss:Formula="=R[-1]C"><Data ss:Type="Number">-12.34</Data></Cell>
+    <Cell ss:StyleID="s46" ss:Formula="=R[-1]C"><Data ss:Type="Number">123.45</Data></Cell>
+    <Cell ss:StyleID="s46" ss:Formula="=R[-1]C"><Data ss:Type="Number">-123.456</Data></Cell>
+    <Cell ss:StyleID="s46" ss:Formula="=R[-1]C"><Data ss:Type="Number">1234.567</Data></Cell>
+    <Cell ss:StyleID="s46" ss:Formula="=R[-1]C"><Data ss:Type="Number">-1234.5678</Data></Cell>
+    <Cell ss:StyleID="s46" ss:Formula="=R[-1]C"><Data ss:Type="Number">12345.678900000001</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">A/P</Data></Cell>
+    <Cell ss:StyleID="s47" ss:Formula="=R[-1]C"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s47" ss:Formula="=R[-1]C"><Data ss:Type="Number">-1.2</Data></Cell>
+    <Cell ss:StyleID="s47" ss:Formula="=R[-1]C"><Data ss:Type="Number">12.3</Data></Cell>
+    <Cell ss:StyleID="s47" ss:Formula="=R[-1]C"><Data ss:Type="Number">-12.34</Data></Cell>
+    <Cell ss:StyleID="s47" ss:Formula="=R[-1]C"><Data ss:Type="Number">123.45</Data></Cell>
+    <Cell ss:StyleID="s47" ss:Formula="=R[-1]C"><Data ss:Type="Number">-123.456</Data></Cell>
+    <Cell ss:StyleID="s47" ss:Formula="=R[-1]C"><Data ss:Type="Number">1234.567</Data></Cell>
+    <Cell ss:StyleID="s47" ss:Formula="=R[-1]C"><Data ss:Type="Number">-1234.5678</Data></Cell>
+    <Cell ss:StyleID="s47" ss:Formula="=R[-1]C"><Data ss:Type="Number">12345.678900000001</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">AM/PM</Data></Cell>
+    <Cell ss:StyleID="s48" ss:Formula="=R[-1]C"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s48" ss:Formula="=R[-1]C"><Data ss:Type="Number">-1.2</Data></Cell>
+    <Cell ss:StyleID="s48" ss:Formula="=R[-1]C"><Data ss:Type="Number">12.3</Data></Cell>
+    <Cell ss:StyleID="s48" ss:Formula="=R[-1]C"><Data ss:Type="Number">-12.34</Data></Cell>
+    <Cell ss:StyleID="s48" ss:Formula="=R[-1]C"><Data ss:Type="Number">123.45</Data></Cell>
+    <Cell ss:StyleID="s48" ss:Formula="=R[-1]C"><Data ss:Type="Number">-123.456</Data></Cell>
+    <Cell ss:StyleID="s48" ss:Formula="=R[-1]C"><Data ss:Type="Number">1234.567</Data></Cell>
+    <Cell ss:StyleID="s48" ss:Formula="=R[-1]C"><Data ss:Type="Number">-1234.5678</Data></Cell>
+    <Cell ss:StyleID="s48" ss:Formula="=R[-1]C"><Data ss:Type="Number">12345.678900000001</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">a/p</Data></Cell>
+    <Cell ss:StyleID="s47" ss:Formula="=R[-1]C"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s47" ss:Formula="=R[-1]C"><Data ss:Type="Number">-1.2</Data></Cell>
+    <Cell ss:StyleID="s47" ss:Formula="=R[-1]C"><Data ss:Type="Number">12.3</Data></Cell>
+    <Cell ss:StyleID="s47" ss:Formula="=R[-1]C"><Data ss:Type="Number">-12.34</Data></Cell>
+    <Cell ss:StyleID="s47" ss:Formula="=R[-1]C"><Data ss:Type="Number">123.45</Data></Cell>
+    <Cell ss:StyleID="s47" ss:Formula="=R[-1]C"><Data ss:Type="Number">-123.456</Data></Cell>
+    <Cell ss:StyleID="s47" ss:Formula="=R[-1]C"><Data ss:Type="Number">1234.567</Data></Cell>
+    <Cell ss:StyleID="s47" ss:Formula="=R[-1]C"><Data ss:Type="Number">-1234.5678</Data></Cell>
+    <Cell ss:StyleID="s47" ss:Formula="=R[-1]C"><Data ss:Type="Number">12345.678900000001</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">am/pm</Data></Cell>
+    <Cell ss:StyleID="s48" ss:Formula="=R[-1]C"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s48" ss:Formula="=R[-1]C"><Data ss:Type="Number">-1.2</Data></Cell>
+    <Cell ss:StyleID="s48" ss:Formula="=R[-1]C"><Data ss:Type="Number">12.3</Data></Cell>
+    <Cell ss:StyleID="s48" ss:Formula="=R[-1]C"><Data ss:Type="Number">-12.34</Data></Cell>
+    <Cell ss:StyleID="s48" ss:Formula="=R[-1]C"><Data ss:Type="Number">123.45</Data></Cell>
+    <Cell ss:StyleID="s48" ss:Formula="=R[-1]C"><Data ss:Type="Number">-123.456</Data></Cell>
+    <Cell ss:StyleID="s48" ss:Formula="=R[-1]C"><Data ss:Type="Number">1234.567</Data></Cell>
+    <Cell ss:StyleID="s48" ss:Formula="=R[-1]C"><Data ss:Type="Number">-1234.5678</Data></Cell>
+    <Cell ss:StyleID="s48" ss:Formula="=R[-1]C"><Data ss:Type="Number">12345.678900000001</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">[COLOR9]</Data></Cell>
+    <Cell ss:Formula="=R[-1]C"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s49" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-12-29T19:12:00.000</Data></Cell>
+    <Cell ss:StyleID="s49" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-01-12T07:12:00.000</Data></Cell>
+    <Cell ss:StyleID="s49" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-12-18T15:50:24.000</Data></Cell>
+    <Cell ss:StyleID="s49" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1900-05-02T10:48:00.000</Data></Cell>
+    <Cell ss:StyleID="s49" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1899-08-29T13:03:21.600</Data></Cell>
+    <Cell ss:StyleID="s49" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1903-05-18T13:36:28.800</Data></Cell>
+    <Cell ss:StyleID="s49" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1896-08-13T10:22:22.080</Data></Cell>
+    <Cell ss:StyleID="s49" ss:Formula="=R[-1]C"><Data ss:Type="DateTime">1933-10-18T16:17:36.960</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <PageSetup>
+    <Layout x:StartPageNumber="1"/>
+    <Header x:Margin="0.78749999999999998"
+     x:Data="&amp;C&amp;&quot;Times New Roman,Regular&quot;&amp;12&amp;A"/>
+    <Footer x:Margin="0.78749999999999998"
+     x:Data="&amp;C&amp;&quot;Times New Roman,Regular&quot;&amp;12Page &amp;P"/>
+    <PageMargins x:Bottom="1.05277777777778" x:Left="0.78749999999999998"
+     x:Right="0.78749999999999998" x:Top="1.05277777777778"/>
+   </PageSetup>
+   <Selected/>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+</Workbook>
