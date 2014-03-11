@@ -13,10 +13,12 @@
 
 #left {
   width:188px;
-  float:left;
+  position:absolute;
+  left:0;
 }
 #right {
-  float:left;
+  position:absolute;
+  left:200px;
 }
 #logo {
   padding:25px;
@@ -24,3 +26,9 @@
 #header {
   height:168px;
 }
+
+.winpt { width:98%; }
+.success { color: #468847; }
+.error { color: #b94a48; }
+.info { color: #3a87ad; }
+pre { white-space: pre-wrap; }

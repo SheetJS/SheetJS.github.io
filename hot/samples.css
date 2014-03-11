@@ -1,5 +1,3 @@
-/*This file is only needed for demo purposes in demo/ subdirectory */
-
 html {
   height: 100%;
 }
@@ -10,7 +8,7 @@ body {
   font-family: Helvetica, Arial, FreeSans, sans-serif;
   color: #454545;
   font-size: 14px;
-  height: 100%;
+  position: relative;
 }
 
 .clear {
@@ -18,69 +16,10 @@ body {
 }
 
 #container {
-  min-width: 1000px;
   height: 100%;
 }
 
-/*variation of http://matthewjamestaylor.com/blog/equal-height-columns-cross-browser-css-no-hacks*/
-.columnLayout {
-  position: relative;
-  width: 100%;
-  right: 50%;
-  float: left;
-  background-color: #FFF;
-  border-right: 1px solid #E5E5EE;
-  min-height: 100%;
-}
-
-.descLayout {
-  position: relative;
-  width: 50%;
-  left: 50%;
-  float: left;
-  clear: both;
-  margin-bottom: 100px;
-}
-
-.descLayout.noMargin {
-  margin-bottom: 0;
-}
-
-.codeLayout {
-  position: relative;
-  /*width: 50%; /*causes problems in IE7*/
-  left: 50%;
-  float: left;
-  margin-bottom: 100px;
-}
-
-/**
- * pad
- */
-
-.pad {
-  width: 400px;
-  margin: 0 40px 0 40px;
-}
-
-.pad:after {
-  content: ".";
-  display: block;
-  clear: both;
-  visibility: hidden;
-  line-height: 0;
-  height: 0;
-}
-
-.descLayout .pad {
-  float: right;
-}
-
-/**
- * headers
- */
-
-h1, h2, h3, .tagline {
+h1, h2, h3 {
   font-family: Verdana, Helvetica, Arial, FreeSans, sans-serif;
 }
 
@@ -118,13 +57,6 @@ a {
 
 a:hover {
   text-decoration: underline;
-}
-
-.tagline {
-  font-size: 15px;
-  margin-bottom: 50px;
-  width: 300px;
-  color: #646464;
 }
 
 h1 .small {
@@ -173,45 +105,6 @@ ul ul {
   margin-left: 0.5em;
 }
 
-.descLayout code {
-  white-space: nowrap;
-  margin: 0 2px;
-  padding: 0 5px;
-  border: 1px solid #ECECEC;
-  background-color: #FAFAFA;
-  border-radius: 3px;
-  font-size: 12px;
-  font-family: Consolas, Courier, monospace;
-}
-
-.descLayout pre code {
-  white-space: pre-wrap;
-  padding: 3px 5px;
-}
-
-/**
- * jsFiddle
- */
-
-.jsFiddle {
-  margin-bottom: 18px;
-  clear: both;
-  float: left;
-}
-
-.jsFiddleLink {
-  background-color: #4285c8;
-  color: white;
-}
-
-.jsFiddleLink:hover {
-  background-color: #3D63AA;
-}
-
-/**
- * warning
- */
-
 .warning {
   border: 1px solid #D4D8EB;
   padding: 10px;
@@ -243,44 +136,6 @@ ul ul {
 }
 
 /**
- * Highlight.js
- */
-
-.codeLayout pre {
-  width: 400px;
-  font-size: 14px;
-}
-
-.codeLayout pre code {
-  padding: 0;
-  background: none;
-}
-
-/**
- * documentation excerpts
- */
-
-dl {
-  background: #FDFFFF;
-  border-left: 4px solid #F5F5FF;
-  padding: 1px 10px 1px 10px;
-  margin: 30px 0;
-}
-
-dl dt {
-  font-size: 14px;
-  font-weight: bold;
-  font-style: italic;
-  padding: 0;
-  margin: 15px 0 5px;
-}
-
-dl dd {
-  margin: 10px 0 0 0;
-  padding: 0;
-}
-
-/**
  * home page
  */
 body.home {
@@ -289,23 +144,10 @@ body.home {
 
 body.home h1 {
   position: relative;
-  width: 800px;
 }
 
 body.home h2 {
   margin-top: 40px;
-}
-
-body.home #githubWatch {
-  position: absolute;
-  top: 31px;
-  right: 100px;
-}
-
-body.home #githubFork {
-  position: absolute;
-  top: 31px;
-  right: 0;
 }
 
 body.home #domainNotice {
@@ -313,7 +155,6 @@ body.home #domainNotice {
 }
 
 body.home .centerLayout {
-  width: 880px;
   margin: 0 auto;
   padding-bottom: 10px;
 }
@@ -343,25 +184,6 @@ body.home #container ul li {
 
 body.home pre.javascript {
   display: none;
-}
-
-body.home .columnLayout h2 {
-  margin-top: 12px;
-}
-
-/**
- * fork me on GitHub (image)
- */
-.forkMeOnGitHub {
-  display: block;
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 149px;
-  height: 149px;
-  text-indent: -10000px;
-  background-repeat: no-repeat;
-  background-image: url(../image/fork-github.png);
 }
 
 .state-loaded {

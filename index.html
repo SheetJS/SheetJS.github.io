@@ -3,9 +3,8 @@
 <head>
 <title>SheetJS Live Grid Demo</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/png" href="logo.png" />
-<link rel="stylesheet" media="screen" href="sheetjs.css">
+<link rel="stylesheet" href="sheetjs.css">
 </head>
 <body>
 <script src="alertify.js"></script>
@@ -102,8 +101,8 @@ var boldRenderer = function (instance, td, row, col, prop, value, cellProperties
 var $container, $parent, $window, availableWidth, availableHeight;
 var calculateSize = function () {
   var offset = $container.offset();
-  availableWidth = $window.width() - offset.left + $window.scrollLeft();
-  availableHeight = $window.height() - offset.top + $window.scrollTop();
+  availableWidth = Math.max($window.width() - 250,600);
+  availableHeight = Math.max($window.height() - 250, 400);
 };
 
 $(document).ready(function() {
@@ -134,7 +133,7 @@ var _onsheet = function(json, cols, sheetnames, select_sheet_cb) {
   /* add header row for table */
   if(!json) json = [];
   json.unshift(function(head){var o = {}; for(i=0;i!=head.length;++i) o[head[i]] = head[i]; return o;}(cols));
-
+  calculateSize();
   /* showtime! */
   $("#hot").handsontable({
     data: json,
@@ -148,12 +147,8 @@ var _onsheet = function(json, cols, sheetnames, select_sheet_cb) {
     cells: function (r,c,p) {
       if(r === 0) this.renderer = boldRenderer;
     },
-    width: function () {
-      return availableWidth || (calculateSize(),availableWidth);
-    },
-    height: function () {
-      return availableHeight || (calculateSize(),availableHeight);
-    },
+    width: function () { return availableWidth; },
+    height: function () { return availableHeight; },
     stretchH: 'all'
   });
 };
