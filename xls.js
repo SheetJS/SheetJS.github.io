@@ -3,7 +3,7 @@
 /*jshint funcscope:true */
 var XLS = {};
 (function(XLS){
-XLS.version = '0.6.11';
+XLS.version = '0.6.13';
 if(typeof module !== "undefined" && typeof require !== 'undefined') {
 	if(typeof cptable === 'undefined') var cptable = require('codepage');
 	var current_codepage = 1252, current_cptable = cptable[1252];
@@ -1836,6 +1836,14 @@ function parse_Note(blob, length) {
 	return parse_NoteSh(blob, length);
 }
 
+/* 2.4.168 */
+function parse_MergeCells(blob, length) {
+	var merges = [];
+	var cmcs = blob.read_shift(2);
+	while (cmcs--) merges.push(parse_Ref8U(blob,length));
+	return merges;
+}
+
 var parse_Backup = parsebool; /* 2.4.14 */
 var parse_Blank = parse_Cell; /* 2.4.20 Just the cell */
 var parse_BottomMargin = parse_Xnum; /* 2.4.27 */
@@ -1950,7 +1958,6 @@ var parse_BookBool = parsenoop;
 var parse_DbOrParamQry = parsenoop;
 var parse_OleObjectSize = parsenoop;
 var parse_SXVS = parsenoop;
-var parse_MergeCells = parsenoop;
 var parse_BkHim = parsenoop;
 var parse_MsoDrawingGroup = parsenoop;
 var parse_MsoDrawing = parsenoop;
@@ -2683,9 +2690,10 @@ var Ptg19 = {
 
 /* TODO: it will be useful to parse the function str */
 function rc_to_a1(fstr, base) {
-	return fstr.replace(/(^|[^A-Za-z])R\[?(-?\d+|)\]?C\[?(-?\d+|)\]?/g,function($$,$1,$2,$3,$4) {
-		var R = $2.length?+$2:0, C = $3.length?+$3:0;
-		return ($1||"")+encode_cell({c:base.c+C,r:base.r+R});
+	return fstr.replace(/(^|[^A-Za-z])R(\[?)(-?\d+|)\]?C(\[?)(-?\d+|)\]?/g,function($$,$1,$2,$3,$4,$5) {
+		var R = $3.length?+$2:0, C = $5.length?+$4:0;
+		if(C<0 && !$4) C=0;
+		return ($1||"")+encode_cell({c:$4?base.c+C:C,r:$2?base.r+R:R});
 	});
 }
 /* 2.4.127 TODO */
@@ -4657,6 +4665,7 @@ function parse_workbook(blob, options) {
 		winlocked: 0, // fLockWn from WinProtect
 		wtf: false
 	};
+	var mergecells = [];
 	var supbooks = [[]]; // 1-indexed, will hold extern names
 	var sbc = 0, sbci = 0, sbcli = 0;
 	supbooks.SheetNames = opts.snames;
@@ -4823,6 +4832,7 @@ function parse_workbook(blob, options) {
 							out["!ref"] = encode_range(range);
 							range.e.r++; range.e.c++;
 						}
+						if(mergecells.length > 0) out["!merges"] = mergecells;
 					}
 					for(y in out) if(out.hasOwnProperty(y)) nout[y] = out[y];
 					if(cur_sheet === "") Preamble = nout; else Sheets[cur_sheet] = nout;
@@ -4833,6 +4843,7 @@ function parse_workbook(blob, options) {
 					out = {};
 					cur_sheet = (Directory[s] || {name:""}).name;
 					lst.push([R.n, s, val, Directory[s]]);
+					mergecells = [];
 				} break;
 				case 'Number': {
 					temp_val = {ixfe: val.ixfe, XF: XFs[val.ixfe], v:val.val, t:'n'};
@@ -4959,7 +4970,7 @@ function parse_workbook(blob, options) {
 
 				} break;
 
-				case 'MergeCells': break;
+				case 'MergeCells': mergecells = mergecells.concat(val); break;
 
 				case 'WOpt': break; // TODO: WTF?
 				case 'HLink': case 'HLinkTooltip': break;
@@ -5314,7 +5325,6 @@ function parse_xlml_data(xml, ss, data, cell, base, styles, o) {
 		if(!styles[sid].Parent) break;
 		sid = styles[sid].Parent;
 	}
-
 	switch(data.Type) {
 		case 'Boolean':
 			cell.t = 'b';
@@ -5335,12 +5345,15 @@ function parse_xlml_data(xml, ss, data, cell, base, styles, o) {
 			break;
 		case 'Error': cell.t = 'e'; cell.v = xml; cell.w = xml; break;
 	}
-	if(cell.t !== 'e') cell.w = xlml_format(nf||"General", cell.v);
-	if(o.cellNF) cell.z = magic_formats[nf]||nf||"General";
+	if(cell.t !== 'e') try {
+		cell.w = xlml_format(nf||"General", cell.v);
+		if(o.cellNF) cell.z = magic_formats[nf]||nf||"General";
+	} catch(e) { if(o.WTF) throw e; }
 	if(o.cellFormula && cell.Formula) {
-		cell.f = rc_to_a1(unescapexml(cell.Formula), base); delete cell.Formula; }
+		cell.f = rc_to_a1(unescapexml(cell.Formula), base);
+		delete cell.Formula;
+	}
 	cell.ixfe = typeof cell.StyleID !== 'undefined' ? cell.StyleID : 'Default';
-
 }
 
 /* TODO: Everything */
@@ -5349,7 +5362,7 @@ function parse_xlml_xml(d, opts) {
 	if(typeof Buffer!=='undefined'&&d instanceof Buffer) str = d.toString('utf8');
 	else if(typeof d === 'string') str = d;
 	else throw "badf";
-	var re = /<(\/?)([a-z]*:|)([A-Za-z]+)[^>]*>/mg, Rn;
+	var re = /<(\/?)([a-z0-9]*:|)([A-Za-z_0-9]+)[^>]*>/mg, Rn;
 	var state = [], tmp;
 	var out = {};
 	var sheets = {}, sheetnames = [], cursheet = {}, sheetname = "";
@@ -5358,6 +5371,8 @@ function parse_xlml_xml(d, opts) {
 	var refguess = {s: {r:1000000, c:1000000}, e: {r:0, c:0} };
 	var styles = {}, stag = {};
 	var ss = "", fidx = 0;
+	var mergecells = [];
+	var Props = {}, Custprops = {}, pidx = 0;
 	while((Rn = re.exec(str))) switch(Rn[3]) {
 		case 'Data': {
 			if(state[state.length-1][1]) break;
@@ -5365,11 +5380,16 @@ function parse_xlml_xml(d, opts) {
 			else { ss = ""; dtag = parsexmltag(Rn[0]); didx = Rn.index + Rn[0].length; }
 		} break;
 		case 'Cell': {
-			if(Rn[0].match(/\/>$/)) ++c;
-			else if(Rn[1]==='/'){
+			if(Rn[1]==='/'){
 				delete cell[0];
-				if(!opts.sheetRows || opts.sheetRows > r) cursheet[encode_cell({c:c,r:r})] = cell;
+				if((!opts.sheetRows || opts.sheetRows > r) && typeof cell.v !== 'undefined') cursheet[encode_cell({c:c,r:r})] = cell;
+				if(cell.MergeAcross || cell.MergeDown) {
+					var cc = c + Number(cell.MergeAcross||0);
+					var rr = r + Number(cell.MergeDown||0);
+					mergecells.push({s:{c:c,r:r},e:{c:cc,r:rr}});
+				}
 				++c;
+				if(cell.MergeAcross) c += +cell.MergeAcross;
 			} else {
 				cell = parsexmltag(Rn[0]);
 				if(cell.Index) c = +cell.Index - 1;
@@ -5384,11 +5404,12 @@ function parse_xlml_xml(d, opts) {
 				c = 0; ++r;
 			} else { row = parsexmltag(Rn[0]); if(row.Index) r = +row.Index - 1; }
 		} break;
-		case 'Worksheet': {
+		case 'Worksheet': { /* TODO: read range from FullRows/FullColumns */
 			if(Rn[1]==='/'){
 				if((tmp=state.pop())[0]!==Rn[3]) throw "Bad state: "+tmp;
 				sheetnames.push(sheetname);
 				cursheet["!ref"] = encode_range(refguess);
+				if(mergecells.length) cursheet["!merges"] = mergecells;
 				sheets[sheetname] = cursheet;
 			} else {
 				refguess = {s: {r:1000000, c:1000000}, e: {r:0, c:0} };
@@ -5397,10 +5418,12 @@ function parse_xlml_xml(d, opts) {
 				tmp = parsexmltag(Rn[0]);
 				sheetname = tmp.Name;
 				cursheet = {};
+				mergecells = [];
 			}
 		} break;
 		case 'Table': {
 			if(Rn[1]==='/'){if((tmp=state.pop())[0]!==Rn[3]) throw "Bad state: "+tmp;}
+			else if(Rn[0].slice(-2) == "/>") break;
 			else {
 				table = parsexmltag(Rn[0]);
 				state.push([Rn[3], false]);
@@ -5439,35 +5462,39 @@ function parse_xlml_xml(d, opts) {
 		case 'Protection': break;
 
 		/* TODO: Normalize the properties */
-		case 'Author': break;
-		case 'Title': break;
-		case 'Description': break;
-		case 'Created': break;
-		case 'Keywords': break;
-		case 'Subject': break;
-		case 'Category': break;
-		case 'Company': break;
-		case 'LastAuthor': break;
-		case 'LastSaved': break;
-		case 'LastPrinted': break;
-		case 'Version': break;
-		case 'Revision': break;
-		case 'TotalTime': break;
-		case 'Manager': break;
-
-		/* CustomDocumentProperties */
-		case 'Text': break;
-		case 'Status': break;
-		case 'Counter': break;
-		case 'Date': break;
+		case 'Author':
+		case 'Title':
+		case 'Description':
+		case 'Created':
+		case 'Keywords':
+		case 'Subject':
+		case 'Category':
+		case 'Company':
+		case 'LastAuthor':
+		case 'LastSaved':
+		case 'LastPrinted':
+		case 'Version':
+		case 'Revision':
+		case 'TotalTime':
+		case 'HyperlinkBase':
+		case 'Manager': {
+			if(Rn[0].match(/\/>$/)) break;
+			else if(Rn[1]==="/") Props[Rn[3]] = str.slice(pidx, Rn.index);
+			else pidx = Rn.index + Rn[0].length;
+		} break;
 
 		/* OfficeDocumentSettings */
 		case 'AllowPNG': break;
 		case 'RemovePersonalInformation': break;
+		case 'DownloadComponents': break;
+		case 'LocationOfComponents': break;
 		case 'Colors': break;
 		case 'Color': break;
 		case 'Index': break;
 		case 'RGB': break;
+		case 'PixelsPerInch': break;
+		case 'TargetScreenSize': break;
+		case 'ReadOnlyRecommended': break;
 
 		/* ExcelWorkbook */
 		case 'WindowHeight': break;
@@ -5481,10 +5508,39 @@ function parse_xlml_xml(d, opts) {
 		case 'DisplayInkNotes': break;
 		case 'FirstVisibleSheet': break;
 		case 'SupBook': break;
+		case 'SheetName': break;
+		case 'SheetIndex': break;
+		case 'SheetIndexFirst': break;
+		case 'SheetIndexLast': break;
 		case 'Dll': break;
+		case 'AcceptLabelsInFormulas': break;
+		case 'DoNotSaveLinkValues': break;
+		case 'Date1904': break;
+		case 'Iteration': break;
+		case 'MaxIterations': break;
+		case 'MaxChange': break;
+		case 'Path': break;
+		case 'Xct': break;
+		case 'Count': break;
+		case 'SelectedSheets': break;
+		case 'Calculation': break;
+		case 'Uncalced': break;
+		case 'StartupPrompt': break;
+		case 'Crn': break;
+		case 'ExternName': break;
+		case 'Formula': break;
+		case 'ColFirst': break;
+		case 'ColLast': break;
+		case 'WantAdvise': break;
+		case 'Boolean': break;
+		case 'Error': break;
+		case 'Text': break;
+		case 'OLE': break;
+		case 'NoAutoRecover': break;
 
 		/* WorksheetOptions */
 		case 'Unsynced': break;
+		case 'Visible': break;
 		case 'Print': break;
 		case 'Panes': break;
 		case 'Scale': break;
@@ -5502,15 +5558,114 @@ function parse_xlml_xml(d, opts) {
 		case 'ValidPrinterInfo': break;
 		case 'HorizontalResolution': break;
 		case 'VerticalResolution': break;
+		case 'NumberofCopies': break;
 		case 'ActiveRow': break;
 		case 'ActiveCol': break;
+		case 'ActivePane': break;
 		case 'TopRowVisible': break;
+		case 'TopRowBottomPane': break;
+		case 'LeftColumnVisible': break;
+		case 'LeftColumnRightPane': break;
 		case 'FitToPage': break;
 		case 'FitHeight': break;
 		case 'RangeSelection': break;
 		case 'PaperSizeIndex': break;
 		case 'PageLayoutZoom': break;
+		case 'PageBreakZoom': break;
 		case 'FilterOn': break;
+		case 'DoNotDisplayGridlines': break;
+		case 'SplitHorizontal': break;
+		case 'SplitVertical': break;
+		case 'FreezePanes': break;
+		case 'FrozenNoSplit': break;
+		case 'FitWidth': break;
+		case 'FitHeight': break;
+		case 'CommentsLayout': break;
+		case 'Zoom': break;
+		case 'LeftToRight': break;
+		case 'Gridlines': break;
+		case 'AllowSort': break;
+		case 'AllowFilter': break;
+		case 'AllowInsertRows': break;
+		case 'AllowDeleteRows': break;
+		case 'AllowInsertCols': break;
+		case 'AllowDeleteCols': break;
+		case 'AllowInsertHyperlinks': break;
+		case 'AllowFormatCells': break;
+		case 'AllowSizeCols': break;
+		case 'AllowSizeRows': break;
+		case 'RefModeR1C1': break;
+		case 'NoSummaryRowsBelowDetail': break;
+		case 'TabColorIndex': break;
+		case 'DoNotDisplayHeadings': break;
+		case 'ShowPageLayoutZoom': break;
+		case 'NoSummaryColumnsRightDetail': break;
+		case 'BlackAndWhite': break;
+		case 'DoNotDisplayZeros': break;
+		case 'DisplayPageBreak': break;
+		case 'RowColHeadings': break;
+		case 'DoNotDisplayOutline': break;
+		case 'NoOrientation': break;
+		case 'AllowUsePivotTables': break;
+		case 'ZeroHeight': break;
+
+		/* PivotTable */
+		case 'ImmediateItemsOnDrop': break;
+		case 'ShowPageMultipleItemLabel': break;
+		case 'CompactRowIndent': break;
+		case 'Location': break;
+		case 'PivotField': break;
+		case 'Orientation': break;
+		case 'LayoutForm': break;
+		case 'LayoutSubtotalLocation': break;
+		case 'LayoutCompactRow': break;
+		case 'Position': break;
+		case 'PivotItem': break;
+		case 'DataType': break;
+		case 'DataField': break;
+		case 'SourceName': break;
+		case 'ParentField': break;
+		case 'PTLineItems': break;
+		case 'PTLineItem': break;
+		case 'CountOfSameItems': break;
+		case 'Item': break;
+		case 'ItemType': break;
+		case 'PTSource': break;
+		case 'CacheIndex': break;
+		case 'ConsolidationReference': break;
+		case 'FileName': break;
+		case 'Reference': break;
+		case 'NoRowGrand': break;
+		case 'BlankLineAfterItems': break;
+		case 'DoNotCalculateBeforeSave': break;
+
+		/* PageBreaks */
+		case 'ColBreaks': break;
+		case 'ColBreak': break;
+		case 'RowBreaks': break;
+		case 'RowBreak': break;
+		case 'ColStart': break;
+		case 'ColEnd': break;
+		case 'RowEnd': break;
+
+		/* Version */
+		case 'DefaultVersion': break;
+		case 'RefreshName': break;
+		case 'RefreshDate': break;
+		case 'RefreshDateCopy': break;
+		case 'VersionLastEdit': break;
+		case 'VersionLastRefresh': break;
+		case 'VersionLastUpdate': break;
+		case 'VersionUpdateableMin': break;
+		case 'VersionRefreshableMin': break;
+
+		/* ConditionalFormatting */
+		case 'Range': break;
+		case 'Condition': break;
+		case 'Qualifier': break;
+		case 'Value1': break;
+		case 'Value2': break;
+		case 'Format': break;
 
 		/* AutoFilter */
 		case 'AutoFilter': break;
@@ -5518,6 +5673,67 @@ function parse_xlml_xml(d, opts) {
 		case 'AutoFilterCondition': break;
 		case 'AutoFilterAnd': break;
 		case 'AutoFilterOr': break;
+
+		/* QueryTable */
+		case 'Name': break;
+		case 'Id': break;
+		case 'AutoFormatFont': break;
+		case 'AutoFormatPattern': break;
+		case 'QuerySource': break;
+		case 'QueryType': break;
+		case 'EnableRedirections': break;
+		case 'RefreshedInXl9': break;
+		case 'URLString': break;
+		case 'HTMLTables': break;
+		case 'Connection': break;
+		case 'CommandText': break;
+		case 'RefreshInfo': break;
+		case 'NoTitles': break;
+		case 'NextId': break;
+		case 'ColumnInfo': break;
+		case 'OverwriteCells': break;
+		case 'UseBlank': break;
+		case 'DoNotPromptForFile': break;
+		case 'TextWizardSettings': break;
+		case 'Source': break;
+		case 'Decimal': break;
+		case 'ThousandSeparator': break;
+		case 'TrailingMinusNumbers': break;
+		case 'FormatSettings': break;
+		case 'FieldType': break;
+		case 'Delimiters': break;
+		case 'Tab': break;
+		case 'Comma': break;
+
+		/* DataValidation */
+		case 'Type': break;
+		case 'Min': break;
+		case 'Max': break;
+		case 'Sorting': break;
+		case 'Sort': break;
+		case 'Descending': break;
+		case 'Order': break;
+		case 'CaseSensitive': break;
+		case 'Value': break;
+		case 'ErrorStyle': break;
+		case 'ErrorMessage': break;
+		case 'ErrorTitle': break;
+		case 'CellRangeList': break;
+		case 'InputMessage': break;
+		case 'InputTitle': break;
+		case 'ComboHide': break;
+		case 'InputHide': break;
+
+		/* MapInfo (schema) */
+		case 'Schema': break;
+		case 'Map': break;
+		case 'Entry': break;
+		case 'XPath': break;
+		case 'Field': break;
+		case 'XSDType': break;
+		case 'Aggregate': break;
+		/* These are from xsd (XML Schema Definition) */
+		case 'schema': case 'element': case 'complexType': case 'all': break;
 
 		case 'Styles':
 		case 'Workbook': {
@@ -5528,18 +5744,36 @@ function parse_xlml_xml(d, opts) {
 		case 'DocumentProperties':
 		case 'CustomDocumentProperties':
 		case 'OfficeDocumentSettings':
+		case 'PivotTable':
 		case 'Names':
+		case 'MapInfo':
+		case 'PageBreaks':
+		case 'QueryTable':
+		case 'DataValidation':
+		case 'ConditionalFormatting':
 		case 'ExcelWorkbook':
 		case 'WorkbookOptions':
 		case 'WorksheetOptions': {
 			if(Rn[1]==='/'){if((tmp=state.pop())[0]!==Rn[3]) throw "Bad state: "+tmp;}
 			else state.push([Rn[3], true]);
 		} break;
-		default: if(!state[state.length-1][1] || opts.WTF) throw 'Unrecognized tag: ' + Rn[3] + "|" + state.join("|");
+		
+		/* CustomDocumentProperties */
+		default:
+			if(!state[state.length-1][1]) throw 'Unrecognized tag: ' + Rn[3] + "|" + state.join("|");
+			if(state[state.length-1][0]==='CustomDocumentProperties') {
+				if(Rn[0].match(/\/>$/)) break;
+				else if(Rn[1]==="/") Custprops[Rn[3].replace(/_x0020_/g," ")] = str.slice(pidx, Rn.index);
+				else pidx = Rn.index + Rn[0].length;
+				break;
+			}
+			if(opts.WTF) throw 'Unrecognized tag: ' + Rn[3] + "|" + state.join("|");
 	}
 	out.Sheets = sheets;
 	out.SheetNames = sheetnames;
 	out.SSF = SSF.get_table();
+	out.Props = Props;
+	out.Custprops = Custprops;
 	return out;
 }
 
