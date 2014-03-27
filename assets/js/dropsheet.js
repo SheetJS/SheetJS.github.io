@@ -29,8 +29,14 @@ var DropSheet = function DropSheet(opts) {
 	function sheetjsw(data, cb, readtype, xls) {
 		pending = true;
 		opts.on.workstart();
-		var worker = new Worker('./sheetjsw.js');
-		console.log(worker);
+		var scripts = document.getElementsByTagName('script');
+		var dropsheetPath;
+		for (var i = 0; i < scripts.length; i++) {
+			if (scripts[i].src.indexOf('dropsheet') != -1) {
+				dropsheetPath = scripts[i].src.split('dropsheet.js')[0];
+			}
+		}
+		var worker = new Worker(dropsheetPath + 'sheetjsw.js');
 		worker.onmessage = function(e) {
 			switch(e.data.t) {
 				case 'ready': break;
