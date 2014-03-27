@@ -1,189 +1,91 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title>SheetJS Live Grid Demo</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="icon" type="image/png" href="logo.png" />
-<link rel="stylesheet" href="sheetjs.css">
-</head>
-<body>
-<script src="alertify.js"></script>
-<script src="hot/jquery.min.js"></script>
-<script src="hot/jquery.handsontable.full.js"></script>
-<link rel="stylesheet" media="screen" href="hot/jquery.handsontable.full.css">
-<link rel="stylesheet" media="screen" href="hot/samples.css">
-<link rel="stylesheet" media="screen" href="alertify.css">
+    <head>
+        <title>SheetJS Live Grid Demo</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="icon" type="image/png" href="assets/img/logo.png" />
+        <link rel="stylesheet" href="assets/css/sheetjs.css">
+    </head>
+    <body>
+        <script src="assets/vendor/alertify.js"></script>
+        <script src="assets/vendor/jquery.min.js"></script>
+        <script src="assets/vendor/jquery.handsontable.full.js"></script>
 
-<div id="body">
-<div id="left">
-<div id="logo"><a href="http://sheetjs.com"><img src="logo.png" class="logo" alt="SheetJS Logo" width=128px height=128px /></a></div>
-<div id="drop">Drop a file here</div>
-<h3> Choose a worksheet:</h3>
-<div id="buttons"></div>
-</div>
-<div id="right">
-<div id="header">
-<pre id="out"></pre>
-<h2>SheetJS In-Browser Live Grid Demo</h2>
-<h3>Drop a spreadsheet (XLS/XLSX/XLSM/XLSB/XML) in the box to the left to see a preview.<br/>
-Need a file?  Why not the <a href="http://www.whitehouse.gov/sites/default/files/omb/budget/fy2014/assets/receipts.xls">OMB FY 2014 Federal Receipts?</a></h3>
-    <table id="tt">
-      <tr><td colspan="6"><a href="osstatus.html">SheetJS Libraries</a> (for parsing) and <a href="http://handsontable.com">Handsontable</a> (grid component)</td></tr>
-      <tr>
-        <th>XLS/XML</th>
-        <td><a href="http://github.com/SheetJS/js-xls">Library Source</a></td>
-        <td><a href="http://SheetJS.github.io/js-xls">Interactive Demo</a></td>
-        <td><a href="http://npm.im/xlsjs">"xlsjs" on npm</a></td>
-        <td><a href="https://travis-ci.org/SheetJS/js-xls">node CI status</a></td>
-        <td><a href="stress.html">browser stress test</a></td>
-      </tr>
-      <tr>
-        <th>XLSX/M/B</th>
-        <td><a href="http://github.com/SheetJS/js-xlsx">Library Source</a></td>
-        <td><a href="http://SheetJS.github.io/js-xlsx">Interactive Demo</a></td>
-        <td><a href="http://npm.im/xlsx">"xlsx" on npm</a></td>
-        <td><a href="https://travis-ci.org/SheetJS/js-xlsx">node CI status</a></td>
-        <td><a href="stress.html">browser stress test</a></td>
-      </tr>
-    </table>
-</div>
-<div id="hot" style="overflow: scroll" class="handsontable"></div>
-<div id="footnote"><h3>This particular parser assumes that <b>the first row of the table is a header.</b><br/>
-For parsing a more general file, check the Interactive Demos</h3><br/>
-<h3>The entire process occurs within your browser <br />
-<b>NO SPREADSHEET DATA IS SENT TO ANY SERVER (parsing and rendering done in your browser)</b></br>
-<h3>This is a work in progress.  Every bit helps.  Please email <a href="mailto:dev@sheetjs.com">dev@sheetjs.com</a> with your feedback.
-<h3>Follow us on Twitter <a href="https://twitter.com/SheetJS">@SheetJS</a></h3>
-</div>
-</div>
+        <link rel="stylesheet" media="screen" href="assets/vendor/jquery.handsontable.full.css">
+        <link rel="stylesheet" media="screen" href="assets/vendor/samples.css">
+        <link rel="stylesheet" media="screen" href="assets/vendor/alertify.css">
 
-<script src="xls.js"></script>
-<script src="jszip.js"></script>
-<script src="xlsx.js"></script>
-<script src="shim.js"></script>
-<script src="others/spin.js"></script>
-<script src="dropsheet.js"></script>
+        <div id="body">
+            <div id="left">
+                <div id="logo">
+                    <a href="http://sheetjs.com"><img src="assets/img/logo.png" class="logo" alt="SheetJS Logo" width=128px height=128px /></a>
+                </div>
+            <div id="drop">Drop a file here</div>
+            <h3> Choose a worksheet:</h3>
+            <div id="buttons"></div>
+        </div>
+        <div id="right">
+            <div id="header">
+                <pre id="out"></pre>
+                <h2>SheetJS In-Browser Live Grid Demo</h2>
+                <h3>
+                    Drop a spreadsheet (XLS/XLSX/XLSM/XLSB/XML) in the box to the left to see a preview.<br/>
+                    Need a file?  Why not the <a href="http://www.whitehouse.gov/sites/default/files/omb/budget/fy2014/assets/receipts.xls">OMB FY 2014 Federal Receipts?</a>
+                </h3>
+                <table id="tt">
+                  <tr><td colspan="6"><a href="osstatus.html">SheetJS Libraries</a> (for parsing) and <a href="http://handsontable.com">Handsontable</a> (grid component)</td></tr>
+                  <tr>
+                    <th>XLS/XML</th>
+                    <td><a href="http://github.com/SheetJS/js-xls">Library Source</a></td>
+                    <td><a href="http://SheetJS.github.io/js-xls">Interactive Demo</a></td>
+                    <td><a href="http://npm.im/xlsjs">"xlsjs" on npm</a></td>
+                    <td><a href="https://travis-ci.org/SheetJS/js-xls">node CI status</a></td>
+                    <td><a href="stress.html">browser stress test</a></td>
+                  </tr>
+                  <tr>
+                    <th>XLSX/M/B</th>
+                    <td><a href="http://github.com/SheetJS/js-xlsx">Library Source</a></td>
+                    <td><a href="http://SheetJS.github.io/js-xlsx">Interactive Demo</a></td>
+                    <td><a href="http://npm.im/xlsx">"xlsx" on npm</a></td>
+                    <td><a href="https://travis-ci.org/SheetJS/js-xlsx">node CI status</a></td>
+                    <td><a href="stress.html">browser stress test</a></td>
+                  </tr>
+                </table>
+            </div>
+            <div id="hot" style="overflow: scroll" class="handsontable"></div>
+            <div id="footnote">
+                <h3>
+                    This particular parser assumes that <b>the first row of the table is a header.</b><br/>
+                    For parsing a more general file, check the Interactive Demos
+                </h3><br/>
+                <h3>The entire process occurs within your browser <br />
+                    <b>NO SPREADSHEET DATA IS SENT TO ANY SERVER (parsing and rendering done in your browser)</b></br>
+                <h3>This is a work in progress.  Every bit helps.  Please email <a href="mailto:dev@sheetjs.com">dev@sheetjs.com</a> with your feedback.
+                <h3>Follow us on Twitter <a href="https://twitter.com/SheetJS">@SheetJS</a></h3>
+            </div>
+        </div>
 
-<script>
-/** drop target **/
-var _target = document.getElementById('drop');
+        <script src="assets/js/xls.js"></script>
+        <script src="assets/js/jszip.js"></script>
+        <script src="assets/js/xlsx.js"></script>
+        <script src="assets/js/shim.js"></script>
+        <script src="assets/js/dropsheet.js"></script>
+        <script src="assets/js/main.js"></script>
 
-/** Spinner **/
-var spinner;
+        <script src="assets/vendor/spin.js"></script>
 
-var _workstart = function() { spinner = new Spinner().spin(_target); }
-var _workend = function() { spinner.stop(); }
+        <script type="text/javascript">
+          var _gaq = _gaq || [];
+          _gaq.push(['_setAccount', 'UA-36810333-1']);
+          _gaq.push(['_setDomainName', 'sheetjs.com']);
+          _gaq.push(['_setAllowLinker', true]);
+          _gaq.push(['_trackPageview']);
 
-/** Alerts **/
-var _badfile = function() {
-  alertify.alert('This file does not appear to be a valid Excel file.  If we made a mistake, please send this file to <a href="mailto:dev@sheetjs.com?subject=I+broke+your+stuff">dev@sheetjs.com</a> so we can take a look.', function(){});
-};
-
-var _pending = function() {
-  alertify.alert('Please wait until the current file is processed.', function(){});
-};
-
-var _large = function(len, cb) {
-  alertify.confirm("This file is " + len + " bytes and may take a few moments.  Your browser may lock up during this process.  Shall we play?", cb);
-};
-
-var _failed = function(e) {
-  console.log(e, e.stack);
-  alertify.alert('We unfortunately dropped the ball here.  We noticed some issues with the grid recently, so please test the file using the direct parsers for <a href="/js-xls/">XLS</a> and <a href="/js-xlsx/">XLSX</a> files.  If there are issues with the direct parsers, please send this file to <a href="mailto:dev@sheetjs.com?subject=I+broke+your+stuff">dev@sheetjs.com</a> so we can make things right.', function(){});
-};
-
-/** Handsontable magic **/
-var boldRenderer = function (instance, td, row, col, prop, value, cellProperties) {
-  Handsontable.TextCell.renderer.apply(this, arguments);
-  $(td).css({'font-weight': 'bold'});
-};
-
-var $container, $parent, $window, availableWidth, availableHeight;
-var calculateSize = function () {
-  var offset = $container.offset();
-  availableWidth = Math.max($window.width() - 250,600);
-  availableHeight = Math.max($window.height() - 250, 400);
-};
-
-$(document).ready(function() {
-  $container = $("#hot"); $parent = $container.parent();
-  $window = $(window);
-  $window.on('resize', calculateSize);
-});
-
-/* make the buttons for the sheets */
-var make_buttons = function(sheetnames, cb) {
-  var $buttons = $('#buttons');
-  $buttons.html("");
-  sheetnames.forEach(function(s,idx) {
-    var button= $('<button/>').attr({ type:'button', name:'btn' +idx, text:s });
-    button.append('<h3>' + s + '</h3>');
-    button.click(function() { cb(idx); });
-    $buttons.append(button);
-    $buttons.append('<br/>');
-  });
-};
-
-var _onsheet = function(json, cols, sheetnames, select_sheet_cb) {
-  $('#footnote').hide();
-
-  make_buttons(sheetnames, select_sheet_cb);
-  calculateSize();
-
-  /* add header row for table */
-  if(!json) json = [];
-  json.unshift(function(head){var o = {}; for(i=0;i!=head.length;++i) o[head[i]] = head[i]; return o;}(cols));
-  calculateSize();
-  /* showtime! */
-  $("#hot").handsontable({
-    data: json,
-    startRows: 5,
-    startCols: 3,
-    fixedRowsTop: 1,
-    stretchH: 'all',
-    rowHeaders: true,
-    columns: cols.map(function(x) { return {data:x}; }),
-    colHeaders: cols,
-    cells: function (r,c,p) {
-      if(r === 0) this.renderer = boldRenderer;
-    },
-    width: function () { return availableWidth; },
-    height: function () { return availableHeight; },
-    stretchH: 'all'
-  });
-};
-
-/** Drop it like it's hot **/
-DropSheet({
-  drop: _target,
-  on: {
-    workstart: _workstart,
-    workend: _workend,
-    sheet: _onsheet,
-    foo: 'bar'
-  },
-  errors: {
-    badfile: _badfile,
-    pending: _pending,
-    failed: _failed,
-    large: _large,
-    foo: 'bar'
-  }
-})
-
-</script>
-<script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-36810333-1']);
-  _gaq.push(['_setDomainName', 'sheetjs.com']);
-  _gaq.push(['_setAllowLinker', true]);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-</script>
-</body>
+          (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+          })();
+        </script>
+    </body>
 </html>
