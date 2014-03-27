@@ -30,6 +30,7 @@ var DropSheet = function DropSheet(opts) {
 		pending = true;
 		opts.on.workstart();
 		var worker = new Worker('./sheetjsw.js');
+		console.log(worker);
 		worker.onmessage = function(e) {
 			switch(e.data.t) {
 				case 'ready': break;

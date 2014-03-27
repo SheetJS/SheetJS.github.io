@@ -4,8 +4,8 @@
     <title>JS-XLS and JS-XLSX Test Runner (Mocha)</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="mocha.css" />
-    <link rel="icon" type="image/png" href="logo.png" />
+    <link rel="stylesheet" href="tests/mocha.css" />
+    <link rel="icon" type="image/png" href="assets/img/logo.png" />
     <style>
       #t { font: 20px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif; margin: 0px 60px; font-weight: bold; }
       #tt{ font: 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif; margin: 0px 60px; }
@@ -32,16 +32,16 @@
       <tr><td colspan="5">Tests compiled from <a href="http://github.com/SheetJS/test_files">test_files repo</a> and are located at /test_files<br /></td></tr>
       <tr><td colspan="5"><a href="http://visionmedia.github.io/mocha">Mocha test runner</a> used here and in the node modules</td></tr>
     </table>
-    <script src="shim.js"></script>
-    <script src="jszip.js"></script>
-    <script src="xlsx.js"></script>
-    <script src="cptable.js"></script>
-    <script src="cputils.js"></script>
-    <script src="xls.js"></script>
+    <script src="assets/js/shim.js"></script>
+    <script src="assets/js/jszip.js"></script>
+    <script src="assets/js/xlsx.js"></script>
+    <script src="assets/js/cptable.js"></script>
+    <script src="assets/js/cputils.js"></script>
+    <script src="assets/js/xls.js"></script>
     <!--[if IE]>
-      <script type="text/javascript" src="xhr-hack.js"></script>
+      <script type="text/javascript" src="assets/js/xhr-hack.js"></script>
     <![endif]-->
-    <script src="mocha-sauce-client.js"></script>
+    <script src="tests/mocha-sauce-client.js"></script>
     <script type="text/javascript">
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-36810333-1']);
@@ -54,12 +54,12 @@
       })();
     </script>
     <div id="mocha"></div>
-    <script src="mocha.js"></script>
+    <script src="tests/mocha.js"></script>
     <script>mocha.setup('bdd')</script>
-    <script src="test.js"></script>
+    <script src="tests/test.js"></script>
     <script>
       if(typeof mochaSaucePlease !== "undefined") mochaSaucePlease();
-      else if(window.mochaPhantomJS) mochaPhantomJS.run(); 
+      else if(window.mochaPhantomJS) mochaPhantomJS.run();
       else mocha.run();
     </script>
   </body>
