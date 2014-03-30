@@ -1,0 +1,2719 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:html="http://www.w3.org/TR/REC-html40">
+ <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+  <Created>2014-03-21T00:40:41Z</Created>
+  <LastSaved>2014-03-21T00:47:48Z</LastSaved>
+  <Version>14.0</Version>
+ </DocumentProperties>
+ <OfficeDocumentSettings xmlns="urn:schemas-microsoft-com:office:office">
+  <AllowPNG/>
+  <RemovePersonalInformation/>
+ </OfficeDocumentSettings>
+ <ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
+  <WindowHeight>15020</WindowHeight>
+  <WindowWidth>25360</WindowWidth>
+  <WindowTopX>2660</WindowTopX>
+  <WindowTopY>0</WindowTopY>
+  <ProtectStructure>False</ProtectStructure>
+  <ProtectWindows>False</ProtectWindows>
+ </ExcelWorkbook>
+ <Styles>
+  <Style ss:ID="Default" ss:Name="Normal">
+   <Alignment ss:Vertical="Bottom"/>
+   <Borders/>
+   <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="12" ss:Color="#000000"/>
+   <Interior/>
+   <NumberFormat/>
+   <Protection/>
+  </Style>
+  <Style ss:ID="s22">
+   <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="12" ss:Color="#000000"/>
+  </Style>
+ </Styles>
+ <Worksheet ss:Name="No Filter">
+  <Table ss:ExpandedColumnCount="5" ss:ExpandedRowCount="22" x:FullColumns="1"
+   x:FullRows="1" ss:DefaultColumnWidth="65" ss:DefaultRowHeight="15">
+   <Row>
+    <Cell><Data ss:Type="String">Code</Data></Cell>
+    <Cell><Data ss:Type="String">Format</Data></Cell>
+    <Cell><Data ss:Type="String">Library</Data></Cell>
+    <Cell><Data ss:Type="String">Notes</Data></Cell>
+    <Cell><Data ss:Type="String">Importance</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">5</Data></Cell>
+    <Cell><Data ss:Type="String">XLSX (Excel 2007+)</Data></Cell>
+    <Cell><Data ss:Type="String">js-xlsx</Data></Cell>
+    <Cell><Data ss:Type="String">Strict Open XML Spreadsheet, Excel Workbook</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">5</Data></Cell>
+    <Cell><Data ss:Type="String">XLSM (2007+ Macros)</Data></Cell>
+    <Cell><Data ss:Type="String">js-xlsx</Data></Cell>
+    <Cell><Data ss:Type="String">Excel Workbook (code)</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">5</Data></Cell>
+    <Cell><Data ss:Type="String">XLSB (2007+ Binary)</Data></Cell>
+    <Cell><Data ss:Type="String">js-xlsx</Data></Cell>
+    <Cell><Data ss:Type="String">BIFF12</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">5</Data></Cell>
+    <Cell><Data ss:Type="String">XLS (97-2004)</Data></Cell>
+    <Cell><Data ss:Type="String">js-xls</Data></Cell>
+    <Cell><Data ss:Type="String">BIFF8</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="String">XML (2003 XMLSS)</Data></Cell>
+    <Cell><Data ss:Type="String">js-xls</Data></Cell>
+    <Cell><Data ss:Type="String">Very Basic Support</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">3</Data></Cell>
+    <Cell><Data ss:Type="String">PRN (Lotus)</Data></Cell>
+    <Cell ss:Index="4"><Data ss:Type="String">Space-delimited</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">3</Data></Cell>
+    <Cell><Data ss:Type="String">TSV (.TXT)</Data></Cell>
+    <Cell ss:Index="4"><Data ss:Type="String">Tab-Separated</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">3</Data></Cell>
+    <Cell><Data ss:Type="String">CSV</Data></Cell>
+    <Cell ss:Index="4"><Data ss:Type="String">Comma-Separated</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="String">HTM (Webpage)</Data></Cell>
+    <Cell ss:Index="4"><Data ss:Type="String">Need samples from various versions</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="String">XML Data</Data></Cell>
+    <Cell ss:Index="5"><Data ss:Type="Number">2</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="String">XLS (5.0/95)</Data></Cell>
+    <Cell ss:Index="4"><Data ss:Type="String">BIFF5</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="String">XLW (4.0)</Data></Cell>
+    <Cell ss:Index="5"><Data ss:Type="Number">2</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="String">DIF</Data></Cell>
+    <Cell ss:Index="5"><Data ss:Type="Number">3</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="String">SYLK</Data></Cell>
+    <Cell ss:Index="5"><Data ss:Type="Number">3</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="String">XLTX (2007+ Template)</Data></Cell>
+    <Cell ss:Index="4"><Data ss:Type="String">Template</Data></Cell>
+    <Cell><Data ss:Type="Number">3</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="String">XLTM (2007+ Template)</Data></Cell>
+    <Cell ss:Index="4"><Data ss:Type="String">Template (code)</Data></Cell>
+    <Cell><Data ss:Type="Number">3</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="String">XLT (97-2004 Template)</Data></Cell>
+    <Cell ss:Index="4"><Data ss:Type="String">Template</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="String">XLAM (2007+ Addin)</Data></Cell>
+    <Cell ss:Index="4"><Data ss:Type="String">Addin (code)</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="String">XLA (97-2004 Addin)</Data></Cell>
+    <Cell ss:Index="4"><Data ss:Type="String">Addin</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="String">DBF</Data></Cell>
+    <Cell ss:Index="5"><Data ss:Type="Number">4</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="String">ODS</Data></Cell>
+    <Cell ss:Index="5"><Data ss:Type="Number">4</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <Print>
+    <ValidPrinterInfo/>
+    <HorizontalResolution>-4</HorizontalResolution>
+    <VerticalResolution>-4</VerticalResolution>
+   </Print>
+   <PageLayoutZoom>0</PageLayoutZoom>
+   <Selected/>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+ <Worksheet ss:Name="Just Filter">
+  <Names>
+   <NamedRange ss:Name="_FilterDatabase" ss:RefersTo="='Just Filter'!R1C1:R22C5"
+    ss:Hidden="1"/>
+  </Names>
+  <Table ss:ExpandedColumnCount="5" ss:ExpandedRowCount="22" x:FullColumns="1"
+   x:FullRows="1" ss:DefaultColumnWidth="65" ss:DefaultRowHeight="15">
+   <Row>
+    <Cell><Data ss:Type="String">Code</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Format</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Library</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Notes</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Importance</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">5</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">XLSX (Excel 2007+)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">js-xlsx</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Strict Open XML Spreadsheet, Excel Workbook</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="Number">1</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">5</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">XLSM (2007+ Macros)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">js-xlsx</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Excel Workbook (code)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="Number">1</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">5</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">XLSB (2007+ Binary)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">js-xlsx</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">BIFF12</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="Number">1</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">5</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">XLS (97-2004)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">js-xls</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">BIFF8</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="Number">1</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">4</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">XML (2003 XMLSS)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">js-xls</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Very Basic Support</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="Number">1</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">3</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">PRN (Lotus)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:Index="4"><Data ss:Type="String">Space-delimited</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="Number">2</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">3</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">TSV (.TXT)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:Index="4"><Data ss:Type="String">Tab-Separated</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="Number">2</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">3</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">CSV</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:Index="4"><Data ss:Type="String">Comma-Separated</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="Number">2</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">2</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">HTM (Webpage)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:Index="4"><Data ss:Type="String">Need samples from various versions</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="Number">2</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">2</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">XML Data</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:Index="5"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">2</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">XLS (5.0/95)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:Index="4"><Data ss:Type="String">BIFF5</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="Number">2</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">1</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">XLW (4.0)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:Index="5"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">1</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">DIF</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:Index="5"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">1</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">SYLK</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:Index="5"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">1</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">XLTX (2007+ Template)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:Index="4"><Data ss:Type="String">Template</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="Number">3</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">1</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">XLTM (2007+ Template)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:Index="4"><Data ss:Type="String">Template (code)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="Number">3</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">1</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">XLT (97-2004 Template)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:Index="4"><Data ss:Type="String">Template</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="Number">4</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">1</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">XLAM (2007+ Addin)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:Index="4"><Data ss:Type="String">Addin (code)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="Number">4</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">1</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">XLA (97-2004 Addin)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:Index="4"><Data ss:Type="String">Addin</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="Number">4</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">1</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">DBF</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:Index="5"><Data ss:Type="Number">4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">2</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">ODS</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:Index="5"><Data ss:Type="Number">4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <Print>
+    <ValidPrinterInfo/>
+    <HorizontalResolution>-4</HorizontalResolution>
+    <VerticalResolution>-4</VerticalResolution>
+   </Print>
+   <PageLayoutZoom>0</PageLayoutZoom>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+     <RangeSelection>R1C1:R22C5</RangeSelection>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+  <AutoFilter x:Range="R1C1:R22C5"
+   xmlns="urn:schemas-microsoft-com:office:excel">
+  </AutoFilter>
+ </Worksheet>
+ <Worksheet ss:Name="One Cond">
+  <Names>
+   <NamedRange ss:Name="_FilterDatabase" ss:RefersTo="='One Cond'!R1C1:R22C5"
+    ss:Hidden="1"/>
+  </Names>
+  <Table ss:ExpandedColumnCount="5" ss:ExpandedRowCount="22" x:FullColumns="1"
+   x:FullRows="1" ss:DefaultColumnWidth="65" ss:DefaultRowHeight="15">
+   <Row>
+    <Cell><Data ss:Type="String">Code</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Format</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Library</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Notes</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Importance</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell><Data ss:Type="Number">5</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">XLSX (Excel 2007+)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">js-xlsx</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Strict Open XML Spreadsheet, Excel Workbook</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="Number">1</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell><Data ss:Type="Number">5</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">XLSM (2007+ Macros)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">js-xlsx</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Excel Workbook (code)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="Number">1</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell><Data ss:Type="Number">5</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">XLSB (2007+ Binary)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">js-xlsx</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">BIFF12</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="Number">1</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell><Data ss:Type="Number">5</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">XLS (97-2004)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">js-xls</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">BIFF8</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="Number">1</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell><Data ss:Type="Number">4</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">XML (2003 XMLSS)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">js-xls</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Very Basic Support</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="Number">1</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell><Data ss:Type="Number">3</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">PRN (Lotus)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:Index="4"><Data ss:Type="String">Space-delimited</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="Number">2</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell><Data ss:Type="Number">3</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">TSV (.TXT)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:Index="4"><Data ss:Type="String">Tab-Separated</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="Number">2</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell><Data ss:Type="Number">3</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">CSV</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:Index="4"><Data ss:Type="String">Comma-Separated</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="Number">2</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell><Data ss:Type="Number">2</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">HTM (Webpage)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:Index="4"><Data ss:Type="String">Need samples from various versions</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="Number">2</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell><Data ss:Type="Number">2</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">XML Data</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:Index="5"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell><Data ss:Type="Number">2</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">XLS (5.0/95)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:Index="4"><Data ss:Type="String">BIFF5</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="Number">2</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">1</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">XLW (4.0)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:Index="5"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">1</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">DIF</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:Index="5"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">1</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">SYLK</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:Index="5"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">1</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">XLTX (2007+ Template)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:Index="4"><Data ss:Type="String">Template</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="Number">3</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">1</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">XLTM (2007+ Template)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:Index="4"><Data ss:Type="String">Template (code)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="Number">3</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">1</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">XLT (97-2004 Template)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:Index="4"><Data ss:Type="String">Template</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="Number">4</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">1</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">XLAM (2007+ Addin)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:Index="4"><Data ss:Type="String">Addin (code)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="Number">4</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">1</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">XLA (97-2004 Addin)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:Index="4"><Data ss:Type="String">Addin</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="Number">4</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">1</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">DBF</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:Index="5"><Data ss:Type="Number">4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell><Data ss:Type="Number">2</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">ODS</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:Index="5"><Data ss:Type="Number">4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <PageLayoutZoom>0</PageLayoutZoom>
+   <FilterOn/>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+     <ActiveRow>13</ActiveRow>
+     <ActiveCol>5</ActiveCol>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+  <AutoFilter x:Range="R1C1:R22C5"
+   xmlns="urn:schemas-microsoft-com:office:excel">
+   <AutoFilterColumn x:Type="Custom">
+    <AutoFilterCondition x:Operator="Equals" x:Value="1"/>
+   </AutoFilterColumn>
+  </AutoFilter>
+ </Worksheet>
+ <Worksheet ss:Name="Two Cond">
+  <Names>
+   <NamedRange ss:Name="_FilterDatabase" ss:RefersTo="='Two Cond'!R1C1:R22C5"
+    ss:Hidden="1"/>
+  </Names>
+  <Table ss:ExpandedColumnCount="5" ss:ExpandedRowCount="22" x:FullColumns="1"
+   x:FullRows="1" ss:DefaultColumnWidth="65" ss:DefaultRowHeight="15">
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Code</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Format</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Library</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Notes</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Importance</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">5</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLSX (Excel 2007+)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">js-xlsx</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Strict Open XML Spreadsheet, Excel Workbook</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">5</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLSM (2007+ Macros)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">js-xlsx</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Excel Workbook (code)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">5</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLSB (2007+ Binary)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">js-xlsx</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">BIFF12</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">5</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLS (97-2004)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">js-xls</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">BIFF8</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XML (2003 XMLSS)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">js-xls</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Very Basic Support</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">PRN (Lotus)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Space-delimited</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">TSV (.TXT)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Tab-Separated</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">CSV</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Comma-Separated</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">HTM (Webpage)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Need samples from various versions</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XML Data</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLS (5.0/95)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">BIFF5</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLW (4.0)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">DIF</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">SYLK</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLTX (2007+ Template)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Template</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLTM (2007+ Template)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Template (code)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLT (97-2004 Template)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Template</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLAM (2007+ Addin)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Addin (code)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLA (97-2004 Addin)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Addin</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">DBF</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">ODS</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <PageLayoutZoom>0</PageLayoutZoom>
+   <FilterOn/>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+  <AutoFilter x:Range="R1C1:R22C5"
+   xmlns="urn:schemas-microsoft-com:office:excel">
+   <AutoFilterColumn x:Type="Custom">
+    <AutoFilterCondition x:Operator="Equals" x:Value="1"/>
+   </AutoFilterColumn>
+   <AutoFilterColumn x:Index="5" x:Type="Custom">
+    <AutoFilterCondition x:Operator="Equals" x:Value="3"/>
+   </AutoFilterColumn>
+  </AutoFilter>
+ </Worksheet>
+ <Worksheet ss:Name="Top10">
+  <Names>
+   <NamedRange ss:Name="_FilterDatabase" ss:RefersTo="=Top10!R1C1:R22C5"
+    ss:Hidden="1"/>
+  </Names>
+  <Table ss:ExpandedColumnCount="5" ss:ExpandedRowCount="22" x:FullColumns="1"
+   x:FullRows="1" ss:DefaultColumnWidth="65" ss:DefaultRowHeight="15">
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Code</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Format</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Library</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Notes</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Importance</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">5</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLSX (Excel 2007+)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">js-xlsx</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Strict Open XML Spreadsheet, Excel Workbook</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">5</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLSM (2007+ Macros)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">js-xlsx</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Excel Workbook (code)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">5</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLSB (2007+ Binary)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">js-xlsx</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">BIFF12</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">5</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLS (97-2004)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">js-xls</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">BIFF8</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XML (2003 XMLSS)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">js-xls</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Very Basic Support</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">PRN (Lotus)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Space-delimited</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">TSV (.TXT)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Tab-Separated</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">CSV</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Comma-Separated</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">HTM (Webpage)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Need samples from various versions</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XML Data</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLS (5.0/95)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">BIFF5</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLW (4.0)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">DIF</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">SYLK</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLTX (2007+ Template)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Template</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLTM (2007+ Template)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Template (code)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLT (97-2004 Template)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Template</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLAM (2007+ Addin)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Addin (code)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLA (97-2004 Addin)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Addin</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">DBF</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">ODS</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <PageLayoutZoom>0</PageLayoutZoom>
+   <FilterOn/>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+     <ActiveRow>2</ActiveRow>
+     <ActiveCol>1</ActiveCol>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+  <AutoFilter x:Range="R1C1:R22C5"
+   xmlns="urn:schemas-microsoft-com:office:excel">
+   <AutoFilterColumn x:Type="Top" x:Value="10"/>
+  </AutoFilter>
+ </Worksheet>
+ <Worksheet ss:Name="Bot10">
+  <Names>
+   <NamedRange ss:Name="_FilterDatabase" ss:RefersTo="=Bot10!R1C1:R22C5"
+    ss:Hidden="1"/>
+  </Names>
+  <Table ss:ExpandedColumnCount="5" ss:ExpandedRowCount="22" x:FullColumns="1"
+   x:FullRows="1" ss:DefaultColumnWidth="65" ss:DefaultRowHeight="15">
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Code</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Format</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Library</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Notes</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Importance</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">5</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLSX (Excel 2007+)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">js-xlsx</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Strict Open XML Spreadsheet, Excel Workbook</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">5</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLSM (2007+ Macros)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">js-xlsx</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Excel Workbook (code)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">5</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLSB (2007+ Binary)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">js-xlsx</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">BIFF12</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">5</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLS (97-2004)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">js-xls</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">BIFF8</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XML (2003 XMLSS)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">js-xls</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Very Basic Support</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">PRN (Lotus)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Space-delimited</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">TSV (.TXT)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Tab-Separated</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">CSV</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Comma-Separated</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">HTM (Webpage)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Need samples from various versions</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XML Data</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLS (5.0/95)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">BIFF5</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLW (4.0)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">DIF</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">SYLK</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLTX (2007+ Template)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Template</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLTM (2007+ Template)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Template (code)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLT (97-2004 Template)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Template</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLAM (2007+ Addin)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Addin (code)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLA (97-2004 Addin)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Addin</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">DBF</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">ODS</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <PageLayoutZoom>0</PageLayoutZoom>
+   <FilterOn/>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+     <RangeSelection>R1C1:R22C5</RangeSelection>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+  <AutoFilter x:Range="R1C1:R22C5"
+   xmlns="urn:schemas-microsoft-com:office:excel">
+   <AutoFilterColumn x:Type="Bottom" x:Value="10"/>
+  </AutoFilter>
+ </Worksheet>
+ <Worksheet ss:Name="Average">
+  <Names>
+   <NamedRange ss:Name="_FilterDatabase" ss:RefersTo="=Average!R1C1:R22C5"
+    ss:Hidden="1"/>
+  </Names>
+  <Table ss:ExpandedColumnCount="5" ss:ExpandedRowCount="22" x:FullColumns="1"
+   x:FullRows="1" ss:DefaultColumnWidth="65" ss:DefaultRowHeight="15">
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Code</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Format</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Library</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Notes</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Importance</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">5</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLSX (Excel 2007+)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">js-xlsx</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Strict Open XML Spreadsheet, Excel Workbook</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">5</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLSM (2007+ Macros)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">js-xlsx</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Excel Workbook (code)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">5</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLSB (2007+ Binary)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">js-xlsx</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">BIFF12</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">5</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLS (97-2004)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">js-xls</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">BIFF8</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XML (2003 XMLSS)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">js-xls</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Very Basic Support</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">PRN (Lotus)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Space-delimited</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">TSV (.TXT)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Tab-Separated</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">CSV</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Comma-Separated</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">HTM (Webpage)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Need samples from various versions</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XML Data</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLS (5.0/95)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">BIFF5</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLW (4.0)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">DIF</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">SYLK</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLTX (2007+ Template)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Template</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLTM (2007+ Template)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Template (code)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLT (97-2004 Template)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Template</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLAM (2007+ Addin)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Addin (code)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLA (97-2004 Addin)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Addin</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">DBF</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">ODS</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <PageLayoutZoom>0</PageLayoutZoom>
+   <FilterOn/>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+     <ActiveRow>10</ActiveRow>
+     <ActiveCol>5</ActiveCol>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+  <AutoFilter x:Range="R1C1:R22C5"
+   xmlns="urn:schemas-microsoft-com:office:excel">
+   <AutoFilterColumn x:Type="Custom">
+    <AutoFilterCondition x:Operator="LessThan" x:Value="2.3809523809523809"/>
+   </AutoFilterColumn>
+   <AutoFilterColumn x:Index="5" x:Type="Custom">
+    <AutoFilterCondition x:Operator="GreaterThan" x:Value="2.4285714285714284"/>
+   </AutoFilterColumn>
+  </AutoFilter>
+ </Worksheet>
+ <Worksheet ss:Name="NE">
+  <Names>
+   <NamedRange ss:Name="_FilterDatabase" ss:RefersTo="=NE!R1C1:R22C5" ss:Hidden="1"/>
+  </Names>
+  <Table ss:ExpandedColumnCount="5" ss:ExpandedRowCount="22" x:FullColumns="1"
+   x:FullRows="1" ss:DefaultColumnWidth="65" ss:DefaultRowHeight="15">
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Code</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Format</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Library</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Notes</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Importance</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">5</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLSX (Excel 2007+)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">js-xlsx</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Strict Open XML Spreadsheet, Excel Workbook</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">5</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLSM (2007+ Macros)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">js-xlsx</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Excel Workbook (code)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">5</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLSB (2007+ Binary)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">js-xlsx</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">BIFF12</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">5</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLS (97-2004)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">js-xls</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">BIFF8</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XML (2003 XMLSS)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">js-xls</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Very Basic Support</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">PRN (Lotus)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Space-delimited</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">TSV (.TXT)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Tab-Separated</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">CSV</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Comma-Separated</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">HTM (Webpage)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Need samples from various versions</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XML Data</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLS (5.0/95)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">BIFF5</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLW (4.0)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">DIF</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">SYLK</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLTX (2007+ Template)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Template</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLTM (2007+ Template)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Template (code)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLT (97-2004 Template)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Template</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLAM (2007+ Addin)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Addin (code)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLA (97-2004 Addin)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Addin</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">DBF</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">ODS</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <PageLayoutZoom>0</PageLayoutZoom>
+   <FilterOn/>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+     <RangeSelection>R1C1:R22C5</RangeSelection>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+  <AutoFilter x:Range="R1C1:R22C5"
+   xmlns="urn:schemas-microsoft-com:office:excel">
+   <AutoFilterColumn x:Type="Custom">
+    <AutoFilterCondition x:Operator="DoesNotEqual" x:Value="3"/>
+   </AutoFilterColumn>
+  </AutoFilter>
+ </Worksheet>
+ <Worksheet ss:Name="GT">
+  <Names>
+   <NamedRange ss:Name="_FilterDatabase" ss:RefersTo="=GT!R1C1:R22C5" ss:Hidden="1"/>
+  </Names>
+  <Table ss:ExpandedColumnCount="5" ss:ExpandedRowCount="22" x:FullColumns="1"
+   x:FullRows="1" ss:DefaultColumnWidth="65" ss:DefaultRowHeight="15">
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Code</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Format</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Library</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Notes</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Importance</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">5</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLSX (Excel 2007+)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">js-xlsx</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Strict Open XML Spreadsheet, Excel Workbook</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">5</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLSM (2007+ Macros)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">js-xlsx</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Excel Workbook (code)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">5</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLSB (2007+ Binary)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">js-xlsx</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">BIFF12</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">5</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLS (97-2004)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">js-xls</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">BIFF8</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XML (2003 XMLSS)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">js-xls</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Very Basic Support</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">PRN (Lotus)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Space-delimited</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">TSV (.TXT)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Tab-Separated</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">CSV</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Comma-Separated</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">HTM (Webpage)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Need samples from various versions</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XML Data</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLS (5.0/95)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">BIFF5</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLW (4.0)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">DIF</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">SYLK</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLTX (2007+ Template)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Template</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLTM (2007+ Template)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Template (code)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLT (97-2004 Template)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Template</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLAM (2007+ Addin)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Addin (code)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLA (97-2004 Addin)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Addin</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">DBF</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">ODS</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <PageLayoutZoom>0</PageLayoutZoom>
+   <FilterOn/>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+  <AutoFilter x:Range="R1C1:R22C5"
+   xmlns="urn:schemas-microsoft-com:office:excel">
+   <AutoFilterColumn x:Type="Custom">
+    <AutoFilterCondition x:Operator="GreaterThan" x:Value="2"/>
+   </AutoFilterColumn>
+  </AutoFilter>
+ </Worksheet>
+ <Worksheet ss:Name="AND Bounding">
+  <Names>
+   <NamedRange ss:Name="_FilterDatabase" ss:RefersTo="='AND Bounding'!R1C1:R22C5"
+    ss:Hidden="1"/>
+  </Names>
+  <Table ss:ExpandedColumnCount="5" ss:ExpandedRowCount="22" x:FullColumns="1"
+   x:FullRows="1" ss:DefaultColumnWidth="65" ss:DefaultRowHeight="15">
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Code</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Format</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Library</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Notes</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Importance</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">5</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLSX (Excel 2007+)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">js-xlsx</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Strict Open XML Spreadsheet, Excel Workbook</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">5</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLSM (2007+ Macros)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">js-xlsx</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Excel Workbook (code)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">5</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLSB (2007+ Binary)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">js-xlsx</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">BIFF12</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">5</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLS (97-2004)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">js-xls</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">BIFF8</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XML (2003 XMLSS)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">js-xls</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Very Basic Support</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">PRN (Lotus)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Space-delimited</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">TSV (.TXT)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Tab-Separated</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">CSV</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Comma-Separated</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">HTM (Webpage)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Need samples from various versions</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XML Data</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLS (5.0/95)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">BIFF5</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLW (4.0)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">DIF</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">SYLK</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLTX (2007+ Template)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Template</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLTM (2007+ Template)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Template (code)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLT (97-2004 Template)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Template</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLAM (2007+ Addin)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Addin (code)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLA (97-2004 Addin)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Addin</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">DBF</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">ODS</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <PageLayoutZoom>0</PageLayoutZoom>
+   <FilterOn/>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+     <RangeSelection>R1C1:R22C5</RangeSelection>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+  <AutoFilter x:Range="R1C1:R22C5"
+   xmlns="urn:schemas-microsoft-com:office:excel">
+   <AutoFilterColumn x:Type="Custom">
+    <AutoFilterAnd>
+     <AutoFilterCondition x:Operator="GreaterThanOrEqual" x:Value="2"/>
+     <AutoFilterCondition x:Operator="LessThanOrEqual" x:Value="4"/>
+    </AutoFilterAnd>
+   </AutoFilterColumn>
+  </AutoFilter>
+ </Worksheet>
+ <Worksheet ss:Name="OR Range">
+  <Names>
+   <NamedRange ss:Name="_FilterDatabase" ss:RefersTo="='OR Range'!R1C1:R22C5"
+    ss:Hidden="1"/>
+  </Names>
+  <Table ss:ExpandedColumnCount="5" ss:ExpandedRowCount="22" x:FullColumns="1"
+   x:FullRows="1" ss:DefaultColumnWidth="65" ss:DefaultRowHeight="15">
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Code</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Format</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Library</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Notes</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Importance</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">5</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLSX (Excel 2007+)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">js-xlsx</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Strict Open XML Spreadsheet, Excel Workbook</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">5</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLSM (2007+ Macros)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">js-xlsx</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Excel Workbook (code)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">5</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLSB (2007+ Binary)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">js-xlsx</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">BIFF12</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">5</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLS (97-2004)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">js-xls</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">BIFF8</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XML (2003 XMLSS)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">js-xls</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Very Basic Support</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">PRN (Lotus)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Space-delimited</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">TSV (.TXT)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Tab-Separated</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">CSV</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Comma-Separated</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">HTM (Webpage)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Need samples from various versions</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XML Data</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLS (5.0/95)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">BIFF5</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLW (4.0)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">DIF</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">SYLK</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLTX (2007+ Template)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Template</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLTM (2007+ Template)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Template (code)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">3</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLT (97-2004 Template)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Template</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLAM (2007+ Addin)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Addin (code)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">XLA (97-2004 Addin)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">Addin</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">1</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">DBF</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Hidden="1">
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="String">ODS</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s22"><Data ss:Type="Number">4</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <PageLayoutZoom>0</PageLayoutZoom>
+   <FilterOn/>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+  <AutoFilter x:Range="R1C1:R22C5"
+   xmlns="urn:schemas-microsoft-com:office:excel">
+   <AutoFilterColumn x:Type="Custom">
+    <AutoFilterOr>
+     <AutoFilterCondition x:Operator="GreaterThanOrEqual" x:Value="4"/>
+     <AutoFilterCondition x:Operator="LessThanOrEqual" x:Value="1"/>
+    </AutoFilterOr>
+   </AutoFilterColumn>
+  </AutoFilter>
+ </Worksheet>
+</Workbook>

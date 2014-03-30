@@ -1,0 +1,1582 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:dt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882"
+ xmlns:s="uuid:BDC6E3F0-6DA3-11d1-A2A3-00AA00C14882"
+ xmlns:rs="urn:schemas-microsoft-com:rowset" xmlns:z="#RowsetSchema"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:html="http://www.w3.org/TR/REC-html40">
+ <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+  <Author>God</Author>
+  <LastAuthor>God</LastAuthor>
+  <Created>2014-03-28T03:17:13Z</Created>
+  <LastSaved>2014-03-28T03:58:46Z</LastSaved>
+  <Version>14.0</Version>
+ </DocumentProperties>
+ <OfficeDocumentSettings xmlns="urn:schemas-microsoft-com:office:office">
+  <AllowPNG/>
+ </OfficeDocumentSettings>
+ <ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
+  <WindowHeight>15260</WindowHeight>
+  <WindowWidth>27920</WindowWidth>
+  <WindowTopX>8260</WindowTopX>
+  <WindowTopY>1280</WindowTopY>
+  <ProtectStructure>False</ProtectStructure>
+  <ProtectWindows>False</ProtectWindows>
+ </ExcelWorkbook>
+ <Styles>
+  <Style ss:ID="Default" ss:Name="Normal">
+   <Alignment ss:Vertical="Bottom"/>
+   <Borders/>
+   <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="12" ss:Color="#000000"/>
+   <Interior/>
+   <NumberFormat/>
+   <Protection/>
+  </Style>
+  <Style ss:ID="s97">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Bottom"/>
+  </Style>
+  <Style ss:ID="s102">
+   <NumberFormat/>
+  </Style>
+  <Style ss:ID="s108">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Bottom" ss:Indent="1"/>
+  </Style>
+  <Style ss:ID="s112">
+   <Borders>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="s113">
+   <Borders>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="Background"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="s114">
+   <Borders>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="Background"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="s116">
+   <Borders>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="s117">
+   <Borders>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="s118">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Bottom"/>
+   <Borders>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="s119">
+   <Borders>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <NumberFormat/>
+  </Style>
+  <Style ss:ID="s120">
+   <Borders>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <NumberFormat/>
+  </Style>
+  <Style ss:ID="s121">
+   <Borders>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <NumberFormat/>
+  </Style>
+  <Style ss:ID="s123">
+   <Borders>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="Background"/>
+   </Borders>
+   <NumberFormat/>
+  </Style>
+  <Style ss:ID="s124">
+   <Borders>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="Background"/>
+   </Borders>
+   <NumberFormat/>
+  </Style>
+  <Style ss:ID="s125">
+   <Borders>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="Background"/>
+   </Borders>
+   <NumberFormat/>
+  </Style>
+  <Style ss:ID="s126">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Bottom"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="s127">
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <NumberFormat/>
+  </Style>
+  <Style ss:ID="s128">
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <NumberFormat/>
+  </Style>
+  <Style ss:ID="s129">
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <NumberFormat/>
+  </Style>
+  <Style ss:ID="s130">
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="s133">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Bottom" ss:Indent="1"/>
+   <Borders>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="Background"/>
+   </Borders>
+  </Style>
+ </Styles>
+ <Names>
+  <NamedRange ss:Name="PTData" ss:RefersTo="=Table1[#All]"/>
+ </Names>
+ <Worksheet ss:Name="PTWithLabelFilter">
+  <Table ss:ExpandedColumnCount="21" ss:ExpandedRowCount="15" x:FullColumns="1"
+   x:FullRows="1" ss:DefaultColumnWidth="65" ss:DefaultRowHeight="15">
+   <Column ss:Width="78"/>
+   <Column ss:AutoFitWidth="0" ss:Width="102"/>
+   <Column ss:AutoFitWidth="0" ss:Width="19" ss:Span="6"/>
+   <Column ss:Index="11" ss:Width="19" ss:Span="6"/>
+   <Column ss:Index="19" ss:Width="19" ss:Span="2"/>
+   <Row>
+    <Cell><Data ss:Type="String">Foo</Data></Cell>
+    <Cell><Data ss:Type="String">(Multiple Items)</Data></Cell>
+   </Row>
+   <Row ss:Index="3">
+    <Cell><Data ss:Type="String">Count of Qux</Data></Cell>
+    <Cell><Data ss:Type="String">Column Labels</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">Row Labels</Data></Cell>
+    <Cell><Data ss:Type="Number">10</Data></Cell>
+    <Cell><Data ss:Type="Number">14</Data></Cell>
+    <Cell><Data ss:Type="Number">18</Data></Cell>
+    <Cell><Data ss:Type="Number">22</Data></Cell>
+    <Cell><Data ss:Type="Number">26</Data></Cell>
+    <Cell><Data ss:Type="Number">30</Data></Cell>
+    <Cell><Data ss:Type="Number">34</Data></Cell>
+    <Cell><Data ss:Type="Number">38</Data></Cell>
+    <Cell><Data ss:Type="String">Grand Total</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s97"><Data ss:Type="String"></Data></Cell>
+    <Cell ss:StyleID="s102"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s102"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s102"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s102"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s102"><Data ss:Type="Number">6</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s108"><Data ss:Type="Number">7</Data></Cell>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"><Data ss:Type="Number">1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s108"><Data ss:Type="Number">11</Data></Cell>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"><Data ss:Type="Number">1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s108"><Data ss:Type="Number">13</Data></Cell>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"><Data ss:Type="Number">1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s108"><Data ss:Type="Number">17</Data></Cell>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"><Data ss:Type="Number">1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s108"><Data ss:Type="Number">19</Data></Cell>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s102"><Data ss:Type="Number">1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s108"><Data ss:Type="String">buzz</Data></Cell>
+    <Cell ss:StyleID="s102"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"><Data ss:Type="Number">1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s97"><Data ss:Type="String">fizz</Data></Cell>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"><Data ss:Type="Number">2</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s108"><Data ss:Type="String">fizz</Data></Cell>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"><Data ss:Type="Number">1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s108"><Data ss:Type="String">fizzbuzz</Data></Cell>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"><Data ss:Type="Number">1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s97"><Data ss:Type="String">Grand Total</Data></Cell>
+    <Cell ss:StyleID="s102"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s102"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s102"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s102"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s102"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s102"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s102"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s102"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s102"><Data ss:Type="Number">8</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <PageLayoutZoom>0</PageLayoutZoom>
+   <Selected/>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+     <ActiveRow>9</ActiveRow>
+     <ActiveCol>8</ActiveCol>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+  <PivotTable xmlns="urn:schemas-microsoft-com:office:excel">
+   <Name>PivotTable9</Name>
+   <ImmediateItemsOnDrop/>
+   <ShowPageMultipleItemLabel/>
+   <CompactRowIndent>1</CompactRowIndent>
+   <Location>R1C1:R15C10</Location>
+   <VersionLastUpdate>4</VersionLastUpdate>
+   <VersionUpdateableMin>3</VersionUpdateableMin>
+   <DefaultVersion>4</DefaultVersion>
+   <PivotField>
+    <Name>Foo</Name>
+    <Orientation>Page</Orientation>
+    <LayoutForm>Outline</LayoutForm>
+    <LayoutSubtotalLocation>Top</LayoutSubtotalLocation>
+    <LayoutCompactRow/>
+    <Position>1</Position>
+    <DataType>Integer</DataType>
+    <PivotItem>
+     <Name>1</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>2</Name>
+     <Hidden/>
+    </PivotItem>
+    <PivotItem>
+     <Name>3</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>4</Name>
+     <Hidden/>
+    </PivotItem>
+    <PivotItem>
+     <Name>5</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>6</Name>
+     <Hidden/>
+    </PivotItem>
+    <PivotItem>
+     <Name>7</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>8</Name>
+     <Hidden/>
+    </PivotItem>
+    <PivotItem>
+     <Name>9</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>10</Name>
+     <Hidden/>
+    </PivotItem>
+    <PivotItem>
+     <Name>11</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>12</Name>
+     <Hidden/>
+    </PivotItem>
+    <PivotItem>
+     <Name>13</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>14</Name>
+     <Hidden/>
+    </PivotItem>
+    <PivotItem>
+     <Name>15</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>16</Name>
+     <Hidden/>
+    </PivotItem>
+    <PivotItem>
+     <Name>17</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>18</Name>
+     <Hidden/>
+    </PivotItem>
+    <PivotItem>
+     <Name>19</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>20</Name>
+     <Hidden/>
+    </PivotItem>
+   </PivotField>
+   <PivotField>
+    <Name>Bar</Name>
+    <Orientation>Column</Orientation>
+    <LayoutForm>Outline</LayoutForm>
+    <LayoutSubtotalLocation>Top</LayoutSubtotalLocation>
+    <LayoutCompactRow/>
+    <Position>1</Position>
+    <DataType>Integer</DataType>
+    <PivotItem>
+     <Name>2</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>4</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>6</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>8</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>10</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>12</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>14</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>16</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>18</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>20</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>22</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>24</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>26</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>28</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>30</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>32</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>34</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>36</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>38</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>40</Name>
+    </PivotItem>
+   </PivotField>
+   <PivotField>
+    <Name>Baz</Name>
+    <Orientation>Row</Orientation>
+    <LayoutForm>Outline</LayoutForm>
+    <LayoutSubtotalLocation>Top</LayoutSubtotalLocation>
+    <LayoutCompactRow/>
+    <Position>1</Position>
+    <ParentField>Baz2</ParentField>
+    <PivotItem>
+     <Name></Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>fizz</Name>
+    </PivotItem>
+   </PivotField>
+   <PivotField>
+    <Name>Qux</Name>
+    <LayoutForm>Outline</LayoutForm>
+    <LayoutSubtotalLocation>Top</LayoutSubtotalLocation>
+    <LayoutCompactRow/>
+   </PivotField>
+   <PivotField>
+    <Name>Quux</Name>
+    <Orientation>Row</Orientation>
+    <LayoutForm>Outline</LayoutForm>
+    <LayoutSubtotalLocation>Top</LayoutSubtotalLocation>
+    <LayoutCompactRow/>
+    <Position>2</Position>
+    <DataType>Integer</DataType>
+    <PivotItem>
+     <Name>1</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>2</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>4</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>7</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>8</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>11</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>13</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>14</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>16</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>17</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>19</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>buzz</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>fizz</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>fizzbuzz</Name>
+    </PivotItem>
+   </PivotField>
+   <PivotField>
+    <Name>Baz2</Name>
+    <Subtotal>None</Subtotal>
+    <LayoutForm>Outline</LayoutForm>
+    <LayoutSubtotalLocation>Top</LayoutSubtotalLocation>
+    <LayoutCompactRow/>
+    <BaseField>Baz</BaseField>
+    <MapChildItems>
+     <Item>Group1</Item>
+     <Item>Group1</Item>
+    </MapChildItems>
+    <PivotItem>
+     <Name>Group1</Name>
+    </PivotItem>
+   </PivotField>
+   <PivotField>
+    <DataField/>
+    <Name>Values</Name>
+    <SourceName>Data</SourceName>
+    <Orientation>Column</Orientation>
+    <Position>-1</Position>
+    <LayoutCompactRow/>
+    <LayoutForm>Outline</LayoutForm>
+   </PivotField>
+   <PivotField>
+    <Name>Count of Qux</Name>
+    <ParentField>Qux</ParentField>
+    <Orientation>Data</Orientation>
+    <Function>Count</Function>
+    <Position>1</Position>
+   </PivotField>
+   <PTLineItems>
+    <PTLineItem>
+     <Item>0</Item>
+    </PTLineItem>
+    <PTLineItem>
+     <CountOfSameItems>1</CountOfSameItems>
+     <Item>3</Item>
+    </PTLineItem>
+    <PTLineItem>
+     <CountOfSameItems>1</CountOfSameItems>
+     <Item>5</Item>
+    </PTLineItem>
+    <PTLineItem>
+     <CountOfSameItems>1</CountOfSameItems>
+     <Item>6</Item>
+    </PTLineItem>
+    <PTLineItem>
+     <CountOfSameItems>1</CountOfSameItems>
+     <Item>9</Item>
+    </PTLineItem>
+    <PTLineItem>
+     <CountOfSameItems>1</CountOfSameItems>
+     <Item>10</Item>
+    </PTLineItem>
+    <PTLineItem>
+     <CountOfSameItems>1</CountOfSameItems>
+     <Item>11</Item>
+    </PTLineItem>
+    <PTLineItem>
+     <Item>1</Item>
+    </PTLineItem>
+    <PTLineItem>
+     <CountOfSameItems>1</CountOfSameItems>
+     <Item>12</Item>
+    </PTLineItem>
+    <PTLineItem>
+     <CountOfSameItems>1</CountOfSameItems>
+     <Item>13</Item>
+    </PTLineItem>
+    <PTLineItem>
+     <ItemType>Grand</ItemType>
+     <Item>0</Item>
+    </PTLineItem>
+   </PTLineItems>
+   <PTLineItems>
+    <Orientation>Column</Orientation>
+    <PTLineItem>
+     <Item>4</Item>
+    </PTLineItem>
+    <PTLineItem>
+     <Item>6</Item>
+    </PTLineItem>
+    <PTLineItem>
+     <Item>8</Item>
+    </PTLineItem>
+    <PTLineItem>
+     <Item>10</Item>
+    </PTLineItem>
+    <PTLineItem>
+     <Item>12</Item>
+    </PTLineItem>
+    <PTLineItem>
+     <Item>14</Item>
+    </PTLineItem>
+    <PTLineItem>
+     <Item>16</Item>
+    </PTLineItem>
+    <PTLineItem>
+     <Item>18</Item>
+    </PTLineItem>
+    <PTLineItem>
+     <ItemType>Grand</ItemType>
+     <Item>0</Item>
+    </PTLineItem>
+   </PTLineItems>
+   <PTSource>
+    <CacheIndex>1</CacheIndex>
+    <VersionLastRefresh>4</VersionLastRefresh>
+    <VersionRefreshableMin>3</VersionRefreshableMin>
+    <RefreshName>God</RefreshName>
+    <RefreshDate>2014-03-27T20:25:27</RefreshDate>
+    <RefreshDateCopy>2014-03-27T20:25:27</RefreshDateCopy>
+    <RefreshOnFileOpen/>
+    <ConsolidationReference>
+     <FileName>pivot_table_named_range.xml</FileName>
+     <Name>Table1</Name>
+    </ConsolidationReference>
+   </PTSource>
+  </PivotTable>
+ </Worksheet>
+ <Worksheet ss:Name="FizzBuzzTable">
+  <Table ss:ExpandedColumnCount="5" ss:ExpandedRowCount="21" x:FullColumns="1"
+   x:FullRows="1" ss:DefaultColumnWidth="65" ss:DefaultRowHeight="15">
+   <Row>
+    <Cell><Data ss:Type="String">Foo</Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell><Data ss:Type="String">Bar</Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell><Data ss:Type="String">Baz</Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell><Data ss:Type="String">Qux</Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell><Data ss:Type="String">Quux</Data><NamedCell ss:Name="PTData"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">1</Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=RC[-1]*2"><Data ss:Type="Number">2</Data><NamedCell
+      ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(MOD(RC[-2],3)=0,&quot;fizz&quot;,&quot;&quot;)"><Data
+      ss:Type="String"></Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(MOD(RC[-3],5)=0,&quot;buzz&quot;,&quot;&quot;)"><Data
+      ss:Type="String"></Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(LEN(RC[-2]&amp;RC[-1])=0,RC[-4],RC[-2]&amp;RC[-1])"><Data
+      ss:Type="Number">1</Data><NamedCell ss:Name="PTData"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">2</Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=RC[-1]*2"><Data ss:Type="Number">4</Data><NamedCell
+      ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(MOD(RC[-2],3)=0,&quot;fizz&quot;,&quot;&quot;)"><Data
+      ss:Type="String"></Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(MOD(RC[-3],5)=0,&quot;buzz&quot;,&quot;&quot;)"><Data
+      ss:Type="String"></Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(LEN(RC[-2]&amp;RC[-1])=0,RC[-4],RC[-2]&amp;RC[-1])"><Data
+      ss:Type="Number">2</Data><NamedCell ss:Name="PTData"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">3</Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=RC[-1]*2"><Data ss:Type="Number">6</Data><NamedCell
+      ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(MOD(RC[-2],3)=0,&quot;fizz&quot;,&quot;&quot;)"><Data
+      ss:Type="String">fizz</Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(MOD(RC[-3],5)=0,&quot;buzz&quot;,&quot;&quot;)"><Data
+      ss:Type="String"></Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(LEN(RC[-2]&amp;RC[-1])=0,RC[-4],RC[-2]&amp;RC[-1])"><Data
+      ss:Type="String">fizz</Data><NamedCell ss:Name="PTData"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">4</Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=RC[-1]*2"><Data ss:Type="Number">8</Data><NamedCell
+      ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(MOD(RC[-2],3)=0,&quot;fizz&quot;,&quot;&quot;)"><Data
+      ss:Type="String"></Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(MOD(RC[-3],5)=0,&quot;buzz&quot;,&quot;&quot;)"><Data
+      ss:Type="String"></Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(LEN(RC[-2]&amp;RC[-1])=0,RC[-4],RC[-2]&amp;RC[-1])"><Data
+      ss:Type="Number">4</Data><NamedCell ss:Name="PTData"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">5</Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=RC[-1]*2"><Data ss:Type="Number">10</Data><NamedCell
+      ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(MOD(RC[-2],3)=0,&quot;fizz&quot;,&quot;&quot;)"><Data
+      ss:Type="String"></Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(MOD(RC[-3],5)=0,&quot;buzz&quot;,&quot;&quot;)"><Data
+      ss:Type="String">buzz</Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(LEN(RC[-2]&amp;RC[-1])=0,RC[-4],RC[-2]&amp;RC[-1])"><Data
+      ss:Type="String">buzz</Data><NamedCell ss:Name="PTData"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">6</Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=RC[-1]*2"><Data ss:Type="Number">12</Data><NamedCell
+      ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(MOD(RC[-2],3)=0,&quot;fizz&quot;,&quot;&quot;)"><Data
+      ss:Type="String">fizz</Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(MOD(RC[-3],5)=0,&quot;buzz&quot;,&quot;&quot;)"><Data
+      ss:Type="String"></Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(LEN(RC[-2]&amp;RC[-1])=0,RC[-4],RC[-2]&amp;RC[-1])"><Data
+      ss:Type="String">fizz</Data><NamedCell ss:Name="PTData"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">7</Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=RC[-1]*2"><Data ss:Type="Number">14</Data><NamedCell
+      ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(MOD(RC[-2],3)=0,&quot;fizz&quot;,&quot;&quot;)"><Data
+      ss:Type="String"></Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(MOD(RC[-3],5)=0,&quot;buzz&quot;,&quot;&quot;)"><Data
+      ss:Type="String"></Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(LEN(RC[-2]&amp;RC[-1])=0,RC[-4],RC[-2]&amp;RC[-1])"><Data
+      ss:Type="Number">7</Data><NamedCell ss:Name="PTData"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">8</Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=RC[-1]*2"><Data ss:Type="Number">16</Data><NamedCell
+      ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(MOD(RC[-2],3)=0,&quot;fizz&quot;,&quot;&quot;)"><Data
+      ss:Type="String"></Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(MOD(RC[-3],5)=0,&quot;buzz&quot;,&quot;&quot;)"><Data
+      ss:Type="String"></Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(LEN(RC[-2]&amp;RC[-1])=0,RC[-4],RC[-2]&amp;RC[-1])"><Data
+      ss:Type="Number">8</Data><NamedCell ss:Name="PTData"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">9</Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=RC[-1]*2"><Data ss:Type="Number">18</Data><NamedCell
+      ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(MOD(RC[-2],3)=0,&quot;fizz&quot;,&quot;&quot;)"><Data
+      ss:Type="String">fizz</Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(MOD(RC[-3],5)=0,&quot;buzz&quot;,&quot;&quot;)"><Data
+      ss:Type="String"></Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(LEN(RC[-2]&amp;RC[-1])=0,RC[-4],RC[-2]&amp;RC[-1])"><Data
+      ss:Type="String">fizz</Data><NamedCell ss:Name="PTData"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">10</Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=RC[-1]*2"><Data ss:Type="Number">20</Data><NamedCell
+      ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(MOD(RC[-2],3)=0,&quot;fizz&quot;,&quot;&quot;)"><Data
+      ss:Type="String"></Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(MOD(RC[-3],5)=0,&quot;buzz&quot;,&quot;&quot;)"><Data
+      ss:Type="String">buzz</Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(LEN(RC[-2]&amp;RC[-1])=0,RC[-4],RC[-2]&amp;RC[-1])"><Data
+      ss:Type="String">buzz</Data><NamedCell ss:Name="PTData"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">11</Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=RC[-1]*2"><Data ss:Type="Number">22</Data><NamedCell
+      ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(MOD(RC[-2],3)=0,&quot;fizz&quot;,&quot;&quot;)"><Data
+      ss:Type="String"></Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(MOD(RC[-3],5)=0,&quot;buzz&quot;,&quot;&quot;)"><Data
+      ss:Type="String"></Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(LEN(RC[-2]&amp;RC[-1])=0,RC[-4],RC[-2]&amp;RC[-1])"><Data
+      ss:Type="Number">11</Data><NamedCell ss:Name="PTData"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">12</Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=RC[-1]*2"><Data ss:Type="Number">24</Data><NamedCell
+      ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(MOD(RC[-2],3)=0,&quot;fizz&quot;,&quot;&quot;)"><Data
+      ss:Type="String">fizz</Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(MOD(RC[-3],5)=0,&quot;buzz&quot;,&quot;&quot;)"><Data
+      ss:Type="String"></Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(LEN(RC[-2]&amp;RC[-1])=0,RC[-4],RC[-2]&amp;RC[-1])"><Data
+      ss:Type="String">fizz</Data><NamedCell ss:Name="PTData"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">13</Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=RC[-1]*2"><Data ss:Type="Number">26</Data><NamedCell
+      ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(MOD(RC[-2],3)=0,&quot;fizz&quot;,&quot;&quot;)"><Data
+      ss:Type="String"></Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(MOD(RC[-3],5)=0,&quot;buzz&quot;,&quot;&quot;)"><Data
+      ss:Type="String"></Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(LEN(RC[-2]&amp;RC[-1])=0,RC[-4],RC[-2]&amp;RC[-1])"><Data
+      ss:Type="Number">13</Data><NamedCell ss:Name="PTData"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">14</Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=RC[-1]*2"><Data ss:Type="Number">28</Data><NamedCell
+      ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(MOD(RC[-2],3)=0,&quot;fizz&quot;,&quot;&quot;)"><Data
+      ss:Type="String"></Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(MOD(RC[-3],5)=0,&quot;buzz&quot;,&quot;&quot;)"><Data
+      ss:Type="String"></Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(LEN(RC[-2]&amp;RC[-1])=0,RC[-4],RC[-2]&amp;RC[-1])"><Data
+      ss:Type="Number">14</Data><NamedCell ss:Name="PTData"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">15</Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=RC[-1]*2"><Data ss:Type="Number">30</Data><NamedCell
+      ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(MOD(RC[-2],3)=0,&quot;fizz&quot;,&quot;&quot;)"><Data
+      ss:Type="String">fizz</Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(MOD(RC[-3],5)=0,&quot;buzz&quot;,&quot;&quot;)"><Data
+      ss:Type="String">buzz</Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(LEN(RC[-2]&amp;RC[-1])=0,RC[-4],RC[-2]&amp;RC[-1])"><Data
+      ss:Type="String">fizzbuzz</Data><NamedCell ss:Name="PTData"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">16</Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=RC[-1]*2"><Data ss:Type="Number">32</Data><NamedCell
+      ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(MOD(RC[-2],3)=0,&quot;fizz&quot;,&quot;&quot;)"><Data
+      ss:Type="String"></Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(MOD(RC[-3],5)=0,&quot;buzz&quot;,&quot;&quot;)"><Data
+      ss:Type="String"></Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(LEN(RC[-2]&amp;RC[-1])=0,RC[-4],RC[-2]&amp;RC[-1])"><Data
+      ss:Type="Number">16</Data><NamedCell ss:Name="PTData"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">17</Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=RC[-1]*2"><Data ss:Type="Number">34</Data><NamedCell
+      ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(MOD(RC[-2],3)=0,&quot;fizz&quot;,&quot;&quot;)"><Data
+      ss:Type="String"></Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(MOD(RC[-3],5)=0,&quot;buzz&quot;,&quot;&quot;)"><Data
+      ss:Type="String"></Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(LEN(RC[-2]&amp;RC[-1])=0,RC[-4],RC[-2]&amp;RC[-1])"><Data
+      ss:Type="Number">17</Data><NamedCell ss:Name="PTData"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">18</Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=RC[-1]*2"><Data ss:Type="Number">36</Data><NamedCell
+      ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(MOD(RC[-2],3)=0,&quot;fizz&quot;,&quot;&quot;)"><Data
+      ss:Type="String">fizz</Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(MOD(RC[-3],5)=0,&quot;buzz&quot;,&quot;&quot;)"><Data
+      ss:Type="String"></Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(LEN(RC[-2]&amp;RC[-1])=0,RC[-4],RC[-2]&amp;RC[-1])"><Data
+      ss:Type="String">fizz</Data><NamedCell ss:Name="PTData"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">19</Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=RC[-1]*2"><Data ss:Type="Number">38</Data><NamedCell
+      ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(MOD(RC[-2],3)=0,&quot;fizz&quot;,&quot;&quot;)"><Data
+      ss:Type="String"></Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(MOD(RC[-3],5)=0,&quot;buzz&quot;,&quot;&quot;)"><Data
+      ss:Type="String"></Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(LEN(RC[-2]&amp;RC[-1])=0,RC[-4],RC[-2]&amp;RC[-1])"><Data
+      ss:Type="Number">19</Data><NamedCell ss:Name="PTData"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">20</Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=RC[-1]*2"><Data ss:Type="Number">40</Data><NamedCell
+      ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(MOD(RC[-2],3)=0,&quot;fizz&quot;,&quot;&quot;)"><Data
+      ss:Type="String"></Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(MOD(RC[-3],5)=0,&quot;buzz&quot;,&quot;&quot;)"><Data
+      ss:Type="String">buzz</Data><NamedCell ss:Name="PTData"/></Cell>
+    <Cell ss:Formula="=IF(LEN(RC[-2]&amp;RC[-1])=0,RC[-4],RC[-2]&amp;RC[-1])"><Data
+      ss:Type="String">buzz</Data><NamedCell ss:Name="PTData"/></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <PageLayoutZoom>0</PageLayoutZoom>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+     <ActiveRow>4</ActiveRow>
+     <ActiveCol>2</ActiveCol>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+ <Worksheet ss:Name="PTTable">
+  <Table ss:ExpandedColumnCount="43" ss:ExpandedRowCount="9" x:FullColumns="1"
+   x:FullRows="1" ss:DefaultColumnWidth="65" ss:DefaultRowHeight="15">
+   <Column ss:AutoFitWidth="0" ss:Width="80"/>
+   <Column ss:AutoFitWidth="0" ss:Width="95"/>
+   <Column ss:AutoFitWidth="0" ss:Width="30"/>
+   <Column ss:Index="5" ss:AutoFitWidth="0" ss:Width="78"/>
+   <Column ss:AutoFitWidth="0" ss:Width="96"/>
+   <Column ss:AutoFitWidth="0" ss:Width="106"/>
+   <Column ss:AutoFitWidth="0" ss:Width="26"/>
+   <Column ss:Width="41"/>
+   <Column ss:Width="26"/>
+   <Column ss:Width="41"/>
+   <Column ss:Width="32"/>
+   <Column ss:Width="47"/>
+   <Column ss:Width="32"/>
+   <Column ss:Width="47"/>
+   <Column ss:AutoFitWidth="0" ss:Width="32"/>
+   <Column ss:Width="47"/>
+   <Column ss:AutoFitWidth="0" ss:Width="32"/>
+   <Column ss:Width="47"/>
+   <Column ss:Width="32"/>
+   <Column ss:Width="47"/>
+   <Column ss:Width="32"/>
+   <Column ss:AutoFitWidth="0" ss:Width="47"/>
+   <Column ss:AutoFitWidth="0" ss:Width="43"/>
+   <Column ss:Width="57"/>
+   <Column ss:Width="36"/>
+   <Column ss:Width="51"/>
+   <Column ss:Width="59"/>
+   <Column ss:Width="73"/>
+   <Column ss:Index="31" ss:Width="47"/>
+   <Column ss:Width="32"/>
+   <Column ss:Width="47"/>
+   <Column ss:Width="32"/>
+   <Column ss:Width="47"/>
+   <Column ss:Width="32"/>
+   <Column ss:Width="47"/>
+   <Column ss:Width="32"/>
+   <Column ss:Width="47"/>
+   <Column ss:Width="32"/>
+   <Column ss:Width="47"/>
+   <Column ss:Index="43" ss:Width="97"/>
+   <Row ss:Index="4">
+    <Cell><Data ss:Type="String">Count of Quux</Data></Cell>
+    <Cell><Data ss:Type="String">Column Labels</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">Row Labels</Data></Cell>
+    <Cell ss:Index="3"><Data ss:Type="String">buzz</Data></Cell>
+    <Cell><Data ss:Type="String">Grand Total</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s97"><Data ss:Type="String">Group1</Data></Cell>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"/>
+    <Cell ss:StyleID="s102"/>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s108"/>
+    <Cell ss:StyleID="s102"><Data ss:Type="Number">11</Data></Cell>
+    <Cell ss:StyleID="s102"><Data ss:Type="Number">3</Data></Cell>
+    <Cell ss:StyleID="s102"><Data ss:Type="Number">14</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s108"><Data ss:Type="String">fizz</Data></Cell>
+    <Cell ss:StyleID="s102"><Data ss:Type="Number">5</Data></Cell>
+    <Cell ss:StyleID="s102"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s102"><Data ss:Type="Number">6</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s97"><Data ss:Type="String">Grand Total</Data></Cell>
+    <Cell ss:StyleID="s102"><Data ss:Type="Number">16</Data></Cell>
+    <Cell ss:StyleID="s102"><Data ss:Type="Number">4</Data></Cell>
+    <Cell ss:StyleID="s102"><Data ss:Type="Number">20</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <PageLayoutZoom>0</PageLayoutZoom>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+     <ActiveRow>7</ActiveRow>
+     <ActiveCol>1</ActiveCol>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+  <PivotTable xmlns="urn:schemas-microsoft-com:office:excel">
+   <Name>PivotTable7</Name>
+   <ImmediateItemsOnDrop/>
+   <ShowPageMultipleItemLabel/>
+   <CompactRowIndent>1</CompactRowIndent>
+   <Location>R4C1:R9C4</Location>
+   <VersionLastUpdate>4</VersionLastUpdate>
+   <VersionUpdateableMin>3</VersionUpdateableMin>
+   <DefaultVersion>4</DefaultVersion>
+   <PivotField>
+    <Name>Foo</Name>
+    <LayoutForm>Outline</LayoutForm>
+    <LayoutSubtotalLocation>Top</LayoutSubtotalLocation>
+    <LayoutCompactRow/>
+    <DataType>Integer</DataType>
+   </PivotField>
+   <PivotField>
+    <Name>Bar</Name>
+    <LayoutForm>Outline</LayoutForm>
+    <LayoutSubtotalLocation>Top</LayoutSubtotalLocation>
+    <LayoutCompactRow/>
+    <DataType>Integer</DataType>
+   </PivotField>
+   <PivotField>
+    <Name>Baz</Name>
+    <Orientation>Row</Orientation>
+    <LayoutForm>Outline</LayoutForm>
+    <LayoutSubtotalLocation>Top</LayoutSubtotalLocation>
+    <LayoutCompactRow/>
+    <Position>2</Position>
+    <ParentField>Baz2</ParentField>
+    <PivotItem>
+     <Name></Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>fizz</Name>
+    </PivotItem>
+   </PivotField>
+   <PivotField>
+    <Name>Qux</Name>
+    <Orientation>Column</Orientation>
+    <LayoutForm>Outline</LayoutForm>
+    <LayoutSubtotalLocation>Top</LayoutSubtotalLocation>
+    <LayoutCompactRow/>
+    <Position>1</Position>
+    <PivotItem>
+     <Name></Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>buzz</Name>
+    </PivotItem>
+   </PivotField>
+   <PivotField>
+    <Name>Quux</Name>
+    <LayoutForm>Outline</LayoutForm>
+    <LayoutSubtotalLocation>Top</LayoutSubtotalLocation>
+    <LayoutCompactRow/>
+    <DataType>Integer</DataType>
+   </PivotField>
+   <PivotField>
+    <Name>Baz2</Name>
+    <Orientation>Row</Orientation>
+    <Subtotal>None</Subtotal>
+    <LayoutForm>Outline</LayoutForm>
+    <LayoutSubtotalLocation>Top</LayoutSubtotalLocation>
+    <LayoutCompactRow/>
+    <Position>1</Position>
+    <BaseField>Baz</BaseField>
+    <MapChildItems>
+     <Item>Group1</Item>
+     <Item>Group1</Item>
+    </MapChildItems>
+    <PivotItem>
+     <Name>Group1</Name>
+    </PivotItem>
+   </PivotField>
+   <PivotField>
+    <DataField/>
+    <Name>Values</Name>
+    <SourceName>Data</SourceName>
+    <Orientation>Column</Orientation>
+    <Position>-1</Position>
+    <LayoutCompactRow/>
+    <LayoutForm>Outline</LayoutForm>
+   </PivotField>
+   <PivotField>
+    <Name>Count of Quux</Name>
+    <ParentField>Quux</ParentField>
+    <Orientation>Data</Orientation>
+    <Function>Count</Function>
+    <Position>1</Position>
+   </PivotField>
+   <PTLineItems>
+    <PTLineItem>
+     <Item>0</Item>
+    </PTLineItem>
+    <PTLineItem>
+     <CountOfSameItems>1</CountOfSameItems>
+     <Item>0</Item>
+    </PTLineItem>
+    <PTLineItem>
+     <CountOfSameItems>1</CountOfSameItems>
+     <Item>1</Item>
+    </PTLineItem>
+    <PTLineItem>
+     <ItemType>Grand</ItemType>
+     <Item>0</Item>
+    </PTLineItem>
+   </PTLineItems>
+   <PTLineItems>
+    <Orientation>Column</Orientation>
+    <PTLineItem>
+     <Item>0</Item>
+    </PTLineItem>
+    <PTLineItem>
+     <Item>1</Item>
+    </PTLineItem>
+    <PTLineItem>
+     <ItemType>Grand</ItemType>
+     <Item>0</Item>
+    </PTLineItem>
+   </PTLineItems>
+   <PTSource>
+    <CacheIndex>1</CacheIndex>
+    <VersionLastRefresh>4</VersionLastRefresh>
+    <VersionRefreshableMin>3</VersionRefreshableMin>
+    <RefreshName>God</RefreshName>
+    <RefreshDate>2014-03-27T20:25:27</RefreshDate>
+    <RefreshDateCopy>2014-03-27T20:25:27</RefreshDateCopy>
+    <RefreshOnFileOpen/>
+    <ConsolidationReference>
+     <FileName>pivot_table_named_range.xml</FileName>
+     <Name>Table1</Name>
+    </ConsolidationReference>
+   </PTSource>
+  </PivotTable>
+  <ConditionalFormatting xmlns="urn:schemas-microsoft-com:office:excel">
+   <Range>R7C2:R8C4</Range>
+   <Condition>
+    <Qualifier>Greater</Qualifier>
+    <Value1>5</Value1>
+    <Format Style='color:#9C0006;background:#FFC7CE'/>
+   </Condition>
+  </ConditionalFormatting>
+ </Worksheet>
+ <Worksheet ss:Name="PTRange">
+  <Names>
+   <NamedRange ss:Name="Print_Titles" ss:RefersTo="=PTRange!C1,PTRange!R1:R5"/>
+  </Names>
+  <Table ss:ExpandedColumnCount="4" ss:ExpandedRowCount="9" x:FullColumns="1"
+   x:FullRows="1" ss:DefaultColumnWidth="65" ss:DefaultRowHeight="15">
+   <Column ss:Width="78"/>
+   <Column ss:Width="102"/>
+   <Column ss:Width="30"/>
+   <Row>
+    <Cell ss:StyleID="s130"><Data ss:Type="String">Foo</Data><NamedCell
+      ss:Name="Print_Titles"/></Cell>
+    <Cell ss:StyleID="s130"><Data ss:Type="String">(All)</Data><NamedCell
+      ss:Name="Print_Titles"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s130"><Data ss:Type="String">Bar</Data><NamedCell
+      ss:Name="Print_Titles"/></Cell>
+    <Cell ss:StyleID="s130"><Data ss:Type="String">(Multiple Items)</Data><NamedCell
+      ss:Name="Print_Titles"/></Cell>
+   </Row>
+   <Row ss:Index="4">
+    <Cell ss:StyleID="s112"><Data ss:Type="String">Count of Quux</Data><NamedCell
+      ss:Name="Print_Titles"/></Cell>
+    <Cell ss:StyleID="s112"><Data ss:Type="String">Column Labels</Data><NamedCell
+      ss:Name="Print_Titles"/></Cell>
+    <Cell ss:StyleID="s113"><NamedCell ss:Name="Print_Titles"/></Cell>
+    <Cell ss:StyleID="s114"><NamedCell ss:Name="Print_Titles"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s112"><Data ss:Type="String">Row Labels</Data><NamedCell
+      ss:Name="Print_Titles"/></Cell>
+    <Cell ss:StyleID="s112"><NamedCell ss:Name="Print_Titles"/></Cell>
+    <Cell ss:StyleID="s116"><Data ss:Type="String">buzz</Data><NamedCell
+      ss:Name="Print_Titles"/></Cell>
+    <Cell ss:StyleID="s117"><Data ss:Type="String">Grand Total</Data><NamedCell
+      ss:Name="Print_Titles"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s118"><Data ss:Type="String">Group1</Data><NamedCell
+      ss:Name="Print_Titles"/></Cell>
+    <Cell ss:StyleID="s119"/>
+    <Cell ss:StyleID="s120"/>
+    <Cell ss:StyleID="s121"/>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s133"><NamedCell ss:Name="Print_Titles"/></Cell>
+    <Cell ss:StyleID="s123"><Data ss:Type="Number">0.9</Data></Cell>
+    <Cell ss:StyleID="s124"><Data ss:Type="Number">1.5</Data></Cell>
+    <Cell ss:StyleID="s125"><Data ss:Type="Number">1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s133"><Data ss:Type="String">fizz</Data><NamedCell
+      ss:Name="Print_Titles"/></Cell>
+    <Cell ss:StyleID="s123"><Data ss:Type="Number">1.2</Data></Cell>
+    <Cell ss:StyleID="s124"><Data ss:Type="Number">0</Data></Cell>
+    <Cell ss:StyleID="s125"><Data ss:Type="Number">1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s126"><Data ss:Type="String">Grand Total</Data><NamedCell
+      ss:Name="Print_Titles"/></Cell>
+    <Cell ss:StyleID="s127"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s128"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s129"><Data ss:Type="Number">1</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <Print>
+    <ValidPrinterInfo/>
+    <HorizontalResolution>-4</HorizontalResolution>
+    <VerticalResolution>-4</VerticalResolution>
+   </Print>
+   <PageLayoutZoom>0</PageLayoutZoom>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+     <ActiveRow>6</ActiveRow>
+     <ActiveCol>3</ActiveCol>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+  <PivotTable xmlns="urn:schemas-microsoft-com:office:excel">
+   <Name>PivotTable8</Name>
+   <PrintSetTitles/>
+   <ImmediateItemsOnDrop/>
+   <ShowPageMultipleItemLabel/>
+   <CompactRowIndent>1</CompactRowIndent>
+   <Location>R1C1:R9C4</Location>
+   <VersionLastUpdate>4</VersionLastUpdate>
+   <VersionUpdateableMin>3</VersionUpdateableMin>
+   <DefaultVersion>4</DefaultVersion>
+   <PivotField>
+    <Name>Foo</Name>
+    <Orientation>Page</Orientation>
+    <LayoutForm>Outline</LayoutForm>
+    <LayoutSubtotalLocation>Top</LayoutSubtotalLocation>
+    <LayoutCompactRow/>
+    <Position>1</Position>
+    <DataType>Integer</DataType>
+    <PivotItem>
+     <Name>1</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>2</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>3</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>4</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>5</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>6</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>7</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>8</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>9</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>10</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>11</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>12</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>13</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>14</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>15</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>16</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>17</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>18</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>19</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>20</Name>
+    </PivotItem>
+   </PivotField>
+   <PivotField>
+    <Name>Bar</Name>
+    <Orientation>Page</Orientation>
+    <LayoutForm>Outline</LayoutForm>
+    <LayoutSubtotalLocation>Top</LayoutSubtotalLocation>
+    <LayoutCompactRow/>
+    <Position>2</Position>
+    <DataType>Integer</DataType>
+    <PivotItem>
+     <Name>2</Name>
+     <Hidden/>
+    </PivotItem>
+    <PivotItem>
+     <Name>4</Name>
+     <Hidden/>
+    </PivotItem>
+    <PivotItem>
+     <Name>6</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>8</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>10</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>12</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>14</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>16</Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>18</Name>
+     <Hidden/>
+    </PivotItem>
+    <PivotItem>
+     <Name>20</Name>
+     <Hidden/>
+    </PivotItem>
+    <PivotItem>
+     <Name>22</Name>
+     <Hidden/>
+    </PivotItem>
+    <PivotItem>
+     <Name>24</Name>
+     <Hidden/>
+    </PivotItem>
+    <PivotItem>
+     <Name>26</Name>
+     <Hidden/>
+    </PivotItem>
+    <PivotItem>
+     <Name>28</Name>
+     <Hidden/>
+    </PivotItem>
+    <PivotItem>
+     <Name>30</Name>
+     <Hidden/>
+    </PivotItem>
+    <PivotItem>
+     <Name>32</Name>
+     <Hidden/>
+    </PivotItem>
+    <PivotItem>
+     <Name>34</Name>
+     <Hidden/>
+    </PivotItem>
+    <PivotItem>
+     <Name>36</Name>
+     <Hidden/>
+    </PivotItem>
+    <PivotItem>
+     <Name>38</Name>
+     <Hidden/>
+    </PivotItem>
+    <PivotItem>
+     <Name>40</Name>
+     <Hidden/>
+    </PivotItem>
+   </PivotField>
+   <PivotField>
+    <Name>Baz</Name>
+    <Orientation>Row</Orientation>
+    <LayoutForm>Outline</LayoutForm>
+    <LayoutSubtotalLocation>Top</LayoutSubtotalLocation>
+    <LayoutCompactRow/>
+    <Position>2</Position>
+    <ParentField>Baz2</ParentField>
+    <PivotItem>
+     <Name></Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>fizz</Name>
+    </PivotItem>
+   </PivotField>
+   <PivotField>
+    <Name>Qux</Name>
+    <Orientation>Column</Orientation>
+    <LayoutForm>Outline</LayoutForm>
+    <LayoutSubtotalLocation>Top</LayoutSubtotalLocation>
+    <LayoutCompactRow/>
+    <Position>1</Position>
+    <PivotItem>
+     <Name></Name>
+    </PivotItem>
+    <PivotItem>
+     <Name>buzz</Name>
+    </PivotItem>
+   </PivotField>
+   <PivotField>
+    <Name>Quux</Name>
+    <LayoutForm>Outline</LayoutForm>
+    <LayoutSubtotalLocation>Top</LayoutSubtotalLocation>
+    <LayoutCompactRow/>
+    <DataType>Integer</DataType>
+   </PivotField>
+   <PivotField>
+    <Name>Baz2</Name>
+    <Orientation>Row</Orientation>
+    <Subtotal>None</Subtotal>
+    <LayoutForm>Outline</LayoutForm>
+    <LayoutSubtotalLocation>Top</LayoutSubtotalLocation>
+    <LayoutCompactRow/>
+    <Position>1</Position>
+    <BaseField>Baz</BaseField>
+    <MapChildItems>
+     <Item>Group1</Item>
+     <Item>Group1</Item>
+    </MapChildItems>
+    <PivotItem>
+     <Name>Group1</Name>
+    </PivotItem>
+   </PivotField>
+   <PivotField>
+    <DataField/>
+    <Name>Values</Name>
+    <SourceName>Data</SourceName>
+    <Orientation>Column</Orientation>
+    <Position>-1</Position>
+    <LayoutCompactRow/>
+    <LayoutForm>Outline</LayoutForm>
+   </PivotField>
+   <PivotField>
+    <Name>Count of Quux</Name>
+    <ParentField>Quux</ParentField>
+    <Orientation>Data</Orientation>
+    <Function>Count</Function>
+    <Calculation>Index</Calculation>
+    <Position>1</Position>
+   </PivotField>
+   <PTLineItems>
+    <PTLineItem>
+     <Item>0</Item>
+    </PTLineItem>
+    <PTLineItem>
+     <CountOfSameItems>1</CountOfSameItems>
+     <Item>0</Item>
+    </PTLineItem>
+    <PTLineItem>
+     <CountOfSameItems>1</CountOfSameItems>
+     <Item>1</Item>
+    </PTLineItem>
+    <PTLineItem>
+     <ItemType>Grand</ItemType>
+     <Item>0</Item>
+    </PTLineItem>
+   </PTLineItems>
+   <PTLineItems>
+    <Orientation>Column</Orientation>
+    <PTLineItem>
+     <Item>0</Item>
+    </PTLineItem>
+    <PTLineItem>
+     <Item>1</Item>
+    </PTLineItem>
+    <PTLineItem>
+     <ItemType>Grand</ItemType>
+     <Item>0</Item>
+    </PTLineItem>
+   </PTLineItems>
+   <PTSource>
+    <CacheIndex>1</CacheIndex>
+    <VersionLastRefresh>4</VersionLastRefresh>
+    <VersionRefreshableMin>3</VersionRefreshableMin>
+    <RefreshName>God</RefreshName>
+    <RefreshDate>2014-03-27T20:25:27</RefreshDate>
+    <RefreshDateCopy>2014-03-27T20:25:27</RefreshDateCopy>
+    <RefreshOnFileOpen/>
+    <ConsolidationReference>
+     <FileName>pivot_table_named_range.xml</FileName>
+     <Name>Table1</Name>
+    </ConsolidationReference>
+   </PTSource>
+  </PivotTable>
+ </Worksheet>
+</Workbook>
