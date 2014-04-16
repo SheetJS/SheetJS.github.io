@@ -64,6 +64,7 @@ var DropSheet = function DropSheet(opts) {
 
 	function get_columns(sheet, type) {
 		var val, rowObject, range, columnHeaders, emptyRow, C;
+		if(!sheet['!ref']) return [];
 		range = XLS.utils.decode_range(sheet["!ref"]);
 		columnHeaders = [];
 		for (C = range.s.c; C <= range.e.c; ++C) {
