@@ -1213,7 +1213,7 @@ describe('should parse test files', function() {
 "rich_text_stress.xlsx",
 "roo_1900_base.xlsx",
 "roo_1904_base.xlsx",
-"roo_Bibelbund.xlsx.pending",
+"roo_Bibelbund.xlsx",
 "roo_Pfand_from_windows_phone.xlsx.pending",
 "roo_bbu.xlsx",
 "roo_boolean.xlsx",
@@ -1258,8 +1258,8 @@ describe('should parse test files', function() {
 "xlrd_test_comments_excel.xlsx",
 "xlrd_test_comments_gdocs.xlsx",
 "xlrd_text_bar.xlsx",
-"xlsx-stream-d-date-cell.xlsx"
-//"חישוב_נקודות_זיכוי.xlsx.pending",
+"xlsx-stream-d-date-cell.xlsx",
+"apachepoi_חישוב_נקודות_זיכוי.xlsx.pending"
 	].forEach(function(x) {
 		it(x, x.substr(-8) == ".pending" ? null : function(done) {
 			var oReq;
@@ -1277,7 +1277,7 @@ describe('should parse test files', function() {
 					var arraybuffer = oReq.response;
 					data = new Uint8Array(arraybuffer);
 					for(i = 0; i != data.length; ++i) arr[i] = data[i];
-					wb = (x.substr(-1) == "s" || x.substr(-4) == ".xml") ? XLS.read(arr, {type:'array'})
+					wb = (x.substr(-1) == "s" || x.substr(-1) == "l") ? XLS.read(arr, {type:'array'})
 						: XLSX.read(arr.map(function(x) { return String.fromCharCode(x); }).join(""), {type:'binary'});
 				} else {
 					var binary = oReq.responseBody;
@@ -1291,7 +1291,7 @@ describe('should parse test files', function() {
 					var lastChr = IEBinaryToArray_ByteStr_Last(binary);
 					data = rawBytes.replace(/[\s\S]/g, function( match ) { return byteMapping[match]; }) + lastChr;
 					for(i = 0; i != data.length; ++i) arr[i] = data.charCodeAt(i) & 0xff;
-					wb = (x.substr(-1) == "s" || x.substr(-4) == ".xml") ? XLS.read(arr, {type:'array'})
+					wb = (x.substr(-1) == "s" || x.substr(-1) == "l") ? XLS.read(arr, {type:'array'})
 						: XLSX.read(arr.map(function(x) { return String.fromCharCode(x); }).join(""), {type:'binary'});
 				}
 				parsetest(x, wb);
@@ -1314,7 +1314,7 @@ describe('should parse test files', function() {
 					var data = rawBytes.replace(/[\s\S]/g, function( match ) { return byteMapping[match]; }) + lastChr;
 					var arr = [];
 					for(i = 0; i != data.length; ++i) arr[i] = data.charCodeAt(i) & 0xff;
-					wb = (x.substr(-1) == "s" || x.substr(-4) == ".xml") ? XLS.read(arr, {type:'array'})
+					wb = (x.substr(-1) == "s" || x.substr(-1) == "l") ? XLS.read(arr, {type:'array'})
 						: XLSX.read(arr.map(function(x) { return String.fromCharCode(x); }).join(""), {type:'binary'});
 					parsetest(x, wb);
 					done();

@@ -76,7 +76,7 @@ var _onsheet = function(json, cols, sheetnames, select_sheet_cb) {
     stretchH: 'all',
     rowHeaders: true,
     columns: cols.map(function(x) { return {data:x}; }),
-    colHeaders: cols,
+    colHeaders: cols.map(function(x,i) { return XLS.utils.encode_col(i); }),
     cells: function (r,c,p) {
       if(r === 0) this.renderer = boldRenderer;
     },
