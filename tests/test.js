@@ -9,21 +9,21 @@ function parsetest(x, wb) {
 	describe(x + ' should generate CSV', function() {
 		wb.SheetNames.forEach(function(ws, i) {
 			it('#' + i + ' (' + ws + ')', function() {
-				var csv = (x.substr(-1)=="s"?XLS:XLSX).utils.make_csv(wb.Sheets[ws]);
+				(x.substr(-1)=="s"?XLS:XLSX).utils.make_csv(wb.Sheets[ws]);
 			});
 		});
 	});
 	describe(x + ' should generate JSON', function() {
 		wb.SheetNames.forEach(function(ws, i) {
 			it('#' + i + ' (' + ws + ')', function() {
-				var json = (x.substr(-1)=="s"?XLS:XLSX).utils.sheet_to_row_object_array(wb.Sheets[ws]);
+				(x.substr(-1)=="s"?XLS:XLSX).utils.sheet_to_row_object_array(wb.Sheets[ws]);
 			});
 		});
 	});
 	describe(x + ' should generate formulae', function() {
 		wb.SheetNames.forEach(function(ws, i) {
 			it('#' + i + ' (' + ws + ')', function() {
-				var json = (x.substr(-1)=="s"?XLS:XLSX).utils.get_formulae(wb.Sheets[ws]);
+				(x.substr(-1)=="s"?XLS:XLSX).utils.get_formulae(wb.Sheets[ws]);
 			});
 		});
 	});
