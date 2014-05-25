@@ -1,6 +1,6 @@
 /* test.js (C) 2013-2014 SheetJS -- http://sheetjs.com */
 /* vim: set ts=2: */
-function parsetest(x, wb) {
+function parsetest(x, wb, skip) {
 	describe(x + ' should have all bits', function() {
 		it('should have all sheets', function() {
 			wb.SheetNames.forEach(function(y) { if(!wb.Sheets[y]) throw new Error('bad sheet ' + y); });
@@ -24,6 +24,21 @@ function parsetest(x, wb) {
 		wb.SheetNames.forEach(function(ws, i) {
 			it('#' + i + ' (' + ws + ')', function() {
 				(x.substr(-1)=="s"?XLS:XLSX).utils.get_formulae(wb.Sheets[ws]);
+			});
+		});
+	});
+	if(skip) return;
+	describe(x + ' should round-trip XLSX', function() {
+		it('should have all sheets', function() {
+			var wbxlsx = XLSX.read(XLSX.write(wb, {type:'binary', bookType:'xlsx', bookSST:true}), {type:'binary'});
+			wbxlsx.SheetNames.forEach(function(y) { if(!wb.Sheets[y]) throw new Error('bad sheet ' + y); });
+		});
+		describe(x + ' should generate CSV', function() {
+			var wbxlsm = XLSX.read(XLSX.write(wb, {type:'binary', bookType:'xlsm', bookSST:false}), {type:'binary'});
+			wbxlsm.SheetNames.forEach(function(ws, i) {
+				it('#' + i + ' (' + ws + ')', function() {
+					(x.substr(-1)=="s"?XLS:XLSX).utils.make_csv(wb.Sheets[ws]);
+				});
 			});
 		});
 	});

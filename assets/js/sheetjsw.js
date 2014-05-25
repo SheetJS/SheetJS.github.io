@@ -1,3 +1,4 @@
+importScripts('cpexcel.js');
 importScripts('xls.js');
 importScripts('jszip.js');
 importScripts('xlsx.js');
