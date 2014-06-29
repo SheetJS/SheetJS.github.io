@@ -56,7 +56,7 @@ var DropSheet = function DropSheet(opts) {
 		if(useworker && workbook.SSF) XLS.SSF.load_table(workbook.SSF);
 		var result = {};
 		workbook.SheetNames.forEach(function(sheetName) {
-			var roa = XL.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
+			var roa = XL.utils.sheet_to_row_object_array(workbook.Sheets[sheetName], {raw:true});
 			if(roa.length > 0) result[sheetName] = roa;
 		});
 		return result;
