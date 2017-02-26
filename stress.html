@@ -16,14 +16,7 @@
     <h1 id="t">JS-XLS and JS-XLSX Browser-based Parsing Tests</h1>
     <table id="tt">
       <tr>
-        <th>XLS/XML</th>
-        <td><a href="http://github.com/SheetJS/js-xls">Library Source</a></td>
-        <td><a href="http://SheetJS.github.io/js-xls">Interactive Demo</a></td>
-        <td><a href="http://npm.im/xlsjs">"xlsjs" on npm</a></td>
-        <td><a href="https://travis-ci.org/SheetJS/js-xls">node CI status</a></td>
-      </tr>
-      <tr>
-        <th>XLSX/B/M</th>
+        <th>File Formats</th>
         <td><a href="http://github.com/SheetJS/js-xlsx">Library Source</a></td>
         <td><a href="http://SheetJS.github.io/js-xls">Interactive Demo</a></td>
         <td><a href="http://npm.im/xlsx">"xlsx" on npm</a></td>
@@ -36,24 +29,16 @@
     <script src="assets/js/cpexcel.js"></script>
     <script src="assets/js/jszip.js"></script>
     <script src="assets/js/xlsx.js"></script>
-    <script src="assets/js/xls.js"></script>
+    <script src="assets/js/ods.js"></script>
     <!--[if IE]>
       <script type="text/javascript" src="assets/js/xhr-hack.js"></script>
     <![endif]-->
-    <script type="text/javascript">
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-36810333-1']);
-      _gaq.push(['_trackPageview']);
-
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-    </script>
     <div id="mocha"></div>
     <script src="tests/mocha.js"></script>
-    <script>mocha.setup('bdd')</script>
+    <script>
+      window.initMochaPhantomJS && window.initMochaPhantomJS();
+      mocha.setup('bdd');
+    </script>
     <script src="tests/test.js"></script>
     <script>
       if(typeof mochaSaucePlease !== "undefined") mochaSaucePlease();

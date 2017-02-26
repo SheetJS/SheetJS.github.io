@@ -1,7 +1,7 @@
 importScripts('cpexcel.js');
-importScripts('xls.js');
 importScripts('jszip.js');
 importScripts('xlsx.js');
+importScripts('ods.js');
 postMessage({t:'ready'});
 onmessage = function(evt) {
   var v;

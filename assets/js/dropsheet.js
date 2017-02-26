@@ -1,4 +1,4 @@
-/* dropsheet.js (C) 2014 SheetJS -- http://sheetjs.com */
+/* dropsheet.js (C) 2014-present SheetJS -- http://sheetjs.com */
 /* vim: set ts=2: */
 
 var DropSheet = function DropSheet(opts) {
@@ -107,7 +107,7 @@ var DropSheet = function DropSheet(opts) {
 				}
 				xls = [0xd0, 0x3c].indexOf(data.charCodeAt(0)) > -1;
 				if(!xls && arr) xls = [0xd0, 0x3c].indexOf(arr[0].charCodeAt(0)) > -1;
-				if(rABS && !xls && data.charCodeAt(0) !== 0x50)
+				if(rABS && !xls && [0x50, 0x09, 0xEF].indexOf(data.charCodeAt(0)) === -1)
 					return opts.errors.badfile();
 				function doit() {
 					try {

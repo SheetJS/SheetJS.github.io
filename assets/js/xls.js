@@ -1,29 +1,39 @@
-/* xls.js (C) 2013-2014 SheetJS -- http://sheetjs.com */
+/* xls.js (C) 2013-present SheetJS -- http://sheetjs.com */
 /* vim: set ts=2: */
+/*jshint -W041 */
 /*jshint funcscope:true, eqnull:true */
 var XLS = {};
 (function make_xls(XLS){
-XLS.version = '0.7.0';
-var current_codepage = 1252, current_cptable;
+XLS.version = '0.7.6';
+var current_codepage = 1200, current_cptable;
 if(typeof module !== "undefined" && typeof require !== 'undefined') {
 	if(typeof cptable === 'undefined') cptable = require('./dist/cpexcel');
 	current_cptable = cptable[current_codepage];
 }
-function reset_cp() { set_cp(1252); }
-function set_cp(cp) { current_codepage = cp; if(typeof cptable !== 'undefined') current_cptable = cptable[cp]; }
+function reset_cp() { set_cp(1200); }
+var set_cp = function(cp) { current_codepage = cp; };
+
+function char_codes(data) { var o = []; for(var i = 0, len = data.length; i < len; ++i) o[i] = data.charCodeAt(i); return o; }
+var debom = function(data) {
+	var c1 = data.charCodeAt(0), c2 = data.charCodeAt(1);
+	if(c1 == 0xFF && c2 == 0xFE) return data.substr(2);
+	if(c1 == 0xFE && c2 == 0xFF) return data.substr(2);
+	if(c1 == 0xFEFF) return data.substr(1);
+	return data;
+};
 
 var _getchar = function _gc1(x) { return String.fromCharCode(x); };
-if(typeof cptable !== 'undefined') _getchar = function _gc2(x) {
-	if(x !== x || typeof x !== "number") throw new Error("dafuq");
-	if(current_codepage === 1200) return String.fromCharCode(x);
-	return cptable.utils.decode(current_codepage, [x&255,x>>8])[0];
-};
-function new_buf(len) {
-	/* jshint -W056 */
-	return new (typeof Buffer !== 'undefined' ? Buffer : Array)(len);
-	/* jshint +W056 */
+if(typeof cptable !== 'undefined') {
+	set_cp = function(cp) { current_codepage = cp; current_cptable = cptable[cp]; };
+	debom = function(data) {
+		if(data.charCodeAt(0) === 0xFF && data.charCodeAt(1) === 0xFE) { return cptable.utils.decode(1200, char_codes(data.substr(2))); }
+		return data;
+	};
+	_getchar = function _gc2(x) {
+		if(current_codepage === 1200) return String.fromCharCode(x);
+		return cptable.utils.decode(current_codepage, [x&255,x>>8])[0];
+	};
 }
-
 var Base64 = (function make_b64(){
 	var map = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
 	return {
@@ -65,32 +75,33 @@ var Base64 = (function make_b64(){
 		}
 	};
 })();
+var has_buf = (typeof Buffer !== 'undefined');
+
+function new_raw_buf(len) {
+	/* jshint -W056 */
+	return new (has_buf ? Buffer : Array)(len);
+	/* jshint +W056 */
+}
 
 function s2a(s) {
-	if(typeof Buffer !== 'undefined') return new Buffer(s, "binary");
-	var w = s.split("").map(function(x){ return x.charCodeAt(0) & 0xff; });
-	return w;
+	if(has_buf) return new Buffer(s, "binary");
+	return s.split("").map(function(x){ return x.charCodeAt(0) & 0xff; });
 }
 
-function readIEEE754(buf, idx, isLE, nl, ml) {
-	if(isLE === undefined) isLE = true;
-	if(!nl) nl = 8;
-	if(!ml && nl === 8) ml = 52;
-	var e, m, el = nl * 8 - ml - 1, eMax = (1 << el) - 1, eBias = eMax >> 1;
-	var bits = -7, d = isLE ? -1 : 1, i = isLE ? (nl - 1) : 0, s = buf[idx + i];
-
-	i += d;
-	e = s & ((1 << (-bits)) - 1); s >>>= (-bits); bits += el;
-	for (; bits > 0; e = e * 256 + buf[idx + i], i += d, bits -= 8);
-	m = e & ((1 << (-bits)) - 1); e >>>= (-bits); bits += ml;
-	for (; bits > 0; m = m * 256 + buf[idx + i], i += d, bits -= 8);
-	if (e === eMax) return m ? NaN : ((s ? -1 : 1) * Infinity);
-	else if (e === 0) e = 1 - eBias;
-	else { m = m + Math.pow(2, ml); e = e - eBias; }
-	return (s ? -1 : 1) * m * Math.pow(2, e - ml);
-}
+var bconcat = function(bufs) { return [].concat.apply([], bufs); };
 
 var chr0 = /\u0000/g, chr1 = /[\u0001-\u0006]/;
+function read_double_le(b, idx) {
+	var s = 1 - 2 * (b[idx + 7] >>> 7);
+	var e = ((b[idx + 7] & 0x7f) << 4) + ((b[idx + 6] >>> 4) & 0x0f);
+	var m = (b[idx+6]&0x0f);
+	for(var i = 5; i >= 0; --i) m = m * 256 + b[idx + i];
+	if(e == 0x7ff) return m == 0 ? s * Infinity : NaN;
+	if(e == 0) e = -1022;
+	else { e -= 1023; m += Math.pow(2,52); }
+	return s * Math.pow(2, e - 52) * m;
+}
+
 var __toBuffer, ___toBuffer;
 __toBuffer = ___toBuffer = function toBuffer_(bufs) { var x = []; for(var i = 0; i < bufs[0].length; ++i) { x.push.apply(x, bufs[0][i]); } return x; };
 var __utf16le, ___utf16le;
@@ -104,9 +115,7 @@ __lpstr = ___lpstr = function lpstr_(b,i) { var len = __readUInt32LE(b,i); retur
 var __lpwstr, ___lpwstr;
 __lpwstr = ___lpwstr = function lpwstr_(b,i) { var len = 2*__readUInt32LE(b,i); return len > 0 ? __utf8(b, i+4,i+4+len-1) : "";};
 var __double, ___double;
-__double = ___double = function(b, idx) { return readIEEE754(b, idx);};
-
-var bconcat = function(bufs) { return [].concat.apply([], bufs); };
+__double = ___double = function(b, idx) { return read_double_le(b, idx);};
 
 
 if(typeof Buffer !== "undefined") {
@@ -114,22 +123,11 @@ if(typeof Buffer !== "undefined") {
 	__hexlify = function(b,s,l) { return Buffer.isBuffer(b) ? b.toString('hex',s,s+l) : ___hexlify(b,s,l); };
 	__lpstr = function lpstr_b(b,i) { if(!Buffer.isBuffer(b)) return ___lpstr(b, i); var len = b.readUInt32LE(i); return len > 0 ? b.toString('utf8',i+4,i+4+len-1) : "";};
 	__lpwstr = function lpwstr_b(b,i) { if(!Buffer.isBuffer(b)) return ___lpwstr(b, i); var len = 2*b.readUInt32LE(i); return b.toString('utf16le',i+4,i+4+len-1);};
-	__utf8 = function utf8_b(s,e) { return this.toString('utf8',s,e); };
+	__utf8 = function utf8_b(b, s,e) { return b.toString('utf8',s,e); };
 	__toBuffer = function(bufs) { return (bufs[0].length > 0 && Buffer.isBuffer(bufs[0][0])) ? Buffer.concat(bufs[0]) : ___toBuffer(bufs);};
 	bconcat = function(bufs) { return Buffer.isBuffer(bufs[0]) ? Buffer.concat(bufs) : [].concat.apply([], bufs); };
 	__double = function double_(b,i) { if(Buffer.isBuffer(b)) return b.readDoubleLE(i); return ___double(b,i); };
 }
-
-
-var __readUInt8 = function(b, idx) { return b[idx]; };
-var __readUInt16LE = function(b, idx) { return b[idx+1]*(1<<8)+b[idx]; };
-var __readInt16LE = function(b, idx) { var u = b[idx+1]*(1<<8)+b[idx]; return (u < 0x8000) ? u : (0xffff - u + 1) * -1; };
-var __readUInt32LE = function(b, idx) { return b[idx+3]*(1<<24)+(b[idx+2]<<16)+(b[idx+1]<<8)+b[idx]; };
-var __readInt32LE = function(b, idx) { return (b[idx+3]<<24)+(b[idx+2]<<16)+(b[idx+1]<<8)+b[idx]; };
-
-var ___unhexlify = function(s) { return s.match(/../g).map(function(x) { return parseInt(x,16);}); };
-
-var __unhexlify = typeof Buffer !== "undefined" ? function(s) { return Buffer.isBuffer(s) ? new Buffer(s, 'hex') : ___unhexlify(s); } : ___unhexlify;
 
 if(typeof cptable !== 'undefined') {
 	__utf16le = function(b,s,e) { return cptable.utils.decode(1200, b.slice(s,e)); };
@@ -138,10 +136,21 @@ if(typeof cptable !== 'undefined') {
 	__lpwstr = function(b,i) { var len = 2*__readUInt32LE(b,i); return len > 0 ? cptable.utils.decode(1200, b.slice(i+4,i+4+len-1)) : "";};
 }
 
+var __readUInt8 = function(b, idx) { return b[idx]; };
+var __readUInt16LE = function(b, idx) { return b[idx+1]*(1<<8)+b[idx]; };
+var __readInt16LE = function(b, idx) { var u = b[idx+1]*(1<<8)+b[idx]; return (u < 0x8000) ? u : (0xffff - u + 1) * -1; };
+var __readUInt32LE = function(b, idx) { return b[idx+3]*(1<<24)+(b[idx+2]<<16)+(b[idx+1]<<8)+b[idx]; };
+var __readInt32LE = function(b, idx) { return (b[idx+3]<<24)|(b[idx+2]<<16)|(b[idx+1]<<8)|b[idx]; };
+
+var ___unhexlify = function(s) { return s.match(/../g).map(function(x) { return parseInt(x,16);}); };
+var __unhexlify = typeof Buffer !== "undefined" ? function(s) { return Buffer.isBuffer(s) ? new Buffer(s, 'hex') : ___unhexlify(s); } : ___unhexlify;
 
 function ReadShift(size, t) {
-	var o, oI, oR, oo=[], w, vv, i, loc;
+	var o="", oI, oR, oo=[], w, vv, i, loc;
 	switch(t) {
+		case 'utf8': o = __utf8(this, this.l, this.l + size); break;
+		case 'utf16le': size *= 2; o = __utf16le(this, this.l, this.l + size); break;
+
 		/* [MS-OLEDS] 2.1.4 LengthPrefixedAnsiString */
 		case 'lpstr': o = __lpstr(this, this.l); size = 5 + o.length; break;
 		/* [MS-OLEDS] 2.1.5 LengthPrefixedUnicodeString */
@@ -155,37 +164,34 @@ function ReadShift(size, t) {
 			size+=2; o = oo.join(""); break;
 
 		/* sbcs and dbcs support continue records in the SST way TODO codepages */
-		case 'dbcs': o = ""; loc = this.l;
+		case 'dbcs-cont': o = ""; loc = this.l;
 			for(i = 0; i != size; ++i) {
 				if(this.lens && this.lens.indexOf(loc) !== -1) {
 					w = __readUInt8(this, loc);
 					this.l = loc + 1;
-					vv = ReadShift.call(this, size-i, w ? 'dbcs' : 'sbcs');
+					vv = ReadShift.call(this, size-i, w ? 'dbcs-cont' : 'sbcs-cont');
 					return oo.join("") + vv;
 				}
 				oo.push(_getchar(__readUInt16LE(this, loc)));
 				loc+=2;
 			} o = oo.join(""); size *= 2; break;
 
-		case 'sbcs': o = ""; loc = this.l;
+		case 'sbcs-cont': o = ""; loc = this.l;
 			for(i = 0; i != size; ++i) {
 				if(this.lens && this.lens.indexOf(loc) !== -1) {
 					w = __readUInt8(this, loc);
 					this.l = loc + 1;
-					vv = ReadShift.call(this, size-i, w ? 'dbcs' : 'sbcs');
+					vv = ReadShift.call(this, size-i, w ? 'dbcs-cont' : 'sbcs-cont');
 					return oo.join("") + vv;
 				}
 				oo.push(_getchar(__readUInt8(this, loc)));
 				loc+=1;
 			} o = oo.join(""); break;
 
-		case 'utf8': o = __utf8(this, this.l, this.l + size); break;
-		case 'utf16le': size *= 2; o = __utf16le(this, this.l, this.l + size); break;
-
 		default:
 	switch(size) {
 		case 1: oI = __readUInt8(this, this.l); this.l++; return oI;
-		case 2: oI = t !== 'i' ? __readUInt16LE(this, this.l) : __readInt16LE(this, this.l); this.l += 2; return oI;
+		case 2: oI = (t === 'i' ? __readInt16LE : __readUInt16LE)(this, this.l); this.l += 2; return oI;
 		case 4:
 			if(t === 'i' || (this[this.l+3] & 0x80)===0) { oI = __readInt32LE(this, this.l); this.l += 4; return oI; }
 			else { oR = __readUInt32LE(this, this.l); this.l += 4; return oR; } break;
@@ -972,6 +978,902 @@ SSF.get_table = function get_table() { return table_fmt; };
 SSF.load_table = function load_table(tbl) { for(var i=0; i!=0x0188; ++i) if(tbl[i] !== undefined) SSF.load(tbl[i], i); };
 };
 make_ssf(SSF);
+/* [MS-DTYP] 2.3.3 FILETIME */
+/* [MS-OLEDS] 2.1.3 FILETIME (Packet Version) */
+/* [MS-OLEPS] 2.8 FILETIME (Packet Version) */
+function parse_FILETIME(blob) {
+	var dwLowDateTime = blob.read_shift(4), dwHighDateTime = blob.read_shift(4);
+	return new Date(((dwHighDateTime/1e7*Math.pow(2,32) + dwLowDateTime/1e7) - 11644473600)*1000).toISOString().replace(/\.000/,"");
+}
+
+/* [MS-OSHARED] 2.3.3.1.4 Lpstr */
+function parse_lpstr(blob, type, pad) {
+	var str = blob.read_shift(0, 'lpstr');
+	if(pad) blob.l += (4 - ((str.length+1) & 3)) & 3;
+	return str;
+}
+
+/* [MS-OSHARED] 2.3.3.1.6 Lpwstr */
+function parse_lpwstr(blob, type, pad) {
+	var str = blob.read_shift(0, 'lpwstr');
+	if(pad) blob.l += (4 - ((str.length+1) & 3)) & 3;
+	return str;
+}
+
+
+/* [MS-OSHARED] 2.3.3.1.11 VtString */
+/* [MS-OSHARED] 2.3.3.1.12 VtUnalignedString */
+function parse_VtStringBase(blob, stringType, pad) {
+	if(stringType === 0x1F /*VT_LPWSTR*/) return parse_lpwstr(blob);
+	return parse_lpstr(blob, stringType, pad);
+}
+
+function parse_VtString(blob, t, pad) { return parse_VtStringBase(blob, t, pad === false ? 0: 4); }
+function parse_VtUnalignedString(blob, t) { if(!t) throw new Error("dafuq?"); return parse_VtStringBase(blob, t, 0); }
+
+/* [MS-OSHARED] 2.3.3.1.9 VtVecUnalignedLpstrValue */
+function parse_VtVecUnalignedLpstrValue(blob) {
+	var length = blob.read_shift(4);
+	var ret = [];
+	for(var i = 0; i != length; ++i) ret[i] = blob.read_shift(0, 'lpstr');
+	return ret;
+}
+
+/* [MS-OSHARED] 2.3.3.1.10 VtVecUnalignedLpstr */
+function parse_VtVecUnalignedLpstr(blob) {
+	return parse_VtVecUnalignedLpstrValue(blob);
+}
+
+/* [MS-OSHARED] 2.3.3.1.13 VtHeadingPair */
+function parse_VtHeadingPair(blob) {
+	var headingString = parse_TypedPropertyValue(blob, VT_USTR);
+	var headerParts = parse_TypedPropertyValue(blob, VT_I4);
+	return [headingString, headerParts];
+}
+
+/* [MS-OSHARED] 2.3.3.1.14 VtVecHeadingPairValue */
+function parse_VtVecHeadingPairValue(blob) {
+	var cElements = blob.read_shift(4);
+	var out = [];
+	for(var i = 0; i != cElements / 2; ++i) out.push(parse_VtHeadingPair(blob));
+	return out;
+}
+
+/* [MS-OSHARED] 2.3.3.1.15 VtVecHeadingPair */
+function parse_VtVecHeadingPair(blob) {
+	// NOTE: When invoked, wType & padding were already consumed
+	return parse_VtVecHeadingPairValue(blob);
+}
+
+/* [MS-OLEPS] 2.18.1 Dictionary (uses 2.17, 2.16) */
+function parse_dictionary(blob,CodePage) {
+	var cnt = blob.read_shift(4);
+	var dict = ({});
+	for(var j = 0; j != cnt; ++j) {
+		var pid = blob.read_shift(4);
+		var len = blob.read_shift(4);
+		dict[pid] = blob.read_shift(len, (CodePage === 0x4B0 ?'utf16le':'utf8')).replace(chr0,'').replace(chr1,'!');
+	}
+	if(blob.l & 3) blob.l = (blob.l>>2+1)<<2;
+	return dict;
+}
+
+/* [MS-OLEPS] 2.9 BLOB */
+function parse_BLOB(blob) {
+	var size = blob.read_shift(4);
+	var bytes = blob.slice(blob.l,blob.l+size);
+	if((size & 3) > 0) blob.l += (4 - (size & 3)) & 3;
+	return bytes;
+}
+
+/* [MS-OLEPS] 2.11 ClipboardData */
+function parse_ClipboardData(blob) {
+	// TODO
+	var o = {};
+	o.Size = blob.read_shift(4);
+	//o.Format = blob.read_shift(4);
+	blob.l += o.Size;
+	return o;
+}
+
+/* [MS-OLEPS] 2.14 Vector and Array Property Types */
+function parse_VtVector(blob, cb) {
+	/* [MS-OLEPS] 2.14.2 VectorHeader */
+/*	var Length = blob.read_shift(4);
+	var o = [];
+	for(var i = 0; i != Length; ++i) {
+		o.push(cb(blob));
+	}
+	return o;*/
+}
+
+/* [MS-OLEPS] 2.15 TypedPropertyValue */
+function parse_TypedPropertyValue(blob, type, _opts) {
+	var t = blob.read_shift(2), ret, opts = _opts||{};
+	blob.l += 2;
+	if(type !== VT_VARIANT)
+	if(t !== type && VT_CUSTOM.indexOf(type)===-1) throw new Error('Expected type ' + type + ' saw ' + t);
+	switch(type === VT_VARIANT ? t : type) {
+		case 0x02 /*VT_I2*/: ret = blob.read_shift(2, 'i'); if(!opts.raw) blob.l += 2; return ret;
+		case 0x03 /*VT_I4*/: ret = blob.read_shift(4, 'i'); return ret;
+		case 0x0B /*VT_BOOL*/: return blob.read_shift(4) !== 0x0;
+		case 0x13 /*VT_UI4*/: ret = blob.read_shift(4); return ret;
+		case 0x1E /*VT_LPSTR*/: return parse_lpstr(blob, t, 4).replace(chr0,'');
+		case 0x1F /*VT_LPWSTR*/: return parse_lpwstr(blob);
+		case 0x40 /*VT_FILETIME*/: return parse_FILETIME(blob);
+		case 0x41 /*VT_BLOB*/: return parse_BLOB(blob);
+		case 0x47 /*VT_CF*/: return parse_ClipboardData(blob);
+		case 0x50 /*VT_STRING*/: return parse_VtString(blob, t, !opts.raw && 4).replace(chr0,'');
+		case 0x51 /*VT_USTR*/: return parse_VtUnalignedString(blob, t, 4).replace(chr0,'');
+		case 0x100C /*VT_VECTOR|VT_VARIANT*/: return parse_VtVecHeadingPair(blob);
+		case 0x101E /*VT_LPSTR*/: return parse_VtVecUnalignedLpstr(blob);
+		default: throw new Error("TypedPropertyValue unrecognized type " + type + " " + t);
+	}
+}
+/* [MS-OLEPS] 2.14.2 VectorHeader */
+/*function parse_VTVectorVariant(blob) {
+	var Length = blob.read_shift(4);
+
+	if(Length & 1 !== 0) throw new Error("VectorHeader Length=" + Length + " must be even");
+	var o = [];
+	for(var i = 0; i != Length; ++i) {
+		o.push(parse_TypedPropertyValue(blob, VT_VARIANT));
+	}
+	return o;
+}*/
+
+/* [MS-OLEPS] 2.20 PropertySet */
+function parse_PropertySet(blob, PIDSI) {
+	var start_addr = blob.l;
+	var size = blob.read_shift(4);
+	var NumProps = blob.read_shift(4);
+	var Props = [], i = 0;
+	var CodePage = 0;
+	var Dictionary = -1, DictObj = ({});
+	for(i = 0; i != NumProps; ++i) {
+		var PropID = blob.read_shift(4);
+		var Offset = blob.read_shift(4);
+		Props[i] = [PropID, Offset + start_addr];
+	}
+	var PropH = {};
+	for(i = 0; i != NumProps; ++i) {
+		if(blob.l !== Props[i][1]) {
+			var fail = true;
+			if(i>0 && PIDSI) switch(PIDSI[Props[i-1][0]].t) {
+				case 0x02 /*VT_I2*/: if(blob.l +2 === Props[i][1]) { blob.l+=2; fail = false; } break;
+				case 0x50 /*VT_STRING*/: if(blob.l <= Props[i][1]) { blob.l=Props[i][1]; fail = false; } break;
+				case 0x100C /*VT_VECTOR|VT_VARIANT*/: if(blob.l <= Props[i][1]) { blob.l=Props[i][1]; fail = false; } break;
+			}
+			if(!PIDSI && blob.l <= Props[i][1]) { fail=false; blob.l = Props[i][1]; }
+			if(fail) throw new Error("Read Error: Expected address " + Props[i][1] + ' at ' + blob.l + ' :' + i);
+		}
+		if(PIDSI) {
+			var piddsi = PIDSI[Props[i][0]];
+			PropH[piddsi.n] = parse_TypedPropertyValue(blob, piddsi.t, {raw:true});
+			if(piddsi.p === 'version') PropH[piddsi.n] = String(PropH[piddsi.n] >> 16) + "." + String(PropH[piddsi.n] & 0xFFFF);
+			if(piddsi.n == "CodePage") switch(PropH[piddsi.n]) {
+				case 0: PropH[piddsi.n] = 1252;
+					/* falls through */
+				case 10000: // OSX Roman
+				case 1252: // Windows Latin
+
+				case 874: // SB Windows Thai
+				case 1250: // SB Windows Central Europe
+				case 1251: // SB Windows Cyrillic
+				case 1253: // SB Windows Greek
+				case 1254: // SB Windows Turkish
+				case 1255: // SB Windows Hebrew
+				case 1256: // SB Windows Arabic
+				case 1257: // SB Windows Baltic
+				case 1258: // SB Windows Vietnam
+
+				case 932: // DB Windows Japanese Shift-JIS
+				case 936: // DB Windows Simplified Chinese GBK
+				case 949: // DB Windows Korean
+				case 950: // DB Windows Traditional Chinese Big5
+
+				case 1200: // UTF16LE
+				case 1201: // UTF16BE
+				case 65000: case -536: // UTF-7
+				case 65001: case -535: // UTF-8
+					set_cp(CodePage = PropH[piddsi.n]); break;
+				default: throw new Error("Unsupported CodePage: " + PropH[piddsi.n]);
+			}
+		} else {
+			if(Props[i][0] === 0x1) {
+				CodePage = PropH.CodePage = parse_TypedPropertyValue(blob, VT_I2);
+				set_cp(CodePage);
+				if(Dictionary !== -1) {
+					var oldpos = blob.l;
+					blob.l = Props[Dictionary][1];
+					DictObj = parse_dictionary(blob,CodePage);
+					blob.l = oldpos;
+				}
+			} else if(Props[i][0] === 0) {
+				if(CodePage === 0) { Dictionary = i; blob.l = Props[i+1][1]; continue; }
+				DictObj = parse_dictionary(blob,CodePage);
+			} else {
+				var name = DictObj[Props[i][0]];
+				var val;
+				/* [MS-OSHARED] 2.3.3.2.3.1.2 + PROPVARIANT */
+				switch(blob[blob.l]) {
+					case 0x41 /*VT_BLOB*/: blob.l += 4; val = parse_BLOB(blob); break;
+					case 0x1E /*VT_LPSTR*/: blob.l += 4; val = parse_VtString(blob, blob[blob.l-4]); break;
+					case 0x1F /*VT_LPWSTR*/: blob.l += 4; val = parse_VtString(blob, blob[blob.l-4]); break;
+					case 0x03 /*VT_I4*/: blob.l += 4; val = blob.read_shift(4, 'i'); break;
+					case 0x13 /*VT_UI4*/: blob.l += 4; val = blob.read_shift(4); break;
+					case 0x05 /*VT_R8*/: blob.l += 4; val = blob.read_shift(8, 'f'); break;
+					case 0x0B /*VT_BOOL*/: blob.l += 4; val = parsebool(blob, 4); break;
+					case 0x40 /*VT_FILETIME*/: blob.l += 4; val = new Date(parse_FILETIME(blob)); break;
+					default: throw new Error("unparsed value: " + blob[blob.l]);
+				}
+				PropH[name] = val;
+			}
+		}
+	}
+	blob.l = start_addr + size; /* step ahead to skip padding */
+	return PropH;
+}
+
+/* [MS-OLEPS] 2.21 PropertySetStream */
+function parse_PropertySetStream(file, PIDSI) {
+	var blob = file.content;
+	prep_blob(blob, 0);
+
+	var NumSets, FMTID0, FMTID1, Offset0, Offset1 = 0;
+	blob.chk('feff', 'Byte Order: ');
+
+	var vers = blob.read_shift(2); // TODO: check version
+	var SystemIdentifier = blob.read_shift(4);
+	blob.chk(CFB.utils.consts.HEADER_CLSID, 'CLSID: ');
+	NumSets = blob.read_shift(4);
+	if(NumSets !== 1 && NumSets !== 2) throw "Unrecognized #Sets: " + NumSets;
+	FMTID0 = blob.read_shift(16); Offset0 = blob.read_shift(4);
+
+	if(NumSets === 1 && Offset0 !== blob.l) throw "Length mismatch";
+	else if(NumSets === 2) { FMTID1 = blob.read_shift(16); Offset1 = blob.read_shift(4); }
+	var PSet0 = parse_PropertySet(blob, PIDSI);
+
+	var rval = ({ SystemIdentifier: SystemIdentifier });
+	for(var y in PSet0) rval[y] = PSet0[y];
+	//rval.blob = blob;
+	rval.FMTID = FMTID0;
+	//rval.PSet0 = PSet0;
+	if(NumSets === 1) return rval;
+	if(blob.l !== Offset1) throw new Error("Length mismatch 2: " + blob.l + " !== " + Offset1);
+	var PSet1;
+	try { PSet1 = parse_PropertySet(blob, null); } catch(e) { }
+	for(y in PSet1) rval[y] = PSet1[y];
+	rval.FMTID = [FMTID0, FMTID1]; // TODO: verify FMTID0/1
+	return rval;
+}
+var DO_NOT_EXPORT_CFB = true;
+/* cfb.js (C) 2013-present SheetJS -- http://sheetjs.com */
+/* vim: set ts=2: */
+/*jshint eqnull:true */
+
+/* [MS-CFB] v20130118 */
+var CFB = (function _CFB(){
+var exports = {};
+exports.version = '0.11.0';
+function parse(file) {
+var mver = 3; // major version
+var ssz = 512; // sector size
+var nmfs = 0; // number of mini FAT sectors
+var ndfs = 0; // number of DIFAT sectors
+var dir_start = 0; // first directory sector location
+var minifat_start = 0; // first mini FAT sector location
+var difat_start = 0; // first mini FAT sector location
+
+var fat_addrs = []; // locations of FAT sectors
+
+/* [MS-CFB] 2.2 Compound File Header */
+var blob = file.slice(0,512);
+prep_blob(blob, 0);
+
+/* major version */
+var mv = check_get_mver(blob);
+mver = mv[0];
+switch(mver) {
+	case 3: ssz = 512; break; case 4: ssz = 4096; break;
+	default: throw "Major Version: Expected 3 or 4 saw " + mver;
+}
+
+/* reprocess header */
+if(ssz !== 512) { blob = file.slice(0,ssz); prep_blob(blob, 28 /* blob.l */); }
+/* Save header for final object */
+var header = file.slice(0,ssz);
+
+check_shifts(blob, mver);
+
+// Number of Directory Sectors
+var nds = blob.read_shift(4, 'i');
+if(mver === 3 && nds !== 0) throw '# Directory Sectors: Expected 0 saw ' + nds;
+
+// Number of FAT Sectors
+//var nfs = blob.read_shift(4, 'i');
+blob.l += 4;
+
+// First Directory Sector Location
+dir_start = blob.read_shift(4, 'i');
+
+// Transaction Signature
+blob.l += 4;
+
+// Mini Stream Cutoff Size
+blob.chk('00100000', 'Mini Stream Cutoff Size: ');
+
+// First Mini FAT Sector Location
+minifat_start = blob.read_shift(4, 'i');
+
+// Number of Mini FAT Sectors
+nmfs = blob.read_shift(4, 'i');
+
+// First DIFAT sector location
+difat_start = blob.read_shift(4, 'i');
+
+// Number of DIFAT Sectors
+ndfs = blob.read_shift(4, 'i');
+
+// Grab FAT Sector Locations
+for(var q, j = 0; j < 109; ++j) { /* 109 = (512 - blob.l)>>>2; */
+	q = blob.read_shift(4, 'i');
+	if(q<0) break;
+	fat_addrs[j] = q;
+}
+
+/** Break the file up into sectors */
+var sectors = sectorify(file, ssz);
+
+sleuth_fat(difat_start, ndfs, sectors, ssz, fat_addrs);
+
+/** Chains */
+var sector_list = make_sector_list(sectors, dir_start, fat_addrs, ssz);
+
+sector_list[dir_start].name = "!Directory";
+if(nmfs > 0 && minifat_start !== ENDOFCHAIN) sector_list[minifat_start].name = "!MiniFAT";
+sector_list[fat_addrs[0]].name = "!FAT";
+sector_list.fat_addrs = fat_addrs;
+sector_list.ssz = ssz;
+
+/* [MS-CFB] 2.6.1 Compound File Directory Entry */
+var files = {}, Paths = [], FileIndex = [], FullPaths = [], FullPathDir = {};
+read_directory(dir_start, sector_list, sectors, Paths, nmfs, files, FileIndex);
+
+build_full_paths(FileIndex, FullPathDir, FullPaths, Paths);
+
+var root_name = Paths.shift();
+Paths.root = root_name;
+
+/* [MS-CFB] 2.6.4 (Unicode 3.0.1 case conversion) */
+var find_path = make_find_path(FullPaths, Paths, FileIndex, files, root_name);
+
+return {
+	raw: {header: header, sectors: sectors},
+	FileIndex: FileIndex,
+	FullPaths: FullPaths,
+	FullPathDir: FullPathDir,
+	find: find_path
+};
+} // parse
+
+/* [MS-CFB] 2.2 Compound File Header -- read up to major version */
+function check_get_mver(blob) {
+	// header signature 8
+	blob.chk(HEADER_SIGNATURE, 'Header Signature: ');
+
+	// clsid 16
+	blob.chk(HEADER_CLSID, 'CLSID: ');
+
+	// minor version 2
+	var mver = blob.read_shift(2, 'u');
+
+	return [blob.read_shift(2,'u'), mver];
+}
+function check_shifts(blob, mver) {
+	var shift = 0x09;
+
+	// Byte Order
+	blob.chk('feff', 'Byte Order: ');
+
+	// Sector Shift
+	switch((shift = blob.read_shift(2))) {
+		case 0x09: if(mver !== 3) throw 'MajorVersion/SectorShift Mismatch'; break;
+		case 0x0c: if(mver !== 4) throw 'MajorVersion/SectorShift Mismatch'; break;
+		default: throw 'Sector Shift: Expected 9 or 12 saw ' + shift;
+	}
+
+	// Mini Sector Shift
+	blob.chk('0600', 'Mini Sector Shift: ');
+
+	// Reserved
+	blob.chk('000000000000', 'Reserved: ');
+}
+
+/** Break the file up into sectors */
+function sectorify(file, ssz) {
+	var nsectors = Math.ceil(file.length/ssz)-1;
+	var sectors = new Array(nsectors);
+	for(var i=1; i < nsectors; ++i) sectors[i-1] = file.slice(i*ssz,(i+1)*ssz);
+	sectors[nsectors-1] = file.slice(nsectors*ssz);
+	return sectors;
+}
+
+/* [MS-CFB] 2.6.4 Red-Black Tree */
+function build_full_paths(FI, FPD, FP, Paths) {
+	var i = 0, L = 0, R = 0, C = 0, j = 0, pl = Paths.length;
+	var dad = new Array(pl), q = new Array(pl);
+
+	for(; i < pl; ++i) { dad[i]=q[i]=i; FP[i]=Paths[i]; }
+
+	for(; j < q.length; ++j) {
+		i = q[j];
+		L = FI[i].L; R = FI[i].R; C = FI[i].C;
+		if(dad[i] === i) {
+			if(L !== -1 /*NOSTREAM*/ && dad[L] !== L) dad[i] = dad[L];
+			if(R !== -1 && dad[R] !== R) dad[i] = dad[R];
+		}
+		if(C !== -1 /*NOSTREAM*/) dad[C] = i;
+		if(L !== -1) { dad[L] = dad[i]; q.push(L); }
+		if(R !== -1) { dad[R] = dad[i]; q.push(R); }
+	}
+	for(i=1; i !== pl; ++i) if(dad[i] === i) {
+		if(R !== -1 /*NOSTREAM*/ && dad[R] !== R) dad[i] = dad[R];
+		else if(L !== -1 && dad[L] !== L) dad[i] = dad[L];
+	}
+
+	for(i=1; i < pl; ++i) {
+		if(FI[i].type === 0 /* unknown */) continue;
+		j = dad[i];
+		if(j === 0) FP[i] = FP[0] + "/" + FP[i];
+		else while(j !== 0) {
+			FP[i] = FP[j] + "/" + FP[i];
+			j = dad[j];
+		}
+		dad[i] = 0;
+	}
+
+	FP[0] += "/";
+	for(i=1; i < pl; ++i) {
+		if(FI[i].type !== 2 /* stream */) FP[i] += "/";
+		FPD[FP[i]] = FI[i];
+	}
+}
+
+/* [MS-CFB] 2.6.4 */
+function make_find_path(FullPaths, Paths, FileIndex, files, root_name) {
+	var UCFullPaths = new Array(FullPaths.length);
+	var UCPaths = new Array(Paths.length), i;
+	for(i = 0; i < FullPaths.length; ++i) UCFullPaths[i] = FullPaths[i].toUpperCase().replace(chr0,'').replace(chr1,'!');
+	for(i = 0; i < Paths.length; ++i) UCPaths[i] = Paths[i].toUpperCase().replace(chr0,'').replace(chr1,'!');
+	return function find_path(path) {
+		var k;
+		if(path.charCodeAt(0) === 47 /* "/" */) { k=true; path = root_name + path; }
+		else k = path.indexOf("/") !== -1;
+		var UCPath = path.toUpperCase().replace(chr0,'').replace(chr1,'!');
+		var w = k === true ? UCFullPaths.indexOf(UCPath) : UCPaths.indexOf(UCPath);
+		if(w === -1) return null;
+		return k === true ? FileIndex[w] : files[Paths[w]];
+	};
+}
+
+/** Chase down the rest of the DIFAT chain to build a comprehensive list
+    DIFAT chains by storing the next sector number as the last 32 bytes */
+function sleuth_fat(idx, cnt, sectors, ssz, fat_addrs) {
+	var q;
+	if(idx === ENDOFCHAIN) {
+		if(cnt !== 0) throw "DIFAT chain shorter than expected";
+	} else if(idx !== -1 /*FREESECT*/) {
+		var sector = sectors[idx], m = (ssz>>>2)-1;
+		if(!sector) return;
+		for(var i = 0; i < m; ++i) {
+			if((q = __readInt32LE(sector,i*4)) === ENDOFCHAIN) break;
+			fat_addrs.push(q);
+		}
+		sleuth_fat(__readInt32LE(sector,ssz-4),cnt - 1, sectors, ssz, fat_addrs);
+	}
+}
+
+/** Follow the linked list of sectors for a given starting point */
+function get_sector_list(sectors, start, fat_addrs, ssz, chkd) {
+	var sl = sectors.length;
+	var buf, buf_chain;
+	if(!chkd) chkd = new Array(sl);
+	var modulus = ssz - 1, j, jj;
+	buf = [];
+	buf_chain = [];
+	for(j=start; j>=0;) {
+		chkd[j] = true;
+		buf[buf.length] = j;
+		buf_chain.push(sectors[j]);
+		var addr = fat_addrs[Math.floor(j*4/ssz)];
+		jj = ((j*4) & modulus);
+		if(ssz < 4 + jj) throw "FAT boundary crossed: " + j + " 4 "+ssz;
+		if(!sectors[addr]) break;
+		j = __readInt32LE(sectors[addr], jj);
+	}
+	return {nodes: buf, data:__toBuffer([buf_chain])};
+}
+
+/** Chase down the sector linked lists */
+function make_sector_list(sectors, dir_start, fat_addrs, ssz) {
+	var sl = sectors.length, sector_list = new Array(sl);
+	var chkd = new Array(sl), buf, buf_chain;
+	var modulus = ssz - 1, i, j, k, jj;
+	for(i=0; i < sl; ++i) {
+		buf = [];
+		k = (i + dir_start); if(k >= sl) k-=sl;
+		if(chkd[k] === true) continue;
+		buf_chain = [];
+		for(j=k; j>=0;) {
+			chkd[j] = true;
+			buf[buf.length] = j;
+			buf_chain.push(sectors[j]);
+			var addr = fat_addrs[Math.floor(j*4/ssz)];
+			jj = ((j*4) & modulus);
+			if(ssz < 4 + jj) throw "FAT boundary crossed: " + j + " 4 "+ssz;
+			if(!sectors[addr]) break;
+			j = __readInt32LE(sectors[addr], jj);
+		}
+		sector_list[k] = {nodes: buf, data:__toBuffer([buf_chain])};
+	}
+	return sector_list;
+}
+
+/* [MS-CFB] 2.6.1 Compound File Directory Entry */
+function read_directory(dir_start, sector_list, sectors, Paths, nmfs, files, FileIndex) {
+	var blob;
+	var minifat_store = 0, pl = (Paths.length?2:0);
+	var sector = sector_list[dir_start].data;
+	var i = 0, namelen = 0, name, o, ctime, mtime;
+	for(; i < sector.length; i+= 128) {
+		blob = sector.slice(i, i+128);
+		prep_blob(blob, 64);
+		namelen = blob.read_shift(2);
+		if(namelen === 0) continue;
+		name = __utf16le(blob,0,namelen-pl);
+		Paths.push(name);
+		o = ({
+			name:  name,
+			type:  blob.read_shift(1),
+			color: blob.read_shift(1),
+			L:     blob.read_shift(4, 'i'),
+			R:     blob.read_shift(4, 'i'),
+			C:     blob.read_shift(4, 'i'),
+			clsid: blob.read_shift(16),
+			state: blob.read_shift(4, 'i')
+		});
+		ctime = blob.read_shift(2) + blob.read_shift(2) + blob.read_shift(2) + blob.read_shift(2);
+		if(ctime !== 0) {
+			o.ctime = ctime; o.ct = read_date(blob, blob.l-8);
+		}
+		mtime = blob.read_shift(2) + blob.read_shift(2) + blob.read_shift(2) + blob.read_shift(2);
+		if(mtime !== 0) {
+			o.mtime = mtime; o.mt = read_date(blob, blob.l-8);
+		}
+		o.start = blob.read_shift(4, 'i');
+		o.size = blob.read_shift(4, 'i');
+		if(o.type === 5) { /* root */
+			minifat_store = o.start;
+			if(nmfs > 0 && minifat_store !== ENDOFCHAIN) sector_list[minifat_store].name = "!StreamData";
+			/*minifat_size = o.size;*/
+		} else if(o.size >= 4096 /* MSCSZ */) {
+			o.storage = 'fat';
+			if(sector_list[o.start] === undefined) sector_list[o.start] = get_sector_list(sectors, o.start, sector_list.fat_addrs, sector_list.ssz);
+			sector_list[o.start].name = o.name;
+			o.content = sector_list[o.start].data.slice(0,o.size);
+			prep_blob(o.content, 0);
+		} else {
+			o.storage = 'minifat';
+			if(minifat_store !== ENDOFCHAIN && o.start !== ENDOFCHAIN) {
+				o.content = sector_list[minifat_store].data.slice(o.start*MSSZ,o.start*MSSZ+o.size);
+				prep_blob(o.content, 0);
+			}
+		}
+		files[name] = o;
+		FileIndex.push(o);
+	}
+}
+
+function read_date(blob, offset) {
+	return new Date(( ( (__readUInt32LE(blob,offset+4)/1e7)*Math.pow(2,32)+__readUInt32LE(blob,offset)/1e7 ) - 11644473600)*1000);
+}
+
+var fs;
+function readFileSync(filename, options) {
+	if(fs === undefined) fs = require('fs');
+	return parse(fs.readFileSync(filename), options);
+}
+
+function readSync(blob, options) {
+	switch(options !== undefined && options.type !== undefined ? options.type : "base64") {
+		case "file": return readFileSync(blob, options);
+		case "base64": return parse(s2a(Base64.decode(blob)), options);
+		case "binary": return parse(s2a(blob), options);
+	}
+	return parse(blob);
+}
+
+/** CFB Constants */
+var MSSZ = 64; /* Mini Sector Size = 1<<6 */
+//var MSCSZ = 4096; /* Mini Stream Cutoff Size */
+/* 2.1 Compound File Sector Numbers and Types */
+var ENDOFCHAIN = -2;
+/* 2.2 Compound File Header */
+var HEADER_SIGNATURE = 'd0cf11e0a1b11ae1';
+var HEADER_CLSID = '00000000000000000000000000000000';
+var consts = {
+	/* 2.1 Compund File Sector Numbers and Types */
+	MAXREGSECT: -6,
+	DIFSECT: -4,
+	FATSECT: -3,
+	ENDOFCHAIN: ENDOFCHAIN,
+	FREESECT: -1,
+	/* 2.2 Compound File Header */
+	HEADER_SIGNATURE: HEADER_SIGNATURE,
+	HEADER_MINOR_VERSION: '3e00',
+	MAXREGSID: -6,
+	NOSTREAM: -1,
+	HEADER_CLSID: HEADER_CLSID,
+	/* 2.6.1 Compound File Directory Entry */
+	EntryTypes: ['unknown','storage','stream','lockbytes','property','root']
+};
+
+exports.read = readSync;
+exports.parse = parse;
+exports.utils = {
+	ReadShift: ReadShift,
+	CheckField: CheckField,
+	prep_blob: prep_blob,
+	bconcat: bconcat,
+	consts: consts
+};
+
+return exports;
+})();
+
+if(typeof require !== 'undefined' && typeof module !== 'undefined' && typeof DO_NOT_EXPORT_CFB === 'undefined') { module.exports = CFB; }
+function dup(o) {
+	if(typeof JSON != 'undefined') return JSON.parse(JSON.stringify(o));
+	if(typeof o != 'object' || !o) return o;
+	var out = {};
+	for(var k in o) if(o.hasOwnProperty(k)) out[k] = dup(o[k]);
+	return out;
+}
+
+function fill(c,l) { var o = ""; while(o.length < l) o+=c; return o; }
+
+/* sections refer to MS-XLS unless otherwise stated */
+
+/* --- Simple Utilities --- */
+function parsenoop(blob, length) { blob.read_shift(length); return; }
+function parsenoop2(blob, length) { blob.read_shift(length); return null; }
+
+function parslurp(blob, length, cb) {
+	var arr = [], target = blob.l + length;
+	while(blob.l < target) arr.push(cb(blob, target - blob.l));
+	if(target !== blob.l) throw new Error("Slurp error");
+	return arr;
+}
+
+function parslurp2(blob, length, cb) {
+	var arr = [], target = blob.l + length, len = blob.read_shift(2);
+	while(len-- !== 0) arr.push(cb(blob, target - blob.l));
+	if(target !== blob.l) throw new Error("Slurp error");
+	return arr;
+}
+
+function parsebool(blob, length) { return blob.read_shift(length) === 0x1; }
+
+function parseuint16(blob) { return blob.read_shift(2, 'u'); }
+function parseuint16a(blob, length) { return parslurp(blob,length,parseuint16);}
+
+/* --- 2.5 Structures --- */
+
+/* [MS-XLS] 2.5.14 Boolean */
+var parse_Boolean = parsebool;
+
+/* [MS-XLS] 2.5.10 Bes (boolean or error) */
+function parse_Bes(blob) {
+	var v = blob.read_shift(1), t = blob.read_shift(1);
+	return t === 0x01 ? v : v === 0x01;
+}
+
+/* [MS-XLS] 2.5.240 ShortXLUnicodeString */
+function parse_ShortXLUnicodeString(blob, length, opts) {
+	var cch = blob.read_shift(1);
+	var width = 1, encoding = 'sbcs-cont';
+	var cp = current_codepage;
+	if(opts && opts.biff >= 8) current_codepage = 1200;
+	if(!opts || opts.biff == 8 ) {
+		var fHighByte = blob.read_shift(1);
+		if(fHighByte) { width = 2; encoding = 'dbcs-cont'; }
+	}
+	var o = cch ? blob.read_shift(cch, encoding) : "";
+	current_codepage = cp;
+	return o;
+}
+
+/* 2.5.293 XLUnicodeRichExtendedString */
+function parse_XLUnicodeRichExtendedString(blob) {
+	var cp = current_codepage;
+	current_codepage = 1200;
+	var cch = blob.read_shift(2), flags = blob.read_shift(1);
+	var fHighByte = flags & 0x1, fExtSt = flags & 0x4, fRichSt = flags & 0x8;
+	var width = 1 + (flags & 0x1); // 0x0 -> utf8, 0x1 -> dbcs
+	var cRun = 0, cbExtRst;
+	var z = {};
+	if(fRichSt) cRun = blob.read_shift(2);
+	if(fExtSt) cbExtRst = blob.read_shift(4);
+	var encoding = (flags & 0x1) ? 'dbcs-cont' : 'sbcs-cont';
+	var msg = cch === 0 ? "" : blob.read_shift(cch, encoding);
+	if(fRichSt) blob.l += 4 * cRun; //TODO: parse this
+	if(fExtSt) blob.l += cbExtRst; //TODO: parse this
+	z.t = msg;
+	if(!fRichSt) { z.raw = "<t>" + z.t + "</t>"; z.r = z.t; }
+	current_codepage = cp;
+	return z;
+}
+
+/* 2.5.296 XLUnicodeStringNoCch */
+function parse_XLUnicodeStringNoCch(blob, cch, opts) {
+	var retval;
+	if(opts) {
+		if(opts.biff >= 2 && opts.biff <= 5) return blob.read_shift(cch, 'sbcs-cont');
+	}
+	var fHighByte = blob.read_shift(1);
+	if(fHighByte===0) { retval = blob.read_shift(cch, 'sbcs-cont'); }
+	else { retval = blob.read_shift(cch, 'dbcs-cont'); }
+	return retval;
+}
+
+/* 2.5.294 XLUnicodeString */
+function parse_XLUnicodeString(blob, length, opts) {
+	var cch = blob.read_shift(opts && opts.biff == 2 ? 1 : 2);
+	if(cch === 0) { blob.l++; return ""; }
+	return parse_XLUnicodeStringNoCch(blob, cch, opts);
+}
+/* BIFF5 override */
+function parse_XLUnicodeString2(blob, length, opts) {
+	if(opts.biff > 5) return parse_XLUnicodeString(blob, length, opts);
+	var cch = blob.read_shift(1);
+	if(cch === 0) { blob.l++; return ""; }
+	return blob.read_shift(cch, 'sbcs-cont');
+}
+
+/* 2.5.342 Xnum */
+function parse_Xnum(blob) { return blob.read_shift(8, 'f'); }
+
+/* 2.5.61 ControlInfo */
+var parse_ControlInfo = parsenoop;
+
+/* [MS-OSHARED] 2.3.7.6 URLMoniker TODO: flags */
+var parse_URLMoniker = function(blob, length) {
+	var len = blob.read_shift(4), start = blob.l;
+	var extra = false;
+	if(len > 24) {
+		/* look ahead */
+		blob.l += len - 24;
+		if(blob.read_shift(16) === "795881f43b1d7f48af2c825dc4852763") extra = true;
+		blob.l = start;
+	}
+	var url = blob.read_shift((extra?len-24:len)>>1, 'utf16le').replace(chr0,"");
+	if(extra) blob.l += 24;
+	return url;
+};
+
+/* [MS-OSHARED] 2.3.7.8 FileMoniker TODO: all fields */
+var parse_FileMoniker = function(blob, length) {
+	var cAnti = blob.read_shift(2);
+	var ansiLength = blob.read_shift(4);
+	var ansiPath = blob.read_shift(ansiLength, 'cstr');
+	var endServer = blob.read_shift(2);
+	var versionNumber = blob.read_shift(2);
+	var cbUnicodePathSize = blob.read_shift(4);
+	if(cbUnicodePathSize === 0) return ansiPath.replace(/\\/g,"/");
+	var cbUnicodePathBytes = blob.read_shift(4);
+	var usKeyValue = blob.read_shift(2);
+	var unicodePath = blob.read_shift(cbUnicodePathBytes>>1, 'utf16le').replace(chr0,"");
+	return unicodePath;
+};
+
+/* [MS-OSHARED] 2.3.7.2 HyperlinkMoniker TODO: all the monikers */
+var parse_HyperlinkMoniker = function(blob, length) {
+	var clsid = blob.read_shift(16); length -= 16;
+	switch(clsid) {
+		case "e0c9ea79f9bace118c8200aa004ba90b": return parse_URLMoniker(blob, length);
+		case "0303000000000000c000000000000046": return parse_FileMoniker(blob, length);
+		default: throw "unsupported moniker " + clsid;
+	}
+};
+
+/* [MS-OSHARED] 2.3.7.9 HyperlinkString */
+var parse_HyperlinkString = function(blob, length) {
+	var len = blob.read_shift(4);
+	var o = blob.read_shift(len, 'utf16le').replace(chr0, "");
+	return o;
+};
+
+/* [MS-OSHARED] 2.3.7.1 Hyperlink Object TODO: unify params with XLSX */
+var parse_Hyperlink = function(blob, length) {
+	var end = blob.l + length;
+	var sVer = blob.read_shift(4);
+	if(sVer !== 2) throw new Error("Unrecognized streamVersion: " + sVer);
+	var flags = blob.read_shift(2);
+	blob.l += 2;
+	var displayName, targetFrameName, moniker, oleMoniker, location, guid, fileTime;
+	if(flags & 0x0010) displayName = parse_HyperlinkString(blob, end - blob.l);
+	if(flags & 0x0080) targetFrameName = parse_HyperlinkString(blob, end - blob.l);
+	if((flags & 0x0101) === 0x0101) moniker = parse_HyperlinkString(blob, end - blob.l);
+	if((flags & 0x0101) === 0x0001) oleMoniker = parse_HyperlinkMoniker(blob, end - blob.l);
+	if(flags & 0x0008) location = parse_HyperlinkString(blob, end - blob.l);
+	if(flags & 0x0020) guid = blob.read_shift(16);
+	if(flags & 0x0040) fileTime = parse_FILETIME(blob, 8);
+	blob.l = end;
+	var target = (targetFrameName||moniker||oleMoniker);
+	if(location) target+="#"+location;
+	return {Target: target};
+};
+
+/* 2.5.178 LongRGBA */
+function parse_LongRGBA(blob, length) { var r = blob.read_shift(1), g = blob.read_shift(1), b = blob.read_shift(1), a = blob.read_shift(1); return [r,g,b,a]; }
+
+/* 2.5.177 LongRGB */
+function parse_LongRGB(blob, length) { var x = parse_LongRGBA(blob, length); x[3] = 0; return x; }
+function shift_cell(cell, tgt) {
+	var out = dup(cell);
+	if(tgt.s) {
+		if(out.cRel) out.c += tgt.s.c;
+		if(out.rRel) out.r += tgt.s.r;
+	} else {
+		out.c += tgt.c;
+		out.r += tgt.r;
+	}
+	while(out.c >= 0x100) out.c -= 0x100;
+	while(out.r >= 0x10000) out.r -= 0x10000;
+	return out;
+}
+
+function shift_range(cell, range) {
+	cell.s = shift_cell(cell.s, range.s);
+	cell.e = shift_cell(cell.e, range.s);
+	return cell;
+}
+
+function encode_cell_xls(c) {
+	var s = encode_cell(c);
+	if(c.cRel === 0) s = fix_col(s);
+	if(c.rRel === 0) s = fix_row(s);
+	return s;
+}
+
+function encode_range_xls(r) {
+	return encode_cell_xls(r.s) + ":" + encode_cell_xls(r.e);
+}
+/* 2.5.217 */
+function parse_RkNumber(data) {
+	var b = data.slice(data.l, data.l+4);
+	var fX100 = b[0] & 1, fInt = b[0] & 2;
+	data.l+=4;
+	b[0] &= 0xFC;
+	var RK = fInt === 0 ? __double([0,0,0,0,b[0],b[1],b[2],b[3]],0) : __readInt32LE(b,0)>>2;
+	return fX100 ? RK/100 : RK;
+}
+
+/* 2.5.198.2 */
+var BErr = {
+	0x00: "#NULL!",
+	0x07: "#DIV/0!",
+	0x0F: "#VALUE!",
+	0x17: "#REF!",
+	0x1D: "#NAME?",
+	0x24: "#NUM!",
+	0x2A: "#N/A",
+	0x2B: "#GETTING_DATA", /* Noted in 2.5.10 but not in 2.5.198.2 */
+	0xFF: "#WTF?"
+};
+var RBErr = evert(BErr);
+
 /* [MS-OLEPS] v20130118 */
 /* [MS-OSHARED] v20130211 */
 
@@ -1083,791 +1985,108 @@ var SpecialProperties = {
 	DocSummaryPIDDSI[y] = SummaryPIDSI[y] = SpecialProperties[y];
 })();
 
-/* [MS-DTYP] 2.3.3 FILETIME */
-/* [MS-OLEDS] 2.1.3 FILETIME (Packet Version) */
-/* [MS-OLEPS] 2.8 FILETIME (Packet Version) */
-function parse_FILETIME(blob) {
-	var dwLowDateTime = blob.read_shift(4), dwHighDateTime = blob.read_shift(4);
-	return new Date(((dwHighDateTime/1e7*Math.pow(2,32) + dwLowDateTime/1e7) - 11644473600)*1000).toISOString().replace(/\.000/,"");
-}
-
-/* [MS-OSHARED] 2.3.3.1.4 Lpstr */
-function parse_lpstr(blob, type, pad) {
-	var str = blob.read_shift(0, 'lpstr');
-	if(pad) blob.l += (4 - ((str.length+1) & 3)) & 3;
-	return str;
-}
-
-/* [MS-OSHARED] 2.3.3.1.6 Lpwstr */
-function parse_lpwstr(blob, type, pad) {
-	var str = blob.read_shift(0, 'lpwstr');
-	if(pad) blob.l += (4 - ((str.length+1) & 3)) & 3;
-	return str;
-}
-
-
-/* [MS-OSHARED] 2.3.3.1.11 VtString */
-/* [MS-OSHARED] 2.3.3.1.12 VtUnalignedString */
-function parse_VtStringBase(blob, stringType, pad) {
-	if(stringType === 0x1F /*VT_LPWSTR*/) return parse_lpwstr(blob);
-	return parse_lpstr(blob, stringType, pad);
-}
-
-function parse_VtString(blob, t, pad) { return parse_VtStringBase(blob, t, pad === false ? 0: 4); }
-function parse_VtUnalignedString(blob, t) { if(!t) throw new Error("dafuq?"); return parse_VtStringBase(blob, t, 0); }
-
-/* [MS-OSHARED] 2.3.3.1.9 VtVecUnalignedLpstrValue */
-function parse_VtVecUnalignedLpstrValue(blob) {
-	var length = blob.read_shift(4);
-	var ret = [];
-	for(var i = 0; i != length; ++i) ret[i] = blob.read_shift(0, 'lpstr');
-	return ret;
-}
-
-/* [MS-OSHARED] 2.3.3.1.10 VtVecUnalignedLpstr */
-function parse_VtVecUnalignedLpstr(blob) {
-	return parse_VtVecUnalignedLpstrValue(blob);
-}
-
-/* [MS-OSHARED] 2.3.3.1.13 VtHeadingPair */
-function parse_VtHeadingPair(blob) {
-	var headingString = parse_TypedPropertyValue(blob, VT_USTR);
-	var headerParts = parse_TypedPropertyValue(blob, VT_I4);
-	return [headingString, headerParts];
-}
-
-/* [MS-OSHARED] 2.3.3.1.14 VtVecHeadingPairValue */
-function parse_VtVecHeadingPairValue(blob) {
-	var cElements = blob.read_shift(4);
-	var out = [];
-	for(var i = 0; i != cElements / 2; ++i) out.push(parse_VtHeadingPair(blob));
-	return out;
-}
-
-/* [MS-OSHARED] 2.3.3.1.15 VtVecHeadingPair */
-function parse_VtVecHeadingPair(blob) {
-	// NOTE: When invoked, wType & padding were already consumed
-	return parse_VtVecHeadingPairValue(blob);
-}
-
-/* [MS-OLEPS] 2.18.1 Dictionary (uses 2.17, 2.16) */
-function parse_dictionary(blob,CodePage) {
-	var cnt = blob.read_shift(4);
-	var dict = {};
-	for(var j = 0; j != cnt; ++j) {
-		var pid = blob.read_shift(4);
-		var len = blob.read_shift(4);
-		dict[pid] = blob.read_shift(len, (CodePage === 0x4B0 ?'utf16le':'utf8')).replace(chr0,'').replace(chr1,'!');
-	}
-	if(blob.l & 3) blob.l = (blob.l>>2+1)<<2;
-	return dict;
-}
-
-/* [MS-OLEPS] 2.9 BLOB */
-function parse_BLOB(blob) {
-	var size = blob.read_shift(4);
-	var bytes = blob.slice(blob.l,blob.l+size);
-	if(size & 3 > 0) blob.l += (4 - (size & 3)) & 3;
-	return bytes;
-}
-
-/* [MS-OLEPS] 2.11 ClipboardData */
-function parse_ClipboardData(blob) {
-	// TODO
-	var o = {};
-	o.Size = blob.read_shift(4);
-	//o.Format = blob.read_shift(4);
-	blob.l += o.Size;
-	return o;
-}
-
-/* [MS-OLEPS] 2.14 Vector and Array Property Types */
-function parse_VtVector(blob, cb) {
-	/* [MS-OLEPS] 2.14.2 VectorHeader */
-/*	var Length = blob.read_shift(4);
-	var o = [];
-	for(var i = 0; i != Length; ++i) {
-		o.push(cb(blob));
-	}
-	return o;*/
-}
-
-/* [MS-OLEPS] 2.15 TypedPropertyValue */
-function parse_TypedPropertyValue(blob, type, _opts) {
-	var t = blob.read_shift(2), ret, opts = _opts||{};
-	blob.l += 2;
-	if(type !== VT_VARIANT)
-	if(t !== type && VT_CUSTOM.indexOf(type)===-1) throw new Error('Expected type ' + type + ' saw ' + t);
-	switch(type === VT_VARIANT ? t : type) {
-		case 0x02 /*VT_I2*/: ret = blob.read_shift(2, 'i'); if(!opts.raw) blob.l += 2; return ret;
-		case 0x03 /*VT_I4*/: ret = blob.read_shift(4, 'i'); return ret;
-		case 0x0B /*VT_BOOL*/: return blob.read_shift(4) !== 0x0;
-		case 0x13 /*VT_UI4*/: ret = blob.read_shift(4); return ret;
-		case 0x1E /*VT_LPSTR*/: return parse_lpstr(blob, t, 4).replace(chr0,'');
-		case 0x1F /*VT_LPWSTR*/: return parse_lpwstr(blob);
-		case 0x40 /*VT_FILETIME*/: return parse_FILETIME(blob);
-		case 0x41 /*VT_BLOB*/: return parse_BLOB(blob);
-		case 0x47 /*VT_CF*/: return parse_ClipboardData(blob);
-		case 0x50 /*VT_STRING*/: return parse_VtString(blob, t, !opts.raw && 4).replace(chr0,'');
-		case 0x51 /*VT_USTR*/: return parse_VtUnalignedString(blob, t, 4).replace(chr0,'');
-		case 0x100C /*VT_VECTOR|VT_VARIANT*/: return parse_VtVecHeadingPair(blob);
-		case 0x101E /*VT_LPSTR*/: return parse_VtVecUnalignedLpstr(blob);
-		default: throw new Error("TypedPropertyValue unrecognized type " + type + " " + t);
-	}
-}
-/* [MS-OLEPS] 2.14.2 VectorHeader */
-/*function parse_VTVectorVariant(blob) {
-	var Length = blob.read_shift(4);
-
-	if(Length & 1 !== 0) throw new Error("VectorHeader Length=" + Length + " must be even");
-	var o = [];
-	for(var i = 0; i != Length; ++i) {
-		o.push(parse_TypedPropertyValue(blob, VT_VARIANT));
-	}
-	return o;
-}*/
-
-/* [MS-OLEPS] 2.20 PropertySet */
-function parse_PropertySet(blob, PIDSI) {
-	var start_addr = blob.l;
-	var size = blob.read_shift(4);
-	var NumProps = blob.read_shift(4);
-	var Props = [], i = 0;
-	var CodePage = 0;
-	var Dictionary = -1, DictObj;
-	for(i = 0; i != NumProps; ++i) {
-		var PropID = blob.read_shift(4);
-		var Offset = blob.read_shift(4);
-		Props[i] = [PropID, Offset + start_addr];
-	}
-	var PropH = {};
-	for(i = 0; i != NumProps; ++i) {
-		if(blob.l !== Props[i][1]) {
-			var fail = true;
-			if(i>0 && PIDSI) switch(PIDSI[Props[i-1][0]].t) {
-				case 0x02 /*VT_I2*/: if(blob.l +2 === Props[i][1]) { blob.l+=2; fail = false; } break;
-				case 0x50 /*VT_STRING*/: if(blob.l <= Props[i][1]) { blob.l=Props[i][1]; fail = false; } break;
-				case 0x100C /*VT_VECTOR|VT_VARIANT*/: if(blob.l <= Props[i][1]) { blob.l=Props[i][1]; fail = false; } break;
-			}
-			if(!PIDSI && blob.l <= Props[i][1]) { fail=false; blob.l = Props[i][1]; }
-			if(fail) throw new Error("Read Error: Expected address " + Props[i][1] + ' at ' + blob.l + ' :' + i);
-		}
-		if(PIDSI) {
-			var piddsi = PIDSI[Props[i][0]];
-			PropH[piddsi.n] = parse_TypedPropertyValue(blob, piddsi.t, {raw:true});
-			if(piddsi.p === 'version') PropH[piddsi.n] = String(PropH[piddsi.n] >> 16) + "." + String(PropH[piddsi.n] & 0xFFFF);
-			if(piddsi.n == "CodePage") switch(PropH[piddsi.n]) {
-				case 0: PropH[piddsi.n] = 1252;
-					/* falls through */
-				case 10000: // OSX Roman
-				case 1252: // Windows Latin
-
-				case 874: // SB Windows Thai
-				case 1250: // SB Windows Central Europe
-				case 1251: // SB Windows Cyrillic
-				case 1253: // SB Windows Greek
-				case 1254: // SB Windows Turkish
-				case 1255: // SB Windows Hebrew
-				case 1256: // SB Windows Arabic
-
-				case 932: // DB Windows Japanese Shift-JIS
-				case 936: // DB Windows Simplified Chinese GBK
-				case 949: // DB Windows Korean
-				case 950: // DB Windows Traditional Chinese Big5
-
-				case 1200: // UTF16LE
-				case 1201: // UTF16BE
-				case 65000: case -536: // UTF-7
-				case 65001: case -535: // UTF-8
-					set_cp(CodePage = PropH[piddsi.n]); break;
-				default: throw new Error("Unsupported CodePage: " + PropH[piddsi.n]);
-			}
-		} else {
-			if(Props[i][0] === 0x1) {
-				CodePage = PropH.CodePage = parse_TypedPropertyValue(blob, VT_I2);
-				set_cp(CodePage);
-				if(Dictionary !== -1) {
-					var oldpos = blob.l;
-					blob.l = Props[Dictionary][1];
-					DictObj = parse_dictionary(blob,CodePage);
-					blob.l = oldpos;
-				}
-			} else if(Props[i][0] === 0) {
-				if(CodePage === 0) { Dictionary = i; blob.l = Props[i+1][1]; continue; }
-				DictObj = parse_dictionary(blob,CodePage);
-			} else {
-				var name = DictObj[Props[i][0]];
-				var val;
-				/* [MS-OSHARED] 2.3.3.2.3.1.2 + PROPVARIANT */
-				switch(blob[blob.l]) {
-					case 0x41 /*VT_BLOB*/: blob.l += 4; val = parse_BLOB(blob); break;
-					case 0x1E /*VT_LPSTR*/: blob.l += 4; val = parse_VtString(blob, blob[blob.l-4]); break;
-					case 0x1F /*VT_LPWSTR*/: blob.l += 4; val = parse_VtString(blob, blob[blob.l-4]); break;
-					case 0x03 /*VT_I4*/: blob.l += 4; val = blob.read_shift(4, 'i'); break;
-					case 0x13 /*VT_UI4*/: blob.l += 4; val = blob.read_shift(4); break;
-					case 0x05 /*VT_R8*/: blob.l += 4; val = blob.read_shift(8, 'f'); break;
-					case 0x0B /*VT_BOOL*/: blob.l += 4; val = parsebool(blob, 4); break;
-					case 0x40 /*VT_FILETIME*/: blob.l += 4; val = new Date(parse_FILETIME(blob)); break;
-					default: throw new Error("unparsed value: " + blob[blob.l]);
-				}
-				PropH[name] = val;
-			}
-		}
-	}
-	blob.l = start_addr + size; /* step ahead to skip padding */
-	return PropH;
-}
-
-/* [MS-OLEPS] 2.21 PropertySetStream */
-function parse_PropertySetStream(file, PIDSI) {
-	var blob = file.content;
-	prep_blob(blob, 0);
-
-	var NumSets, FMTID0, FMTID1, Offset0, Offset1;
-	blob.chk('feff', 'Byte Order: ');
-
-	var vers = blob.read_shift(2); // TODO: check version
-	var SystemIdentifier = blob.read_shift(4);
-	blob.chk(CFB.utils.consts.HEADER_CLSID, 'CLSID: ');
-	NumSets = blob.read_shift(4);
-	if(NumSets !== 1 && NumSets !== 2) throw "Unrecognized #Sets: " + NumSets;
-	FMTID0 = blob.read_shift(16); Offset0 = blob.read_shift(4);
-
-	if(NumSets === 1 && Offset0 !== blob.l) throw "Length mismatch";
-	else if(NumSets === 2) { FMTID1 = blob.read_shift(16); Offset1 = blob.read_shift(4); }
-	var PSet0 = parse_PropertySet(blob, PIDSI);
-
-	var rval = { SystemIdentifier: SystemIdentifier };
-	for(var y in PSet0) rval[y] = PSet0[y];
-	//rval.blob = blob;
-	rval.FMTID = FMTID0;
-	//rval.PSet0 = PSet0;
-	if(NumSets === 1) return rval;
-	if(blob.l !== Offset1) throw "Length mismatch 2: " + blob.l + " !== " + Offset1;
-	var PSet1;
-	try { PSet1 = parse_PropertySet(blob, null); } catch(e) { }
-	for(y in PSet1) rval[y] = PSet1[y];
-	rval.FMTID = [FMTID0, FMTID1]; // TODO: verify FMTID0/1
-	return rval;
-}
-var DO_NOT_EXPORT_CFB = true;
-/* [MS-CFB] v20130118 */
-var CFB = (function _CFB(){
-var exports = {};
-exports.version = '0.10.0';
-function parse(file) {
-var mver = 3; // major version
-var ssz = 512; // sector size
-var nmfs = 0; // number of mini FAT sectors
-var ndfs = 0; // number of DIFAT sectors
-var dir_start = 0; // first directory sector location
-var minifat_start = 0; // first mini FAT sector location
-var difat_start = 0; // first mini FAT sector location
-
-var fat_addrs = []; // locations of FAT sectors
-
-/* [MS-CFB] 2.2 Compound File Header */
-var blob = file.slice(0,512);
-prep_blob(blob, 0);
-
-/* major version */
-mver = check_get_mver(blob);
-switch(mver) {
-	case 3: ssz = 512; break; case 4: ssz = 4096; break;
-	default: throw "Major Version: Expected 3 or 4 saw " + mver;
-}
-
-/* reprocess header */
-if(ssz !== 512) { blob = file.slice(0,ssz); prep_blob(blob, 28 /* blob.l */); }
-/* Save header for final object */
-var header = file.slice(0,ssz);
-
-check_shifts(blob, mver);
-
-// Number of Directory Sectors
-var nds = blob.read_shift(4, 'i');
-if(mver === 3 && nds !== 0) throw '# Directory Sectors: Expected 0 saw ' + nds;
-
-// Number of FAT Sectors
-//var nfs = blob.read_shift(4, 'i');
-blob.l += 4;
-
-// First Directory Sector Location
-dir_start = blob.read_shift(4, 'i');
-
-// Transaction Signature
-blob.l += 4;
-
-// Mini Stream Cutoff Size
-blob.chk('00100000', 'Mini Stream Cutoff Size: ');
-
-// First Mini FAT Sector Location
-minifat_start = blob.read_shift(4, 'i');
-
-// Number of Mini FAT Sectors
-nmfs = blob.read_shift(4, 'i');
-
-// First DIFAT sector location
-difat_start = blob.read_shift(4, 'i');
-
-// Number of DIFAT Sectors
-ndfs = blob.read_shift(4, 'i');
-
-// Grab FAT Sector Locations
-for(var q, j = 0; j < 109; ++j) { /* 109 = (512 - blob.l)>>>2; */
-	q = blob.read_shift(4, 'i');
-	if(q<0) break;
-	fat_addrs[j] = q;
-}
-
-/** Break the file up into sectors */
-var sectors = sectorify(file, ssz);
-
-sleuth_fat(difat_start, ndfs, sectors, ssz, fat_addrs);
-
-/** Chains */
-var sector_list = make_sector_list(sectors, dir_start, fat_addrs, ssz);
-
-sector_list[dir_start].name = "!Directory";
-if(nmfs > 0 && minifat_start !== ENDOFCHAIN) sector_list[minifat_start].name = "!MiniFAT";
-sector_list[fat_addrs[0]].name = "!FAT";
-
-/* [MS-CFB] 2.6.1 Compound File Directory Entry */
-var files = {}, Paths = [], FileIndex = [], FullPaths = [], FullPathDir = {};
-read_directory(dir_start, sector_list, sectors, Paths, nmfs, files, FileIndex);
-
-build_full_paths(FileIndex, FullPathDir, FullPaths, Paths);
-
-var root_name = Paths.shift();
-Paths.root = root_name;
-
-/* [MS-CFB] 2.6.4 (Unicode 3.0.1 case conversion) */
-var find_path = make_find_path(FullPaths, Paths, FileIndex, files, root_name);
-
-return {
-	raw: {header: header, sectors: sectors},
-	FileIndex: FileIndex,
-	FullPaths: FullPaths,
-	FullPathDir: FullPathDir,
-	find: find_path
-};
-} // parse
-
-/* [MS-CFB] 2.2 Compound File Header -- read up to major version */
-function check_get_mver(blob) {
-	// header signature 8
-	blob.chk(HEADER_SIGNATURE, 'Header Signature: ');
-
-	// clsid 16
-	blob.chk(HEADER_CLSID, 'CLSID: ');
-
-	// minor version 2
-	blob.l += 2;
-
-	return blob.read_shift(2,'u');
-}
-function check_shifts(blob, mver) {
-	var shift = 0x09;
-
-	// Byte Order
-	blob.chk('feff', 'Byte Order: ');
-
-	// Sector Shift
-	switch((shift = blob.read_shift(2))) {
-		case 0x09: if(mver !== 3) throw 'MajorVersion/SectorShift Mismatch'; break;
-		case 0x0c: if(mver !== 4) throw 'MajorVersion/SectorShift Mismatch'; break;
-		default: throw 'Sector Shift: Expected 9 or 12 saw ' + shift;
-	}
-
-	// Mini Sector Shift
-	blob.chk('0600', 'Mini Sector Shift: ');
-
-	// Reserved
-	blob.chk('000000000000', 'Reserved: ');
-}
-
-/** Break the file up into sectors */
-function sectorify(file, ssz) {
-	var nsectors = Math.ceil(file.length/ssz)-1;
-	var sectors = new Array(nsectors);
-	for(var i=1; i < nsectors; ++i) sectors[i-1] = file.slice(i*ssz,(i+1)*ssz);
-	sectors[nsectors-1] = file.slice(nsectors*ssz);
-	return sectors;
-}
-
-/* [MS-CFB] 2.6.4 Red-Black Tree */
-function build_full_paths(FI, FPD, FP, Paths) {
-	var i = 0, L = 0, R = 0, C = 0, j = 0, pl = Paths.length;
-	var dad = new Array(pl), q = new Array(pl);
-
-	for(; i < pl; ++i) { dad[i]=q[i]=i; FP[i]=Paths[i]; }
-
-	for(; j < q.length; ++j) {
-		i = q[j];
-		L = FI[i].L; R = FI[i].R; C = FI[i].C;
-		if(dad[i] === i) {
-			if(L !== -1 /*NOSTREAM*/ && dad[L] !== L) dad[i] = dad[L];
-			if(R !== -1 && dad[R] !== R) dad[i] = dad[R];
-		}
-		if(C !== -1 /*NOSTREAM*/) dad[C] = i;
-		if(L !== -1) { dad[L] = dad[i]; q.push(L); }
-		if(R !== -1) { dad[R] = dad[i]; q.push(R); }
-	}
-	for(i=1; i !== pl; ++i) if(dad[i] === i) {
-		if(R !== -1 /*NOSTREAM*/ && dad[R] !== R) dad[i] = dad[R];
-		else if(L !== -1 && dad[L] !== L) dad[i] = dad[L];
-	}
-
-	for(i=1; i < pl; ++i) {
-		if(FI[i].type === 0 /* unknown */) continue;
-		j = dad[i];
-		if(j === 0) FP[i] = FP[0] + "/" + FP[i];
-		else while(j !== 0) {
-			FP[i] = FP[j] + "/" + FP[i];
-			j = dad[j];
-		}
-		dad[i] = 0;
-	}
-
-	FP[0] += "/";
-	for(i=1; i < pl; ++i) {
-		if(FI[i].type !== 2 /* stream */) FP[i] += "/";
-		FPD[FP[i]] = FI[i];
-	}
-}
-
-/* [MS-CFB] 2.6.4 */
-function make_find_path(FullPaths, Paths, FileIndex, files, root_name) {
-	var UCFullPaths = new Array(FullPaths.length);
-	var UCPaths = new Array(Paths.length), i;
-	for(i = 0; i < FullPaths.length; ++i) UCFullPaths[i] = FullPaths[i].toUpperCase();
-	for(i = 0; i < Paths.length; ++i) UCPaths[i] = Paths[i].toUpperCase();
-	return function find_path(path) {
-		var k;
-		if(path.charCodeAt(0) === 47 /* "/" */) { k=true; path = root_name + path; }
-		else k = path.indexOf("/") !== -1;
-		var UCPath = path.toUpperCase();
-		var w = k === true ? UCFullPaths.indexOf(UCPath) : UCPaths.indexOf(UCPath);
-		if(w === -1) return null;
-		return k === true ? FileIndex[w] : files[Paths[w]];
-	};
-}
-
-/** Chase down the rest of the DIFAT chain to build a comprehensive list
-    DIFAT chains by storing the next sector number as the last 32 bytes */
-function sleuth_fat(idx, cnt, sectors, ssz, fat_addrs) {
-	var q;
-	if(idx === ENDOFCHAIN) {
-		if(cnt !== 0) throw "DIFAT chain shorter than expected";
-	} else if(idx !== -1 /*FREESECT*/) {
-		var sector = sectors[idx], m = (ssz>>>2)-1;
-		for(var i = 0; i < m; ++i) {
-			if((q = __readInt32LE(sector,i*4)) === ENDOFCHAIN) break;
-			fat_addrs.push(q);
-		}
-		sleuth_fat(__readInt32LE(sector,ssz-4),cnt - 1, sectors, ssz, fat_addrs);
-	}
-}
-
-/** Chase down the sector linked lists */
-function make_sector_list(sectors, dir_start, fat_addrs, ssz) {
-	var sl = sectors.length, sector_list = new Array(sl);
-	var chkd = new Array(sl), buf, buf_chain;
-	var modulus = ssz - 1, i, j, k, jj;
-	for(i=0; i < sl; ++i) {
-		buf = [];
-		k = (i + dir_start); if(k >= sl) k-=sl;
-		if(chkd[k] === true) continue;
-		buf_chain = [];
-		for(j=k; j>=0;) {
-			chkd[j] = true;
-			buf[buf.length] = j;
-			buf_chain.push(sectors[j]);
-			var addr = fat_addrs[Math.floor(j*4/ssz)];
-			jj = ((j*4) & modulus);
-			if(ssz < 4 + jj) throw "FAT boundary crossed: " + j + " 4 "+ssz;
-			j = __readInt32LE(sectors[addr], jj);
-		}
-		sector_list[k] = {nodes: buf, data:__toBuffer([buf_chain])};
-	}
-	return sector_list;
-}
-
-/* [MS-CFB] 2.6.1 Compound File Directory Entry */
-function read_directory(dir_start, sector_list, sectors, Paths, nmfs, files, FileIndex) {
-	var blob;
-	var minifat_store = 0, pl = (Paths.length?2:0);
-	var sector = sector_list[dir_start].data;
-	var i = 0, namelen = 0, name, o, ctime, mtime;
-	for(; i < sector.length; i+= 128) {
-		blob = sector.slice(i, i+128);
-		prep_blob(blob, 64);
-		namelen = blob.read_shift(2);
-		if(namelen === 0) continue;
-		name = __utf16le(blob,0,namelen-pl).replace(chr0,'').replace(chr1,'!');
-		Paths.push(name);
-		o = {
-			name:  name,
-			type:  blob.read_shift(1),
-			color: blob.read_shift(1),
-			L:     blob.read_shift(4, 'i'),
-			R:     blob.read_shift(4, 'i'),
-			C:     blob.read_shift(4, 'i'),
-			clsid: blob.read_shift(16),
-			state: blob.read_shift(4, 'i')
-		};
-		ctime = blob.read_shift(2) + blob.read_shift(2) + blob.read_shift(2) + blob.read_shift(2);
-		if(ctime !== 0) {
-			o.ctime = ctime; o.ct = read_date(blob, blob.l-8);
-		}
-		mtime = blob.read_shift(2) + blob.read_shift(2) + blob.read_shift(2) + blob.read_shift(2);
-		if(mtime !== 0) {
-			o.mtime = mtime; o.mt = read_date(blob, blob.l-8);
-		}
-		o.start = blob.read_shift(4, 'i');
-		o.size = blob.read_shift(4, 'i');
-		if(o.type === 5) { /* root */
-			minifat_store = o.start;
-			if(nmfs > 0 && minifat_store !== ENDOFCHAIN) sector_list[minifat_store].name = "!StreamData";
-			/*minifat_size = o.size;*/
-		} else if(o.size >= 4096 /* MSCSZ */) {
-			o.storage = 'fat';
-			if(sector_list[o.start] === undefined) if((o.start+=dir_start)>=sectors.length) o.start-=sectors.length;
-			sector_list[o.start].name = o.name;
-			o.content = sector_list[o.start].data.slice(0,o.size);
-			prep_blob(o.content, 0);
-		} else {
-			o.storage = 'minifat';
-			if(minifat_store !== ENDOFCHAIN && o.start !== ENDOFCHAIN) {
-				o.content = sector_list[minifat_store].data.slice(o.start*MSSZ,o.start*MSSZ+o.size);
-				prep_blob(o.content, 0);
-			}
-		}
-		files[name] = o;
-		FileIndex.push(o);
-	}
-}
-
-function read_date(blob, offset) {
-	return new Date(( ( (__readUInt32LE(blob,offset+4)/1e7)*Math.pow(2,32)+__readUInt32LE(blob,offset)/1e7 ) - 11644473600)*1000);
-}
-
-var fs;
-function readFileSync(filename) {
-	if(fs === undefined) fs = require('fs');
-	return parse(fs.readFileSync(filename));
-}
-
-function readSync(blob, options) {
-	switch(options !== undefined && options.type !== undefined ? options.type : "base64") {
-		case "file": return readFileSync(blob);
-		case "base64": return parse(s2a(Base64.decode(blob)));
-		case "binary": return parse(s2a(blob));
-	}
-	return parse(blob);
-}
-
-/** CFB Constants */
-var MSSZ = 64; /* Mini Sector Size = 1<<6 */
-//var MSCSZ = 4096; /* Mini Stream Cutoff Size */
-/* 2.1 Compound File Sector Numbers and Types */
-var ENDOFCHAIN = -2;
-/* 2.2 Compound File Header */
-var HEADER_SIGNATURE = 'd0cf11e0a1b11ae1';
-var HEADER_CLSID = '00000000000000000000000000000000';
-var consts = {
-	/* 2.1 Compund File Sector Numbers and Types */
-	MAXREGSECT: -6,
-	DIFSECT: -4,
-	FATSECT: -3,
-	ENDOFCHAIN: ENDOFCHAIN,
-	FREESECT: -1,
-	/* 2.2 Compound File Header */
-	HEADER_SIGNATURE: HEADER_SIGNATURE,
-	HEADER_MINOR_VERSION: '3e00',
-	MAXREGSID: -6,
-	NOSTREAM: -1,
-	HEADER_CLSID: HEADER_CLSID,
-	/* 2.6.1 Compound File Directory Entry */
-	EntryTypes: ['unknown','storage','stream','lockbytes','property','root']
-};
-
-exports.read = readSync;
-exports.parse = parse;
-exports.utils = {
-	ReadShift: ReadShift,
-	CheckField: CheckField,
-	prep_blob: prep_blob,
-	bconcat: bconcat,
-	consts: consts
-};
-
-return exports;
-})();
-
-if(typeof require !== 'undefined' && typeof module !== 'undefined' && typeof DO_NOT_EXPORT_CFB === 'undefined') { module.exports = CFB; }
-
-/* sections refer to MS-XLS unless otherwise stated */
-
-/* --- Simple Utilities --- */
-function parsenoop(blob, length) { blob.read_shift(length); return; }
-function parsenoop2(blob, length) { blob.read_shift(length); return null; }
-
-function parslurp(blob, length, cb) {
-	var arr = [], target = blob.l + length;
-	while(blob.l < target) arr.push(cb(blob, target - blob.l));
-	if(target !== blob.l) throw new Error("Slurp error");
-	return arr;
-}
-
-function parslurp2(blob, length, cb) {
-	var arr = [], target = blob.l + length, len = blob.read_shift(2);
-	while(len-- !== 0) arr.push(cb(blob, target - blob.l));
-	if(target !== blob.l) throw new Error("Slurp error");
-	return arr;
-}
-
-function parsebool(blob, length) { return blob.read_shift(length) === 0x1; }
-
-function parseuint16(blob) { return blob.read_shift(2, 'u'); }
-function parseuint16a(blob, length) { return parslurp(blob,length,parseuint16);}
-
-/* --- 2.5 Structures --- */
-
-/* [MS-XLS] 2.5.14 Boolean */
-var parse_Boolean = parsebool;
-
-/* [MS-XLS] 2.5.10 Bes (boolean or error) */
-function parse_Bes(blob) {
-	var v = blob.read_shift(1), t = blob.read_shift(1);
-	return t === 0x01 ? BERR[v] : v === 0x01;
-}
-
-/* [MS-XLS] 2.5.240 ShortXLUnicodeString */
-function parse_ShortXLUnicodeString(blob, length, opts) {
-	var cch = blob.read_shift(1);
-	var width = 1, encoding = 'sbcs';
-	if(opts === undefined || opts.biff !== 5) {
-		var fHighByte = blob.read_shift(1);
-		if(fHighByte) { width = 2; encoding = 'dbcs'; }
-	}
-	return cch ? blob.read_shift(cch, encoding) : "";
-}
-
-/* 2.5.293 XLUnicodeRichExtendedString */
-function parse_XLUnicodeRichExtendedString(blob) {
-	var cch = blob.read_shift(2), flags = blob.read_shift(1);
-	var fHighByte = flags & 0x1, fExtSt = flags & 0x4, fRichSt = flags & 0x8;
-	var width = 1 + (flags & 0x1); // 0x0 -> utf8, 0x1 -> dbcs
-	var cRun, cbExtRst;
-	var z = {};
-	if(fRichSt) cRun = blob.read_shift(2);
-	if(fExtSt) cbExtRst = blob.read_shift(4);
-	var encoding = (flags & 0x1) ? 'dbcs' : 'sbcs';
-	var msg = cch === 0 ? "" : blob.read_shift(cch, encoding);
-	if(fRichSt) blob.l += 4 * cRun; //TODO: parse this
-	if(fExtSt) blob.l += cbExtRst; //TODO: parse this
-	z.t = msg;
-	if(!fRichSt) { z.raw = "<t>" + z.t + "</t>"; z.r = z.t; }
-	return z;
-}
-
-/* 2.5.296 XLUnicodeStringNoCch */
-function parse_XLUnicodeStringNoCch(blob, cch, opts) {
-	var retval;
-	var fHighByte = blob.read_shift(1);
-	if(fHighByte===0) { retval = blob.read_shift(cch, 'sbcs'); }
-	else { retval = blob.read_shift(cch, 'dbcs'); }
-	return retval;
-}
-
-/* 2.5.294 XLUnicodeString */
-function parse_XLUnicodeString(blob, length, opts) {
-	var cch = blob.read_shift(opts !== undefined && opts.biff === 5 ? 1 : 2);
-	if(cch === 0) { blob.l++; return ""; }
-	return parse_XLUnicodeStringNoCch(blob, cch, opts);
-}
-/* BIFF5 override */
-function parse_XLUnicodeString2(blob, length, opts) {
-	if(opts.biff !== 5) return parse_XLUnicodeString(blob, length, opts);
-	var cch = blob.read_shift(1);
-	if(cch === 0) { blob.l++; return ""; }
-	return blob.read_shift(cch, 'sbcs');
-}
-
-/* 2.5.342 Xnum */
-function parse_Xnum(blob) { return blob.read_shift(8, 'f'); }
-
-/* 2.5.61 ControlInfo */
-var parse_ControlInfo = parsenoop;
-
-/* [MS-OSHARED] 2.3.7.6 URLMoniker TODO: flags */
-var parse_URLMoniker = function(blob, length) {
-	var len = blob.read_shift(4), start = blob.l;
-	var extra = false;
-	if(len > 24) {
-		/* look ahead */
-		blob.l += len - 24;
-		if(blob.read_shift(16) === "795881f43b1d7f48af2c825dc4852763") extra = true;
-		blob.l = start;
-	}
-	var url = blob.read_shift((extra?len-24:len)>>1, 'utf16le').replace(chr0,"");
-	if(extra) blob.l += 24;
-	return url;
-};
-
-/* [MS-OSHARED] 2.3.7.8 FileMoniker TODO: all fields */
-var parse_FileMoniker = function(blob, length) {
-	var cAnti = blob.read_shift(2);
-	var ansiLength = blob.read_shift(4);
-	var ansiPath = blob.read_shift(ansiLength, 'cstr');
-	var endServer = blob.read_shift(2);
-	var versionNumber = blob.read_shift(2);
-	var cbUnicodePathSize = blob.read_shift(4);
-	if(cbUnicodePathSize === 0) return ansiPath.replace(/\\/g,"/");
-	var cbUnicodePathBytes = blob.read_shift(4);
-	var usKeyValue = blob.read_shift(2);
-	var unicodePath = blob.read_shift(cbUnicodePathBytes>>1, 'utf16le').replace(chr0,"");
-	return unicodePath;
-};
-
-/* [MS-OSHARED] 2.3.7.2 HyperlinkMoniker TODO: all the monikers */
-var parse_HyperlinkMoniker = function(blob, length) {
-	var clsid = blob.read_shift(16); length -= 16;
-	switch(clsid) {
-		case "e0c9ea79f9bace118c8200aa004ba90b": return parse_URLMoniker(blob, length);
-		case "0303000000000000c000000000000046": return parse_FileMoniker(blob, length);
-		default: throw "unsupported moniker " + clsid;
-	}
-};
-
-/* [MS-OSHARED] 2.3.7.9 HyperlinkString */
-var parse_HyperlinkString = function(blob, length) {
-	var len = blob.read_shift(4);
-	var o = blob.read_shift(len, 'utf16le').replace(chr0, "");
-	return o;
-};
-
-/* [MS-OSHARED] 2.3.7.1 Hyperlink Object TODO: unify params with XLSX */
-var parse_Hyperlink = function(blob, length) {
-	var end = blob.l + length;
-	var sVer = blob.read_shift(4);
-	if(sVer !== 2) throw new Error("Unrecognized streamVersion: " + sVer);
-	var flags = blob.read_shift(2);
-	blob.l += 2;
-	var displayName, targetFrameName, moniker, oleMoniker, location, guid, fileTime;
-	if(flags & 0x0010) displayName = parse_HyperlinkString(blob, end - blob.l);
-	if(flags & 0x0080) targetFrameName = parse_HyperlinkString(blob, end - blob.l);
-	if((flags & 0x0101) === 0x0101) moniker = parse_HyperlinkString(blob, end - blob.l);
-	if((flags & 0x0101) === 0x0001) oleMoniker = parse_HyperlinkMoniker(blob, end - blob.l);
-	if(flags & 0x0008) location = parse_HyperlinkString(blob, end - blob.l);
-	if(flags & 0x0020) guid = blob.read_shift(16);
-	if(flags & 0x0040) fileTime = parse_FILETIME(blob, 8);
-	blob.l = end;
-	var target = (targetFrameName||moniker||oleMoniker);
-	if(location) target+="#"+location;
-	return {Target: target};
-};
+/* 2.5.127 */
+var FillPattern = [
+	null,
+	'solid',
+	'mediumGray',
+	'darkGray',
+	'lightGray',
+	'darkHorizontal',
+	'darkVertical',
+	'darkDown',
+	'darkUp',
+	'darkGrid',
+	'darkTrellis',
+	'lightHorizontal',
+	'lightVertical',
+	'lightDown',
+	'lightUp',
+	'lightGrid',
+	'lightTrellis',
+	'gray125',
+	'gray0625'
+];
+
+function rgbify(arr) { return arr.map(function(x) { return [(x>>16)&255,(x>>8)&255,x&255]; }); }
+
+/* 2.5.161 */
+var Icv = rgbify([
+	/* Color Constants */
+	0x000000,
+	0xFFFFFF,
+	0xFF0000,
+	0x00FF00,
+	0x0000FF,
+	0xFFFF00,
+	0xFF00FF,
+	0x00FFFF,
+
+	/* Defaults */
+	0x000000,
+	0xFFFFFF,
+	0xFF0000,
+	0x00FF00,
+	0x0000FF,
+	0xFFFF00,
+	0xFF00FF,
+	0x00FFFF,
+
+	0x800000,
+	0x008000,
+	0x000080,
+	0x808000,
+	0x800080,
+	0x008080,
+	0xC0C0C0,
+	0x808080,
+	0x9999FF,
+	0x993366,
+	0xFFFFCC,
+	0xCCFFFF,
+	0x660066,
+	0xFF8080,
+	0x0066CC,
+	0xCCCCFF,
+
+	0x000080,
+	0xFF00FF,
+	0xFFFF00,
+	0x00FFFF,
+	0x800080,
+	0x800000,
+	0x008080,
+	0x0000FF,
+	0x00CCFF,
+	0xCCFFFF,
+	0xCCFFCC,
+	0xFFFF99,
+	0x99CCFF,
+	0xFF99CC,
+	0xCC99FF,
+	0xFFCC99,
+
+	0x3366FF,
+	0x33CCCC,
+	0x99CC00,
+	0xFFCC00,
+	0xFF9900,
+	0xFF6600,
+	0x666699,
+	0x969696,
+	0x003366,
+	0x339966,
+	0x003300,
+	0x333300,
+	0x993300,
+	0x993366,
+	0x333399,
+	0x333333,
+
+	/* Sheet */
+	0xFFFFFF,
+	0x000000
+]);
 function isval(x) { return x !== undefined && x !== null; }
 
 function keys(o) { return Object.keys(o); }
@@ -1883,6 +2102,10 @@ function evert(obj, arr) {
 	return o;
 }
 
+function rgb2Hex(rgb) {
+	for(var i=0,o=1; i!=3; ++i) o = o*256 + (rgb[i]>255?255:rgb[i]<0?0:rgb[i]);
+	return o.toString(16).toUpperCase().substr(1);
+}
 
 
 /* 2.5.19 */
@@ -1890,7 +2113,7 @@ function parse_Cell(blob, length) {
 	var rw = blob.read_shift(2); // 0-indexed
 	var col = blob.read_shift(2);
 	var ixfe = blob.read_shift(2);
-	return {r:rw, c:col, ixfe:ixfe};
+	return ({r:rw, c:col, ixfe:ixfe});
 }
 
 /* 2.5.134 */
@@ -1903,7 +2126,7 @@ function parse_frtHeader(blob) {
 
 
 
-function parse_OptXLUnicodeString(blob, length, opts) { return length === 0 ? "" : parse_XLUnicodeString(blob, length, opts); }
+function parse_OptXLUnicodeString(blob, length, opts) { return length === 0 ? "" : parse_XLUnicodeString2(blob, length, opts); }
 
 /* 2.5.158 */
 var HIDEOBJENUM = ['SHOWALL', 'SHOWPLACEHOLDER', 'HIDEALL'];
@@ -1915,16 +2138,6 @@ function parse_XTI(blob, length) {
 	return [iSupBook, itabFirst, itabLast];
 }
 
-/* 2.5.217 */
-function parse_RkNumber(blob) {
-	var b = blob.slice(blob.l, blob.l+4);
-	var fX100 = b[0] & 1, fInt = b[0] & 2;
-	blob.l+=4;
-	b[0] &= ~3;
-	var RK = fInt === 0 ? __double([0,0,0,0,b[0],b[1],b[2],b[3]],0) : __readInt32LE(b,0)>>2;
-	return fX100 ? RK/100 : RK;
-}
-
 /* 2.5.218 */
 function parse_RkRec(blob, length) {
 	var ixfe = blob.read_shift(2);
@@ -1934,10 +2147,10 @@ function parse_RkRec(blob, length) {
 }
 
 /* 2.5.1 */
-function parse_AddinUdf(blob, length) {
+function parse_AddinUdf(blob, length, opts) {
 	blob.l += 4; length -= 4;
 	var l = blob.l + length;
-	var udfName = parse_ShortXLUnicodeString(blob, length);
+	var udfName = parse_ShortXLUnicodeString(blob, length, opts);
 	var cb = blob.read_shift(2);
 	l -= blob.l;
 	if(cb !== l) throw "Malformed AddinUdf: padding = " + l + " != " + cb;
@@ -2036,7 +2249,13 @@ var parse_FontIndex = parseuint16;
 function parse_BOF(blob, length) {
 	var o = {};
 	o.BIFFVer = blob.read_shift(2); length -= 2;
-	if(o.BIFFVer !== 0x0600 && o.BIFFVer !== 0x0500) throw "Unexpected BIFF Ver " + o.BIFFVer;
+	switch(o.BIFFVer) {
+		case 0x0600: /* BIFF8 */
+		case 0x0500: /* BIFF5 */
+		case 0x0002: case 0x0007: /* BIFF2 */
+			break;
+		default: if(length > 6) throw new Error("Unexpected BIFF Ver " + o.BIFFVer);
+	}
 	blob.read_shift(length);
 	return o;
 }
@@ -2064,7 +2283,7 @@ function parse_WriteAccess(blob, length, opts) {
 /* 2.4.28 */
 function parse_BoundSheet8(blob, length, opts) {
 	var pos = blob.read_shift(4);
-	var hidden = blob.read_shift(1) >> 6;
+	var hidden = blob.read_shift(1) & 0x03;
 	var dt = blob.read_shift(1);
 	switch(dt) {
 		case 0: dt = 'Worksheet'; break;
@@ -2073,6 +2292,7 @@ function parse_BoundSheet8(blob, length, opts) {
 		case 6: dt = 'VBAModule'; break;
 	}
 	var name = parse_ShortXLUnicodeString(blob, 0, opts);
+	if(name.length === 0) name = "Sheet1";
 	return { pos:pos, hs:hidden, dt:dt, name:name };
 }
 
@@ -2129,7 +2349,7 @@ function parse_RecalcId(blob, length) {
 
 /* 2.4.87 */
 function parse_DefaultRowHeight (blob, length) {
-	var f = blob.read_shift(2), miyRw;
+	var f = length == 4 ? blob.read_shift(2) : 0, miyRw;
 	miyRw = blob.read_shift(2); // flags & 0x02 -> hidden, else empty
 	var fl = {Unsynced:f&1,DyZero:(f&2)>>1,ExAsc:(f&4)>>2,ExDsc:(f&8)>>3};
 	return [fl, miyRw];
@@ -2160,8 +2380,10 @@ function parse_LabelSst(blob, length) {
 
 /* 2.4.148 */
 function parse_Label(blob, length, opts) {
+	var target = blob.l + length;
 	var cell = parse_Cell(blob, 6);
-	var str = parse_XLUnicodeString(blob, length-6, opts);
+	if(opts.biff == 2) blob.l++;
+	var str = parse_XLUnicodeString(blob, target - blob.l, opts);
 	cell.val = str;
 	return cell;
 }
@@ -2172,13 +2394,15 @@ function parse_Format(blob, length, opts) {
 	var fmtstr = parse_XLUnicodeString2(blob, 0, opts);
 	return [ifmt, fmtstr];
 }
+var parse_BIFF2Format = parse_XLUnicodeString2;
 
 /* 2.4.90 */
-function parse_Dimensions(blob, length) {
-	var w = length === 10 ? 2 : 4;
+function parse_Dimensions(blob, length, opts) {
+	var end = blob.l + length;
+	var w = opts.biff == 8 || !opts.biff ? 4 : 2;
 	var r = blob.read_shift(w), R = blob.read_shift(w),
 	    c = blob.read_shift(2), C = blob.read_shift(2);
-	blob.l += 2;
+	blob.l = end;
 	return {s: {r:r, c:c}, e: {r:R, c:C}};
 }
 
@@ -2201,10 +2425,18 @@ function parse_MulRk(blob, length) {
 	return {r:rw, c:col, C:lastcol, rkrec:rkrecs};
 }
 
-/* 2.5.20 TODO */
-var parse_CellXF = parsenoop;
-/* 2.5.249 TODO */
-var parse_StyleXF = parsenoop;
+/* 2.5.20 2.5.249 TODO */
+function parse_CellStyleXF(blob, length, style) {
+	var o = {};
+	var a = blob.read_shift(4), b = blob.read_shift(4);
+	var c = blob.read_shift(4), d = blob.read_shift(2);
+	o.patternType = FillPattern[c >> 26];
+	o.icvFore = d & 0x7F;
+	o.icvBack = (d >> 7) & 0x7F;
+	return o;
+}
+function parse_CellXF(blob, length) {return parse_CellStyleXF(blob,length,0);}
+function parse_StyleXF(blob, length) {return parse_CellStyleXF(blob,length,1);}
 
 /* 2.4.353 TODO: actually do this right */
 function parse_XF(blob, length) {
@@ -2212,7 +2444,7 @@ function parse_XF(blob, length) {
 	o.ifnt = blob.read_shift(2); o.ifmt = blob.read_shift(2); o.flags = blob.read_shift(2);
 	o.fStyle = (o.flags >> 2) & 0x01;
 	length -= 6;
-	o.data = o.fStyle ? parse_StyleXF(blob, length) : parse_CellXF(blob, length);
+	o.data = parse_CellStyleXF(blob, length, o.fStyle);
 	return o;
 }
 
@@ -2222,13 +2454,14 @@ function parse_Guts(blob, length) {
 	var out = [blob.read_shift(2), blob.read_shift(2)];
 	if(out[0] !== 0) out[0]--;
 	if(out[1] !== 0) out[1]--;
-	if(out[0] > 7 || out[1] > 7) throw "Bad Gutters: " + out;
+	if(out[0] > 7 || out[1] > 7) throw "Bad Gutters: " + out.join("|");
 	return out;
 }
 
 /* 2.4.24 */
-function parse_BoolErr(blob, length) {
+function parse_BoolErr(blob, length, opts) {
 	var cell = parse_Cell(blob, 6);
+	if(opts.biff == 2) ++blob.l;
 	var val = parse_Bes(blob, 2);
 	cell.val = val;
 	cell.t = (val === true || val === false) ? 'b' : 'e';
@@ -2261,7 +2494,7 @@ function parse_SupBook(blob, length, opts) {
 function parse_ExternName(blob, length, opts) {
 	var flags = blob.read_shift(2);
 	var body;
-	var o = {
+	var o = ({
 		fBuiltIn: flags & 0x01,
 		fWantAdvise: (flags >>> 1) & 0x01,
 		fWantPict: (flags >>> 2) & 0x01,
@@ -2269,8 +2502,8 @@ function parse_ExternName(blob, length, opts) {
 		fOleLink: (flags >>> 4) & 0x01,
 		cf: (flags >>> 5) & 0x3FF,
 		fIcon: flags >>> 15 & 0x01
-	};
-	if(opts.sbcch === 0x3A01) body = parse_AddinUdf(blob, length-2);
+	});
+	if(opts.sbcch === 0x3A01) body = parse_AddinUdf(blob, length-2, opts);
 	//else throw new Error("unsupported SupBook cch: " + opts.sbcch);
 	o.body = body || blob.read_shift(length-2);
 	return o;
@@ -2278,17 +2511,19 @@ function parse_ExternName(blob, length, opts) {
 
 /* 2.4.150 TODO */
 function parse_Lbl(blob, length, opts) {
-	if(opts.biff < 8) return parse_Label(blob, length, opts);
 	var target = blob.l + length;
 	var flags = blob.read_shift(2);
 	var chKey = blob.read_shift(1);
 	var cch = blob.read_shift(1);
-	var cce = blob.read_shift(2);
-	blob.l += 2;
-	var itab = blob.read_shift(2);
-	blob.l += 4;
+	var cce = blob.read_shift(opts && opts.biff == 2 ? 1 : 2);
+	if(!opts || opts.biff >= 5) {
+		blob.l += 2;
+		var itab = blob.read_shift(2);
+		blob.l += 4;
+	}
 	var name = parse_XLUnicodeStringNoCch(blob, cch, opts);
-	var rgce = parse_NameParsedFormula(blob, target - blob.l, opts, cce);
+	var npflen = target - blob.l; if(opts && opts.biff == 2) --npflen;
+	var rgce = target == blob.l || cce == 0 ? [] : parse_NameParsedFormula(blob, npflen, opts, cce);
 	return {
 		chKey: chKey,
 		Name: name,
@@ -2320,7 +2555,12 @@ function parse_ShrFmla(blob, length, opts) {
 /* 2.4.4 TODO */
 function parse_Array(blob, length, opts) {
 	var ref = parse_Ref(blob, 6);
-	blob.l += 6; length -= 12; /* TODO: fAlwaysCalc */
+	/* TODO: fAlwaysCalc */
+	switch(opts.biff) {
+		case 2: blob.l ++; length -= 7; break;
+		case 3: case 4: blob.l += 2; length -= 8; break;
+		default: blob.l += 6; length -= 12;
+	}
 	return [ref, parse_ArrayParsedFormula(blob, length, opts, ref)];
 }
 
@@ -2366,6 +2606,7 @@ function parse_Obj(blob, length) {
 /* 2.4.329 TODO: parse properly */
 function parse_TxO(blob, length, opts) {
 	var s = blob.l;
+	var texts = "";
 try {
 	blob.l += 4;
 	var ot = (opts.lastobj||{cmo:[0,0]}).cmo[1];
@@ -2379,7 +2620,6 @@ try {
 	blob.l += len;
 	//var fmla = parse_ObjFmla(blob, s + length - blob.l);
 
-	var texts = "";
 	for(var i = 1; i < blob.lens.length-1; ++i) {
 		if(blob.l-s != blob.lens[i]) throw "TxO: bad continue record";
 		var hdr = blob[blob.l];
@@ -2400,7 +2640,7 @@ try {
 //	blob.l += 6;
 //	if(s + length != blob.l) throw "TxO " + (s + length) + ", at " + blob.l;
 	return { t: texts };
-} catch(e) { blob.l = s + length; return { t: texts||"" }; }
+} catch(e) { blob.l = s + length; return { t: texts }; }
 }
 
 /* 2.4.140 */
@@ -2416,10 +2656,51 @@ var parse_HLinkTooltip = function(blob, length) {
 	var end = blob.l + length;
 	blob.read_shift(2);
 	var ref = parse_Ref8U(blob, 8);
-	var wzTooltip = blob.read_shift((length-10)/2, 'dbcs');
+	var wzTooltip = blob.read_shift((length-10)/2, 'dbcs-cont');
 	wzTooltip = wzTooltip.replace(chr0,"");
 	return [ref, wzTooltip];
 };
+
+/* 2.4.63 */
+function parse_Country(blob, length) {
+	var o = [], d;
+	d = blob.read_shift(2); o[0] = CountryEnum[d] || d;
+	d = blob.read_shift(2); o[1] = CountryEnum[d] || d;
+	return o;
+}
+
+/* 2.4.50 ClrtClient */
+function parse_ClrtClient(blob, length) {
+	var ccv = blob.read_shift(2);
+	var o = [];
+	while(ccv-->0) o.push(parse_LongRGB(blob, 8));
+	return o;
+}
+
+/* 2.4.188 */
+function parse_Palette(blob, length) {
+	var ccv = blob.read_shift(2);
+	var o = [];
+	while(ccv-->0) o.push(parse_LongRGB(blob, 8));
+	return o;
+}
+
+/* 2.4.354 */
+function parse_XFCRC(blob, length) {
+	blob.l += 2;
+	var o = {cxfs:0, crc:0};
+	o.cxfs = blob.read_shift(2);
+	o.crc = blob.read_shift(4);
+	return o;
+}
+
+
+var parse_Style = parsenoop;
+var parse_StyleExt = parsenoop;
+
+var parse_ColInfo = parsenoop;
+
+var parse_Window2 = parsenoop;
 
 
 var parse_Backup = parsebool; /* 2.4.14 */
@@ -2435,7 +2716,6 @@ var parse_CalcRefMode = parsenoop2; /* 2.4.36 */
 var parse_CalcSaveRecalc = parsebool; /* 2.4.37 */
 var parse_CodePage = parseuint16; /* 2.4.52 */
 var parse_Compat12 = parsebool; /* 2.4.54 true = no compatibility check */
-var parse_Country = parseuint16a; /* 2.4.63 -- two ints, 1 to 981 */
 var parse_Date1904 = parsebool; /* 2.4.77 - 1=1904,0=1900 */
 var parse_DefColWidth = parseuint16; /* 2.4.89 */
 var parse_DSF = parsenoop2; /* 2.4.94 -- MUST be ignored */
@@ -2490,10 +2770,8 @@ var parse_FileSharing = parsenoop;
 var parse_Uncalced = parsenoop;
 var parse_Template = parsenoop;
 var parse_Intl = parsenoop;
-var parse_ColInfo = parsenoop;
 var parse_WsBool = parsenoop;
 var parse_Sort = parsenoop;
-var parse_Palette = parsenoop;
 var parse_Sync = parsenoop;
 var parse_LPr = parsenoop;
 var parse_DxGCol = parsenoop;
@@ -2594,8 +2872,6 @@ var parse_ObNoMacros = parsenoop;
 var parse_Dv = parsenoop;
 var parse_Index = parsenoop;
 var parse_Table = parsenoop;
-var parse_Window2 = parsenoop;
-var parse_Style = parsenoop;
 var parse_BigName = parsenoop;
 var parse_ContinueBigName = parsenoop;
 var parse_WebPub = parsenoop;
@@ -2645,8 +2921,6 @@ var parse_Feature12 = parsenoop;
 var parse_CondFmt12 = parsenoop;
 var parse_CF12 = parsenoop;
 var parse_CFEx = parsenoop;
-var parse_XFCRC = parsenoop;
-var parse_XFExt = parsenoop;
 var parse_AutoFilter12 = parsenoop;
 var parse_ContinueFrt12 = parsenoop;
 var parse_MDTInfo = parsenoop;
@@ -2661,11 +2935,9 @@ var parse_DXF = parsenoop;
 var parse_TableStyles = parsenoop;
 var parse_TableStyle = parsenoop;
 var parse_TableStyleElement = parsenoop;
-var parse_StyleExt = parsenoop;
 var parse_NamePublish = parsenoop;
 var parse_NameCmt = parsenoop;
 var parse_SortData = parsenoop;
-var parse_Theme = parsenoop;
 var parse_GUIDTypeLib = parsenoop;
 var parse_FnGrp12 = parsenoop;
 var parse_NameFnGrp12 = parsenoop;
@@ -2728,7 +3000,6 @@ var parse_Pos = parsenoop;
 var parse_AlRuns = parsenoop;
 var parse_BRAI = parsenoop;
 var parse_SerAuxErrBar = parsenoop;
-var parse_ClrtClient = parsenoop;
 var parse_SerFmt = parsenoop;
 var parse_Chart3DBarShape = parsenoop;
 var parse_Fbi = parsenoop;
@@ -2741,10 +3012,66 @@ var parse_GelFrame = parsenoop;
 var parse_BopPopCustom = parsenoop;
 var parse_Fbi2 = parsenoop;
 
-/* --- */
+/* --- Specific to versions before BIFF8 --- */
 function parse_BIFF5String(blob) {
 	var len = blob.read_shift(1);
-	return blob.read_shift(len, 'sbcs');
+	return blob.read_shift(len, 'sbcs-cont');
+}
+
+/* BIFF2_??? where ??? is the name from [XLS] */
+function parse_BIFF2STR(blob, length, opts) {
+	var cell = parse_Cell(blob, 6);
+	++blob.l;
+	var str = parse_XLUnicodeString2(blob, length-7, opts);
+	cell.t = 'str';
+	cell.val = str;
+	return cell;
+}
+
+function parse_BIFF2NUM(blob, length, opts) {
+	var cell = parse_Cell(blob, 6);
+	++blob.l;
+	var num = parse_Xnum(blob, 8);
+	cell.t = 'n';
+	cell.val = num;
+	return cell;
+}
+
+function parse_BIFF2INT(blob, length) {
+	var cell = parse_Cell(blob, 6);
+	++blob.l;
+	var num = blob.read_shift(2);
+	cell.t = 'n';
+	cell.val = num;
+	return cell;
+}
+
+function parse_BIFF2STRING(blob, length) {
+	var cch = blob.read_shift(1);
+	if(cch === 0) { blob.l++; return ""; }
+	return blob.read_shift(cch, 'sbcs-cont');
+}
+
+/* TODO: convert to BIFF8 font struct */
+function parse_BIFF2FONTXTRA(blob, length) {
+	blob.l += 6; // unknown
+	blob.l += 2; // font weight "bls"
+	blob.l += 1; // charset
+	blob.l += 3; // unknown
+	blob.l += 1; // font family
+	blob.l += length - 9;
+}
+
+/* TODO: parse rich text runs */
+function parse_RString(blob, length, opts) {
+	var end = blob.l + length;
+	var cell = parse_Cell(blob, 6);
+	var cch = blob.read_shift(2);
+	var str = parse_XLUnicodeStringNoCch(blob, cch, opts);
+	blob.l = end;
+	cell.t = 'str';
+	cell.val = str;
+	return cell;
 }
 var _chr = function(c) { return String.fromCharCode(c); };
 var attregexg=/([\w:]+)=((?:")([^"]*)(?:")|(?:')([^']*)(?:'))/g;
@@ -2820,14 +3147,18 @@ var make_offcrypto = function(O, _crypto) {
 		return out;
 	};
 
-	if(crypto) {
-		O.md5 = function(hex) { return crypto.createHash('md5').update(hex).digest('hex'); };
-	} else {
-		O.md5 = function(hex) { throw "unimplemented"; };
-	}
+	O.md5 = function(hex) {
+		if(!crypto) throw new Error("Unsupported crypto");
+		return crypto.createHash('md5').update(hex).digest('hex');
+	};
 };
 make_offcrypto(OFFCRYPTO, typeof crypto !== "undefined" ? crypto : undefined);
-function _JS2ANSI(str) { if(typeof cptable !== 'undefined') return cptable.utils.encode(1252, str); return str.split("").map(function(x) { return x.charCodeAt(0); }); }
+function _JS2ANSI(str) {
+	if(typeof cptable !== 'undefined') return cptable.utils.encode(1252, str);
+	var o = [], oo = str.split("");
+	for(var i = 0; i < oo.length; ++i) o[i] = oo[i].charCodeAt(0);
+	return o;
+}
 
 /* [MS-OFFCRYPTO] 2.1.4 Version */
 function parse_Version(blob, length) {
@@ -2887,7 +3218,7 @@ function crypto_CreatePasswordVerifier_Method1(Password) {
 	var PasswordDecoded = _JS2ANSI(Password);
 	var len = PasswordDecoded.length + 1, i, PasswordByte;
 	var Intermediate1, Intermediate2, Intermediate3;
-	PasswordArray = new_buf(len);
+	PasswordArray = new_raw_buf(len);
 	PasswordArray[0] = PasswordDecoded.length;
 	for(i = 1; i != len; ++i) PasswordArray[i] = PasswordDecoded[i-1];
 	for(i = len-1; i >= 0; --i) {
@@ -2923,7 +3254,7 @@ var crypto_CreateXorArray_Method1 = (function() {
 		var Password = _JS2ANSI(password);
 		var XorKey = CreateXorKey_Method1(Password);
 		var Index = Password.length;
-		var ObfuscationArray = new_buf(16);
+		var ObfuscationArray = new_raw_buf(16);
 		for(var i = 0; i != 16; ++i) ObfuscationArray[i] = 0x00;
 		var Temp, PasswordLastChar, PadIndex;
 		if((Index & 1) === 1) {
@@ -2977,7 +3308,7 @@ var crypto_DecryptData_Method1 = function(password, Data, XorArrayIndex, XorArra
 var crypto_MakeXorDecryptor = function(password) {
 	var XorArrayIndex = 0, XorArray = crypto_CreateXorArray_Method1(password);
 	return function(Data) {
-		var O = crypto_DecryptData_Method1(null, Data, XorArrayIndex, XorArray);
+		var O = crypto_DecryptData_Method1("", Data, XorArrayIndex, XorArray);
 		XorArrayIndex = O[1];
 		return O[0];
 	};
@@ -2985,7 +3316,7 @@ var crypto_MakeXorDecryptor = function(password) {
 
 /* 2.5.343 */
 function parse_XORObfuscation(blob, length, opts, out) {
-	var o = { key: parseuint16(blob), verificationBytes: parseuint16(blob) };
+	var o = ({ key: parseuint16(blob), verificationBytes: parseuint16(blob) });
 	if(opts.password) o.verifier = crypto_CreatePasswordVerifier_Method1(opts.password);
 	out.valid = o.verificationBytes === o.verifier;
 	if(out.valid) out.insitu_decrypt = crypto_MakeXorDecryptor(opts.password);
@@ -3015,16 +3346,27 @@ function parseread1(blob, length) { blob.l+=1; return; }
 
 /* 2.5.51 */
 function parse_ColRelU(blob, length) {
-	var c = blob.read_shift(2);
+	var c = blob.read_shift(length == 1 ? 1 : 2);
 	return [c & 0x3FFF, (c >> 14) & 1, (c >> 15) & 1];
 }
 
 /* 2.5.198.105 */
-function parse_RgceArea(blob, length) {
-	var r=blob.read_shift(2), R=blob.read_shift(2);
+function parse_RgceArea(blob, length, opts) {
+	var w = 2;
+	if(opts) {
+		if(opts.biff >= 2 && opts.biff <= 5) return parse_RgceArea_BIFF2(blob, length, opts);
+	}
+	var r=blob.read_shift(w), R=blob.read_shift(w);
 	var c=parse_ColRelU(blob, 2);
 	var C=parse_ColRelU(blob, 2);
 	return { s:{r:r, c:c[0], cRel:c[1], rRel:c[2]}, e:{r:R, c:C[0], cRel:C[1], rRel:C[2]} };
+}
+/* BIFF 2-5 encodes flags in the row field */
+function parse_RgceArea_BIFF2(blob, length, opts) {
+	var r=parse_ColRelU(blob, 2), R=parse_ColRelU(blob, 2);
+	var c=blob.read_shift(1);
+	var C=blob.read_shift(1);
+	return { s:{r:r[0], c:c, cRel:r[1], rRel:r[2]}, e:{r:R[0], c:C, cRel:R[1], rRel:R[2]} };
 }
 
 /* 2.5.198.105 TODO */
@@ -3036,36 +3378,58 @@ function parse_RgceAreaRel(blob, length) {
 }
 
 /* 2.5.198.109 */
-function parse_RgceLoc(blob, length) {
+function parse_RgceLoc(blob, length, opts) {
+	if(opts && opts.biff >= 2 && opts.biff <= 5) return parse_RgceLoc_BIFF2(blob, length, opts);
 	var r = blob.read_shift(2);
 	var c = parse_ColRelU(blob, 2);
 	return {r:r, c:c[0], cRel:c[1], rRel:c[2]};
 }
+function parse_RgceLoc_BIFF2(blob, length, opts) {
+	var r = parse_ColRelU(blob, 2);
+	var c = blob.read_shift(1);
+	return {r:r[0], c:c, cRel:r[1], rRel:r[2]};
+}
 
 /* 2.5.198.111 */
-function parse_RgceLocRel(blob, length) {
+function parse_RgceLocRel(blob, length, opts) {
+	var biff = opts && opts.biff ? opts.biff : 8;
+	if(biff >= 2 && biff <= 5) return parse_RgceLocRel_BIFF2(blob, length, opts);
 	var r = blob.read_shift(2);
 	var cl = blob.read_shift(2);
 	var cRel = (cl & 0x8000) >> 15, rRel = (cl & 0x4000) >> 14;
 	cl &= 0x3FFF;
-	if(cRel !== 0) while(cl >= 0x100) cl -= 0x100;
+	if(rRel == 1) while(r > 0x7FFFF) r -= 0x100000;
+	if(cRel == 1) while(cl > 0x1FFF) cl = cl - 0x4000;
 	return {r:r,c:cl,cRel:cRel,rRel:rRel};
+}
+function parse_RgceLocRel_BIFF2(blob, length) {
+	var rl = blob.read_shift(2);
+	var c = blob.read_shift(1);
+	var rRel = (rl & 0x8000) >> 15, cRel = (rl & 0x4000) >> 14;
+	rl &= 0x3FFF;
+	if(rRel == 1 && rl >= 0x2000) rl = rl - 0x4000;
+	if(cRel == 1 && c >= 0x80) c = c - 0x100;
+	return {r:rl,c:c,cRel:cRel,rRel:rRel};
 }
 
 /* Ptg Tokens */
 
 /* 2.5.198.27 */
-function parse_PtgArea(blob, length) {
+function parse_PtgArea(blob, length, opts) {
 	var type = (blob[blob.l++] & 0x60) >> 5;
-	var area = parse_RgceArea(blob, 8);
+	var area = parse_RgceArea(blob, opts.biff >= 2 && opts.biff <= 5 ? 6 : 8, opts);
 	return [type, area];
 }
 
 /* 2.5.198.28 */
-function parse_PtgArea3d(blob, length) {
+function parse_PtgArea3d(blob, length, opts) {
 	var type = (blob[blob.l++] & 0x60) >> 5;
-	var ixti = blob.read_shift(2);
-	var area = parse_RgceArea(blob, 8);
+	var ixti = blob.read_shift(2, 'i');
+	var w = 8;
+	if(opts) switch(opts.biff) {
+		case 5: blob.l += 12; w = 6; break;
+	}
+	var area = parse_RgceArea(blob, w, opts);
 	return [type, ixti, area];
 }
 
@@ -3076,10 +3440,14 @@ function parse_PtgAreaErr(blob, length) {
 	return [type];
 }
 /* 2.5.198.30 */
-function parse_PtgAreaErr3d(blob, length) {
+function parse_PtgAreaErr3d(blob, length, opts) {
 	var type = (blob[blob.l++] & 0x60) >> 5;
 	var ixti = blob.read_shift(2);
-	blob.l += 8;
+	var w = 8;
+	if(opts) switch(opts.biff) {
+		case 5: blob.l += 12; w = 6; break;
+	}
+	blob.l += w;
 	return [type, ixti];
 }
 
@@ -3091,9 +3459,9 @@ function parse_PtgAreaN(blob, length) {
 }
 
 /* 2.5.198.32 -- ignore this and look in PtgExtraArray for shape + values */
-function parse_PtgArray(blob, length) {
+function parse_PtgArray(blob, length, opts) {
 	var type = (blob[blob.l++] & 0x60) >> 5;
-	blob.l += 7;
+	blob.l += opts.biff == 2 ? 6 : 7;
 	return [type];
 }
 
@@ -3106,33 +3474,33 @@ function parse_PtgAttrBaxcel(blob, length) {
 }
 
 /* 2.5.198.34 */
-function parse_PtgAttrChoose(blob, length) {
+function parse_PtgAttrChoose(blob, length, opts) {
 	blob.l +=2;
-	var offset = blob.read_shift(2);
+	var offset = blob.read_shift(opts && opts.biff == 2 ? 1 : 2);
 	var o = [];
 	/* offset is 1 less than the number of elements */
-	for(var i = 0; i <= offset; ++i) o.push(blob.read_shift(2));
+	for(var i = 0; i <= offset; ++i) o.push(blob.read_shift(opts && opts.biff == 2 ? 1 : 2));
 	return o;
 }
 
 /* 2.5.198.35 */
-function parse_PtgAttrGoto(blob, length) {
+function parse_PtgAttrGoto(blob, length, opts) {
 	var bitGoto = (blob[blob.l+1] & 0xFF) ? 1 : 0;
 	blob.l += 2;
-	return [bitGoto, blob.read_shift(2)];
+	return [bitGoto, blob.read_shift(opts && opts.biff == 2 ? 1 : 2)];
 }
 
 /* 2.5.198.36 */
-function parse_PtgAttrIf(blob, length) {
+function parse_PtgAttrIf(blob, length, opts) {
 	var bitIf = (blob[blob.l+1] & 0xFF) ? 1 : 0;
 	blob.l += 2;
-	return [bitIf, blob.read_shift(2)];
+	return [bitIf, blob.read_shift(opts && opts.biff == 2 ? 1 : 2)];
 }
 
 /* 2.5.198.37 */
-function parse_PtgAttrSemi(blob, length) {
+function parse_PtgAttrSemi(blob, length, opts) {
 	var bitSemi = (blob[blob.l+1] & 0xFF) ? 1 : 0;
-	blob.l += 4;
+	blob.l += opts && opts.biff == 2 ? 3 : 4;
 	return [bitSemi];
 }
 
@@ -3155,46 +3523,44 @@ function parse_PtgAttrSpaceSemi(blob, length) {
 }
 
 /* 2.5.198.84 TODO */
-function parse_PtgRef(blob, length) {
+function parse_PtgRef(blob, length, opts) {
 	var ptg = blob[blob.l] & 0x1F;
 	var type = (blob[blob.l] & 0x60)>>5;
 	blob.l += 1;
-	var loc = parse_RgceLoc(blob,4);
+	var loc = parse_RgceLoc(blob, 4, opts);
 	return [type, loc];
 }
 
 /* 2.5.198.88 TODO */
-function parse_PtgRefN(blob, length) {
-	var ptg = blob[blob.l] & 0x1F;
+function parse_PtgRefN(blob, length, opts) {
 	var type = (blob[blob.l] & 0x60)>>5;
 	blob.l += 1;
-	var loc = parse_RgceLocRel(blob,4);
+	var loc = parse_RgceLocRel(blob, 4, opts);
 	return [type, loc];
 }
 
 /* 2.5.198.85 TODO */
-function parse_PtgRef3d(blob, length) {
-	var ptg = blob[blob.l] & 0x1F;
+function parse_PtgRef3d(blob, length, opts) {
 	var type = (blob[blob.l] & 0x60)>>5;
 	blob.l += 1;
 	var ixti = blob.read_shift(2); // XtiIndex
-	var loc = parse_RgceLoc(blob,4);
+	var loc = parse_RgceLoc(blob, 0, opts);
 	return [type, ixti, loc];
 }
 
 
 /* 2.5.198.62 TODO */
-function parse_PtgFunc(blob, length) {
+function parse_PtgFunc(blob, length, opts) {
 	var ptg = blob[blob.l] & 0x1F;
 	var type = (blob[blob.l] & 0x60)>>5;
 	blob.l += 1;
-	var iftab = blob.read_shift(2);
-	return [FtabArgc[iftab], Ftab[iftab]];
+	var iftab = blob.read_shift(opts && opts.biff <= 3 ? 1 : 2);
+	return [FtabArgc[iftab], Ftab[iftab], type];
 }
 /* 2.5.198.63 TODO */
-function parse_PtgFuncVar(blob, length) {
+function parse_PtgFuncVar(blob, length, opts) {
 	blob.l++;
-	var cparams = blob.read_shift(1), tab = parsetab(blob);
+	var cparams = blob.read_shift(1), tab = opts && opts.biff <= 3 ? [0, blob.read_shift(1)]: parsetab(blob);
 	return [cparams, (tab[0] === 0 ? Ftab : Cetab)[tab[1]]];
 }
 
@@ -3203,20 +3569,23 @@ function parsetab(blob, length) {
 }
 
 /* 2.5.198.41 */
-var parse_PtgAttrSum = parseread(4);
+function parse_PtgAttrSum(blob, length, opts) {
+	blob.l += opts && opts.biff == 2 ? 3 : 4; return;
+}
+
 /* 2.5.198.43 */
 var parse_PtgConcat = parseread1;
 
 /* 2.5.198.58 */
-function parse_PtgExp(blob, length) {
+function parse_PtgExp(blob, length, opts) {
 	blob.l++;
 	var row = blob.read_shift(2);
-	var col = blob.read_shift(2);
+	var col = blob.read_shift(opts && opts.biff == 2 ? 1 : 2);
 	return [row, col];
 }
 
 /* 2.5.198.57 */
-function parse_PtgErr(blob, length) { blob.l++; return BERR[blob.read_shift(1)]; }
+function parse_PtgErr(blob, length) { blob.l++; return BErr[blob.read_shift(1)]; }
 
 /* 2.5.198.66 TODO */
 function parse_PtgInt(blob, length) { blob.l++; return blob.read_shift(2); }
@@ -3228,19 +3597,19 @@ function parse_PtgBool(blob, length) { blob.l++; return blob.read_shift(1)!==0;}
 function parse_PtgNum(blob, length) { blob.l++; return parse_Xnum(blob, 8); }
 
 /* 2.5.198.89 */
-function parse_PtgStr(blob, length) { blob.l++; return parse_ShortXLUnicodeString(blob); }
+function parse_PtgStr(blob, length, opts) { blob.l++; return parse_ShortXLUnicodeString(blob, length-1, opts); }
 
 /* 2.5.192.112 + 2.5.192.11{3,4,5,6,7} */
-function parse_SerAr(blob) {
-	var val = [];
-	switch((val[0] = blob.read_shift(1))) {
+function parse_SerAr(blob, biff) {
+	var val = [blob.read_shift(1)];
+	switch(val[0]) {
 		/* 2.5.192.113 */
 		case 0x04: /* SerBool -- boolean */
 			val[1] = parsebool(blob, 1) ? 'TRUE' : 'FALSE';
 			blob.l += 7; break;
 		/* 2.5.192.114 */
 		case 0x10: /* SerErr -- error */
-			val[1] = BERR[blob[blob.l]];
+			val[1] = BErr[blob[blob.l]];
 			blob.l += 8; break;
 		/* 2.5.192.115 */
 		case 0x00: /* SerNil -- honestly, I'm not sure how to reproduce this */
@@ -3250,7 +3619,7 @@ function parse_SerAr(blob) {
 			val[1] = parse_Xnum(blob, 8); break;
 		/* 2.5.192.117 */
 		case 0x02: /* SerStr -- XLUnicodeString (<256 chars) */
-			val[1] = parse_XLUnicodeString(blob); break;
+			val[1] = parse_XLUnicodeString2(blob, 0, {biff:biff > 0 && biff < 8 ? 2 : biff}); break;
 		// default: throw "Bad SerAr: " + val[0]; /* Unreachable */
 	}
 	return val;
@@ -3265,47 +3634,63 @@ function parse_PtgExtraMem(blob, cce) {
 }
 
 /* 2.5.198.59 */
-function parse_PtgExtraArray(blob) {
+function parse_PtgExtraArray(blob, length, opts) {
 	var cols = 1 + blob.read_shift(1); //DColByteU
 	var rows = 1 + blob.read_shift(2); //DRw
+	if(opts.biff >= 2 && opts.biff < 8) { --rows; if(--cols == 0) cols = 0x100; }
 	for(var i = 0, o=[]; i != rows && (o[i] = []); ++i)
-		for(var j = 0; j != cols; ++j) o[i][j] = parse_SerAr(blob);
+		for(var j = 0; j != cols; ++j) o[i][j] = parse_SerAr(blob, opts.biff);
 	return o;
 }
 
 /* 2.5.198.76 */
-function parse_PtgName(blob, length) {
+function parse_PtgName(blob, length, opts) {
 	var type = (blob.read_shift(1) >>> 5) & 0x03;
-	var nameindex = blob.read_shift(4);
+	var w = (!opts || (opts.biff >= 8)) ? 4 : 2;
+	var nameindex = blob.read_shift(w);
+	switch(opts.biff) {
+		case 2: blob.l += 5; break;
+		case 3: case 4: blob.l += 8; break;
+		case 5: blob.l += 12; break;
+	}
 	return [type, 0, nameindex];
 }
 
 /* 2.5.198.77 */
-function parse_PtgNameX(blob, length) {
+function parse_PtgNameX(blob, length, opts) {
+	if(opts.biff == 5) return parse_PtgNameX_BIFF5(blob, length, opts);
 	var type = (blob.read_shift(1) >>> 5) & 0x03;
 	var ixti = blob.read_shift(2); // XtiIndex
 	var nameindex = blob.read_shift(4);
 	return [type, ixti, nameindex];
 }
+function parse_PtgNameX_BIFF5(blob, length, opts) {
+	var type = (blob.read_shift(1) >>> 5) & 0x03;
+	var ixti = blob.read_shift(2, 'i'); // XtiIndex
+	blob.l += 8;
+	var nameindex = blob.read_shift(2);
+	blob.l += 12;
+	return [type, ixti, nameindex];
+}
 
 /* 2.5.198.70 */
-function parse_PtgMemArea(blob, length) {
+function parse_PtgMemArea(blob, length, opts) {
 	var type = (blob.read_shift(1) >>> 5) & 0x03;
-	blob.l += 4;
-	var cce = blob.read_shift(2);
+	blob.l += (opts && opts.biff == 2 ? 3 : 4);
+	var cce = blob.read_shift(opts && opts.biff == 2 ? 1 : 2);
 	return [type, cce];
 }
 
 /* 2.5.198.72 */
-function parse_PtgMemFunc(blob, length) {
+function parse_PtgMemFunc(blob, length, opts) {
 	var type = (blob.read_shift(1) >>> 5) & 0x03;
-	var cce = blob.read_shift(2);
+	var cce = blob.read_shift(opts && opts.biff == 2 ? 1 : 2);
 	return [type, cce];
 }
 
 
 /* 2.5.198.86 */
-function parse_PtgRefErr(blob, length) {
+function parse_PtgRefErr(blob, length, opts) {
 	var type = (blob.read_shift(1) >>> 5) & 0x03;
 	blob.l += 4;
 	return [type];
@@ -3447,29 +3832,36 @@ var Ptg19 = {
 };
 
 /* TODO: it will be useful to parse the function str */
-var rcregex = /(^|[^A-Za-z])R(\[?)(-?\d+|)\]?C(\[?)(-?\d+|)\]?/g;
-var rcbase;
-function rcfunc($$,$1,$2,$3,$4,$5) {
-	var R = $3.length>0?parseInt($3,10)|0:0, C = $5.length>0?parseInt($5,10)|0:0;
-	if(C<0 && $4.length === 0) C=0;
-	if($4.length > 0) C += rcbase.c;
-	if($2.length > 0) R += rcbase.r;
-	return $1 + encode_col(C) + encode_row(R);
-}
-function rc_to_a1(fstr, base) {
-	rcbase = base;
-	return fstr.replace(rcregex, rcfunc);
-}
+var rc_to_a1 = (function(){
+	var rcregex = /(^|[^A-Za-z])R(\[?)(-?\d+|)\]?C(\[?)(-?\d+|)\]?/g;
+	var rcbase;
+	function rcfunc($$,$1,$2,$3,$4,$5) {
+		var R = $3.length>0?parseInt($3,10)|0:0, C = $5.length>0?parseInt($5,10)|0:0;
+		if(C<0 && $4.length === 0) C=0;
+		var cRel = false, rRel = false;
+		if($4.length > 0 || $5.length == 0) cRel = true; if(cRel) C += rcbase.c; else --C;
+		if($2.length > 0 || $3.length == 0) rRel = true; if(rRel) R += rcbase.r; else --R;
+		return $1 + (cRel ? "" : "$") + encode_col(C) + (rRel ? "" : "$") + encode_row(R);
+	}
+	return function rc_to_a1(fstr, base) {
+		rcbase = base;
+		return fstr.replace(rcregex, rcfunc);
+	};
+})();
 /* 2.4.127 TODO */
 function parse_Formula(blob, length, opts) {
+	var end = blob.l + length;
 	var cell = parse_Cell(blob, 6);
+	if(opts.biff == 2) ++blob.l;
 	var val = parse_FormulaValue(blob,8);
 	var flags = blob.read_shift(1);
-	blob.read_shift(1);
-	var chn = blob.read_shift(4);
-	var cbf = "";
-	if(opts.biff === 5) blob.l += length-20;
-	else cbf = parse_CellParsedFormula(blob, length-20, opts);
+	if(opts.biff != 2) {
+		blob.read_shift(1);
+		if(opts.biff >= 5) {
+			var chn = blob.read_shift(4);
+		}
+	}
+	var cbf = parse_CellParsedFormula(blob, end - blob.l, opts);
 	return {cell:cell, val:val[0], formula:cbf, shared: (flags >> 3) & 1, tt:val[1]};
 }
 
@@ -3480,20 +3872,21 @@ function parse_FormulaValue(blob) {
 	switch(blob[blob.l]) {
 		case 0x00: blob.l += 8; return ["String", 's'];
 		case 0x01: b = blob[blob.l+2] === 0x1; blob.l += 8; return [b,'b'];
-		case 0x02: b = BERR[blob[blob.l+2]]; blob.l += 8; return [b,'e'];
+		case 0x02: b = blob[blob.l+2]; blob.l += 8; return [b,'e'];
 		case 0x03: blob.l += 8; return ["",'s'];
 	}
+	return [];
 }
 
 /* 2.5.198.103 */
 function parse_RgbExtra(blob, length, rgce, opts) {
-	if(opts.biff < 8) return parsenoop(length);
+	if(opts.biff < 8) return parsenoop(blob, length);
 	var target = blob.l + length;
 	var o = [];
 	for(var i = 0; i !== rgce.length; ++i) {
 		switch(rgce[i][0]) {
 			case 'PtgArray': /* PtgArray -> PtgExtraArray */
-				rgce[i][1] = parse_PtgExtraArray(blob);
+				rgce[i][1] = parse_PtgExtraArray(blob, 0, opts);
 				o.push(rgce[i][1]);
 				break;
 			case 'PtgMemArea': /* PtgMemArea -> PtgExtraMem */
@@ -3511,7 +3904,7 @@ function parse_RgbExtra(blob, length, rgce, opts) {
 /* 2.5.198.21 */
 function parse_NameParsedFormula(blob, length, opts, cce) {
 	var target = blob.l + length;
-	var rgce = parse_Rgce(blob, cce);
+	var rgce = parse_Rgce(blob, cce, opts);
 	var rgcb;
 	if(target !== blob.l) rgcb = parse_RgbExtra(blob, target - blob.l, rgce, opts);
 	return [rgce, rgcb];
@@ -3519,11 +3912,11 @@ function parse_NameParsedFormula(blob, length, opts, cce) {
 
 /* 2.5.198.3 TODO */
 function parse_CellParsedFormula(blob, length, opts) {
-	var target = blob.l + length;
-	var rgcb, cce = blob.read_shift(2); // length of rgce
+	var target = blob.l + length, len = opts.biff == 2 ? 1 : 2;
+	var rgcb, cce = blob.read_shift(len); // length of rgce
 	if(cce == 0xFFFF) return [[],parsenoop(blob, length-2)];
-	var rgce = parse_Rgce(blob, cce);
-	if(length !== cce + 2) rgcb = parse_RgbExtra(blob, length - cce - 2, rgce, opts);
+	var rgce = parse_Rgce(blob, cce, opts);
+	if(length !== cce + len) rgcb = parse_RgbExtra(blob, length - cce - len, rgce, opts);
 	return [rgce, rgcb];
 }
 
@@ -3531,7 +3924,7 @@ function parse_CellParsedFormula(blob, length, opts) {
 function parse_SharedParsedFormula(blob, length, opts) {
 	var target = blob.l + length;
 	var rgcb, cce = blob.read_shift(2); // length of rgce
-	var rgce = parse_Rgce(blob, cce);
+	var rgce = parse_Rgce(blob, cce, opts);
 	if(cce == 0xFFFF) return [[],parsenoop(blob, length-2)];
 	if(length !== cce + 2) rgcb = parse_RgbExtra(blob, target - cce - 2, rgce, opts);
 	return [rgce, rgcb];
@@ -3539,41 +3932,69 @@ function parse_SharedParsedFormula(blob, length, opts) {
 
 /* 2.5.198.1 TODO */
 function parse_ArrayParsedFormula(blob, length, opts, ref) {
-	var target = blob.l + length;
-	var rgcb, cce = blob.read_shift(2); // length of rgce
+	var target = blob.l + length, len = opts.biff == 2 ? 1 : 2;
+	var rgcb, cce = blob.read_shift(len); // length of rgce
 	if(cce == 0xFFFF) return [[],parsenoop(blob, length-2)];
-	var rgce = parse_Rgce(blob, cce);
-	if(length !== cce + 2) rgcb = parse_RgbExtra(blob, target - cce - 2, rgce, opts);
+	var rgce = parse_Rgce(blob, cce, opts);
+	if(length !== cce + len) rgcb = parse_RgbExtra(blob, target - blob.l, rgce, opts);
 	return [rgce, rgcb];
 }
 
 /* 2.5.198.104 */
-function parse_Rgce(blob, length) {
+function parse_Rgce(blob, length, opts) {
 	var target = blob.l + length;
 	var R, id, ptgs = [];
 	while(target != blob.l) {
 		length = target - blob.l;
 		id = blob[blob.l];
 		R = PtgTypes[id];
-		//console.log("ptg", id, R)
 		if(id === 0x18 || id === 0x19) {
 			id = blob[blob.l + 1];
 			R = (id === 0x18 ? Ptg18 : Ptg19)[id];
 		}
 		if(!R || !R.f) { ptgs.push(parsenoop(blob, length)); }
-		else { ptgs.push([R.n, R.f(blob, length)]); }
+		else { ptgs.push([R.n, R.f(blob, length, opts)]); }
 	}
 	return ptgs;
 }
 
-function mapper(x) { return x.map(function f2(y) { return y[1];}).join(",");}
+function stringify_array(f) {
+	var o = [];
+	for(var i = 0; i < f.length; ++i) {
+		var x = f[i], r = [];
+		for(var j = 0; j < x.length; ++j) {
+			var y = x[j];
+			if(y) switch(y[0]) {
+				// TODO: handle embedded quotes
+				case 0x02: r.push('"' + y[1].replace(/"/g,'""') + '"'); break;
+				default: r.push(y[1]);
+			} else r.push("");
+		}
+		o.push(r.join(","));
+	}
+	return o.join(";");
+}
 
-/* 2.2.2 + Magic TODO */
+/* 2.2.2 TODO */
+var PtgBinOp = {
+	PtgAdd: "+",
+	PtgConcat: "&",
+	PtgDiv: "/",
+	PtgEq: "=",
+	PtgGe: ">=",
+	PtgGt: ">",
+	PtgLe: "<=",
+	PtgLt: "<",
+	PtgMul: "*",
+	PtgNe: "<>",
+	PtgPower: "^",
+	PtgSub: "-"
+};
 function stringify_formula(formula, range, cell, supbooks, opts) {
-	if(opts !== undefined && opts.biff === 5) return "BIFF5??";
-	var _range = range !== undefined ? range : {s:{c:0, r:0}};
-	var stack = [], e1, e2, type, c, ixti, nameidx, r;
+	var _range = {s:{c:0, r:0},e:{c:0, r:0}};
+	var stack = [], e1, e2, type, c, ixti, nameidx, r, sname="";
 	if(!formula[0] || !formula[0][0]) return "";
+	var last_sp = -1, sp = "";
 	//console.log("--",cell,formula[0])
 	for(var ff = 0, fflen = formula[0].length; ff < fflen; ++ff) {
 		var f = formula[0][ff];
@@ -3588,65 +4009,31 @@ function stringify_formula(formula, range, cell, supbooks, opts) {
 			case 'PtgPercent': stack.push(stack.pop() + "%"); break;
 
 		/* 2.2.2.1 Binary Value Operator Token */
-			/* 2.5.198.26 */
-			case 'PtgAdd':
+			case 'PtgAdd':    /* 2.5.198.26 */
+			case 'PtgConcat': /* 2.5.198.43 */
+			case 'PtgDiv':    /* 2.5.198.45 */
+			case 'PtgEq':     /* 2.5.198.56 */
+			case 'PtgGe':     /* 2.5.198.64 */
+			case 'PtgGt':     /* 2.5.198.65 */
+			case 'PtgLe':     /* 2.5.198.68 */
+			case 'PtgLt':     /* 2.5.198.69 */
+			case 'PtgMul':    /* 2.5.198.75 */
+			case 'PtgNe':     /* 2.5.198.78 */
+			case 'PtgPower':  /* 2.5.198.82 */
+			case 'PtgSub':    /* 2.5.198.90 */
 				e1 = stack.pop(); e2 = stack.pop();
-				stack.push(e2+"+"+e1);
-				break;
-			/* 2.5.198.90 */
-			case 'PtgSub':
-				e1 = stack.pop(); e2 = stack.pop();
-				stack.push(e2+"-"+e1);
-				break;
-			/* 2.5.198.75 */
-			case 'PtgMul':
-				e1 = stack.pop(); e2 = stack.pop();
-				stack.push(e2+"*"+e1);
-				break;
-			/* 2.5.198.45 */
-			case 'PtgDiv':
-				e1 = stack.pop(); e2 = stack.pop();
-				stack.push(e2+"/"+e1);
-				break;
-			/* 2.5.198.82 */
-			case 'PtgPower':
-				e1 = stack.pop(); e2 = stack.pop();
-				stack.push(e2+"^"+e1);
-				break;
-			/* 2.5.198.43 */
-			case 'PtgConcat':
-				e1 = stack.pop(); e2 = stack.pop();
-				stack.push(e2+"&"+e1);
-				break;
-			/* 2.5.198.69 */
-			case 'PtgLt':
-				e1 = stack.pop(); e2 = stack.pop();
-				stack.push(e2+"<"+e1);
-				break;
-			/* 2.5.198.68 */
-			case 'PtgLe':
-				e1 = stack.pop(); e2 = stack.pop();
-				stack.push(e2+"<="+e1);
-				break;
-			/* 2.5.198.56 */
-			case 'PtgEq':
-				e1 = stack.pop(); e2 = stack.pop();
-				stack.push(e2+"="+e1);
-				break;
-			/* 2.5.198.64 */
-			case 'PtgGe':
-				e1 = stack.pop(); e2 = stack.pop();
-				stack.push(e2+">="+e1);
-				break;
-			/* 2.5.198.65 */
-			case 'PtgGt':
-				e1 = stack.pop(); e2 = stack.pop();
-				stack.push(e2+">"+e1);
-				break;
-			/* 2.5.198.78 */
-			case 'PtgNe':
-				e1 = stack.pop(); e2 = stack.pop();
-				stack.push(e2+"<>"+e1);
+				if(last_sp >= 0) {
+					switch(formula[0][last_sp][1][0]) {
+						case 0: sp = fill(" ", formula[0][last_sp][1][1]); break;
+						case 1: sp = fill("\r", formula[0][last_sp][1][1]); break;
+						default:
+							sp = "";
+							if(opts.WTF) throw new Error("Unexpected PtgSpace type " + formula[0][last_sp][1][0]);
+					}
+					e2 = e2 + sp;
+					last_sp = -1;
+				}
+				stack.push(e2+PtgBinOp[f[0]]+e1);
 				break;
 
 		/* 2.2.2.1 Binary Reference Operator Token */
@@ -3659,7 +4046,10 @@ function stringify_formula(formula, range, cell, supbooks, opts) {
 				e1 = stack.pop(); e2 = stack.pop();
 				stack.push(e2+","+e1);
 				break;
-			case 'PtgRange': break;
+			case 'PtgRange':
+				e1 = stack.pop(); e2 = stack.pop();
+				stack.push(e2+":"+e1);
+				break;
 
 		/* 2.2.2.3 Control Tokens "can be ignored" */
 			/* 2.5.198.34 */
@@ -3672,17 +4062,18 @@ function stringify_formula(formula, range, cell, supbooks, opts) {
 
 			/* 2.5.198.84 */
 			case 'PtgRef':
-				type = f[1][0]; c = shift_cell(decode_cell(encode_cell(f[1][1])), _range);
-				stack.push(encode_cell(c));
+				type = f[1][0]; c = shift_cell(f[1][1], _range, opts);
+				stack.push(encode_cell_xls(c));
 				break;
 			/* 2.5.198.88 */
 			case 'PtgRefN':
-				type = f[1][0]; c = shift_cell(decode_cell(encode_cell(f[1][1])), cell);
-				stack.push(encode_cell(c));
+				type = f[1][0]; c = shift_cell(f[1][1], cell, opts);
+				stack.push(encode_cell_xls(c));
 				break;
 			case 'PtgRef3d': // TODO: lots of stuff
-				type = f[1][0]; ixti = f[1][1]; c = shift_cell(f[1][2], _range);
-				stack.push(supbooks[1][ixti+1]+"!"+encode_cell(c));
+				type = f[1][0]; ixti = f[1][1]; c = shift_cell(f[1][2], _range, opts);
+				sname = (supbooks && supbooks[1] ? supbooks[1][ixti+1] : "**MISSING**");
+				stack.push(sname + "!" + encode_cell(c));
 				break;
 
 		/* Function Call */
@@ -3690,10 +4081,10 @@ function stringify_formula(formula, range, cell, supbooks, opts) {
 			case 'PtgFunc':
 			/* 2.5.198.63 */
 			case 'PtgFuncVar':
-				/* f[1] = [argc, func] */
+				/* f[1] = [argc, func, type] */
 				var argc = f[1][0], func = f[1][1];
 				if(!argc) argc = 0;
-				var args = stack.slice(-argc);
+				var args = argc == 0 ? [] : stack.slice(-argc);
 				stack.length -= argc;
 				if(func === 'User') func = args.shift();
 				stack.push(func + "(" + args.join(",") + ")");
@@ -3712,12 +4103,13 @@ function stringify_formula(formula, range, cell, supbooks, opts) {
 			/* 2.5.198.27 TODO: fixed points */
 			case 'PtgArea':
 				type = f[1][0]; r = shift_range(f[1][1], _range);
-				stack.push(encode_range(r));
+				stack.push(encode_range_xls(r));
 				break;
 			/* 2.5.198.28 */
 			case 'PtgArea3d': // TODO: lots of stuff
 				type = f[1][0]; ixti = f[1][1]; r = f[1][2];
-				stack.push(supbooks[1][ixti+1]+"!"+encode_range(r));
+				sname = (supbooks && supbooks[1] ? supbooks[1][ixti+1] : "**MISSING**");
+				stack.push(sname + "!" + encode_range(r));
 				break;
 			/* 2.5.198.41 */
 			case 'PtgAttrSum':
@@ -3733,7 +4125,7 @@ function stringify_formula(formula, range, cell, supbooks, opts) {
 				/* f[1] = type, 0, nameindex */
 				nameidx = f[1][2];
 				var lbl = supbooks[0][nameidx];
-				var name = lbl.Name;
+				var name = lbl ? lbl.Name : "**MISSING**" + nameidx;
 				if(name in XLSXFutureFunctions) name = XLSXFutureFunctions[name];
 				stack.push(name);
 				break;
@@ -3743,15 +4135,34 @@ function stringify_formula(formula, range, cell, supbooks, opts) {
 				/* f[1] = type, ixti, nameindex */
 				var bookidx = f[1][1]; nameidx = f[1][2]; var externbook;
 				/* TODO: Properly handle missing values */
-				if(supbooks[bookidx+1]) externbook = supbooks[bookidx+1][nameidx];
-				else if(supbooks[bookidx-1]) externbook = supbooks[bookidx-1][nameidx];
+				if(opts.biff == 5) {
+					if(bookidx < 0) bookidx = -bookidx;
+					if(supbooks[bookidx]) externbook = supbooks[bookidx][nameidx];
+				} else {
+					if(supbooks[bookidx+1]) externbook = supbooks[bookidx+1][nameidx];
+					else if(supbooks[bookidx-1]) externbook = supbooks[bookidx-1][nameidx];
+				}
 				if(!externbook) externbook = {body: "??NAMEX??"};
 				stack.push(externbook.body);
 				break;
 
 		/* 2.2.2.4 Display Tokens */
 			/* 2.5.198.80 */
-			case 'PtgParen': stack.push('(' + stack.pop() + ')'); break;
+			case 'PtgParen':
+				var lp = '(', rp = ')';
+				if(last_sp >= 0) {
+					sp = "";
+					switch(formula[0][last_sp][1][0]) {
+						case 2: lp = fill(" ", formula[0][last_sp][1][1]) + lp; break;
+						case 3: lp = fill("\r", formula[0][last_sp][1][1]) + lp; break;
+						case 4: rp = fill(" ", formula[0][last_sp][1][1]) + lp; break;
+						case 5: rp = fill("\r", formula[0][last_sp][1][1]) + lp; break;
+						default:
+							if(opts.WTF) throw new Error("Unexpected PtgSpace type " + formula[0][last_sp][1][0]);
+					}
+					last_sp = -1;
+				}
+				stack.push(lp + stack.pop() + rp); break;
 
 			/* 2.5.198.86 */
 			case 'PtgRefErr': stack.push('#REF!'); break;
@@ -3773,6 +4184,8 @@ function stringify_formula(formula, range, cell, supbooks, opts) {
 						if(c.c < e2[0].s.c || c.c > e2[0].e.c) continue;
 						if(c.r < e2[0].s.r || c.r > e2[0].e.r) continue;
 						stack.push(stringify_formula(e2[1], _range, q, supbooks, opts));
+						fnd = true;
+						break;
 					}
 					if(!fnd) stack.push(f[1]);
 				}
@@ -3780,7 +4193,7 @@ function stringify_formula(formula, range, cell, supbooks, opts) {
 
 			/* 2.5.198.32 TODO */
 			case 'PtgArray':
-				stack.push("{" + f[1].map(mapper).join(";") + "}");
+				stack.push("{" + stringify_array(f[1]) + "}");
 				break;
 
 		/* 2.2.2.5 Mem Tokens */
@@ -3789,8 +4202,12 @@ function stringify_formula(formula, range, cell, supbooks, opts) {
 				//stack.push("(" + f[2].map(encode_range).join(",") + ")");
 				break;
 
-			/* 2.5.198.38 TODO */
-			case 'PtgAttrSpace': break;
+			/* 2.5.198.38 */
+			case 'PtgAttrSpace':
+			/* 2.5.198.39 */
+			case 'PtgAttrSpaceSemi':
+				last_sp = ff;
+				break;
 
 			/* 2.5.198.92 TODO */
 			case 'PtgTbl': break;
@@ -3817,993 +4234,1113 @@ function stringify_formula(formula, range, cell, supbooks, opts) {
 
 			default: throw 'Unrecognized Formula Token: ' + f;
 		}
+		var PtgNonDisp = ['PtgAttrSpace', 'PtgAttrSpaceSemi', 'PtgAttrGoto'];
+		if(last_sp >= 0 && PtgNonDisp.indexOf(formula[0][ff][0]) == -1) {
+			f = formula[0][last_sp];
+			switch(f[1][0]) {
+				case 0: sp = fill(" ", f[1][1]); break;
+				case 1: sp = fill("\r", f[1][1]); break;
+				default:
+					sp = "";
+					if(opts.WTF) throw new Error("Unexpected PtgSpace type " + f[1][0]);
+			}
+			stack.push(sp + stack.pop());
+			last_sp = -1;
+		}
 		//console.log("::",f, stack)
 	}
 	//console.log("--",stack);
+	if(stack.length > 1 && opts.WTF) throw new Error("bad formula stack");
 	return stack[0];
 }
-/* 2.5.198.44 */
+/* [MS-XLS] 2.5.198.44 */
 var PtgDataType = {
-	0x1: "REFERENCE", // reference to range
-	0x2: "VALUE", // single value
-	0x3: "ARRAY" // array of values
+0x1: "REFERENCE", // reference to range
+0x2: "VALUE", // single value
+0x3: "ARRAY" // array of values
 };
 
-/* 2.5.198.2 */
-var BERR = {
-	0x00: "#NULL!",
-	0x07: "#DIV/0!",
-	0x0F: "#VALUE!",
-	0x17: "#REF!",
-	0x1D: "#NAME?",
-	0x24: "#NUM!",
-	0x2A: "#N/A",
-	0x2B: "#GETTING_DATA", /* Noted in 2.5.10 but not in 2.5.198.2 */
-	0xFF: "#WTF?"
-};
-
-/* 2.5.198.4 */
+/* [MS-XLS] 2.5.198.4 */
 var Cetab = {
-	0x0000: 'BEEP',
-	0x0001: 'OPEN',
-	0x0002: 'OPEN.LINKS',
-	0x0003: 'CLOSE.ALL',
-	0x0004: 'SAVE',
-	0x0005: 'SAVE.AS',
-	0x0006: 'FILE.DELETE',
-	0x0007: 'PAGE.SETUP',
-	0x0008: 'PRINT',
-	0x0009: 'PRINTER.SETUP',
-	0x000A: 'QUIT',
-	0x000B: 'NEW.WINDOW',
-	0x000C: 'ARRANGE.ALL',
-	0x000D: 'WINDOW.SIZE',
-	0x000E: 'WINDOW.MOVE',
-	0x000F: 'FULL',
-	0x0010: 'CLOSE',
-	0x0011: 'RUN',
-	0x0016: 'SET.PRINT.AREA',
-	0x0017: 'SET.PRINT.TITLES',
-	0x0018: 'SET.PAGE.BREAK',
-	0x0019: 'REMOVE.PAGE.BREAK',
-	0x001A: 'FONT',
-	0x001B: 'DISPLAY',
-	0x001C: 'PROTECT.DOCUMENT',
-	0x001D: 'PRECISION',
-	0x001E: 'A1.R1C1',
-	0x001F: 'CALCULATE.NOW',
-	0x0020: 'CALCULATION',
-	0x0022: 'DATA.FIND',
-	0x0023: 'EXTRACT',
-	0x0024: 'DATA.DELETE',
-	0x0025: 'SET.DATABASE',
-	0x0026: 'SET.CRITERIA',
-	0x0027: 'SORT',
-	0x0028: 'DATA.SERIES',
-	0x0029: 'TABLE',
-	0x002A: 'FORMAT.NUMBER',
-	0x002B: 'ALIGNMENT',
-	0x002C: 'STYLE',
-	0x002D: 'BORDER',
-	0x002E: 'CELL.PROTECTION',
-	0x002F: 'COLUMN.WIDTH',
-	0x0030: 'UNDO',
-	0x0031: 'CUT',
-	0x0032: 'COPY',
-	0x0033: 'PASTE',
-	0x0034: 'CLEAR',
-	0x0035: 'PASTE.SPECIAL',
-	0x0036: 'EDIT.DELETE',
-	0x0037: 'INSERT',
-	0x0038: 'FILL.RIGHT',
-	0x0039: 'FILL.DOWN',
-	0x003D: 'DEFINE.NAME',
-	0x003E: 'CREATE.NAMES',
-	0x003F: 'FORMULA.GOTO',
-	0x0040: 'FORMULA.FIND',
-	0x0041: 'SELECT.LAST.CELL',
-	0x0042: 'SHOW.ACTIVE.CELL',
-	0x0043: 'GALLERY.AREA',
-	0x0044: 'GALLERY.BAR',
-	0x0045: 'GALLERY.COLUMN',
-	0x0046: 'GALLERY.LINE',
-	0x0047: 'GALLERY.PIE',
-	0x0048: 'GALLERY.SCATTER',
-	0x0049: 'COMBINATION',
-	0x004A: 'PREFERRED',
-	0x004B: 'ADD.OVERLAY',
-	0x004C: 'GRIDLINES',
-	0x004D: 'SET.PREFERRED',
-	0x004E: 'AXES',
-	0x004F: 'LEGEND',
-	0x0050: 'ATTACH.TEXT',
-	0x0051: 'ADD.ARROW',
-	0x0052: 'SELECT.CHART',
-	0x0053: 'SELECT.PLOT.AREA',
-	0x0054: 'PATTERNS',
-	0x0055: 'MAIN.CHART',
-	0x0056: 'OVERLAY',
-	0x0057: 'SCALE',
-	0x0058: 'FORMAT.LEGEND',
-	0x0059: 'FORMAT.TEXT',
-	0x005A: 'EDIT.REPEAT',
-	0x005B: 'PARSE',
-	0x005C: 'JUSTIFY',
-	0x005D: 'HIDE',
-	0x005E: 'UNHIDE',
-	0x005F: 'WORKSPACE',
-	0x0060: 'FORMULA',
-	0x0061: 'FORMULA.FILL',
-	0x0062: 'FORMULA.ARRAY',
-	0x0063: 'DATA.FIND.NEXT',
-	0x0064: 'DATA.FIND.PREV',
-	0x0065: 'FORMULA.FIND.NEXT',
-	0x0066: 'FORMULA.FIND.PREV',
-	0x0067: 'ACTIVATE',
-	0x0068: 'ACTIVATE.NEXT',
-	0x0069: 'ACTIVATE.PREV',
-	0x006A: 'UNLOCKED.NEXT',
-	0x006B: 'UNLOCKED.PREV',
-	0x006C: 'COPY.PICTURE',
-	0x006D: 'SELECT',
-	0x006E: 'DELETE.NAME',
-	0x006F: 'DELETE.FORMAT',
-	0x0070: 'VLINE',
-	0x0071: 'HLINE',
-	0x0072: 'VPAGE',
-	0x0073: 'HPAGE',
-	0x0074: 'VSCROLL',
-	0x0075: 'HSCROLL',
-	0x0076: 'ALERT',
-	0x0077: 'NEW',
-	0x0078: 'CANCEL.COPY',
-	0x0079: 'SHOW.CLIPBOARD',
-	0x007A: 'MESSAGE',
-	0x007C: 'PASTE.LINK',
-	0x007D: 'APP.ACTIVATE',
-	0x007E: 'DELETE.ARROW',
-	0x007F: 'ROW.HEIGHT',
-	0x0080: 'FORMAT.MOVE',
-	0x0081: 'FORMAT.SIZE',
-	0x0082: 'FORMULA.REPLACE',
-	0x0083: 'SEND.KEYS',
-	0x0084: 'SELECT.SPECIAL',
-	0x0085: 'APPLY.NAMES',
-	0x0086: 'REPLACE.FONT',
-	0x0087: 'FREEZE.PANES',
-	0x0088: 'SHOW.INFO',
-	0x0089: 'SPLIT',
-	0x008A: 'ON.WINDOW',
-	0x008B: 'ON.DATA',
-	0x008C: 'DISABLE.INPUT',
-	0x008E: 'OUTLINE',
-	0x008F: 'LIST.NAMES',
-	0x0090: 'FILE.CLOSE',
-	0x0091: 'SAVE.WORKBOOK',
-	0x0092: 'DATA.FORM',
-	0x0093: 'COPY.CHART',
-	0x0094: 'ON.TIME',
-	0x0095: 'WAIT',
-	0x0096: 'FORMAT.FONT',
-	0x0097: 'FILL.UP',
-	0x0098: 'FILL.LEFT',
-	0x0099: 'DELETE.OVERLAY',
-	0x009B: 'SHORT.MENUS',
-	0x009F: 'SET.UPDATE.STATUS',
-	0x00A1: 'COLOR.PALETTE',
-	0x00A2: 'DELETE.STYLE',
-	0x00A3: 'WINDOW.RESTORE',
-	0x00A4: 'WINDOW.MAXIMIZE',
-	0x00A6: 'CHANGE.LINK',
-	0x00A7: 'CALCULATE.DOCUMENT',
-	0x00A8: 'ON.KEY',
-	0x00A9: 'APP.RESTORE',
-	0x00AA: 'APP.MOVE',
-	0x00AB: 'APP.SIZE',
-	0x00AC: 'APP.MINIMIZE',
-	0x00AD: 'APP.MAXIMIZE',
-	0x00AE: 'BRING.TO.FRONT',
-	0x00AF: 'SEND.TO.BACK',
-	0x00B9: 'MAIN.CHART.TYPE',
-	0x00BA: 'OVERLAY.CHART.TYPE',
-	0x00BB: 'SELECT.END',
-	0x00BC: 'OPEN.MAIL',
-	0x00BD: 'SEND.MAIL',
-	0x00BE: 'STANDARD.FONT',
-	0x00BF: 'CONSOLIDATE',
-	0x00C0: 'SORT.SPECIAL',
-	0x00C1: 'GALLERY.3D.AREA',
-	0x00C2: 'GALLERY.3D.COLUMN',
-	0x00C3: 'GALLERY.3D.LINE',
-	0x00C4: 'GALLERY.3D.PIE',
-	0x00C5: 'VIEW.3D',
-	0x00C6: 'GOAL.SEEK',
-	0x00C7: 'WORKGROUP',
-	0x00C8: 'FILL.GROUP',
-	0x00C9: 'UPDATE.LINK',
-	0x00CA: 'PROMOTE',
-	0x00CB: 'DEMOTE',
-	0x00CC: 'SHOW.DETAIL',
-	0x00CE: 'UNGROUP',
-	0x00CF: 'OBJECT.PROPERTIES',
-	0x00D0: 'SAVE.NEW.OBJECT',
-	0x00D1: 'SHARE',
-	0x00D2: 'SHARE.NAME',
-	0x00D3: 'DUPLICATE',
-	0x00D4: 'APPLY.STYLE',
-	0x00D5: 'ASSIGN.TO.OBJECT',
-	0x00D6: 'OBJECT.PROTECTION',
-	0x00D7: 'HIDE.OBJECT',
-	0x00D8: 'SET.EXTRACT',
-	0x00D9: 'CREATE.PUBLISHER',
-	0x00DA: 'SUBSCRIBE.TO',
-	0x00DB: 'ATTRIBUTES',
-	0x00DC: 'SHOW.TOOLBAR',
-	0x00DE: 'PRINT.PREVIEW',
-	0x00DF: 'EDIT.COLOR',
-	0x00E0: 'SHOW.LEVELS',
-	0x00E1: 'FORMAT.MAIN',
-	0x00E2: 'FORMAT.OVERLAY',
-	0x00E3: 'ON.RECALC',
-	0x00E4: 'EDIT.SERIES',
-	0x00E5: 'DEFINE.STYLE',
-	0x00F0: 'LINE.PRINT',
-	0x00F3: 'ENTER.DATA',
-	0x00F9: 'GALLERY.RADAR',
-	0x00FA: 'MERGE.STYLES',
-	0x00FB: 'EDITION.OPTIONS',
-	0x00FC: 'PASTE.PICTURE',
-	0x00FD: 'PASTE.PICTURE.LINK',
-	0x00FE: 'SPELLING',
-	0x0100: 'ZOOM',
-	0x0103: 'INSERT.OBJECT',
-	0x0104: 'WINDOW.MINIMIZE',
-	0x0109: 'SOUND.NOTE',
-	0x010A: 'SOUND.PLAY',
-	0x010B: 'FORMAT.SHAPE',
-	0x010C: 'EXTEND.POLYGON',
-	0x010D: 'FORMAT.AUTO',
-	0x0110: 'GALLERY.3D.BAR',
-	0x0111: 'GALLERY.3D.SURFACE',
-	0x0112: 'FILL.AUTO',
-	0x0114: 'CUSTOMIZE.TOOLBAR',
-	0x0115: 'ADD.TOOL',
-	0x0116: 'EDIT.OBJECT',
-	0x0117: 'ON.DOUBLECLICK',
-	0x0118: 'ON.ENTRY',
-	0x0119: 'WORKBOOK.ADD',
-	0x011A: 'WORKBOOK.MOVE',
-	0x011B: 'WORKBOOK.COPY',
-	0x011C: 'WORKBOOK.OPTIONS',
-	0x011D: 'SAVE.WORKSPACE',
-	0x0120: 'CHART.WIZARD',
-	0x0121: 'DELETE.TOOL',
-	0x0122: 'MOVE.TOOL',
-	0x0123: 'WORKBOOK.SELECT',
-	0x0124: 'WORKBOOK.ACTIVATE',
-	0x0125: 'ASSIGN.TO.TOOL',
-	0x0127: 'COPY.TOOL',
-	0x0128: 'RESET.TOOL',
-	0x0129: 'CONSTRAIN.NUMERIC',
-	0x012A: 'PASTE.TOOL',
-	0x012E: 'WORKBOOK.NEW',
-	0x0131: 'SCENARIO.CELLS',
-	0x0132: 'SCENARIO.DELETE',
-	0x0133: 'SCENARIO.ADD',
-	0x0134: 'SCENARIO.EDIT',
-	0x0135: 'SCENARIO.SHOW',
-	0x0136: 'SCENARIO.SHOW.NEXT',
-	0x0137: 'SCENARIO.SUMMARY',
-	0x0138: 'PIVOT.TABLE.WIZARD',
-	0x0139: 'PIVOT.FIELD.PROPERTIES',
-	0x013A: 'PIVOT.FIELD',
-	0x013B: 'PIVOT.ITEM',
-	0x013C: 'PIVOT.ADD.FIELDS',
-	0x013E: 'OPTIONS.CALCULATION',
-	0x013F: 'OPTIONS.EDIT',
-	0x0140: 'OPTIONS.VIEW',
-	0x0141: 'ADDIN.MANAGER',
-	0x0142: 'MENU.EDITOR',
-	0x0143: 'ATTACH.TOOLBARS',
-	0x0144: 'VBAActivate',
-	0x0145: 'OPTIONS.CHART',
-	0x0148: 'VBA.INSERT.FILE',
-	0x014A: 'VBA.PROCEDURE.DEFINITION',
-	0x0150: 'ROUTING.SLIP',
-	0x0152: 'ROUTE.DOCUMENT',
-	0x0153: 'MAIL.LOGON',
-	0x0156: 'INSERT.PICTURE',
-	0x0157: 'EDIT.TOOL',
-	0x0158: 'GALLERY.DOUGHNUT',
-	0x015E: 'CHART.TREND',
-	0x0160: 'PIVOT.ITEM.PROPERTIES',
-	0x0162: 'WORKBOOK.INSERT',
-	0x0163: 'OPTIONS.TRANSITION',
-	0x0164: 'OPTIONS.GENERAL',
-	0x0172: 'FILTER.ADVANCED',
-	0x0175: 'MAIL.ADD.MAILER',
-	0x0176: 'MAIL.DELETE.MAILER',
-	0x0177: 'MAIL.REPLY',
-	0x0178: 'MAIL.REPLY.ALL',
-	0x0179: 'MAIL.FORWARD',
-	0x017A: 'MAIL.NEXT.LETTER',
-	0x017B: 'DATA.LABEL',
-	0x017C: 'INSERT.TITLE',
-	0x017D: 'FONT.PROPERTIES',
-	0x017E: 'MACRO.OPTIONS',
-	0x017F: 'WORKBOOK.HIDE',
-	0x0180: 'WORKBOOK.UNHIDE',
-	0x0181: 'WORKBOOK.DELETE',
-	0x0182: 'WORKBOOK.NAME',
-	0x0184: 'GALLERY.CUSTOM',
-	0x0186: 'ADD.CHART.AUTOFORMAT',
-	0x0187: 'DELETE.CHART.AUTOFORMAT',
-	0x0188: 'CHART.ADD.DATA',
-	0x0189: 'AUTO.OUTLINE',
-	0x018A: 'TAB.ORDER',
-	0x018B: 'SHOW.DIALOG',
-	0x018C: 'SELECT.ALL',
-	0x018D: 'UNGROUP.SHEETS',
-	0x018E: 'SUBTOTAL.CREATE',
-	0x018F: 'SUBTOTAL.REMOVE',
-	0x0190: 'RENAME.OBJECT',
-	0x019C: 'WORKBOOK.SCROLL',
-	0x019D: 'WORKBOOK.NEXT',
-	0x019E: 'WORKBOOK.PREV',
-	0x019F: 'WORKBOOK.TAB.SPLIT',
-	0x01A0: 'FULL.SCREEN',
-	0x01A1: 'WORKBOOK.PROTECT',
-	0x01A4: 'SCROLLBAR.PROPERTIES',
-	0x01A5: 'PIVOT.SHOW.PAGES',
-	0x01A6: 'TEXT.TO.COLUMNS',
-	0x01A7: 'FORMAT.CHARTTYPE',
-	0x01A8: 'LINK.FORMAT',
-	0x01A9: 'TRACER.DISPLAY',
-	0x01AE: 'TRACER.NAVIGATE',
-	0x01AF: 'TRACER.CLEAR',
-	0x01B0: 'TRACER.ERROR',
-	0x01B1: 'PIVOT.FIELD.GROUP',
-	0x01B2: 'PIVOT.FIELD.UNGROUP',
-	0x01B3: 'CHECKBOX.PROPERTIES',
-	0x01B4: 'LABEL.PROPERTIES',
-	0x01B5: 'LISTBOX.PROPERTIES',
-	0x01B6: 'EDITBOX.PROPERTIES',
-	0x01B7: 'PIVOT.REFRESH',
-	0x01B8: 'LINK.COMBO',
-	0x01B9: 'OPEN.TEXT',
-	0x01BA: 'HIDE.DIALOG',
-	0x01BB: 'SET.DIALOG.FOCUS',
-	0x01BC: 'ENABLE.OBJECT',
-	0x01BD: 'PUSHBUTTON.PROPERTIES',
-	0x01BE: 'SET.DIALOG.DEFAULT',
-	0x01BF: 'FILTER',
-	0x01C0: 'FILTER.SHOW.ALL',
-	0x01C1: 'CLEAR.OUTLINE',
-	0x01C2: 'FUNCTION.WIZARD',
-	0x01C3: 'ADD.LIST.ITEM',
-	0x01C4: 'SET.LIST.ITEM',
-	0x01C5: 'REMOVE.LIST.ITEM',
-	0x01C6: 'SELECT.LIST.ITEM',
-	0x01C7: 'SET.CONTROL.VALUE',
-	0x01C8: 'SAVE.COPY.AS',
-	0x01CA: 'OPTIONS.LISTS.ADD',
-	0x01CB: 'OPTIONS.LISTS.DELETE',
-	0x01CC: 'SERIES.AXES',
-	0x01CD: 'SERIES.X',
-	0x01CE: 'SERIES.Y',
-	0x01CF: 'ERRORBAR.X',
-	0x01D0: 'ERRORBAR.Y',
-	0x01D1: 'FORMAT.CHART',
-	0x01D2: 'SERIES.ORDER',
-	0x01D3: 'MAIL.LOGOFF',
-	0x01D4: 'CLEAR.ROUTING.SLIP',
-	0x01D5: 'APP.ACTIVATE.MICROSOFT',
-	0x01D6: 'MAIL.EDIT.MAILER',
-	0x01D7: 'ON.SHEET',
-	0x01D8: 'STANDARD.WIDTH',
-	0x01D9: 'SCENARIO.MERGE',
-	0x01DA: 'SUMMARY.INFO',
-	0x01DB: 'FIND.FILE',
-	0x01DC: 'ACTIVE.CELL.FONT',
-	0x01DD: 'ENABLE.TIPWIZARD',
-	0x01DE: 'VBA.MAKE.ADDIN',
-	0x01E0: 'INSERTDATATABLE',
-	0x01E1: 'WORKGROUP.OPTIONS',
-	0x01E2: 'MAIL.SEND.MAILER',
-	0x01E5: 'AUTOCORRECT',
-	0x01E9: 'POST.DOCUMENT',
-	0x01EB: 'PICKLIST',
-	0x01ED: 'VIEW.SHOW',
-	0x01EE: 'VIEW.DEFINE',
-	0x01EF: 'VIEW.DELETE',
-	0x01FD: 'SHEET.BACKGROUND',
-	0x01FE: 'INSERT.MAP.OBJECT',
-	0x01FF: 'OPTIONS.MENONO',
-	0x0205: 'MSOCHECKS',
-	0x0206: 'NORMAL',
-	0x0207: 'LAYOUT',
-	0x0208: 'RM.PRINT.AREA',
-	0x0209: 'CLEAR.PRINT.AREA',
-	0x020A: 'ADD.PRINT.AREA',
-	0x020B: 'MOVE.BRK',
-	0x0221: 'HIDECURR.NOTE',
-	0x0222: 'HIDEALL.NOTES',
-	0x0223: 'DELETE.NOTE',
-	0x0224: 'TRAVERSE.NOTES',
-	0x0225: 'ACTIVATE.NOTES',
-	0x026C: 'PROTECT.REVISIONS',
-	0x026D: 'UNPROTECT.REVISIONS',
-	0x0287: 'OPTIONS.ME',
-	0x028D: 'WEB.PUBLISH',
-	0x029B: 'NEWWEBQUERY',
-	0x02A1: 'PIVOT.TABLE.CHART',
-	0x02F1: 'OPTIONS.SAVE',
-	0x02F3: 'OPTIONS.SPELL',
-	0x0328: 'HIDEALL.INKANNOTS'
+0x0000: 'BEEP',
+0x0001: 'OPEN',
+0x0002: 'OPEN.LINKS',
+0x0003: 'CLOSE.ALL',
+0x0004: 'SAVE',
+0x0005: 'SAVE.AS',
+0x0006: 'FILE.DELETE',
+0x0007: 'PAGE.SETUP',
+0x0008: 'PRINT',
+0x0009: 'PRINTER.SETUP',
+0x000A: 'QUIT',
+0x000B: 'NEW.WINDOW',
+0x000C: 'ARRANGE.ALL',
+0x000D: 'WINDOW.SIZE',
+0x000E: 'WINDOW.MOVE',
+0x000F: 'FULL',
+0x0010: 'CLOSE',
+0x0011: 'RUN',
+0x0016: 'SET.PRINT.AREA',
+0x0017: 'SET.PRINT.TITLES',
+0x0018: 'SET.PAGE.BREAK',
+0x0019: 'REMOVE.PAGE.BREAK',
+0x001A: 'FONT',
+0x001B: 'DISPLAY',
+0x001C: 'PROTECT.DOCUMENT',
+0x001D: 'PRECISION',
+0x001E: 'A1.R1C1',
+0x001F: 'CALCULATE.NOW',
+0x0020: 'CALCULATION',
+0x0022: 'DATA.FIND',
+0x0023: 'EXTRACT',
+0x0024: 'DATA.DELETE',
+0x0025: 'SET.DATABASE',
+0x0026: 'SET.CRITERIA',
+0x0027: 'SORT',
+0x0028: 'DATA.SERIES',
+0x0029: 'TABLE',
+0x002A: 'FORMAT.NUMBER',
+0x002B: 'ALIGNMENT',
+0x002C: 'STYLE',
+0x002D: 'BORDER',
+0x002E: 'CELL.PROTECTION',
+0x002F: 'COLUMN.WIDTH',
+0x0030: 'UNDO',
+0x0031: 'CUT',
+0x0032: 'COPY',
+0x0033: 'PASTE',
+0x0034: 'CLEAR',
+0x0035: 'PASTE.SPECIAL',
+0x0036: 'EDIT.DELETE',
+0x0037: 'INSERT',
+0x0038: 'FILL.RIGHT',
+0x0039: 'FILL.DOWN',
+0x003D: 'DEFINE.NAME',
+0x003E: 'CREATE.NAMES',
+0x003F: 'FORMULA.GOTO',
+0x0040: 'FORMULA.FIND',
+0x0041: 'SELECT.LAST.CELL',
+0x0042: 'SHOW.ACTIVE.CELL',
+0x0043: 'GALLERY.AREA',
+0x0044: 'GALLERY.BAR',
+0x0045: 'GALLERY.COLUMN',
+0x0046: 'GALLERY.LINE',
+0x0047: 'GALLERY.PIE',
+0x0048: 'GALLERY.SCATTER',
+0x0049: 'COMBINATION',
+0x004A: 'PREFERRED',
+0x004B: 'ADD.OVERLAY',
+0x004C: 'GRIDLINES',
+0x004D: 'SET.PREFERRED',
+0x004E: 'AXES',
+0x004F: 'LEGEND',
+0x0050: 'ATTACH.TEXT',
+0x0051: 'ADD.ARROW',
+0x0052: 'SELECT.CHART',
+0x0053: 'SELECT.PLOT.AREA',
+0x0054: 'PATTERNS',
+0x0055: 'MAIN.CHART',
+0x0056: 'OVERLAY',
+0x0057: 'SCALE',
+0x0058: 'FORMAT.LEGEND',
+0x0059: 'FORMAT.TEXT',
+0x005A: 'EDIT.REPEAT',
+0x005B: 'PARSE',
+0x005C: 'JUSTIFY',
+0x005D: 'HIDE',
+0x005E: 'UNHIDE',
+0x005F: 'WORKSPACE',
+0x0060: 'FORMULA',
+0x0061: 'FORMULA.FILL',
+0x0062: 'FORMULA.ARRAY',
+0x0063: 'DATA.FIND.NEXT',
+0x0064: 'DATA.FIND.PREV',
+0x0065: 'FORMULA.FIND.NEXT',
+0x0066: 'FORMULA.FIND.PREV',
+0x0067: 'ACTIVATE',
+0x0068: 'ACTIVATE.NEXT',
+0x0069: 'ACTIVATE.PREV',
+0x006A: 'UNLOCKED.NEXT',
+0x006B: 'UNLOCKED.PREV',
+0x006C: 'COPY.PICTURE',
+0x006D: 'SELECT',
+0x006E: 'DELETE.NAME',
+0x006F: 'DELETE.FORMAT',
+0x0070: 'VLINE',
+0x0071: 'HLINE',
+0x0072: 'VPAGE',
+0x0073: 'HPAGE',
+0x0074: 'VSCROLL',
+0x0075: 'HSCROLL',
+0x0076: 'ALERT',
+0x0077: 'NEW',
+0x0078: 'CANCEL.COPY',
+0x0079: 'SHOW.CLIPBOARD',
+0x007A: 'MESSAGE',
+0x007C: 'PASTE.LINK',
+0x007D: 'APP.ACTIVATE',
+0x007E: 'DELETE.ARROW',
+0x007F: 'ROW.HEIGHT',
+0x0080: 'FORMAT.MOVE',
+0x0081: 'FORMAT.SIZE',
+0x0082: 'FORMULA.REPLACE',
+0x0083: 'SEND.KEYS',
+0x0084: 'SELECT.SPECIAL',
+0x0085: 'APPLY.NAMES',
+0x0086: 'REPLACE.FONT',
+0x0087: 'FREEZE.PANES',
+0x0088: 'SHOW.INFO',
+0x0089: 'SPLIT',
+0x008A: 'ON.WINDOW',
+0x008B: 'ON.DATA',
+0x008C: 'DISABLE.INPUT',
+0x008E: 'OUTLINE',
+0x008F: 'LIST.NAMES',
+0x0090: 'FILE.CLOSE',
+0x0091: 'SAVE.WORKBOOK',
+0x0092: 'DATA.FORM',
+0x0093: 'COPY.CHART',
+0x0094: 'ON.TIME',
+0x0095: 'WAIT',
+0x0096: 'FORMAT.FONT',
+0x0097: 'FILL.UP',
+0x0098: 'FILL.LEFT',
+0x0099: 'DELETE.OVERLAY',
+0x009B: 'SHORT.MENUS',
+0x009F: 'SET.UPDATE.STATUS',
+0x00A1: 'COLOR.PALETTE',
+0x00A2: 'DELETE.STYLE',
+0x00A3: 'WINDOW.RESTORE',
+0x00A4: 'WINDOW.MAXIMIZE',
+0x00A6: 'CHANGE.LINK',
+0x00A7: 'CALCULATE.DOCUMENT',
+0x00A8: 'ON.KEY',
+0x00A9: 'APP.RESTORE',
+0x00AA: 'APP.MOVE',
+0x00AB: 'APP.SIZE',
+0x00AC: 'APP.MINIMIZE',
+0x00AD: 'APP.MAXIMIZE',
+0x00AE: 'BRING.TO.FRONT',
+0x00AF: 'SEND.TO.BACK',
+0x00B9: 'MAIN.CHART.TYPE',
+0x00BA: 'OVERLAY.CHART.TYPE',
+0x00BB: 'SELECT.END',
+0x00BC: 'OPEN.MAIL',
+0x00BD: 'SEND.MAIL',
+0x00BE: 'STANDARD.FONT',
+0x00BF: 'CONSOLIDATE',
+0x00C0: 'SORT.SPECIAL',
+0x00C1: 'GALLERY.3D.AREA',
+0x00C2: 'GALLERY.3D.COLUMN',
+0x00C3: 'GALLERY.3D.LINE',
+0x00C4: 'GALLERY.3D.PIE',
+0x00C5: 'VIEW.3D',
+0x00C6: 'GOAL.SEEK',
+0x00C7: 'WORKGROUP',
+0x00C8: 'FILL.GROUP',
+0x00C9: 'UPDATE.LINK',
+0x00CA: 'PROMOTE',
+0x00CB: 'DEMOTE',
+0x00CC: 'SHOW.DETAIL',
+0x00CE: 'UNGROUP',
+0x00CF: 'OBJECT.PROPERTIES',
+0x00D0: 'SAVE.NEW.OBJECT',
+0x00D1: 'SHARE',
+0x00D2: 'SHARE.NAME',
+0x00D3: 'DUPLICATE',
+0x00D4: 'APPLY.STYLE',
+0x00D5: 'ASSIGN.TO.OBJECT',
+0x00D6: 'OBJECT.PROTECTION',
+0x00D7: 'HIDE.OBJECT',
+0x00D8: 'SET.EXTRACT',
+0x00D9: 'CREATE.PUBLISHER',
+0x00DA: 'SUBSCRIBE.TO',
+0x00DB: 'ATTRIBUTES',
+0x00DC: 'SHOW.TOOLBAR',
+0x00DE: 'PRINT.PREVIEW',
+0x00DF: 'EDIT.COLOR',
+0x00E0: 'SHOW.LEVELS',
+0x00E1: 'FORMAT.MAIN',
+0x00E2: 'FORMAT.OVERLAY',
+0x00E3: 'ON.RECALC',
+0x00E4: 'EDIT.SERIES',
+0x00E5: 'DEFINE.STYLE',
+0x00F0: 'LINE.PRINT',
+0x00F3: 'ENTER.DATA',
+0x00F9: 'GALLERY.RADAR',
+0x00FA: 'MERGE.STYLES',
+0x00FB: 'EDITION.OPTIONS',
+0x00FC: 'PASTE.PICTURE',
+0x00FD: 'PASTE.PICTURE.LINK',
+0x00FE: 'SPELLING',
+0x0100: 'ZOOM',
+0x0103: 'INSERT.OBJECT',
+0x0104: 'WINDOW.MINIMIZE',
+0x0109: 'SOUND.NOTE',
+0x010A: 'SOUND.PLAY',
+0x010B: 'FORMAT.SHAPE',
+0x010C: 'EXTEND.POLYGON',
+0x010D: 'FORMAT.AUTO',
+0x0110: 'GALLERY.3D.BAR',
+0x0111: 'GALLERY.3D.SURFACE',
+0x0112: 'FILL.AUTO',
+0x0114: 'CUSTOMIZE.TOOLBAR',
+0x0115: 'ADD.TOOL',
+0x0116: 'EDIT.OBJECT',
+0x0117: 'ON.DOUBLECLICK',
+0x0118: 'ON.ENTRY',
+0x0119: 'WORKBOOK.ADD',
+0x011A: 'WORKBOOK.MOVE',
+0x011B: 'WORKBOOK.COPY',
+0x011C: 'WORKBOOK.OPTIONS',
+0x011D: 'SAVE.WORKSPACE',
+0x0120: 'CHART.WIZARD',
+0x0121: 'DELETE.TOOL',
+0x0122: 'MOVE.TOOL',
+0x0123: 'WORKBOOK.SELECT',
+0x0124: 'WORKBOOK.ACTIVATE',
+0x0125: 'ASSIGN.TO.TOOL',
+0x0127: 'COPY.TOOL',
+0x0128: 'RESET.TOOL',
+0x0129: 'CONSTRAIN.NUMERIC',
+0x012A: 'PASTE.TOOL',
+0x012E: 'WORKBOOK.NEW',
+0x0131: 'SCENARIO.CELLS',
+0x0132: 'SCENARIO.DELETE',
+0x0133: 'SCENARIO.ADD',
+0x0134: 'SCENARIO.EDIT',
+0x0135: 'SCENARIO.SHOW',
+0x0136: 'SCENARIO.SHOW.NEXT',
+0x0137: 'SCENARIO.SUMMARY',
+0x0138: 'PIVOT.TABLE.WIZARD',
+0x0139: 'PIVOT.FIELD.PROPERTIES',
+0x013A: 'PIVOT.FIELD',
+0x013B: 'PIVOT.ITEM',
+0x013C: 'PIVOT.ADD.FIELDS',
+0x013E: 'OPTIONS.CALCULATION',
+0x013F: 'OPTIONS.EDIT',
+0x0140: 'OPTIONS.VIEW',
+0x0141: 'ADDIN.MANAGER',
+0x0142: 'MENU.EDITOR',
+0x0143: 'ATTACH.TOOLBARS',
+0x0144: 'VBAActivate',
+0x0145: 'OPTIONS.CHART',
+0x0148: 'VBA.INSERT.FILE',
+0x014A: 'VBA.PROCEDURE.DEFINITION',
+0x0150: 'ROUTING.SLIP',
+0x0152: 'ROUTE.DOCUMENT',
+0x0153: 'MAIL.LOGON',
+0x0156: 'INSERT.PICTURE',
+0x0157: 'EDIT.TOOL',
+0x0158: 'GALLERY.DOUGHNUT',
+0x015E: 'CHART.TREND',
+0x0160: 'PIVOT.ITEM.PROPERTIES',
+0x0162: 'WORKBOOK.INSERT',
+0x0163: 'OPTIONS.TRANSITION',
+0x0164: 'OPTIONS.GENERAL',
+0x0172: 'FILTER.ADVANCED',
+0x0175: 'MAIL.ADD.MAILER',
+0x0176: 'MAIL.DELETE.MAILER',
+0x0177: 'MAIL.REPLY',
+0x0178: 'MAIL.REPLY.ALL',
+0x0179: 'MAIL.FORWARD',
+0x017A: 'MAIL.NEXT.LETTER',
+0x017B: 'DATA.LABEL',
+0x017C: 'INSERT.TITLE',
+0x017D: 'FONT.PROPERTIES',
+0x017E: 'MACRO.OPTIONS',
+0x017F: 'WORKBOOK.HIDE',
+0x0180: 'WORKBOOK.UNHIDE',
+0x0181: 'WORKBOOK.DELETE',
+0x0182: 'WORKBOOK.NAME',
+0x0184: 'GALLERY.CUSTOM',
+0x0186: 'ADD.CHART.AUTOFORMAT',
+0x0187: 'DELETE.CHART.AUTOFORMAT',
+0x0188: 'CHART.ADD.DATA',
+0x0189: 'AUTO.OUTLINE',
+0x018A: 'TAB.ORDER',
+0x018B: 'SHOW.DIALOG',
+0x018C: 'SELECT.ALL',
+0x018D: 'UNGROUP.SHEETS',
+0x018E: 'SUBTOTAL.CREATE',
+0x018F: 'SUBTOTAL.REMOVE',
+0x0190: 'RENAME.OBJECT',
+0x019C: 'WORKBOOK.SCROLL',
+0x019D: 'WORKBOOK.NEXT',
+0x019E: 'WORKBOOK.PREV',
+0x019F: 'WORKBOOK.TAB.SPLIT',
+0x01A0: 'FULL.SCREEN',
+0x01A1: 'WORKBOOK.PROTECT',
+0x01A4: 'SCROLLBAR.PROPERTIES',
+0x01A5: 'PIVOT.SHOW.PAGES',
+0x01A6: 'TEXT.TO.COLUMNS',
+0x01A7: 'FORMAT.CHARTTYPE',
+0x01A8: 'LINK.FORMAT',
+0x01A9: 'TRACER.DISPLAY',
+0x01AE: 'TRACER.NAVIGATE',
+0x01AF: 'TRACER.CLEAR',
+0x01B0: 'TRACER.ERROR',
+0x01B1: 'PIVOT.FIELD.GROUP',
+0x01B2: 'PIVOT.FIELD.UNGROUP',
+0x01B3: 'CHECKBOX.PROPERTIES',
+0x01B4: 'LABEL.PROPERTIES',
+0x01B5: 'LISTBOX.PROPERTIES',
+0x01B6: 'EDITBOX.PROPERTIES',
+0x01B7: 'PIVOT.REFRESH',
+0x01B8: 'LINK.COMBO',
+0x01B9: 'OPEN.TEXT',
+0x01BA: 'HIDE.DIALOG',
+0x01BB: 'SET.DIALOG.FOCUS',
+0x01BC: 'ENABLE.OBJECT',
+0x01BD: 'PUSHBUTTON.PROPERTIES',
+0x01BE: 'SET.DIALOG.DEFAULT',
+0x01BF: 'FILTER',
+0x01C0: 'FILTER.SHOW.ALL',
+0x01C1: 'CLEAR.OUTLINE',
+0x01C2: 'FUNCTION.WIZARD',
+0x01C3: 'ADD.LIST.ITEM',
+0x01C4: 'SET.LIST.ITEM',
+0x01C5: 'REMOVE.LIST.ITEM',
+0x01C6: 'SELECT.LIST.ITEM',
+0x01C7: 'SET.CONTROL.VALUE',
+0x01C8: 'SAVE.COPY.AS',
+0x01CA: 'OPTIONS.LISTS.ADD',
+0x01CB: 'OPTIONS.LISTS.DELETE',
+0x01CC: 'SERIES.AXES',
+0x01CD: 'SERIES.X',
+0x01CE: 'SERIES.Y',
+0x01CF: 'ERRORBAR.X',
+0x01D0: 'ERRORBAR.Y',
+0x01D1: 'FORMAT.CHART',
+0x01D2: 'SERIES.ORDER',
+0x01D3: 'MAIL.LOGOFF',
+0x01D4: 'CLEAR.ROUTING.SLIP',
+0x01D5: 'APP.ACTIVATE.MICROSOFT',
+0x01D6: 'MAIL.EDIT.MAILER',
+0x01D7: 'ON.SHEET',
+0x01D8: 'STANDARD.WIDTH',
+0x01D9: 'SCENARIO.MERGE',
+0x01DA: 'SUMMARY.INFO',
+0x01DB: 'FIND.FILE',
+0x01DC: 'ACTIVE.CELL.FONT',
+0x01DD: 'ENABLE.TIPWIZARD',
+0x01DE: 'VBA.MAKE.ADDIN',
+0x01E0: 'INSERTDATATABLE',
+0x01E1: 'WORKGROUP.OPTIONS',
+0x01E2: 'MAIL.SEND.MAILER',
+0x01E5: 'AUTOCORRECT',
+0x01E9: 'POST.DOCUMENT',
+0x01EB: 'PICKLIST',
+0x01ED: 'VIEW.SHOW',
+0x01EE: 'VIEW.DEFINE',
+0x01EF: 'VIEW.DELETE',
+0x01FD: 'SHEET.BACKGROUND',
+0x01FE: 'INSERT.MAP.OBJECT',
+0x01FF: 'OPTIONS.MENONO',
+0x0205: 'MSOCHECKS',
+0x0206: 'NORMAL',
+0x0207: 'LAYOUT',
+0x0208: 'RM.PRINT.AREA',
+0x0209: 'CLEAR.PRINT.AREA',
+0x020A: 'ADD.PRINT.AREA',
+0x020B: 'MOVE.BRK',
+0x0221: 'HIDECURR.NOTE',
+0x0222: 'HIDEALL.NOTES',
+0x0223: 'DELETE.NOTE',
+0x0224: 'TRAVERSE.NOTES',
+0x0225: 'ACTIVATE.NOTES',
+0x026C: 'PROTECT.REVISIONS',
+0x026D: 'UNPROTECT.REVISIONS',
+0x0287: 'OPTIONS.ME',
+0x028D: 'WEB.PUBLISH',
+0x029B: 'NEWWEBQUERY',
+0x02A1: 'PIVOT.TABLE.CHART',
+0x02F1: 'OPTIONS.SAVE',
+0x02F3: 'OPTIONS.SPELL',
+0x0328: 'HIDEALL.INKANNOTS'
 };
 
-/* 2.5.198.17 */
+/* [MS-XLS] 2.5.198.17 */
+/* [MS-XLSB] 2.5.97.10 */
 var Ftab = {
-	0x0000: 'COUNT',
-	0x0001: 'IF',
-	0x0002: 'ISNA',
-	0x0003: 'ISERROR',
-	0x0004: 'SUM',
-	0x0005: 'AVERAGE',
-	0x0006: 'MIN',
-	0x0007: 'MAX',
-	0x0008: 'ROW',
-	0x0009: 'COLUMN',
-	0x000A: 'NA',
-	0x000B: 'NPV',
-	0x000C: 'STDEV',
-	0x000D: 'DOLLAR',
-	0x000E: 'FIXED',
-	0x000F: 'SIN',
-	0x0010: 'COS',
-	0x0011: 'TAN',
-	0x0012: 'ATAN',
-	0x0013: 'PI',
-	0x0014: 'SQRT',
-	0x0015: 'EXP',
-	0x0016: 'LN',
-	0x0017: 'LOG10',
-	0x0018: 'ABS',
-	0x0019: 'INT',
-	0x001A: 'SIGN',
-	0x001B: 'ROUND',
-	0x001C: 'LOOKUP',
-	0x001D: 'INDEX',
-	0x001E: 'REPT',
-	0x001F: 'MID',
-	0x0020: 'LEN',
-	0x0021: 'VALUE',
-	0x0022: 'TRUE',
-	0x0023: 'FALSE',
-	0x0024: 'AND',
-	0x0025: 'OR',
-	0x0026: 'NOT',
-	0x0027: 'MOD',
-	0x0028: 'DCOUNT',
-	0x0029: 'DSUM',
-	0x002A: 'DAVERAGE',
-	0x002B: 'DMIN',
-	0x002C: 'DMAX',
-	0x002D: 'DSTDEV',
-	0x002E: 'VAR',
-	0x002F: 'DVAR',
-	0x0030: 'TEXT',
-	0x0031: 'LINEST',
-	0x0032: 'TREND',
-	0x0033: 'LOGEST',
-	0x0034: 'GROWTH',
-	0x0035: 'GOTO',
-	0x0036: 'HALT',
-	0x0037: 'RETURN',
-	0x0038: 'PV',
-	0x0039: 'FV',
-	0x003A: 'NPER',
-	0x003B: 'PMT',
-	0x003C: 'RATE',
-	0x003D: 'MIRR',
-	0x003E: 'IRR',
-	0x003F: 'RAND',
-	0x0040: 'MATCH',
-	0x0041: 'DATE',
-	0x0042: 'TIME',
-	0x0043: 'DAY',
-	0x0044: 'MONTH',
-	0x0045: 'YEAR',
-	0x0046: 'WEEKDAY',
-	0x0047: 'HOUR',
-	0x0048: 'MINUTE',
-	0x0049: 'SECOND',
-	0x004A: 'NOW',
-	0x004B: 'AREAS',
-	0x004C: 'ROWS',
-	0x004D: 'COLUMNS',
-	0x004E: 'OFFSET',
-	0x004F: 'ABSREF',
-	0x0050: 'RELREF',
-	0x0051: 'ARGUMENT',
-	0x0052: 'SEARCH',
-	0x0053: 'TRANSPOSE',
-	0x0054: 'ERROR',
-	0x0055: 'STEP',
-	0x0056: 'TYPE',
-	0x0057: 'ECHO',
-	0x0058: 'SET.NAME',
-	0x0059: 'CALLER',
-	0x005A: 'DEREF',
-	0x005B: 'WINDOWS',
-	0x005C: 'SERIES',
-	0x005D: 'DOCUMENTS',
-	0x005E: 'ACTIVE.CELL',
-	0x005F: 'SELECTION',
-	0x0060: 'RESULT',
-	0x0061: 'ATAN2',
-	0x0062: 'ASIN',
-	0x0063: 'ACOS',
-	0x0064: 'CHOOSE',
-	0x0065: 'HLOOKUP',
-	0x0066: 'VLOOKUP',
-	0x0067: 'LINKS',
-	0x0068: 'INPUT',
-	0x0069: 'ISREF',
-	0x006A: 'GET.FORMULA',
-	0x006B: 'GET.NAME',
-	0x006C: 'SET.VALUE',
-	0x006D: 'LOG',
-	0x006E: 'EXEC',
-	0x006F: 'CHAR',
-	0x0070: 'LOWER',
-	0x0071: 'UPPER',
-	0x0072: 'PROPER',
-	0x0073: 'LEFT',
-	0x0074: 'RIGHT',
-	0x0075: 'EXACT',
-	0x0076: 'TRIM',
-	0x0077: 'REPLACE',
-	0x0078: 'SUBSTITUTE',
-	0x0079: 'CODE',
-	0x007A: 'NAMES',
-	0x007B: 'DIRECTORY',
-	0x007C: 'FIND',
-	0x007D: 'CELL',
-	0x007E: 'ISERR',
-	0x007F: 'ISTEXT',
-	0x0080: 'ISNUMBER',
-	0x0081: 'ISBLANK',
-	0x0082: 'T',
-	0x0083: 'N',
-	0x0084: 'FOPEN',
-	0x0085: 'FCLOSE',
-	0x0086: 'FSIZE',
-	0x0087: 'FREADLN',
-	0x0088: 'FREAD',
-	0x0089: 'FWRITELN',
-	0x008A: 'FWRITE',
-	0x008B: 'FPOS',
-	0x008C: 'DATEVALUE',
-	0x008D: 'TIMEVALUE',
-	0x008E: 'SLN',
-	0x008F: 'SYD',
-	0x0090: 'DDB',
-	0x0091: 'GET.DEF',
-	0x0092: 'REFTEXT',
-	0x0093: 'TEXTREF',
-	0x0094: 'INDIRECT',
-	0x0095: 'REGISTER',
-	0x0096: 'CALL',
-	0x0097: 'ADD.BAR',
-	0x0098: 'ADD.MENU',
-	0x0099: 'ADD.COMMAND',
-	0x009A: 'ENABLE.COMMAND',
-	0x009B: 'CHECK.COMMAND',
-	0x009C: 'RENAME.COMMAND',
-	0x009D: 'SHOW.BAR',
-	0x009E: 'DELETE.MENU',
-	0x009F: 'DELETE.COMMAND',
-	0x00A0: 'GET.CHART.ITEM',
-	0x00A1: 'DIALOG.BOX',
-	0x00A2: 'CLEAN',
-	0x00A3: 'MDETERM',
-	0x00A4: 'MINVERSE',
-	0x00A5: 'MMULT',
-	0x00A6: 'FILES',
-	0x00A7: 'IPMT',
-	0x00A8: 'PPMT',
-	0x00A9: 'COUNTA',
-	0x00AA: 'CANCEL.KEY',
-	0x00AB: 'FOR',
-	0x00AC: 'WHILE',
-	0x00AD: 'BREAK',
-	0x00AE: 'NEXT',
-	0x00AF: 'INITIATE',
-	0x00B0: 'REQUEST',
-	0x00B1: 'POKE',
-	0x00B2: 'EXECUTE',
-	0x00B3: 'TERMINATE',
-	0x00B4: 'RESTART',
-	0x00B5: 'HELP',
-	0x00B6: 'GET.BAR',
-	0x00B7: 'PRODUCT',
-	0x00B8: 'FACT',
-	0x00B9: 'GET.CELL',
-	0x00BA: 'GET.WORKSPACE',
-	0x00BB: 'GET.WINDOW',
-	0x00BC: 'GET.DOCUMENT',
-	0x00BD: 'DPRODUCT',
-	0x00BE: 'ISNONTEXT',
-	0x00BF: 'GET.NOTE',
-	0x00C0: 'NOTE',
-	0x00C1: 'STDEVP',
-	0x00C2: 'VARP',
-	0x00C3: 'DSTDEVP',
-	0x00C4: 'DVARP',
-	0x00C5: 'TRUNC',
-	0x00C6: 'ISLOGICAL',
-	0x00C7: 'DCOUNTA',
-	0x00C8: 'DELETE.BAR',
-	0x00C9: 'UNREGISTER',
-	0x00CC: 'USDOLLAR',
-	0x00CD: 'FINDB',
-	0x00CE: 'SEARCHB',
-	0x00CF: 'REPLACEB',
-	0x00D0: 'LEFTB',
-	0x00D1: 'RIGHTB',
-	0x00D2: 'MIDB',
-	0x00D3: 'LENB',
-	0x00D4: 'ROUNDUP',
-	0x00D5: 'ROUNDDOWN',
-	0x00D6: 'ASC',
-	0x00D7: 'DBCS',
-	0x00D8: 'RANK',
-	0x00DB: 'ADDRESS',
-	0x00DC: 'DAYS360',
-	0x00DD: 'TODAY',
-	0x00DE: 'VDB',
-	0x00DF: 'ELSE',
-	0x00E0: 'ELSE.IF',
-	0x00E1: 'END.IF',
-	0x00E2: 'FOR.CELL',
-	0x00E3: 'MEDIAN',
-	0x00E4: 'SUMPRODUCT',
-	0x00E5: 'SINH',
-	0x00E6: 'COSH',
-	0x00E7: 'TANH',
-	0x00E8: 'ASINH',
-	0x00E9: 'ACOSH',
-	0x00EA: 'ATANH',
-	0x00EB: 'DGET',
-	0x00EC: 'CREATE.OBJECT',
-	0x00ED: 'VOLATILE',
-	0x00EE: 'LAST.ERROR',
-	0x00EF: 'CUSTOM.UNDO',
-	0x00F0: 'CUSTOM.REPEAT',
-	0x00F1: 'FORMULA.CONVERT',
-	0x00F2: 'GET.LINK.INFO',
-	0x00F3: 'TEXT.BOX',
-	0x00F4: 'INFO',
-	0x00F5: 'GROUP',
-	0x00F6: 'GET.OBJECT',
-	0x00F7: 'DB',
-	0x00F8: 'PAUSE',
-	0x00FB: 'RESUME',
-	0x00FC: 'FREQUENCY',
-	0x00FD: 'ADD.TOOLBAR',
-	0x00FE: 'DELETE.TOOLBAR',
-	0x00FF: 'User',
-	0x0100: 'RESET.TOOLBAR',
-	0x0101: 'EVALUATE',
-	0x0102: 'GET.TOOLBAR',
-	0x0103: 'GET.TOOL',
-	0x0104: 'SPELLING.CHECK',
-	0x0105: 'ERROR.TYPE',
-	0x0106: 'APP.TITLE',
-	0x0107: 'WINDOW.TITLE',
-	0x0108: 'SAVE.TOOLBAR',
-	0x0109: 'ENABLE.TOOL',
-	0x010A: 'PRESS.TOOL',
-	0x010B: 'REGISTER.ID',
-	0x010C: 'GET.WORKBOOK',
-	0x010D: 'AVEDEV',
-	0x010E: 'BETADIST',
-	0x010F: 'GAMMALN',
-	0x0110: 'BETAINV',
-	0x0111: 'BINOMDIST',
-	0x0112: 'CHIDIST',
-	0x0113: 'CHIINV',
-	0x0114: 'COMBIN',
-	0x0115: 'CONFIDENCE',
-	0x0116: 'CRITBINOM',
-	0x0117: 'EVEN',
-	0x0118: 'EXPONDIST',
-	0x0119: 'FDIST',
-	0x011A: 'FINV',
-	0x011B: 'FISHER',
-	0x011C: 'FISHERINV',
-	0x011D: 'FLOOR',
-	0x011E: 'GAMMADIST',
-	0x011F: 'GAMMAINV',
-	0x0120: 'CEILING',
-	0x0121: 'HYPGEOMDIST',
-	0x0122: 'LOGNORMDIST',
-	0x0123: 'LOGINV',
-	0x0124: 'NEGBINOMDIST',
-	0x0125: 'NORMDIST',
-	0x0126: 'NORMSDIST',
-	0x0127: 'NORMINV',
-	0x0128: 'NORMSINV',
-	0x0129: 'STANDARDIZE',
-	0x012A: 'ODD',
-	0x012B: 'PERMUT',
-	0x012C: 'POISSON',
-	0x012D: 'TDIST',
-	0x012E: 'WEIBULL',
-	0x012F: 'SUMXMY2',
-	0x0130: 'SUMX2MY2',
-	0x0131: 'SUMX2PY2',
-	0x0132: 'CHITEST',
-	0x0133: 'CORREL',
-	0x0134: 'COVAR',
-	0x0135: 'FORECAST',
-	0x0136: 'FTEST',
-	0x0137: 'INTERCEPT',
-	0x0138: 'PEARSON',
-	0x0139: 'RSQ',
-	0x013A: 'STEYX',
-	0x013B: 'SLOPE',
-	0x013C: 'TTEST',
-	0x013D: 'PROB',
-	0x013E: 'DEVSQ',
-	0x013F: 'GEOMEAN',
-	0x0140: 'HARMEAN',
-	0x0141: 'SUMSQ',
-	0x0142: 'KURT',
-	0x0143: 'SKEW',
-	0x0144: 'ZTEST',
-	0x0145: 'LARGE',
-	0x0146: 'SMALL',
-	0x0147: 'QUARTILE',
-	0x0148: 'PERCENTILE',
-	0x0149: 'PERCENTRANK',
-	0x014A: 'MODE',
-	0x014B: 'TRIMMEAN',
-	0x014C: 'TINV',
-	0x014E: 'MOVIE.COMMAND',
-	0x014F: 'GET.MOVIE',
-	0x0150: 'CONCATENATE',
-	0x0151: 'POWER',
-	0x0152: 'PIVOT.ADD.DATA',
-	0x0153: 'GET.PIVOT.TABLE',
-	0x0154: 'GET.PIVOT.FIELD',
-	0x0155: 'GET.PIVOT.ITEM',
-	0x0156: 'RADIANS',
-	0x0157: 'DEGREES',
-	0x0158: 'SUBTOTAL',
-	0x0159: 'SUMIF',
-	0x015A: 'COUNTIF',
-	0x015B: 'COUNTBLANK',
-	0x015C: 'SCENARIO.GET',
-	0x015D: 'OPTIONS.LISTS.GET',
-	0x015E: 'ISPMT',
-	0x015F: 'DATEDIF',
-	0x0160: 'DATESTRING',
-	0x0161: 'NUMBERSTRING',
-	0x0162: 'ROMAN',
-	0x0163: 'OPEN.DIALOG',
-	0x0164: 'SAVE.DIALOG',
-	0x0165: 'VIEW.GET',
-	0x0166: 'GETPIVOTDATA',
-	0x0167: 'HYPERLINK',
-	0x0168: 'PHONETIC',
-	0x0169: 'AVERAGEA',
-	0x016A: 'MAXA',
-	0x016B: 'MINA',
-	0x016C: 'STDEVPA',
-	0x016D: 'VARPA',
-	0x016E: 'STDEVA',
-	0x016F: 'VARA',
-	0x0170: 'BAHTTEXT',
-	0x0171: 'THAIDAYOFWEEK',
-	0x0172: 'THAIDIGIT',
-	0x0173: 'THAIMONTHOFYEAR',
-	0x0174: 'THAINUMSOUND',
-	0x0175: 'THAINUMSTRING',
-	0x0176: 'THAISTRINGLENGTH',
-	0x0177: 'ISTHAIDIGIT',
-	0x0178: 'ROUNDBAHTDOWN',
-	0x0179: 'ROUNDBAHTUP',
-	0x017A: 'THAIYEAR',
-	0x017B: 'RTD'
+0x0000: 'COUNT',
+0x0001: 'IF',
+0x0002: 'ISNA',
+0x0003: 'ISERROR',
+0x0004: 'SUM',
+0x0005: 'AVERAGE',
+0x0006: 'MIN',
+0x0007: 'MAX',
+0x0008: 'ROW',
+0x0009: 'COLUMN',
+0x000A: 'NA',
+0x000B: 'NPV',
+0x000C: 'STDEV',
+0x000D: 'DOLLAR',
+0x000E: 'FIXED',
+0x000F: 'SIN',
+0x0010: 'COS',
+0x0011: 'TAN',
+0x0012: 'ATAN',
+0x0013: 'PI',
+0x0014: 'SQRT',
+0x0015: 'EXP',
+0x0016: 'LN',
+0x0017: 'LOG10',
+0x0018: 'ABS',
+0x0019: 'INT',
+0x001A: 'SIGN',
+0x001B: 'ROUND',
+0x001C: 'LOOKUP',
+0x001D: 'INDEX',
+0x001E: 'REPT',
+0x001F: 'MID',
+0x0020: 'LEN',
+0x0021: 'VALUE',
+0x0022: 'TRUE',
+0x0023: 'FALSE',
+0x0024: 'AND',
+0x0025: 'OR',
+0x0026: 'NOT',
+0x0027: 'MOD',
+0x0028: 'DCOUNT',
+0x0029: 'DSUM',
+0x002A: 'DAVERAGE',
+0x002B: 'DMIN',
+0x002C: 'DMAX',
+0x002D: 'DSTDEV',
+0x002E: 'VAR',
+0x002F: 'DVAR',
+0x0030: 'TEXT',
+0x0031: 'LINEST',
+0x0032: 'TREND',
+0x0033: 'LOGEST',
+0x0034: 'GROWTH',
+0x0035: 'GOTO',
+0x0036: 'HALT',
+0x0037: 'RETURN',
+0x0038: 'PV',
+0x0039: 'FV',
+0x003A: 'NPER',
+0x003B: 'PMT',
+0x003C: 'RATE',
+0x003D: 'MIRR',
+0x003E: 'IRR',
+0x003F: 'RAND',
+0x0040: 'MATCH',
+0x0041: 'DATE',
+0x0042: 'TIME',
+0x0043: 'DAY',
+0x0044: 'MONTH',
+0x0045: 'YEAR',
+0x0046: 'WEEKDAY',
+0x0047: 'HOUR',
+0x0048: 'MINUTE',
+0x0049: 'SECOND',
+0x004A: 'NOW',
+0x004B: 'AREAS',
+0x004C: 'ROWS',
+0x004D: 'COLUMNS',
+0x004E: 'OFFSET',
+0x004F: 'ABSREF',
+0x0050: 'RELREF',
+0x0051: 'ARGUMENT',
+0x0052: 'SEARCH',
+0x0053: 'TRANSPOSE',
+0x0054: 'ERROR',
+0x0055: 'STEP',
+0x0056: 'TYPE',
+0x0057: 'ECHO',
+0x0058: 'SET.NAME',
+0x0059: 'CALLER',
+0x005A: 'DEREF',
+0x005B: 'WINDOWS',
+0x005C: 'SERIES',
+0x005D: 'DOCUMENTS',
+0x005E: 'ACTIVE.CELL',
+0x005F: 'SELECTION',
+0x0060: 'RESULT',
+0x0061: 'ATAN2',
+0x0062: 'ASIN',
+0x0063: 'ACOS',
+0x0064: 'CHOOSE',
+0x0065: 'HLOOKUP',
+0x0066: 'VLOOKUP',
+0x0067: 'LINKS',
+0x0068: 'INPUT',
+0x0069: 'ISREF',
+0x006A: 'GET.FORMULA',
+0x006B: 'GET.NAME',
+0x006C: 'SET.VALUE',
+0x006D: 'LOG',
+0x006E: 'EXEC',
+0x006F: 'CHAR',
+0x0070: 'LOWER',
+0x0071: 'UPPER',
+0x0072: 'PROPER',
+0x0073: 'LEFT',
+0x0074: 'RIGHT',
+0x0075: 'EXACT',
+0x0076: 'TRIM',
+0x0077: 'REPLACE',
+0x0078: 'SUBSTITUTE',
+0x0079: 'CODE',
+0x007A: 'NAMES',
+0x007B: 'DIRECTORY',
+0x007C: 'FIND',
+0x007D: 'CELL',
+0x007E: 'ISERR',
+0x007F: 'ISTEXT',
+0x0080: 'ISNUMBER',
+0x0081: 'ISBLANK',
+0x0082: 'T',
+0x0083: 'N',
+0x0084: 'FOPEN',
+0x0085: 'FCLOSE',
+0x0086: 'FSIZE',
+0x0087: 'FREADLN',
+0x0088: 'FREAD',
+0x0089: 'FWRITELN',
+0x008A: 'FWRITE',
+0x008B: 'FPOS',
+0x008C: 'DATEVALUE',
+0x008D: 'TIMEVALUE',
+0x008E: 'SLN',
+0x008F: 'SYD',
+0x0090: 'DDB',
+0x0091: 'GET.DEF',
+0x0092: 'REFTEXT',
+0x0093: 'TEXTREF',
+0x0094: 'INDIRECT',
+0x0095: 'REGISTER',
+0x0096: 'CALL',
+0x0097: 'ADD.BAR',
+0x0098: 'ADD.MENU',
+0x0099: 'ADD.COMMAND',
+0x009A: 'ENABLE.COMMAND',
+0x009B: 'CHECK.COMMAND',
+0x009C: 'RENAME.COMMAND',
+0x009D: 'SHOW.BAR',
+0x009E: 'DELETE.MENU',
+0x009F: 'DELETE.COMMAND',
+0x00A0: 'GET.CHART.ITEM',
+0x00A1: 'DIALOG.BOX',
+0x00A2: 'CLEAN',
+0x00A3: 'MDETERM',
+0x00A4: 'MINVERSE',
+0x00A5: 'MMULT',
+0x00A6: 'FILES',
+0x00A7: 'IPMT',
+0x00A8: 'PPMT',
+0x00A9: 'COUNTA',
+0x00AA: 'CANCEL.KEY',
+0x00AB: 'FOR',
+0x00AC: 'WHILE',
+0x00AD: 'BREAK',
+0x00AE: 'NEXT',
+0x00AF: 'INITIATE',
+0x00B0: 'REQUEST',
+0x00B1: 'POKE',
+0x00B2: 'EXECUTE',
+0x00B3: 'TERMINATE',
+0x00B4: 'RESTART',
+0x00B5: 'HELP',
+0x00B6: 'GET.BAR',
+0x00B7: 'PRODUCT',
+0x00B8: 'FACT',
+0x00B9: 'GET.CELL',
+0x00BA: 'GET.WORKSPACE',
+0x00BB: 'GET.WINDOW',
+0x00BC: 'GET.DOCUMENT',
+0x00BD: 'DPRODUCT',
+0x00BE: 'ISNONTEXT',
+0x00BF: 'GET.NOTE',
+0x00C0: 'NOTE',
+0x00C1: 'STDEVP',
+0x00C2: 'VARP',
+0x00C3: 'DSTDEVP',
+0x00C4: 'DVARP',
+0x00C5: 'TRUNC',
+0x00C6: 'ISLOGICAL',
+0x00C7: 'DCOUNTA',
+0x00C8: 'DELETE.BAR',
+0x00C9: 'UNREGISTER',
+0x00CC: 'USDOLLAR',
+0x00CD: 'FINDB',
+0x00CE: 'SEARCHB',
+0x00CF: 'REPLACEB',
+0x00D0: 'LEFTB',
+0x00D1: 'RIGHTB',
+0x00D2: 'MIDB',
+0x00D3: 'LENB',
+0x00D4: 'ROUNDUP',
+0x00D5: 'ROUNDDOWN',
+0x00D6: 'ASC',
+0x00D7: 'DBCS',
+0x00D8: 'RANK',
+0x00DB: 'ADDRESS',
+0x00DC: 'DAYS360',
+0x00DD: 'TODAY',
+0x00DE: 'VDB',
+0x00DF: 'ELSE',
+0x00E0: 'ELSE.IF',
+0x00E1: 'END.IF',
+0x00E2: 'FOR.CELL',
+0x00E3: 'MEDIAN',
+0x00E4: 'SUMPRODUCT',
+0x00E5: 'SINH',
+0x00E6: 'COSH',
+0x00E7: 'TANH',
+0x00E8: 'ASINH',
+0x00E9: 'ACOSH',
+0x00EA: 'ATANH',
+0x00EB: 'DGET',
+0x00EC: 'CREATE.OBJECT',
+0x00ED: 'VOLATILE',
+0x00EE: 'LAST.ERROR',
+0x00EF: 'CUSTOM.UNDO',
+0x00F0: 'CUSTOM.REPEAT',
+0x00F1: 'FORMULA.CONVERT',
+0x00F2: 'GET.LINK.INFO',
+0x00F3: 'TEXT.BOX',
+0x00F4: 'INFO',
+0x00F5: 'GROUP',
+0x00F6: 'GET.OBJECT',
+0x00F7: 'DB',
+0x00F8: 'PAUSE',
+0x00FB: 'RESUME',
+0x00FC: 'FREQUENCY',
+0x00FD: 'ADD.TOOLBAR',
+0x00FE: 'DELETE.TOOLBAR',
+0x00FF: 'User',
+0x0100: 'RESET.TOOLBAR',
+0x0101: 'EVALUATE',
+0x0102: 'GET.TOOLBAR',
+0x0103: 'GET.TOOL',
+0x0104: 'SPELLING.CHECK',
+0x0105: 'ERROR.TYPE',
+0x0106: 'APP.TITLE',
+0x0107: 'WINDOW.TITLE',
+0x0108: 'SAVE.TOOLBAR',
+0x0109: 'ENABLE.TOOL',
+0x010A: 'PRESS.TOOL',
+0x010B: 'REGISTER.ID',
+0x010C: 'GET.WORKBOOK',
+0x010D: 'AVEDEV',
+0x010E: 'BETADIST',
+0x010F: 'GAMMALN',
+0x0110: 'BETAINV',
+0x0111: 'BINOMDIST',
+0x0112: 'CHIDIST',
+0x0113: 'CHIINV',
+0x0114: 'COMBIN',
+0x0115: 'CONFIDENCE',
+0x0116: 'CRITBINOM',
+0x0117: 'EVEN',
+0x0118: 'EXPONDIST',
+0x0119: 'FDIST',
+0x011A: 'FINV',
+0x011B: 'FISHER',
+0x011C: 'FISHERINV',
+0x011D: 'FLOOR',
+0x011E: 'GAMMADIST',
+0x011F: 'GAMMAINV',
+0x0120: 'CEILING',
+0x0121: 'HYPGEOMDIST',
+0x0122: 'LOGNORMDIST',
+0x0123: 'LOGINV',
+0x0124: 'NEGBINOMDIST',
+0x0125: 'NORMDIST',
+0x0126: 'NORMSDIST',
+0x0127: 'NORMINV',
+0x0128: 'NORMSINV',
+0x0129: 'STANDARDIZE',
+0x012A: 'ODD',
+0x012B: 'PERMUT',
+0x012C: 'POISSON',
+0x012D: 'TDIST',
+0x012E: 'WEIBULL',
+0x012F: 'SUMXMY2',
+0x0130: 'SUMX2MY2',
+0x0131: 'SUMX2PY2',
+0x0132: 'CHITEST',
+0x0133: 'CORREL',
+0x0134: 'COVAR',
+0x0135: 'FORECAST',
+0x0136: 'FTEST',
+0x0137: 'INTERCEPT',
+0x0138: 'PEARSON',
+0x0139: 'RSQ',
+0x013A: 'STEYX',
+0x013B: 'SLOPE',
+0x013C: 'TTEST',
+0x013D: 'PROB',
+0x013E: 'DEVSQ',
+0x013F: 'GEOMEAN',
+0x0140: 'HARMEAN',
+0x0141: 'SUMSQ',
+0x0142: 'KURT',
+0x0143: 'SKEW',
+0x0144: 'ZTEST',
+0x0145: 'LARGE',
+0x0146: 'SMALL',
+0x0147: 'QUARTILE',
+0x0148: 'PERCENTILE',
+0x0149: 'PERCENTRANK',
+0x014A: 'MODE',
+0x014B: 'TRIMMEAN',
+0x014C: 'TINV',
+0x014E: 'MOVIE.COMMAND',
+0x014F: 'GET.MOVIE',
+0x0150: 'CONCATENATE',
+0x0151: 'POWER',
+0x0152: 'PIVOT.ADD.DATA',
+0x0153: 'GET.PIVOT.TABLE',
+0x0154: 'GET.PIVOT.FIELD',
+0x0155: 'GET.PIVOT.ITEM',
+0x0156: 'RADIANS',
+0x0157: 'DEGREES',
+0x0158: 'SUBTOTAL',
+0x0159: 'SUMIF',
+0x015A: 'COUNTIF',
+0x015B: 'COUNTBLANK',
+0x015C: 'SCENARIO.GET',
+0x015D: 'OPTIONS.LISTS.GET',
+0x015E: 'ISPMT',
+0x015F: 'DATEDIF',
+0x0160: 'DATESTRING',
+0x0161: 'NUMBERSTRING',
+0x0162: 'ROMAN',
+0x0163: 'OPEN.DIALOG',
+0x0164: 'SAVE.DIALOG',
+0x0165: 'VIEW.GET',
+0x0166: 'GETPIVOTDATA',
+0x0167: 'HYPERLINK',
+0x0168: 'PHONETIC',
+0x0169: 'AVERAGEA',
+0x016A: 'MAXA',
+0x016B: 'MINA',
+0x016C: 'STDEVPA',
+0x016D: 'VARPA',
+0x016E: 'STDEVA',
+0x016F: 'VARA',
+0x0170: 'BAHTTEXT',
+0x0171: 'THAIDAYOFWEEK',
+0x0172: 'THAIDIGIT',
+0x0173: 'THAIMONTHOFYEAR',
+0x0174: 'THAINUMSOUND',
+0x0175: 'THAINUMSTRING',
+0x0176: 'THAISTRINGLENGTH',
+0x0177: 'ISTHAIDIGIT',
+0x0178: 'ROUNDBAHTDOWN',
+0x0179: 'ROUNDBAHTUP',
+0x017A: 'THAIYEAR',
+0x017B: 'RTD',
+
+0x017C: 'CUBEVALUE',
+0x017D: 'CUBEMEMBER',
+0x017E: 'CUBEMEMBERPROPERTY',
+0x017F: 'CUBERANKEDMEMBER',
+0x0180: 'HEX2BIN',
+0x0181: 'HEX2DEC',
+0x0182: 'HEX2OCT',
+0x0183: 'DEC2BIN',
+0x0184: 'DEC2HEX',
+0x0185: 'DEC2OCT',
+0x0186: 'OCT2BIN',
+0x0187: 'OCT2HEX',
+0x0188: 'OCT2DEC',
+0x0189: 'BIN2DEC',
+0x018A: 'BIN2OCT',
+0x018B: 'BIN2HEX',
+0x018C: 'IMSUB',
+0x018D: 'IMDIV',
+0x018E: 'IMPOWER',
+0x018F: 'IMABS',
+0x0190: 'IMSQRT',
+0x0191: 'IMLN',
+0x0192: 'IMLOG2',
+0x0193: 'IMLOG10',
+0x0194: 'IMSIN',
+0x0195: 'IMCOS',
+0x0196: 'IMEXP',
+0x0197: 'IMARGUMENT',
+0x0198: 'IMCONJUGATE',
+0x0199: 'IMAGINARY',
+0x019A: 'IMREAL',
+0x019B: 'COMPLEX',
+0x019C: 'IMSUM',
+0x019D: 'IMPRODUCT',
+0x019E: 'SERIESSUM',
+0x019F: 'FACTDOUBLE',
+0x01A0: 'SQRTPI',
+0x01A1: 'QUOTIENT',
+0x01A2: 'DELTA',
+0x01A3: 'GESTEP',
+0x01A4: 'ISEVEN',
+0x01A5: 'ISODD',
+0x01A6: 'MROUND',
+0x01A7: 'ERF',
+0x01A8: 'ERFC',
+0x01A9: 'BESSELJ',
+0x01AA: 'BESSELK',
+0x01AB: 'BESSELY',
+0x01AC: 'BESSELI',
+0x01AD: 'XIRR',
+0x01AE: 'XNPV',
+0x01AF: 'PRICEMAT',
+0x01B0: 'YIELDMAT',
+0x01B1: 'INTRATE',
+0x01B2: 'RECEIVED',
+0x01B3: 'DISC',
+0x01B4: 'PRICEDISC',
+0x01B5: 'YIELDDISC',
+0x01B6: 'TBILLEQ',
+0x01B7: 'TBILLPRICE',
+0x01B8: 'TBILLYIELD',
+0x01B9: 'PRICE',
+0x01BA: 'YIELD',
+0x01BB: 'DOLLARDE',
+0x01BC: 'DOLLARFR',
+0x01BD: 'NOMINAL',
+0x01BE: 'EFFECT',
+0x01BF: 'CUMPRINC',
+0x01C0: 'CUMIPMT',
+0x01C1: 'EDATE',
+0x01C2: 'EOMONTH',
+0x01C3: 'YEARFRAC',
+0x01C4: 'COUPDAYBS',
+0x01C5: 'COUPDAYS',
+0x01C6: 'COUPDAYSNC',
+0x01C7: 'COUPNCD',
+0x01C8: 'COUPNUM',
+0x01C9: 'COUPPCD',
+0x01CA: 'DURATION',
+0x01CB: 'MDURATION',
+0x01CC: 'ODDLPRICE',
+0x01CD: 'ODDLYIELD',
+0x01CE: 'ODDFPRICE',
+0x01CF: 'ODDFYIELD',
+0x01D0: 'RANDBETWEEN',
+0x01D1: 'WEEKNUM',
+0x01D2: 'AMORDEGRC',
+0x01D3: 'AMORLINC',
+0x01D4: 'SHEETJS',
+0x01D5: 'ACCRINT',
+0x01D6: 'ACCRINTM',
+0x01D7: 'WORKDAY',
+0x01D8: 'NETWORKDAYS',
+0x01D9: 'GCD',
+0x01DA: 'MULTINOMIAL',
+0x01DB: 'LCM',
+0x01DC: 'FVSCHEDULE',
+0x01DD: 'CUBEKPIMEMBER',
+0x01DE: 'CUBESET',
+0x01DF: 'CUBESETCOUNT',
+0x01E0: 'IFERROR',
+0x01E1: 'COUNTIFS',
+0x01E2: 'SUMIFS',
+0x01E3: 'AVERAGEIF',
+0x01E4: 'AVERAGEIFS'
 };
 var FtabArgc = {
-	0x0002: 1, /* ISNA */
-	0x0003: 1, /* ISERROR */
-	0x000F: 1, /* SIN */
-	0x0010: 1, /* COS */
-	0x0011: 1, /* TAN */
-	0x0012: 1, /* ATAN */
-	0x0014: 1, /* SQRT */
-	0x0015: 1, /* EXP */
-	0x0016: 1, /* LN */
-	0x0017: 1, /* LOG10 */
-	0x0018: 1, /* ABS */
-	0x0019: 1, /* INT */
-	0x001A: 1, /* SIGN */
-	0x001B: 2, /* ROUND */
-	0x001E: 2, /* REPT */
-	0x001F: 3, /* MID */
-	0x0020: 1, /* LEN */
-	0x0021: 1, /* VALUE */
-	0x0026: 1, /* NOT */
-	0x0027: 2, /* MOD */
-	0x0028: 3, /* DCOUNT */
-	0x0029: 3, /* DSUM */
-	0x002A: 3, /* DAVERAGE */
-	0x002B: 3, /* DMIN */
-	0x002C: 3, /* DMAX */
-	0x002D: 3, /* DSTDEV */
-	0x002F: 3, /* DVAR */
-	0x0030: 2, /* TEXT */
-	0x0035: 1, /* GOTO */
-	0x003D: 3, /* MIRR */
-	0x0041: 3, /* DATE */
-	0x0042: 3, /* TIME */
-	0x0043: 1, /* DAY */
-	0x0044: 1, /* MONTH */
-	0x0045: 1, /* YEAR */
-	0x0047: 1, /* HOUR */
-	0x0048: 1, /* MINUTE */
-	0x0049: 1, /* SECOND */
-	0x004B: 1, /* AREAS */
-	0x004C: 1, /* ROWS */
-	0x004D: 1, /* COLUMNS */
-	0x004F: 2, /* ABSREF */
-	0x0050: 2, /* RELREF */
-	0x0053: 1, /* TRANSPOSE */
-	0x0056: 1, /* TYPE */
-	0x005A: 1, /* DEREF */
-	0x0061: 2, /* ATAN2 */
-	0x0062: 1, /* ASIN */
-	0x0063: 1, /* ACOS */
-	0x0069: 1, /* ISREF */
-	0x006F: 1, /* CHAR */
-	0x0070: 1, /* LOWER */
-	0x0071: 1, /* UPPER */
-	0x0072: 1, /* PROPER */
-	0x0075: 2, /* EXACT */
-	0x0076: 1, /* TRIM */
-	0x0077: 4, /* REPLACE */
-	0x0079: 1, /* CODE */
-	0x007E: 1, /* ISERR */
-	0x007F: 1, /* ISTEXT */
-	0x0080: 1, /* ISNUMBER */
-	0x0081: 1, /* ISBLANK */
-	0x0082: 1, /* T */
-	0x0083: 1, /* N */
-	0x0085: 1, /* FCLOSE */
-	0x0086: 1, /* FSIZE */
-	0x0087: 1, /* FREADLN */
-	0x0088: 2, /* FREAD */
-	0x0089: 2, /* FWRITELN */
-	0x008A: 2, /* FWRITE */
-	0x008C: 1, /* DATEVALUE */
-	0x008D: 1, /* TIMEVALUE */
-	0x008E: 3, /* SLN */
-	0x008F: 4, /* SYD */
-	0x00A2: 1, /* CLEAN */
-	0x00A3: 1, /* MDETERM */
-	0x00A4: 1, /* MINVERSE */
-	0x00A5: 2, /* MMULT */
-	0x00AC: 1, /* WHILE */
-	0x00AF: 2, /* INITIATE */
-	0x00B0: 2, /* REQUEST */
-	0x00B1: 3, /* POKE */
-	0x00B2: 2, /* EXECUTE */
-	0x00B3: 1, /* TERMINATE */
-	0x00B8: 1, /* FACT */
-	0x00BD: 3, /* DPRODUCT */
-	0x00BE: 1, /* ISNONTEXT */
-	0x00C3: 3, /* DSTDEVP */
-	0x00C4: 3, /* DVARP */
-	0x00C6: 1, /* ISLOGICAL */
-	0x00C7: 3, /* DCOUNTA */
-	0x00C9: 1, /* UNREGISTER */
-	0x00CF: 4, /* REPLACEB */
-	0x00D2: 3, /* MIDB */
-	0x00D3: 1, /* LENB */
-	0x00D4: 2, /* ROUNDUP */
-	0x00D5: 2, /* ROUNDDOWN */
-	0x00D6: 1, /* ASC */
-	0x00D7: 1, /* DBCS */
-	0x00E5: 1, /* SINH */
-	0x00E6: 1, /* COSH */
-	0x00E7: 1, /* TANH */
-	0x00E8: 1, /* ASINH */
-	0x00E9: 1, /* ACOSH */
-	0x00EA: 1, /* ATANH */
-	0x00EB: 3, /* DGET */
-	0x00F4: 1, /* INFO */
-	0x00FC: 2, /* FREQUENCY */
-	0x0101: 1, /* EVALUATE */
-	0x0105: 1, /* ERROR.TYPE */
-	0x010F: 1, /* GAMMALN */
-	0x0111: 4, /* BINOMDIST */
-	0x0112: 2, /* CHIDIST */
-	0x0113: 2, /* CHIINV */
-	0x0114: 2, /* COMBIN */
-	0x0115: 3, /* CONFIDENCE */
-	0x0116: 3, /* CRITBINOM */
-	0x0117: 1, /* EVEN */
-	0x0118: 3, /* EXPONDIST */
-	0x0119: 3, /* FDIST */
-	0x011A: 3, /* FINV */
-	0x011B: 1, /* FISHER */
-	0x011C: 1, /* FISHERINV */
-	0x011D: 2, /* FLOOR */
-	0x011E: 4, /* GAMMADIST */
-	0x011F: 3, /* GAMMAINV */
-	0x0120: 2, /* CEILING */
-	0x0121: 4, /* HYPGEOMDIST */
-	0x0122: 3, /* LOGNORMDIST */
-	0x0123: 3, /* LOGINV */
-	0x0124: 3, /* NEGBINOMDIST */
-	0x0125: 4, /* NORMDIST */
-	0x0126: 1, /* NORMSDIST */
-	0x0127: 3, /* NORMINV */
-	0x0128: 1, /* NORMSINV */
-	0x0129: 3, /* STANDARDIZE */
-	0x012A: 1, /* ODD */
-	0x012B: 2, /* PERMUT */
-	0x012C: 3, /* POISSON */
-	0x012D: 3, /* TDIST */
-	0x012E: 4, /* WEIBULL */
-	0x012F: 2, /* SUMXMY2 */
-	0x0130: 2, /* SUMX2MY2 */
-	0x0131: 2, /* SUMX2PY2 */
-	0x0132: 2, /* CHITEST */
-	0x0133: 2, /* CORREL */
-	0x0134: 2, /* COVAR */
-	0x0135: 3, /* FORECAST */
-	0x0136: 2, /* FTEST */
-	0x0137: 2, /* INTERCEPT */
-	0x0138: 2, /* PEARSON */
-	0x0139: 2, /* RSQ */
-	0x013A: 2, /* STEYX */
-	0x013B: 2, /* SLOPE */
-	0x013C: 4, /* TTEST */
-	0x0145: 2, /* LARGE */
-	0x0146: 2, /* SMALL */
-	0x0147: 2, /* QUARTILE */
-	0x0148: 2, /* PERCENTILE */
-	0x014B: 2, /* TRIMMEAN */
-	0x014C: 2, /* TINV */
-	0x0151: 2, /* POWER */
-	0x0156: 1, /* RADIANS */
-	0x0157: 1, /* DEGREES */
-	0x015A: 2, /* COUNTIF */
-	0x015B: 1, /* COUNTBLANK */
-	0x015E: 4, /* ISPMT */
-	0x015F: 3, /* DATEDIF */
-	0x0160: 1, /* DATESTRING */
-	0x0161: 2, /* NUMBERSTRING */
-	0x0168: 1, /* PHONETIC */
-	0x0170: 1, /* BAHTTEXT */
-	0x0171: 1, /* THAIDAYOFWEEK */
-	0x0172: 1, /* THAIDIGIT */
-	0x0173: 1, /* THAIMONTHOFYEAR */
-	0x0174: 1, /* THAINUMSOUND */
-	0x0175: 1, /* THAINUMSTRING */
-	0x0176: 1, /* THAISTRINGLENGTH */
-	0x0177: 1, /* ISTHAIDIGIT */
-	0x0178: 1, /* ROUNDBAHTDOWN */
-	0x0179: 1, /* ROUNDBAHTUP */
-	0x017A: 1, /* THAIYEAR */
-	0xFFFF: 0
+0x0002: 1, /* ISNA */
+0x0003: 1, /* ISERROR */
+0x000F: 1, /* SIN */
+0x0010: 1, /* COS */
+0x0011: 1, /* TAN */
+0x0012: 1, /* ATAN */
+0x0013: 0, /* PI */
+0x0014: 1, /* SQRT */
+0x0015: 1, /* EXP */
+0x0016: 1, /* LN */
+0x0017: 1, /* LOG10 */
+0x0018: 1, /* ABS */
+0x0019: 1, /* INT */
+0x001A: 1, /* SIGN */
+0x001B: 2, /* ROUND */
+0x001E: 2, /* REPT */
+0x001F: 3, /* MID */
+0x0020: 1, /* LEN */
+0x0021: 1, /* VALUE */
+0x0026: 1, /* NOT */
+0x0027: 2, /* MOD */
+0x0028: 3, /* DCOUNT */
+0x0029: 3, /* DSUM */
+0x002A: 3, /* DAVERAGE */
+0x002B: 3, /* DMIN */
+0x002C: 3, /* DMAX */
+0x002D: 3, /* DSTDEV */
+0x002F: 3, /* DVAR */
+0x0030: 2, /* TEXT */
+0x0035: 1, /* GOTO */
+0x003D: 3, /* MIRR */
+0x0041: 3, /* DATE */
+0x0042: 3, /* TIME */
+0x0043: 1, /* DAY */
+0x0044: 1, /* MONTH */
+0x0045: 1, /* YEAR */
+0x0046: 1, /* WEEKDAY */
+0x0047: 1, /* HOUR */
+0x0048: 1, /* MINUTE */
+0x0049: 1, /* SECOND */
+0x004B: 1, /* AREAS */
+0x004C: 1, /* ROWS */
+0x004D: 1, /* COLUMNS */
+0x004F: 2, /* ABSREF */
+0x0050: 2, /* RELREF */
+0x0053: 1, /* TRANSPOSE */
+0x0055: 0, /* STEP */
+0x0056: 1, /* TYPE */
+0x005A: 1, /* DEREF */
+0x0061: 2, /* ATAN2 */
+0x0062: 1, /* ASIN */
+0x0063: 1, /* ACOS */
+0x0065: 3, /* HLOOKUP */
+0x0066: 3, /* VLOOKUP */
+0x0069: 1, /* ISREF */
+0x006F: 1, /* CHAR */
+0x0070: 1, /* LOWER */
+0x0071: 1, /* UPPER */
+0x0072: 1, /* PROPER */
+0x0075: 2, /* EXACT */
+0x0076: 1, /* TRIM */
+0x0077: 4, /* REPLACE */
+0x0079: 1, /* CODE */
+0x007E: 1, /* ISERR */
+0x007F: 1, /* ISTEXT */
+0x0080: 1, /* ISNUMBER */
+0x0081: 1, /* ISBLANK */
+0x0082: 1, /* T */
+0x0083: 1, /* N */
+0x0085: 1, /* FCLOSE */
+0x0086: 1, /* FSIZE */
+0x0087: 1, /* FREADLN */
+0x0088: 2, /* FREAD */
+0x0089: 2, /* FWRITELN */
+0x008A: 2, /* FWRITE */
+0x008C: 1, /* DATEVALUE */
+0x008D: 1, /* TIMEVALUE */
+0x008E: 3, /* SLN */
+0x008F: 4, /* SYD */
+0x0090: 4, /* DDB */
+0x00A2: 1, /* CLEAN */
+0x00A3: 1, /* MDETERM */
+0x00A4: 1, /* MINVERSE */
+0x00A5: 2, /* MMULT */
+0x00AC: 1, /* WHILE */
+0x00AF: 2, /* INITIATE */
+0x00B0: 2, /* REQUEST */
+0x00B1: 3, /* POKE */
+0x00B2: 2, /* EXECUTE */
+0x00B3: 1, /* TERMINATE */
+0x00B8: 1, /* FACT */
+0x00BD: 3, /* DPRODUCT */
+0x00BE: 1, /* ISNONTEXT */
+0x00C3: 3, /* DSTDEVP */
+0x00C4: 3, /* DVARP */
+0x00C5: 1, /* TRUNC */
+0x00C6: 1, /* ISLOGICAL */
+0x00C7: 3, /* DCOUNTA */
+0x00C9: 1, /* UNREGISTER */
+0x00CF: 4, /* REPLACEB */
+0x00D2: 3, /* MIDB */
+0x00D3: 1, /* LENB */
+0x00D4: 2, /* ROUNDUP */
+0x00D5: 2, /* ROUNDDOWN */
+0x00D6: 1, /* ASC */
+0x00D7: 1, /* DBCS */
+0x00E5: 1, /* SINH */
+0x00E6: 1, /* COSH */
+0x00E7: 1, /* TANH */
+0x00E8: 1, /* ASINH */
+0x00E9: 1, /* ACOSH */
+0x00EA: 1, /* ATANH */
+0x00EB: 3, /* DGET */
+0x00F4: 1, /* INFO */
+0x00F7: 4, /* DB */
+0x00FC: 2, /* FREQUENCY */
+0x0101: 1, /* EVALUATE */
+0x0105: 1, /* ERROR.TYPE */
+0x010F: 1, /* GAMMALN */
+0x0111: 4, /* BINOMDIST */
+0x0112: 2, /* CHIDIST */
+0x0113: 2, /* CHIINV */
+0x0114: 2, /* COMBIN */
+0x0115: 3, /* CONFIDENCE */
+0x0116: 3, /* CRITBINOM */
+0x0117: 1, /* EVEN */
+0x0118: 3, /* EXPONDIST */
+0x0119: 3, /* FDIST */
+0x011A: 3, /* FINV */
+0x011B: 1, /* FISHER */
+0x011C: 1, /* FISHERINV */
+0x011D: 2, /* FLOOR */
+0x011E: 4, /* GAMMADIST */
+0x011F: 3, /* GAMMAINV */
+0x0120: 2, /* CEILING */
+0x0121: 4, /* HYPGEOMDIST */
+0x0122: 3, /* LOGNORMDIST */
+0x0123: 3, /* LOGINV */
+0x0124: 3, /* NEGBINOMDIST */
+0x0125: 4, /* NORMDIST */
+0x0126: 1, /* NORMSDIST */
+0x0127: 3, /* NORMINV */
+0x0128: 1, /* NORMSINV */
+0x0129: 3, /* STANDARDIZE */
+0x012A: 1, /* ODD */
+0x012B: 2, /* PERMUT */
+0x012C: 3, /* POISSON */
+0x012D: 3, /* TDIST */
+0x012E: 4, /* WEIBULL */
+0x012F: 2, /* SUMXMY2 */
+0x0130: 2, /* SUMX2MY2 */
+0x0131: 2, /* SUMX2PY2 */
+0x0132: 2, /* CHITEST */
+0x0133: 2, /* CORREL */
+0x0134: 2, /* COVAR */
+0x0135: 3, /* FORECAST */
+0x0136: 2, /* FTEST */
+0x0137: 2, /* INTERCEPT */
+0x0138: 2, /* PEARSON */
+0x0139: 2, /* RSQ */
+0x013A: 2, /* STEYX */
+0x013B: 2, /* SLOPE */
+0x013C: 4, /* TTEST */
+0x0145: 2, /* LARGE */
+0x0146: 2, /* SMALL */
+0x0147: 2, /* QUARTILE */
+0x0148: 2, /* PERCENTILE */
+0x014B: 2, /* TRIMMEAN */
+0x014C: 2, /* TINV */
+0x0151: 2, /* POWER */
+0x0156: 1, /* RADIANS */
+0x0157: 1, /* DEGREES */
+0x015A: 2, /* COUNTIF */
+0x015B: 1, /* COUNTBLANK */
+0x015E: 4, /* ISPMT */
+0x015F: 3, /* DATEDIF */
+0x0160: 1, /* DATESTRING */
+0x0161: 2, /* NUMBERSTRING */
+0x0168: 1, /* PHONETIC */
+0x0170: 1, /* BAHTTEXT */
+0x0171: 1, /* THAIDAYOFWEEK */
+0x0172: 1, /* THAIDIGIT */
+0x0173: 1, /* THAIMONTHOFYEAR */
+0x0174: 1, /* THAINUMSOUND */
+0x0175: 1, /* THAINUMSTRING */
+0x0176: 1, /* THAISTRINGLENGTH */
+0x0177: 1, /* ISTHAIDIGIT */
+0x0178: 1, /* ROUNDBAHTDOWN */
+0x0179: 1, /* ROUNDBAHTUP */
+0x017A: 1, /* THAIYEAR */
+0x01A0: 1, /* SQRTPI */
+0x01C1: 2, /* EDATE */
+0x01C2: 2, /* EOMONTH */
+0xFFFF: 0
 };
 /* [MS-XLSX] 2.2.3 Functions */
+/* [MS-XLSB] 2.5.97.10 Ftab */
 var XLSXFutureFunctions = {
 	"_xlfn.ACOT": "ACOT",
 	"_xlfn.ACOTH": "ACOTH",
@@ -4924,8 +5461,90 @@ var XLSXFutureFunctions = {
 	"_xlfn.XOR": "XOR",
 	"_xlfn.Z.TEST": "Z.TEST"
 };
+
+/* 2.4.326 TODO: payload is a zip file */
+function parse_Theme(blob, length) {
+	var dwThemeVersion = blob.read_shift(4);
+	if(dwThemeVersion === 124226) return;
+	blob.l += length-4;
+}
+
+/* 2.5.49 */
+function parse_ColorTheme(blob, length) { return blob.read_shift(4); }
+
+/* 2.5.155 */
+function parse_FullColorExt(blob, length) {
+	var o = {};
+	o.xclrType = blob.read_shift(2);
+	o.nTintShade = blob.read_shift(2);
+	switch(o.xclrType) {
+		case 0: blob.l += 4; break;
+		case 1: o.xclrValue = parse_IcvXF(blob, 4); break;
+		case 2: o.xclrValue = parse_LongRGBA(blob, 4); break;
+		case 3: o.xclrValue = parse_ColorTheme(blob, 4); break;
+		case 4: blob.l += 4; break;
+	}
+	blob.l += 8;
+	return o;
+}
+
+/* 2.5.164 TODO: read 7 bits*/
+function parse_IcvXF(blob, length) {
+	return parsenoop(blob, length);
+}
+
+/* 2.5.280 */
+function parse_XFExtGradient(blob, length) {
+	return parsenoop(blob, length);
+}
+
+/* 2.5.108 */
+function parse_ExtProp(blob, length) {
+	var extType = blob.read_shift(2);
+	var cb = blob.read_shift(2);
+	var o = [extType];
+	switch(extType) {
+		case 0x04: case 0x05: case 0x07: case 0x08:
+		case 0x09: case 0x0A: case 0x0B: case 0x0D:
+			o[1] = parse_FullColorExt(blob, cb); break;
+		case 0x06: o[1] = parse_XFExtGradient(blob, cb); break;
+		case 0x0E: case 0x0F: o[1] = blob.read_shift(cb === 5 ? 1 : 2); break;
+		default: throw new Error("Unrecognized ExtProp type: " + extType + " " + cb);
+	}
+	return o;
+}
+
+/* 2.4.355 */
+function parse_XFExt(blob, length) {
+	var end = blob.l + length;
+	blob.l += 2;
+	var ixfe = blob.read_shift(2);
+	blob.l += 2;
+	var cexts = blob.read_shift(2);
+	var ext = [];
+	while(cexts-- > 0) ext.push(parse_ExtProp(blob, end-blob.l));
+	return {ixfe:ixfe, ext:ext};
+}
+
+/* xf is an XF, see parse_XFExt for xfext */
+function update_xfext(xf, xfext) {
+	xfext.forEach(function(xfe) {
+		switch(xfe[0]) { /* 2.5.108 extPropData */
+			case 0x04: break; /* foreground color */
+			case 0x05: break; /* background color */
+			case 0x07: case 0x08: case 0x09: case 0x0a: break;
+			case 0x0d: break; /* text color */
+			case 0x0e: break; /* font scheme */
+			default: throw "bafuq" + xfe[0].toString(16);
+		}
+	});
+}
+/* [MS-XLS] 2.3 Record Enumeration */
 var RecordEnum = {
+	0x0003: { n:"BIFF2NUM", f:parse_BIFF2NUM },
+	0x0004: { n:"BIFF2STR", f:parse_BIFF2STR },
 	0x0006: { n:"Formula", f:parse_Formula },
+	0x0009: { n:'BOF', f:parse_BOF },
 	0x000a: { n:'EOF', f:parse_EOF },
 	0x000c: { n:"CalcCount", f:parse_CalcCount },
 	0x000d: { n:"CalcMode", f:parse_CalcMode },
@@ -5115,6 +5734,7 @@ var RecordEnum = {
 	0x0203: { n:"Number", f:parse_Number },
 	0x0204: { n:"Label", f:parse_Label },
 	0x0205: { n:"BoolErr", f:parse_BoolErr },
+	0x0206: { n:"Formula", f:parse_Formula },
 	0x0207: { n:"String", f:parse_String },
 	0x0208: { n:'Row', f:parse_Row },
 	0x020b: { n:"Index", f:parse_Index },
@@ -5124,6 +5744,7 @@ var RecordEnum = {
 	0x023e: { n:"Window2", f:parse_Window2 },
 	0x027e: { n:"RK", f:parse_RK },
 	0x0293: { n:"Style", f:parse_Style },
+	0x0406: { n:"Formula", f:parse_Formula },
 	0x0418: { n:"BigName", f:parse_BigName },
 	0x041e: { n:"Format", f:parse_Format },
 	0x043c: { n:"ContinueBigName", f:parse_ContinueBigName },
@@ -5178,8 +5799,8 @@ var RecordEnum = {
 	0x0879: { n:"CondFmt12", f:parse_CondFmt12 },
 	0x087a: { n:"CF12", f:parse_CF12 },
 	0x087b: { n:"CFEx", f:parse_CFEx },
-	0x087c: { n:"XFCRC", f:parse_XFCRC },
-	0x087d: { n:"XFExt", f:parse_XFExt },
+	0x087c: { n:"XFCRC", f:parse_XFCRC, r:12 },
+	0x087d: { n:"XFExt", f:parse_XFExt, r:12 },
 	0x087e: { n:"AutoFilter12", f:parse_AutoFilter12 },
 	0x087f: { n:"ContinueFrt12", f:parse_ContinueFrt12 },
 	0x0884: { n:"MDTInfo", f:parse_MDTInfo },
@@ -5199,7 +5820,7 @@ var RecordEnum = {
 	0x0893: { n:"NamePublish", f:parse_NamePublish },
 	0x0894: { n:"NameCmt", f:parse_NameCmt },
 	0x0895: { n:"SortData", f:parse_SortData },
-	0x0896: { n:"Theme", f:parse_Theme },
+	0x0896: { n:"Theme", f:parse_Theme, r:12 },
 	0x0897: { n:"GUIDTypeLib", f:parse_GUIDTypeLib },
 	0x0898: { n:"FnGrp12", f:parse_FnGrp12 },
 	0x0899: { n:"NameFnGrp12", f:parse_NameFnGrp12 },
@@ -5280,7 +5901,21 @@ var RecordEnum = {
 	0x1068: { n:"Fbi2", f:parse_Fbi2 },
 
 	/* These are specified in an older version of the spec */
+	0x0000: { n:"Dimensions", f:parse_Dimensions },
+	0x0002: { n:"BIFF2INT", f:parse_BIFF2INT },
+	0x0005: { n:"BoolErr", f:parse_BoolErr },
+	0x0007: { n:"String", f:parse_BIFF2STRING },
+	0x0008: { n:"BIFF2ROW", f:parsenoop },
+	0x000b: { n:"Index", f:parse_Index },
+	0x001e: { n:"BIFF2FORMAT", f:parse_BIFF2Format },
+	0x001f: { n:"BIFF2FMTCNT", f:parsenoop }, /* 16-bit cnt of BIFF2FORMAT records */
 	0x0016: { n:"ExternCount", f:parsenoop },
+	0x0021: { n:"Array", f:parse_Array },
+	0x0025: { n:"DefaultRowHeight", f:parse_DefaultRowHeight },
+	0x0032: { n:"BIFF2FONTXTRA", f:parse_BIFF2FONTXTRA },
+	0x003e: { n:"BIFF2WINDOW2", f:parsenoop },
+	0x0045: { n:"BIFF2FONTCLR", f:parsenoop },
+	0x0056: { n:"BIFF4FMTCNT", f:parsenoop }, /* 16-bit cnt, similar to BIFF2 */
 	0x007e: { n:"RK", f:parsenoop }, /* Not necessarily same as 0x027e */
 	0x007f: { n:"ImData", f:parsenoop },
 	0x0087: { n:"Addin", f:parsenoop },
@@ -5295,15 +5930,16 @@ var RecordEnum = {
 	0x00bc: { n:"ShrFmla", f:parsenoop }, /* Not necessarily same as 0x04bc */
 	0x00c2: { n:"AddMenu", f:parsenoop },
 	0x00c3: { n:"DelMenu", f:parsenoop },
-	0x00d6: { n:"RString", f:parsenoop },
+	0x00d6: { n:"RString", f:parse_RString },
 	0x00df: { n:"UDDesc", f:parsenoop },
 	0x00ea: { n:"TabIdConf", f:parsenoop },
 	0x0162: { n:"XL5Modify", f:parsenoop },
 	0x01a5: { n:"FileSharing2", f:parsenoop },
-	0x0218: { n:"Name", f:parsenoop },
+	0x0209: { n:'BOF', f:parse_BOF },
+	0x0218: { n:"Lbl", f:parse_Lbl },
 	0x0223: { n:"ExternName", f:parse_ExternName },
 	0x0231: { n:"Font", f:parsenoop },
-	0x0406: { n:"Formula", f:parse_Formula },
+	0x0409: { n:'BOF', f:parse_BOF },
 	0x086d: { n:"FeatInfo", f:parsenoop },
 	0x0873: { n:"FeatInfo11", f:parsenoop },
 	0x0881: { n:"SXAddl12", f:parsenoop },
@@ -5320,22 +5956,80 @@ var RecordEnum = {
 	0x08ca: { n:"MkrExt", f:parsenoop },
 	0x08cb: { n:"CrtCoopt", f:parsenoop },
 
-	0x0000: {}
+	0x0043: { n:"BIFF2XF", f:parsenoop },
+	0x0243: { n:"BIFF3XF", f:parsenoop },
+	0x0443: { n:"BIFF4XF", f:parsenoop },
+
+	0x7262: {}
 };
 
+/* 2.4.63 Country/Region codes */
+var CountryEnum = {
+	0x0001: "US", // United States
+	0x0002: "CA", // Canada
+	0x0003: "", // Latin America (except Brazil)
+	0x0007: "RU", // Russia
+	0x0014: "EG", // Egypt
+	0x001E: "GR", // Greece
+	0x001F: "NL", // Netherlands
+	0x0020: "BE", // Belgium
+	0x0021: "FR", // France
+	0x0022: "ES", // Spain
+	0x0024: "HU", // Hungary
+	0x0027: "IT", // Italy
+	0x0029: "CH", // Switzerland
+	0x002B: "AT", // Austria
+	0x002C: "GB", // United Kingdom
+	0x002D: "DK", // Denmark
+	0x002E: "SE", // Sweden
+	0x002F: "NO", // Norway
+	0x0030: "PL", // Poland
+	0x0031: "DE", // Germany
+	0x0034: "MX", // Mexico
+	0x0037: "BR", // Brazil
+	0x003d: "AU", // Australia
+	0x0040: "NZ", // New Zealand
+	0x0042: "TH", // Thailand
+	0x0051: "JP", // Japan
+	0x0052: "KR", // Korea
+	0x0054: "VN", // Viet Nam
+	0x0056: "CN", // China
+	0x005A: "TR", // Turkey
+	0x0069: "JS", // Ramastan
+	0x00D5: "DZ", // Algeria
+	0x00D8: "MA", // Morocco
+	0x00DA: "LY", // Libya
+	0x015F: "PT", // Portugal
+	0x0162: "IS", // Iceland
+	0x0166: "FI", // Finland
+	0x01A4: "CZ", // Czech Republic
+	0x0376: "TW", // Taiwan
+	0x03C1: "LB", // Lebanon
+	0x03C2: "JO", // Jordan
+	0x03C3: "SY", // Syria
+	0x03C4: "IQ", // Iraq
+	0x03C5: "KW", // Kuwait
+	0x03C6: "SA", // Saudi Arabia
+	0x03CB: "AE", // United Arab Emirates
+	0x03CC: "IL", // Israel
+	0x03CE: "QA", // Qatar
+	0x03D5: "IR", // Iran
+	0xFFFF: "US"  // United States
+};
 function fix_opts_func(defaults) {
 	return function fix_opts(opts) {
 		for(var i = 0; i != defaults.length; ++i) {
 			var d = defaults[i];
-			if(typeof opts[d[0]] === 'undefined') opts[d[0]] = d[1];
+			if(opts[d[0]] === undefined) opts[d[0]] = d[1];
 			if(d[2] === 'n') opts[d[0]] = Number(opts[d[0]]);
 		}
 	};
 }
 
-var fixopts = fix_opts_func([
+var fix_read_opts = fix_opts_func([
 	['cellNF', false], /* emit cell number format string as .z */
 	['cellFormula', true], /* emit formulae as .f */
+	['cellStyles', false], /* emits style/theme as .s */
 
 	['sheetRows', 0, 'n'], /* read n rows (0 = read all rows) */
 
@@ -5370,26 +6064,15 @@ function parse_compobj(obj) {
 	m = __lpstr(o, l); l += m.length === 0 ? 0 : 5 + m.length; v.Reserved1 = m;
 
 	if((m = __readUInt32LE(o,l)) !== 0x71b2e9f4) return v;
-	throw "Unsupported Unicode Extension";
+	throw new Error("Unsupported Unicode Extension");
 }
-
-function parse_xlscfb(cfb, options) {
-if(!options) options = {};
-fixopts(options);
-reset_cp();
-var CompObj = cfb.find('!CompObj');
-var Summary = cfb.find('!SummaryInformation');
-var Workbook = cfb.find('/Workbook');
-if(!Workbook) Workbook = cfb.find('/Book');
-var CompObjP, SummaryP, WorkbookP;
-
 
 /* 2.4.58 Continue logic */
 function slurp(R, blob, length, opts) {
 	var l = length;
 	var bufs = [];
 	var d = blob.slice(blob.l,blob.l+l);
-	if(opts.enc && opts.enc.insitu_decrypt) switch(R.n) {
+	if(opts && opts.enc && opts.enc.insitu_decrypt) switch(R.n) {
 	case 'BOF': case 'FilePass': case 'FileLock': case 'InterfaceHdr': case 'RRDInfo': case 'RRDHead': case 'UsrExcl': break;
 	default:
 		if(d.length === 0) break;
@@ -5404,36 +6087,38 @@ function slurp(R, blob, length, opts) {
 		blob.l += 4+l;
 		next = (RecordEnum[__readUInt16LE(blob, blob.l)]);
 	}
-	var b = bconcat(bufs);
+	var b = (bconcat(bufs));
 	prep_blob(b, 0);
 	var ll = 0; b.lens = [];
 	for(var j = 0; j < bufs.length; ++j) { b.lens.push(ll); ll += bufs[j].length; }
 	return R.f(b, b.length, opts);
 }
 
-function safe_format_xf(p, opts) {
+function safe_format_xf(p, opts, date1904) {
+	if(p.t === 'e') { p.w = p.w || BErr[p.v]; }
 	if(!p.XF) return;
 	try {
 		var fmtid = p.XF.ifmt||0;
-		if(fmtid === 0) {
+		if(p.t === 'e');
+		else if(fmtid === 0) {
 			if(p.t === 'n') {
 				if((p.v|0) === p.v) p.w = SSF._general_int(p.v);
 				else p.w = SSF._general_num(p.v);
 			}
 			else p.w = SSF._general(p.v);
 		}
-		else p.w = SSF.format(fmtid,p.v);
+		else p.w = SSF.format(fmtid,p.v, {date1904:date1904||false});
 		if(opts.cellNF) p.z = SSF._table[fmtid];
 	} catch(e) { if(opts.WTF) throw e; }
 }
 
 function make_cell(val, ixfe, t) {
-	return {v:val, ixfe:ixfe, t:t};
+	return ({v:val, ixfe:ixfe, t:t});
 }
 
 // 2.3.2
 function parse_workbook(blob, options) {
-	var wb = {opts:{}};
+	var wb = ({opts:{}});
 	var Sheets = {};
 	var out = {};
 	var Directory = {};
@@ -5447,10 +6132,27 @@ function parse_workbook(blob, options) {
 	var shared_formulae = {};
 	var array_formulae = []; /* TODO: something more clever */
 	var temp_val;
+	var country;
 	var cell_valid = true;
 	var XFs = []; /* XF records */
-	var addline = function addline(cell, line, options) {
+	var palette = [];
+	var get_rgb = function getrgb(icv) {
+		if(icv < 8) return Icv[icv];
+		if(icv < 64) return palette[icv-8] || Icv[icv];
+		return Icv[icv];
+	};
+	var process_cell_style = function pcs(cell, line) {
+		var xfd = line.XF.data;
+		if(!xfd || !xfd.patternType) return;
+		line.s = {};
+		line.s.patternType = xfd.patternType;
+		var t;
+		if((t = rgb2Hex(get_rgb(xfd.icvFore)))) { line.s.fgColor = {rgb:t}; }
+		if((t = rgb2Hex(get_rgb(xfd.icvBack)))) { line.s.bgColor = {rgb:t}; }
+	};
+	var addcell = function addcell(cell, line, options) {
 		if(!cell_valid) return;
+		if(options.cellStyles && line.XF && line.XF.data) process_cell_style(cell, line);
 		lastcell = cell;
 		last_cell = encode_cell(cell);
 		if(range.s) {
@@ -5458,13 +6160,13 @@ function parse_workbook(blob, options) {
 			if(cell.c < range.s.c) range.s.c = cell.c;
 		}
 		if(range.e) {
-			if(cell.r > range.e.r) range.e.r = cell.r;
-			if(cell.c > range.e.c) range.e.c = cell.c;
+			if(cell.r + 1 > range.e.r) range.e.r = cell.r + 1;
+			if(cell.c + 1 > range.e.c) range.e.c = cell.c + 1;
 		}
 		if(options.sheetRows && lastcell.r >= options.sheetRows) cell_valid = false;
 		else out[last_cell] = line;
 	};
-	var opts = {
+	var opts = ({
 		enc: false, // encrypted
 		sbcch: 0, // cch in the preceding SupBook
 		snames: [], // sheetnames
@@ -5476,17 +6178,23 @@ function parse_workbook(blob, options) {
 		codepage: 0, // CP from CodePage record
 		winlocked: 0, // fLockWn from WinProtect
 		wtf: false
-	};
+	});
 	if(options.password) opts.password = options.password;
 	var mergecells = [];
 	var objects = [];
-	var supbooks = [[]]; // 1-indexed, will hold extern names
+	var supbooks = ([[]]); // 1-indexed, will hold extern names
 	var sbc = 0, sbci = 0, sbcli = 0;
 	supbooks.SheetNames = opts.snames;
 	supbooks.sharedf = opts.sharedf;
 	supbooks.arrayf = opts.arrayf;
 	var last_Rn = '';
 	var file_depth = 0; /* TODO: make a real stack */
+	var BIFF2Fmt = 0;
+
+	/* explicit override for some broken writers */
+	opts.codepage = 1200;
+	set_cp(1200);
+
 	while(blob.l < blob.length - 1) {
 		var s = blob.l;
 		var RecordType = blob.read_shift(2);
@@ -5508,10 +6216,7 @@ function parse_workbook(blob, options) {
 			if(R.n === 'EOF') val = R.f(blob, length, opts);
 			else val = slurp(R, blob, length, opts);
 			var Rn = R.n;
-			/* BIFF5 overrides */
-			if(opts.biff === 5) switch(Rn) {
-				case 'Lbl': Rn = 'Label'; break;
-			}
+			/* nested switch statements to workaround V8 128 limit */
 			switch(Rn) {
 				/* Workbook Options */
 				case 'Date1904': wb.opts.Date1904 = val; break;
@@ -5527,6 +6232,9 @@ function parse_workbook(blob, options) {
 				case 'WriteAccess': opts.lastuser = val; break;
 				case 'FileSharing': break; //TODO
 				case 'CodePage':
+					/* overrides based on test cases */
+					if(val === 0x5212) val = 1200;
+					else if(val === 0x8001) val = 1252;
 					opts.codepage = val;
 					set_cp(val);
 					break;
@@ -5585,35 +6293,49 @@ function parse_workbook(blob, options) {
 					out = {};
 				} break;
 				case 'BOF': {
-					if(val.BIFFVer === 0x0500) opts.biff = 5;
+					if(opts.biff !== 8){}
+					else if(val.BIFFVer === 0x0500) opts.biff = 5;
+					else if(val.BIFFVer === 0x0002) opts.biff = 2;
+					else if(val.BIFFVer === 0x0007) opts.biff = 2;
+					else if(RecordType  === 0x0009) opts.biff = 2;
+					else if(RecordType  === 0x0209) opts.biff = 3;
+					else if(RecordType  === 0x0409) opts.biff = 4;
 					if(file_depth++) break;
 					cell_valid = true;
 					out = {};
-					cur_sheet = (Directory[s] || {name:""}).name;
+					if(opts.biff < 5) {
+						if(cur_sheet === "") cur_sheet = "Sheet1";
+						range = {s:{r:0,c:0},e:{r:0,c:0}};
+						/* fake BoundSheet8 */
+						var fakebs8 = {pos: blob.l - length, name:cur_sheet};
+						Directory[fakebs8.pos] = fakebs8;
+						opts.snames.push(cur_sheet);
+					}
+					else cur_sheet = (Directory[s] || {name:""}).name;
 					mergecells = [];
 					objects = [];
 				} break;
-				case 'Number': {
+				case 'Number': case 'BIFF2NUM': case 'BIFF2INT': {
 					temp_val = {ixfe: val.ixfe, XF: XFs[val.ixfe], v:val.val, t:'n'};
-					if(temp_val.XF) safe_format_xf(temp_val, options);
-					addline({c:val.c, r:val.r}, temp_val, options);
+					safe_format_xf(temp_val, options, wb.opts.Date1904);
+					addcell({c:val.c, r:val.r}, temp_val, options);
 				} break;
 				case 'BoolErr': {
 					temp_val = {ixfe: val.ixfe, XF: XFs[val.ixfe], v:val.val, t:val.t};
-					if(temp_val.XF) safe_format_xf(temp_val, options);
-					addline({c:val.c, r:val.r}, temp_val, options);
+					safe_format_xf(temp_val, options, wb.opts.Date1904);
+					addcell({c:val.c, r:val.r}, temp_val, options);
 				} break;
 				case 'RK': {
 					temp_val = {ixfe: val.ixfe, XF: XFs[val.ixfe], v:val.rknum, t:'n'};
-					if(temp_val.XF) safe_format_xf(temp_val, options);
-					addline({c:val.c, r:val.r}, temp_val, options);
+					safe_format_xf(temp_val, options, wb.opts.Date1904);
+					addcell({c:val.c, r:val.r}, temp_val, options);
 				} break;
 				case 'MulRk': {
 					for(var j = val.c; j <= val.C; ++j) {
 						var ixfe = val.rkrec[j-val.c][0];
 						temp_val= {ixfe:ixfe, XF:XFs[ixfe], v:val.rkrec[j-val.c][1], t:'n'};
-						if(temp_val.XF) safe_format_xf(temp_val, options);
-						addline({c:j, r:val.r}, temp_val, options);
+						safe_format_xf(temp_val, options, wb.opts.Date1904);
+						addcell({c:j, r:val.r}, temp_val, options);
 					}
 				} break;
 				case 'Formula': {
@@ -5621,48 +6343,61 @@ function parse_workbook(blob, options) {
 						case 'String': last_formula = val; break;
 						case 'Array Formula': throw "Array Formula unsupported";
 						default:
-							temp_val = {v:val.val, ixfe:val.cell.ixfe, t:val.tt};
+							temp_val = ({v:val.val, ixfe:val.cell.ixfe, t:val.tt});
 							temp_val.XF = XFs[temp_val.ixfe];
-							if(options.cellFormula) temp_val.f = "="+stringify_formula(val.formula,range,val.cell,supbooks, opts);
-							if(temp_val.XF) safe_format_xf(temp_val, options);
-							addline(val.cell, temp_val, options);
+							if(options.cellFormula) {
+								var _f = val.formula;
+								if(_f && _f[0] && _f[0][0] && _f[0][0][0] == 'PtgExp') {
+									var _fr = _f[0][0][1][0], _fc = _f[0][0][1][1];
+									var _fe = encode_cell({r:_fr, c:_fc});
+									if(shared_formulae[_fe]) temp_val.f = stringify_formula(val.formula,range,val.cell,supbooks, opts);
+									else temp_val.F = (out[_fe] || {}).F;
+								} else temp_val.f = stringify_formula(val.formula,range,val.cell,supbooks, opts);
+							}
+							safe_format_xf(temp_val, options, wb.opts.Date1904);
+							addcell(val.cell, temp_val, options);
 							last_formula = val;
 					}
 				} break;
 				case 'String': {
 					if(last_formula) {
 						last_formula.val = val;
-						temp_val = {v:last_formula.val, ixfe:last_formula.cell.ixfe, t:'s'};
+						temp_val = ({v:last_formula.val, ixfe:last_formula.cell.ixfe, t:'s'});
 						temp_val.XF = XFs[temp_val.ixfe];
-						if(options.cellFormula) temp_val.f = "="+stringify_formula(last_formula.formula, range, last_formula.cell, supbooks, opts);
-						if(temp_val.XF) safe_format_xf(temp_val, options);
-						addline(last_formula.cell, temp_val, options);
+						if(options.cellFormula) temp_val.f = stringify_formula(last_formula.formula, range, last_formula.cell, supbooks, opts);
+						safe_format_xf(temp_val, options, wb.opts.Date1904);
+						addcell(last_formula.cell, temp_val, options);
 						last_formula = null;
 					}
 				} break;
 				case 'Array': {
 					array_formulae.push(val);
+					if(options.cellFormula && out[last_cell]) {
+						out[last_cell].f = stringify_formula(last_formula.formula, range, last_formula.cell, supbooks, opts);
+						out[last_cell].F = encode_range(val[0]);
+					}
 				} break;
 				case 'ShrFmla': {
 					if(!cell_valid) break;
-					//if(options.cellFormula) out[last_cell].f = stringify_formula(val[0], range, lastcell, supbooks, opts);
-					/* TODO: capture range */
-					shared_formulae[encode_cell(last_formula.cell)]= val[0];
+					if(!options.cellFormula) break;
+					if(last_cell) {
+						/* TODO: capture range */
+						shared_formulae[encode_cell(last_formula.cell)]= val[0];
+						(out[encode_cell(last_formula.cell)]||{}).f = stringify_formula(val[0], range, lastcell, supbooks, opts);
+					}
 				} break;
 				case 'LabelSst':
-					//temp_val={v:sst[val.isst].t, ixfe:val.ixfe, t:'s'};
 					temp_val=make_cell(sst[val.isst].t, val.ixfe, 's');
 					temp_val.XF = XFs[temp_val.ixfe];
-					if(temp_val.XF) safe_format_xf(temp_val, options);
-					addline({c:val.c, r:val.r}, temp_val, options);
+					safe_format_xf(temp_val, options, wb.opts.Date1904);
+					addcell({c:val.c, r:val.r}, temp_val, options);
 					break;
-				case 'Label':
-					/* Some writers erroneously write Label */
-					//temp_val = {v:val.val, ixfe:val.ixfe, XF:XFs[val.ixfe], t:'s'};
+				case 'RString':
+				case 'Label': case 'BIFF2STR':
 					temp_val=make_cell(val.val, val.ixfe, 's');
 					temp_val.XF = XFs[temp_val.ixfe];
-					if(temp_val.XF) safe_format_xf(temp_val, options);
-					addline({c:val.c, r:val.r}, temp_val, options);
+					safe_format_xf(temp_val, options, wb.opts.Date1904);
+					addcell({c:val.c, r:val.r}, temp_val, options);
 					break;
 				case 'Dimensions': {
 					if(file_depth === 1) range = val; /* TODO: stack */
@@ -5672,6 +6407,9 @@ function parse_workbook(blob, options) {
 				} break;
 				case 'Format': { /* val = [id, fmt] */
 					SSF.load(val[1], val[0]);
+				} break;
+				case 'BIFF2FORMAT': {
+					SSF.load(val, BIFF2Fmt++);
 				} break;
 
 				case 'MergeCells': mergecells = mergecells.concat(val); break;
@@ -5694,7 +6432,7 @@ function parse_workbook(blob, options) {
 
 				/* Comments */
 				case 'Note': {
-					if(opts.biff === 5) break; /* TODO: BIFF5 */
+					if(opts.biff <= 5 && opts.biff >= 2) break; /* TODO: BIFF5 */
 					cc = out[encode_cell(val[0])];
 					var noteobj = objects[val[2]];
 					if(!cc) break;
@@ -5702,9 +6440,12 @@ function parse_workbook(blob, options) {
 					cmnt = {a:val[1],t:noteobj.TxO.t};
 					cc.c.push(cmnt);
 				} break;
-				case 'NameCmt': break;
 
 				default: switch(R.n) { /* nested */
+				case 'ClrtClient': break;
+				case 'XFExt': update_xfext(XFs[val.ixfe], val.ext); break;
+
+				case 'NameCmt': break;
 				case 'Header': break; // TODO
 				case 'Footer': break; // TODO
 				case 'HCenter': break; // TODO
@@ -5733,17 +6474,15 @@ function parse_workbook(blob, options) {
 				case 'FeatHdr': case 'FeatHdr11': break;
 				case 'Feature11': case 'Feature12': case 'List12': break;
 				case 'Blank': break;
-				case 'Country': break; // TODO: international support
+				case 'Country': country = val; break;
 				case 'RecalcId': break;
 				case 'DefaultRowHeight': case 'DxGCol': break; // TODO: htmlify
 				case 'Fbi': case 'Fbi2': case 'GelFrame': break;
 				case 'Font': break; // TODO
 				case 'XFCRC': break; // TODO
-				case 'XFExt': break; // TODO
 				case 'Style': break; // TODO
 				case 'StyleExt': break; // TODO
-				case 'Palette': break; // TODO
-				case 'ClrtClient': break; // TODO
+				case 'Palette': palette = val; break; // TODO
 				case 'Theme': break; // TODO
 				/* Protection */
 				case 'ScenarioProtect': break;
@@ -5763,6 +6502,7 @@ function parse_workbook(blob, options) {
 				case 'SXVS': break; // TODO
 				case 'DConRef': break; // TODO
 				case 'SXAddl': break; // TODO
+				case 'DConBin': break; // TODO
 				case 'DConName': break; // TODO
 				case 'SXPI': break; // TODO
 				case 'SxFormat': break; // TODO
@@ -5852,7 +6592,7 @@ function parse_workbook(blob, options) {
 				case 'Frame': case 'Area':
 				case 'Axis': case 'AxisLine': case 'Tick': break;
 				case 'AxesUsed':
-				case 'CrtLayout12': case 'CrtLayout12A': case 'CrtLink': case 'CrtLine': case 'CrtMlFrt': break;
+				case 'CrtLayout12': case 'CrtLayout12A': case 'CrtLink': case 'CrtLine': case 'CrtMlFrt': case 'CrtMlFrtContinue': break;
 				case 'LineFormat': case 'AreaFormat':
 				case 'Chart': case 'Chart3d': case 'Chart3DBarShape': case 'ChartFormat': case 'ChartFrtInfo': break;
 				case 'PlotArea': case 'PlotGrowth': break;
@@ -5868,7 +6608,7 @@ function parse_workbook(blob, options) {
 				case 'StartObject': case 'EndObject': break;
 				case 'AlRuns': case 'ObjectLink': break;
 				case 'SIIndex': break;
-				case 'AttachedLabel': break;
+				case 'AttachedLabel': case 'YMult': break;
 
 				/* Chart Group */
 				case 'Line': case 'Bar': break;
@@ -5920,11 +6660,25 @@ function parse_workbook(blob, options) {
 				/* Should not Happen */
 				case 'Continue': case 'ContinueFrt12': break;
 
+				/* Future Records */
+				case 'FrtFontList': case 'FrtWrapper': break;
+
+				default: switch(R.n) { /* nested */
 				/* BIFF5 records */
 				case 'ExternCount': break;
-				case 'RString': break;
+				case 'TabIdConf': case 'Radar': case 'RadarArea': case 'DropBar': case 'Intl': case 'CoordList': case 'SerAuxErrBar': break;
+
+				/* BIFF2-4 records */
+				case 'BIFF2FONTCLR': case 'BIFF2FMTCNT': case 'BIFF2FONTXTRA': break;
+				case 'BIFF2XF': case 'BIFF3XF': case 'BIFF4XF': break;
+				case 'BIFF4FMTCNT': case 'BIFF2ROW': case 'BIFF2WINDOW2': break;
+
+				/* Miscellaneous */
+				case 'SCENARIO': case 'DConBin': case 'PicF': case 'DataLabExt':
+				case 'Lel': case 'BopPop': case 'BopPopCustom': case 'RealTimeData':
+				case 'Name': break;
 				default: if(options.WTF) throw 'Unrecognized Record ' + R.n;
-			}}}
+			}}}}
 		} else blob.l += length;
 	}
 	var sheetnamesraw = Object.keys(Directory).sort(function(a,b) { return Number(a) - Number(b); }).map(function(x){return Directory[x].name;});
@@ -5936,16 +6690,36 @@ function parse_workbook(blob, options) {
 	wb.Strings = sst;
 	wb.SSF = SSF.get_table();
 	if(opts.enc) wb.Encryption = opts.enc;
+	wb.Metadata = {};
+	if(country !== undefined) wb.Metadata.Country = country;
 	return wb;
 }
+
+function parse_xlscfb(cfb, options) {
+if(!options) options = {};
+fix_read_opts(options);
+reset_cp();
+var CompObj, Summary, Workbook;
+if(cfb.FullPaths) {
+	CompObj = cfb.find('!CompObj');
+	Summary = cfb.find('!SummaryInformation');
+	Workbook = cfb.find('/Workbook');
+} else {
+	prep_blob(cfb, 0);
+	Workbook = ({content: cfb});
+}
+
+if(!Workbook) Workbook = cfb.find('/Book');
+var CompObjP, SummaryP, WorkbookP;
+
 if(CompObj) CompObjP = parse_compobj(CompObj);
 if(options.bookProps && !options.bookSheets) WorkbookP = {};
 else {
-	if(Workbook) WorkbookP = parse_workbook(Workbook.content, options);
+	if(Workbook) WorkbookP = parse_workbook(Workbook.content, options, !!Workbook.find);
 	else throw new Error("Cannot find Workbook stream");
 }
 
-parse_props(cfb);
+if(cfb.FullPaths) parse_props(cfb);
 
 var props = {};
 for(var y in cfb.Summary) props[y] = cfb.Summary[y];
@@ -5992,9 +6766,8 @@ function entrepl($$,$1) { return String.fromCharCode(parseInt($1,10)); }
 function fixstr(str) {
 	return str.replace(entregex,entrepl);
 }
-var everted_BERR = evert(BERR);
-
-var magic_formats = {
+/* map from xlml named formats to SSF TODO: localize */
+var XLMLFormatMap/*{[string]:string}*/ = ({
 	"General Number": "General",
 	"General Date": SSF._table[22],
 	"Long Date": "dddd, mmmm dd, yyyy",
@@ -6011,13 +6784,26 @@ var magic_formats = {
 	"Yes/No": '"Yes";"Yes";"No";@',
 	"True/False": '"True";"True";"False";@',
 	"On/Off": '"Yes";"Yes";"No";@'
-};
+});
 
-function xlml_format(format, value) {
-	var fmt = magic_formats[format] || unescapexml(format);
-	if(fmt === "General") return SSF._general(value);
-	return SSF.format(fmt, value);
-}
+/* [MS-EXSPXML3] 2.4.54 ST_enmPattern */
+var PatternTypeMap = {
+	"None": "none",
+	"Solid": "solid",
+	"Gray50": "mediumGray",
+	"Gray75": "darkGray",
+	"Gray25": "lightGray",
+	"HorzStripe": "darkHorizontal",
+	"VertStripe": "darkVertical",
+	"ReverseDiagStripe": "darkDown",
+	"DiagStripe": "darkUp",
+	"DiagCross": "darkGrid",
+	"ThickDiagCross": "darkTrellis",
+	"ThinHorzStripe": "lightHorizontal",
+	"ThinVertStripe": "lightVertical",
+	"ThinReverseDiagStripe": "lightDown",
+	"ThinHorzCross": "lightGrid"
+};
 
 /* TODO: Normalize the properties */
 function xlml_set_prop(Props, tag, val) {
@@ -6025,6 +6811,12 @@ function xlml_set_prop(Props, tag, val) {
 		case 'Description': tag = 'Comments'; break;
 	}
 	Props[tag] = val;
+}
+
+function xlml_format(format, value) {
+	var fmt = XLMLFormatMap[format] || unescapexml(format);
+	if(fmt === "General") return SSF._general(value);
+	return SSF.format(fmt, value);
 }
 
 function xlml_set_custprop(Custprops, Rn, cp, val) {
@@ -6041,7 +6833,8 @@ function xlml_set_custprop(Custprops, Rn, cp, val) {
 
 function safe_format_xlml(cell, nf, o) {
 	try {
-		if(nf === "General") {
+		if(cell.t === 'e') { cell.w = cell.w || BErr[cell.v]; }
+		else if(nf === "General") {
 			if(cell.t === 'n') {
 				if((cell.v|0) === cell.v) cell.w = SSF._general_int(cell.v);
 				else cell.w = SSF._general_num(cell.v);
@@ -6049,16 +6842,29 @@ function safe_format_xlml(cell, nf, o) {
 			else cell.w = SSF._general(cell.v);
 		}
 		else cell.w = xlml_format(nf||"General", cell.v);
-		if(o.cellNF) cell.z = magic_formats[nf]||nf||"General";
+		if(o.cellNF) cell.z = XLMLFormatMap[nf]||nf||"General";
 	} catch(e) { if(o.WTF) throw e; }
 }
 
+function process_style_xlml(styles, stag, opts) {
+	if(opts.cellStyles) {
+		if(stag.Interior) {
+			var I = stag.Interior;
+			if(I.Pattern) I.patternType = PatternTypeMap[I.Pattern] || I.Pattern;
+		}
+	}
+	styles[stag.ID] = stag;
+}
+
 /* TODO: there must exist some form of OSP-blessed spec */
-function parse_xlml_data(xml, ss, data, cell, base, styles, csty, o) {
-	var nf = "General", sid = cell.StyleID; o = o || {};
+function parse_xlml_data(xml, ss, data, cell, base, styles, csty, row, arrayf, o) {
+	var nf = "General", sid = cell.StyleID, S = {}; o = o || {};
+	var interiors = [];
+	if(sid === undefined && row) sid = row.StyleID;
 	if(sid === undefined && csty) sid = csty.StyleID;
 	while(styles[sid] !== undefined) {
 		if(styles[sid].nf) nf = styles[sid].nf;
+		if(styles[sid].Interior) interiors.push(styles[sid].Interior);
 		if(!styles[sid].Parent) break;
 		sid = styles[sid].Parent;
 	}
@@ -6068,8 +6874,8 @@ function parse_xlml_data(xml, ss, data, cell, base, styles, csty, o) {
 			cell.v = parsexmlbool(xml);
 			break;
 		case 'String':
-			cell.t = 'str'; cell.r = fixstr(unescapexml(xml));
-			cell.v = xml.indexOf("<") > -1 ? ss : cell.r;
+			cell.t = 's'; cell.r = fixstr(unescapexml(xml));
+			cell.v = xml.indexOf("<") > -1 ? unescapexml(ss) : cell.r;
 			break;
 		case 'DateTime':
 			cell.v = (Date.parse(xml) - new Date(Date.UTC(1899, 11, 30))) / (24 * 60 * 60 * 1000);
@@ -6081,13 +6887,34 @@ function parse_xlml_data(xml, ss, data, cell, base, styles, csty, o) {
 			if(cell.v === undefined) cell.v=+xml;
 			if(!cell.t) cell.t = 'n';
 			break;
-		case 'Error': cell.t = 'e'; cell.v = xml; cell.w = xml; break;
+		case 'Error': cell.t = 'e'; cell.v = RBErr[xml]; cell.w = xml; break;
 		default: cell.t = 's'; cell.v = fixstr(ss); break;
 	}
-	if(cell.t !== 'e') safe_format_xlml(cell, nf, o);
-	if(o.cellFormula != null && cell.Formula) {
-		cell.f = rc_to_a1(unescapexml(cell.Formula), base);
-		cell.Formula = undefined;
+	safe_format_xlml(cell, nf, o);
+	if(o.cellFormula != null) {
+		if(cell.Formula) {
+			var fstr = unescapexml(cell.Formula);
+			/* strictly speaking, the leading = is required but some writers omit */
+			if(fstr.charCodeAt(0) == 61 /* = */) fstr = fstr.substr(1);
+			cell.f = rc_to_a1(fstr, base);
+			cell.Formula = undefined;
+			if(cell.ArrayRange == "RC") cell.F = rc_to_a1("RC:RC", base);
+			else if(cell.ArrayRange) {
+				cell.F = rc_to_a1(cell.ArrayRange, base);
+				arrayf.push([safe_decode_range(cell.F), cell.F]);
+			}
+		} else {
+			for(i = 0; i < arrayf.length; ++i)
+				if(base.r >= arrayf[i][0].s.r && base.r <= arrayf[i][0].e.r)
+					if(base.c >= arrayf[i][0].s.c && base.c <= arrayf[i][0].e.c)
+						cell.F = arrayf[i][1];
+		}
+	}
+	if(o.cellStyles) {
+		interiors.forEach(function(x) {
+			if(!S.patternType && x.patternType) S.patternType = x.patternType;
+		});
+		cell.s = S;
 	}
 	cell.ixfe = cell.StyleID !== undefined ? cell.StyleID : 'Default';
 }
@@ -6098,31 +6925,34 @@ function xlml_clean_comment(comment) {
 }
 
 function xlml_normalize(d) {
-	if(typeof Buffer!=='undefined'&&d instanceof Buffer) return d.toString('utf8');
+	if(has_buf && Buffer.isBuffer(d)) return d.toString('utf8');
 	if(typeof d === 'string') return d;
-	throw "badf";
+	throw new Error("Bad input format: expected Buffer or string");
 }
 
 /* TODO: Everything */
 var xlmlregex = /<(\/?)([a-z0-9]*:|)(\w+)[^>]*>/mg;
 function parse_xlml_xml(d, opts) {
-	var str = xlml_normalize(d);
+	var str = debom(xlml_normalize(d));
 	var Rn;
 	var state = [], tmp;
 	var sheets = {}, sheetnames = [], cursheet = {}, sheetname = "";
-	var table = {}, cell = {}, row = {}, dtag, didx;
+	var table = {}, cell = ({}), row = {};
+	var dtag = parsexmltag('<Data ss:Type="String">'), didx = 0;
 	var c = 0, r = 0;
-	var refguess = {s: {r:1000000, c:1000000}, e: {r:0, c:0} };
+	var refguess = {s: {r:2000000, c:2000000}, e: {r:0, c:0} };
 	var styles = {}, stag = {};
 	var ss = "", fidx = 0;
 	var mergecells = [];
 	var Props = {}, Custprops = {}, pidx = 0, cp = {};
 	var comments = [], comment = {};
 	var cstys = [], csty;
+	var arrayf = [];
+	xlmlregex.lastIndex = 0;
 	while((Rn = xlmlregex.exec(str))) switch(Rn[3]) {
 		case 'Data':
 			if(state[state.length-1][1]) break;
-			if(Rn[1]==='/') parse_xlml_data(str.slice(didx, Rn.index), ss, dtag, state[state.length-1][0]=="Comment"?comment:cell, {c:c,r:r}, styles, cstys[c], opts);
+			if(Rn[1]==='/') parse_xlml_data(str.slice(didx, Rn.index), ss, dtag, state[state.length-1][0]=="Comment"?comment:cell, {c:c,r:r}, styles, cstys[c], row, arrayf, opts);
 			else { ss = ""; dtag = parsexmltag(Rn[0]); didx = Rn.index + Rn[0].length; }
 			break;
 		case 'Cell':
@@ -6145,15 +6975,15 @@ function parse_xlml_xml(d, opts) {
 				if(cell.Index) c = +cell.Index - 1;
 				if(c < refguess.s.c) refguess.s.c = c;
 				if(c > refguess.e.c) refguess.e.c = c;
-				if(Rn[0].substr(-2) === "/>") ++c;
+				if(Rn[0].slice(-2) === "/>") ++c;
 				comments = [];
 			}
 			break;
 		case 'Row':
-			if(Rn[1]==='/' || Rn[0].substr(-2) === "/>") {
+			if(Rn[1]==='/' || Rn[0].slice(-2) === "/>") {
 				if(r < refguess.s.r) refguess.s.r = r;
 				if(r > refguess.e.r) refguess.e.r = r;
-				if(Rn[0].substr(-2) === "/>") {
+				if(Rn[0].slice(-2) === "/>") {
 					row = parsexmltag(Rn[0]);
 					if(row.Index) r = +row.Index - 1;
 				}
@@ -6171,7 +7001,7 @@ function parse_xlml_xml(d, opts) {
 				if(mergecells.length) cursheet["!merges"] = mergecells;
 				sheets[sheetname] = cursheet;
 			} else {
-				refguess = {s: {r:1000000, c:1000000}, e: {r:0, c:0} };
+				refguess = {s: {r:2000000, c:2000000}, e: {r:0, c:0} };
 				r = c = 0;
 				state.push([Rn[3], false]);
 				tmp = parsexmltag(Rn[0]);
@@ -6191,7 +7021,7 @@ function parse_xlml_xml(d, opts) {
 			break;
 
 		case 'Style':
-			if(Rn[1]==='/') styles[stag.ID] = stag;
+			if(Rn[1]==='/') process_style_xlml(styles, stag, opts);
 			else stag = parsexmltag(Rn[0]);
 			break;
 
@@ -6219,11 +7049,14 @@ function parse_xlml_xml(d, opts) {
 		case 'Alignment': break;
 		case 'Borders': break;
 		case 'Font':
-			if(Rn[0].substr(-2) === "/>") break;
+			if(Rn[0].slice(-2) === "/>") break;
 			else if(Rn[1]==="/") ss += str.slice(fidx, Rn.index);
 			else fidx = Rn.index + Rn[0].length;
 			break;
-		case 'Interior': break;
+		case 'Interior':
+			if(!opts.cellStyles) break;
+			stag.Interior = parsexmltag(Rn[0]);
+			break;
 		case 'Protection': break;
 
 		case 'Author':
@@ -6242,7 +7075,7 @@ function parse_xlml_xml(d, opts) {
 		case 'TotalTime':
 		case 'HyperlinkBase':
 		case 'Manager':
-			if(Rn[0].substr(-2) === "/>") break;
+			if(Rn[0].slice(-2) === "/>") break;
 			else if(Rn[1]==="/") xlml_set_prop(Props, Rn[3], str.slice(pidx, Rn.index));
 			else pidx = Rn.index + Rn[0].length;
 			break;
@@ -6284,14 +7117,21 @@ function parse_xlml_xml(d, opts) {
 		case 'Schema':
 		case 'data':
 		case 'ConditionalFormatting':
+		case 'SmartTagType':
+		case 'SmartTags':
 		case 'ExcelWorkbook':
 		case 'WorkbookOptions':
 		case 'WorksheetOptions':
 			if(Rn[1]==='/'){if((tmp=state.pop())[0]!==Rn[3]) throw "Bad state: "+tmp;}
-			else state.push([Rn[3], true]);
+			else if(Rn[0].charAt(Rn[0].length-2) !== '/') state.push([Rn[3], true]);
 			break;
 
 		default:
+			/* FODS file root is <office:document> */
+			if(state.length == 0 && Rn[3] == "document") throw new Error("Unsupported FODS format");
+			/* UOS file root is <uof:UOF> */
+			if(state.length == 0 && Rn[3] == "UOF") throw new Error("Unsupported UOS format");
+
 			var seen = true;
 			switch(state[state.length-1][0]) {
 				/* OfficeDocumentSettings */
@@ -6369,6 +7209,7 @@ function parse_xlml_xml(d, opts) {
 					case 'DoNotCalculateBeforeSave': break;
 					case 'Number': break;
 					case 'RefModeR1C1': break;
+					case 'EmbedSaveSmartTags': break;
 					default: seen = false;
 				} break;
 
@@ -6619,20 +7460,23 @@ function parse_xlml_xml(d, opts) {
 					default: seen = false;
 				} break;
 
+				/* SmartTags (can be anything) */
+				case 'SmartTags': break;
+
 				default: seen = false; break;
 			}
 			if(seen) break;
 			/* CustomDocumentProperties */
 			if(!state[state.length-1][1]) throw 'Unrecognized tag: ' + Rn[3] + "|" + state.join("|");
 			if(state[state.length-1][0]==='CustomDocumentProperties') {
-				if(Rn[0].substr(-2) === "/>") break;
+				if(Rn[0].slice(-2) === "/>") break;
 				else if(Rn[1]==="/") xlml_set_custprop(Custprops, Rn, cp, str.slice(pidx, Rn.index));
 				else { cp = Rn; pidx = Rn.index + Rn[0].length; }
 				break;
 			}
 			if(opts.WTF) throw 'Unrecognized tag: ' + Rn[3] + "|" + state.join("|");
 	}
-	var out = {};
+	var out = ({});
 	if(!opts.bookSheets && !opts.bookProps) out.Sheets = sheets;
 	out.SheetNames = sheetnames;
 	out.SSF = SSF.get_table();
@@ -6642,7 +7486,7 @@ function parse_xlml_xml(d, opts) {
 }
 
 function parse_xlml(data, opts) {
-	fixopts(opts=opts||{});
+	fix_read_opts(opts=opts||{});
 	switch(opts.type||"base64") {
 		case "base64": return parse_xlml_xml(Base64.decode(data), opts);
 		case "binary": case "buffer": case "file": return parse_xlml_xml(data, opts);
@@ -6650,7 +7494,11 @@ function parse_xlml(data, opts) {
 	}
 }
 
-function write_xlml(wb, opts) { }
+/* TODO */
+function write_xlml(wb, opts) {
+	var o = [XML_HEADER];
+	return o.join("");
+}
 var fs;
 if(typeof exports !== 'undefined') {
 	if(typeof module !== 'undefined' && module.exports) {
@@ -6668,12 +7516,15 @@ function firstbyte(f,o) {
 }
 
 function xlsread(f, o) {
+	var n=0;
 	if(!o) o = {};
-	if(!o.type) o.type = (typeof Buffer !== 'undefined' && f instanceof Buffer) ? "buffer" : "base64";
-	switch(firstbyte(f, o)) {
+	if(!o.type) o.type = (has_buf && Buffer.isBuffer(f)) ? "buffer" : "base64";
+	switch((n = firstbyte(f, o))) {
 		case 0xD0: return parse_xlscfb(CFB.read(f, o), o);
+		case 0x09: return parse_xlscfb(s2a(o.type === 'base64' ? Base64.decode(f) : f), o);
 		case 0x3C: return parse_xlml(f, o);
-		default: throw "Unsupported file";
+		case 0xEF: return parse_xlml(f, o);
+		default: throw new Error("Unsupported file " + n);
 	}
 }
 var readFile = function(f,o) {
@@ -6681,7 +7532,9 @@ var readFile = function(f,o) {
 	if(!o) o = {};
 	switch(firstbyte(d, {type:'buffer'})) {
 		case 0xD0: return parse_xlscfb(CFB.read(d,{type:'buffer'}),o);
+		case 0x09: return parse_xlscfb(d, o);
 		case 0x3C: return parse_xlml(d, (o.type="buffer",o));
+		case 0xEF: return parse_xlml(d, (o.type="buffer",o));
 		default: throw "Unsupported file";
 	}
 };
@@ -6702,26 +7555,6 @@ function writeFileSync(wb, filename, opts) {
 		case '.xml': o.bookType = 'xml'; break;
 	}
 	return writeSync(wb, o);
-}
-
-function shift_cell(cell, tgt) {
-	if(tgt.s) {
-		if(cell.cRel) cell.c += tgt.s.c;
-		if(cell.rRel) cell.r += tgt.s.r;
-	} else {
-		cell.c += tgt.c;
-		cell.r += tgt.r;
-	}
-	cell.cRel = cell.rRel = 0;
-	while(cell.c >= 0x100) cell.c -= 0x100;
-	while(cell.r >= 0x10000) cell.r -= 0x10000;
-	return cell;
-}
-
-function shift_range(cell, range) {
-	cell.s = shift_cell(cell.s, range.s);
-	cell.e = shift_cell(cell.e, range.s);
-	return cell;
 }
 
 function decode_row(rowstr) { return parseInt(unfix_row(rowstr),10) - 1; }
@@ -6749,27 +7582,28 @@ function encode_range(cs,ce) {
 function safe_decode_range(range) {
 	var o = {s:{c:0,r:0},e:{c:0,r:0}};
 	var idx = 0, i = 0, cc = 0;
-	for(idx = 0; i != range.length; ++i) {
+	var len = range.length;
+	for(idx = 0; i < len; ++i) {
 		if((cc=range.charCodeAt(i)-64) < 1 || cc > 26) break;
 		idx = 26*idx + cc;
 	}
 	o.s.c = --idx;
 
-	for(idx = 0; i != range.length; ++i) {
+	for(idx = 0; i < len; ++i) {
 		if((cc=range.charCodeAt(i)-48) < 0 || cc > 9) break;
 		idx = 10*idx + cc;
 	}
 	o.s.r = --idx;
 
-	if(i === range.length || range.charCodeAt(++i) === 58) { o.e.c=o.s.c; o.e.r=o.s.r; return o; }
+	if(i === len || range.charCodeAt(++i) === 58) { o.e.c=o.s.c; o.e.r=o.s.r; return o; }
 
-	for(idx = 0; i != range.length; ++i) {
+	for(idx = 0; i != len; ++i) {
 		if((cc=range.charCodeAt(i)-64) < 1 || cc > 26) break;
 		idx = 26*idx + cc;
 	}
 	o.e.c = --idx;
 
-	for(idx = 0; i != range.length; ++i) {
+	for(idx = 0; i != len; ++i) {
 		if((cc=range.charCodeAt(i)-48) < 0 || cc > 9) break;
 		idx = 10*idx + cc;
 	}
@@ -6792,9 +7626,9 @@ function format_cell(cell, v) {
 
 function sheet_to_json(sheet, opts){
 	var val, row, range, header = 0, offset = 1, r, hdr = [], isempty, R, C, v;
-	var out = [];
 	var o = opts != null ? opts : {};
-	if(!sheet || !sheet["!ref"]) return out;
+	var raw = o.raw;
+	if(sheet == null || sheet["!ref"] == null) return [];
 	range = o.range !== undefined ? o.range : sheet["!ref"];
 	if(o.header === 1) header = 1;
 	else if(o.header === "A") header = 2;
@@ -6806,7 +7640,9 @@ function sheet_to_json(sheet, opts){
 	}
 	if(header > 0) offset = 0;
 	var rr = encode_row(r.s.r);
-	var cols = [];
+	var cols = new Array(r.e.c-r.s.c+1);
+	var out = new Array(r.e.r-r.s.r-offset+1);
+	var outi = 0;
 	for(C = r.s.c; C <= r.e.c; ++C) {
 		cols[C] = encode_col(C);
 		val = sheet[cols[C] + rr];
@@ -6815,7 +7651,7 @@ function sheet_to_json(sheet, opts){
 			case 2: hdr[C] = cols[C]; break;
 			case 3: hdr[C] = o.header[C - r.s.c]; break;
 			default:
-				if(!val) continue;
+				if(val === undefined) continue;
 				hdr[C] = format_cell(val);
 		}
 	}
@@ -6823,28 +7659,34 @@ function sheet_to_json(sheet, opts){
 	for (R = r.s.r + offset; R <= r.e.r; ++R) {
 		rr = encode_row(R);
 		isempty = true;
-		row = header === 1 ? [] : Object.create({ __rowNum__ : R });
+		if(header === 1) row = [];
+		else {
+			row = {};
+			if(Object.defineProperty) Object.defineProperty(row, '__rowNum__', {value:R, enumerable:false});
+			else row.__rowNum__ = R;
+		}
 		for (C = r.s.c; C <= r.e.c; ++C) {
 			val = sheet[cols[C] + rr];
-			if(!val || !val.t) continue;
+			if(val === undefined || val.t === undefined) continue;
 			v = val.v;
 			switch(val.t){
 				case 'e': continue;
-				case 's': case 'str': break;
+				case 's': break;
 				case 'b': case 'n': break;
 				default: throw 'unrecognized type ' + val.t;
 			}
 			if(v !== undefined) {
-				row[hdr[C]] = o.raw ? v : format_cell(val,v);
+				row[hdr[C]] = raw ? v : format_cell(val,v);
 				isempty = false;
 			}
 		}
-		if(!isempty) out.push(row);
+		if(isempty === false || header === 1) out[outi++] = row;
 	}
+	out.length = outi;
 	return out;
 }
 
-function sheet_to_row_object_array(sheet, opts) { return sheet_to_json(sheet, opts == null ? opts : {}); }
+function sheet_to_row_object_array(sheet, opts) { return sheet_to_json(sheet, opts != null ? opts : {}); }
 
 function sheet_to_csv(sheet, opts) {
 	var out = "", txt = "", qreg = /"/g;
@@ -6856,11 +7698,11 @@ function sheet_to_csv(sheet, opts) {
 	var row = "", rr = "", cols = [];
 	var i = 0, cc = 0, val;
 	var R = 0, C = 0;
+	for(C = r.s.c; C <= r.e.c; ++C) cols[C] = encode_col(C);
 	for(R = r.s.r; R <= r.e.r; ++R) {
 		row = "";
 		rr = encode_row(R);
 		for(C = r.s.c; C <= r.e.c; ++C) {
-			if(R === r.s.r) cols[C] = encode_col(C);
 			val = sheet[cols[C] + rr];
 			txt = val !== undefined ? ''+format_cell(val) : "";
 			for(i = 0, cc = 0; i !== txt.length; ++i) if((cc = txt.charCodeAt(i)) === fs || cc === rs || cc === 34) {
@@ -6874,22 +7716,31 @@ function sheet_to_csv(sheet, opts) {
 var make_csv = sheet_to_csv;
 
 function sheet_to_formulae(sheet) {
-	var cmds, y = "", x, val="";
-	if(sheet == null || sheet["!ref"] == null) return "";
-	var r = safe_decode_range(sheet['!ref']), rr = "", cols = [];
-	cmds = new Array((r.e.r-r.s.r+1)*(r.e.c-r.s.c+1));
+	var y = "", x, val="";
+	if(sheet == null || sheet["!ref"] == null) return [];
+	var r = safe_decode_range(sheet['!ref']), rr = "", cols = [], C;
+	var cmds = new Array((r.e.r-r.s.r+1)*(r.e.c-r.s.c+1));
 	var i = 0;
+	for(C = r.s.c; C <= r.e.c; ++C) cols[C] = encode_col(C);
 	for(var R = r.s.r; R <= r.e.r; ++R) {
 		rr = encode_row(R);
-		for(var C = r.s.c; C <= r.e.c; ++C) {
-			if(R === r.s.r) cols[C] = encode_col(C);
+		for(C = r.s.c; C <= r.e.c; ++C) {
 			y = cols[C] + rr;
 			x = sheet[y];
 			val = "";
 			if(x === undefined) continue;
+			else if(x.F != null) {
+				y = x.F;
+				if(!x.f) continue;
+				val = x.f;
+				if(y.indexOf(":") == -1) y = y + ":" + y;
+			}
 			if(x.f != null) val = x.f;
+			else if(x.t == 'n' && x.v != null) val = "" + x.v;
+			else if(x.t == 'b') val = x.v ? "TRUE" : "FALSE";
 			else if(x.w !== undefined) val = "'" + x.w;
 			else if(x.v === undefined) continue;
+			else if(x.t == 's') val = "'" + x.v;
 			else val = ""+x.v;
 			cmds[i++] = y + "=" + val;
 		}
@@ -6921,6 +7772,8 @@ var utils = {
 XLS.parse_xlscfb = parse_xlscfb;
 XLS.read = xlsread;
 XLS.readFile = readFile;
+XLS.readSync = xlsread;
+XLS.readFileSync = readFile;
 XLS.utils = utils;
 XLS.CFB = CFB;
 XLS.SSF = SSF;
