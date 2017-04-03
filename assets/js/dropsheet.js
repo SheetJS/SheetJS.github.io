@@ -46,7 +46,7 @@ var DropSheet = function DropSheet(opts) {
 					cb(JSON.parse(e.data.d), e.data.t); break;
 			}
 		};
-		worker.postMessage({d:data,b:readtype,t:xls?'xls':'xlsx'});
+		worker.postMessage({d:data,b:readtype,t:'xlsx'});
 	}
 
 	var last_wb, last_type;
@@ -99,27 +99,18 @@ var DropSheet = function DropSheet(opts) {
 			var name = f.name;
 			reader.onload = function(e) {
 				var data = e.target.result;
-				var wb, arr, xls;
+				var wb, arr, xls = false;
 				var readtype = {type: rABS ? 'binary' : 'base64' };
 				if(!rABS) {
 					arr = fixdata(data);
 					data = btoa(arr);
 				}
-				xls = [0xd0, 0x3c].indexOf(data.charCodeAt(0)) > -1;
-				if(!xls && arr) xls = [0xd0, 0x3c].indexOf(arr[0].charCodeAt(0)) > -1;
-				if(rABS && !xls && [0x50, 0x09, 0xEF].indexOf(data.charCodeAt(0)) === -1)
-					return opts.errors.badfile();
 				function doit() {
 					try {
 						if(useworker) { sheetjsw(data, process_wb, readtype, xls); return; }
-						if(xls) {
-							wb = XLS.read(data, readtype);
-							process_wb(wb, 'XLS');
-						} else {
-							wb = XLSX.read(data, readtype);
-							process_wb(wb, 'XLSX');
-						}
-					} catch(e) { opts.errors.failed(e); }
+						wb = XLSX.read(data, readtype);
+						process_wb(wb, 'XLSX');
+					} catch(e) { console.log(e); opts.errors.failed(e); }
 				}
 
 				if(e.target.result.length > 500000) opts.errors.large(e.target.result.length, function(e) { if(e) doit(); });
