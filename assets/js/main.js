@@ -22,7 +22,7 @@ var _large = function(len, cb) {
 
 var _failed = function(e) {
   console.log(e, e.stack);
-  alertify.alert('We unfortunately dropped the ball here.  We noticed some issues with the grid recently, so please test the file using the direct parsers for <a href="/js-xls/">XLS</a> and <a href="/js-xlsx/">XLSX</a> files.  If there are issues with the direct parsers, please send this file to <a href="mailto:dev@sheetjs.com?subject=I+broke+your+stuff">dev@sheetjs.com</a> so we can make things right.', function(){});
+  alertify.alert('We unfortunately dropped the ball here.  We noticed some issues with the grid recently, so please test the file using the <a href="/js-xlsx/">raw parser</a>.  If there are issues with the file processor, please send this file to <a href="mailto:dev@sheetjs.com?subject=I+broke+your+stuff">dev@sheetjs.com</a> so we can make things right.', function(){});
 };
 
 /** Handsontable magic **/
@@ -57,7 +57,7 @@ var make_buttons = function(sheetnames, cb) {
   });
 };
 
-var _onsheet = function(json, cols, sheetnames, select_sheet_cb) {
+var _onsheet = function(json, sheetnames, select_sheet_cb) {
   $('#footnote').hide();
 
   make_buttons(sheetnames, select_sheet_cb);
@@ -65,21 +65,16 @@ var _onsheet = function(json, cols, sheetnames, select_sheet_cb) {
 
   /* add header row for table */
   if(!json) json = [];
-  json.unshift(function(head){var o = {}; for(i=0;i!=head.length;++i) o[head[i]] = head[i]; return o;}(cols));
+	json.forEach(function(r) { if(json[0].length < r.length) json[0].length = r.length; });
   calculateSize();
   /* showtime! */
   $("#hot").handsontable({
     data: json,
     startRows: 5,
     startCols: 3,
-    fixedRowsTop: 1,
     stretchH: 'all',
     rowHeaders: true,
-    columns: cols.map(function(x) { return {data:x}; }),
-    colHeaders: cols.map(function(x,i) { return XLS.utils.encode_col(i); }),
-    cells: function (r,c,p) {
-      if(r === 0) this.renderer = boldRenderer;
-    },
+    colHeaders: true,
     width: function () { return availableWidth; },
     height: function () { return availableHeight; },
     stretchH: 'all'

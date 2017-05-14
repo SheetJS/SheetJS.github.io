@@ -26,22 +26,20 @@
       <tr><td colspan="5"><a href="http://visionmedia.github.io/mocha">Mocha test runner</a> used here and in the node modules</td></tr>
     </table>
     <script src="assets/js/shim.js"></script>
-    <script src="assets/js/cpexcel.js"></script>
-    <script src="assets/js/jszip.js"></script>
-    <script src="assets/js/xlsx.js"></script>
-    <script src="assets/js/ods.js"></script>
+    <script src="assets/js/xlsx.full.min.js"></script>
     <!--[if IE]>
       <script type="text/javascript" src="assets/js/xhr-hack.js"></script>
     <![endif]-->
     <div id="mocha"></div>
     <script src="tests/mocha.js"></script>
+    <script src="tests/mocha-sauce-client.js"></script>
     <script>
       window.initMochaPhantomJS && window.initMochaPhantomJS();
       mocha.setup('bdd');
     </script>
     <script src="tests/test.js"></script>
     <script>
-      if(typeof mochaSaucePlease !== "undefined") mochaSaucePlease();
+      if(typeof mocha_sauce !== "undefined") mocha_sauce();
       else if(window.mochaPhantomJS) mochaPhantomJS.run();
       else mocha.run();
     </script>

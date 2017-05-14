@@ -15,7 +15,7 @@ var DropSheet = function DropSheet(opts) {
 	if(!opts.on.sheet) opts.on.sheet = nullfunc;
 	if(!opts.on.wb) opts.on.wb = nullfunc;
 
-	var rABS = typeof FileReader !== 'undefined' && typeof FileReader.prototype !== 'undefined' && typeof FileReader.prototype.readAsBinaryString !== 'undefined';
+	var rABS = typeof FileReader !== 'undefined' && FileReader.prototype && FileReader.prototype.readAsBinaryString;
 	var useworker = typeof Worker !== 'undefined';
 	var pending = false;
 	function fixdata(data) {
@@ -26,7 +26,7 @@ var DropSheet = function DropSheet(opts) {
 		return o;
 	}
 
-	function sheetjsw(data, cb, readtype, xls) {
+	function sheetjsw(data, cb, readtype) {
 		pending = true;
 		opts.on.workstart();
 		var scripts = document.getElementsByTagName('script');
@@ -41,51 +41,35 @@ var DropSheet = function DropSheet(opts) {
 			switch(e.data.t) {
 				case 'ready': break;
 				case 'e': pending = false; console.error(e.data.d); break;
-				case 'xls': case 'xlsx': pending = false;
+				case 'xlsx':
+					pending = false;
 					opts.on.workend();
-					cb(JSON.parse(e.data.d), e.data.t); break;
+					cb(JSON.parse(e.data.d)); break;
 			}
 		};
 		worker.postMessage({d:data,b:readtype,t:'xlsx'});
 	}
 
-	var last_wb, last_type;
+	var last_wb;
 
-	function to_json(workbook, type) {
-		var XL = type.toUpperCase() === 'XLS' ? XLS : XLSX;
-		if(useworker && workbook.SSF) XLS.SSF.load_table(workbook.SSF);
+	function to_json(workbook) {
+		if(useworker && workbook.SSF) XLSX.SSF.load_table(workbook.SSF);
 		var result = {};
 		workbook.SheetNames.forEach(function(sheetName) {
-			var roa = XL.utils.sheet_to_row_object_array(workbook.Sheets[sheetName], {raw:true});
+			var roa = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], {header:1});
 			if(roa.length > 0) result[sheetName] = roa;
 		});
 		return result;
 	}
 
-	function get_columns(sheet, type) {
-		var val, rowObject, range, columnHeaders, emptyRow, C;
-		if(!sheet['!ref']) return [];
-		range = XLS.utils.decode_range(sheet["!ref"]);
-		columnHeaders = [];
-		for (C = range.s.c; C <= range.e.c; ++C) {
-			val = sheet[XLS.utils.encode_cell({c: C, r: range.s.r})];
-			if(!val) continue;
-			columnHeaders[C] = type.toLowerCase() == 'xls' ? XLS.utils.format_cell(val) : val.v;
-			//console.log(val, columnHeaders[C]);
-		}
-		return columnHeaders;
-	}
+	function choose_sheet(sheetidx) { process_wb(last_wb, sheetidx); }
 
-	function choose_sheet(sheetidx) { process_wb(last_wb, last_type, sheetidx); }
-
-	function process_wb(wb, type, sheetidx) {
+	function process_wb(wb, sheetidx) {
 		last_wb = wb;
-		last_type = type;
-		opts.on.wb(wb, type, sheetidx);
+		opts.on.wb(wb, sheetidx);
 		var sheet = wb.SheetNames[sheetidx||0];
-		if(type.toLowerCase() == 'xls' && wb.SSF) XLS.SSF.load_table(wb.SSF);
-		var json = to_json(wb, type)[sheet], cols = get_columns(wb.Sheets[sheet], type);
-		opts.on.sheet(json, cols, wb.SheetNames, choose_sheet);
+		var json = to_json(wb)[sheet];
+		opts.on.sheet(json, wb.SheetNames, choose_sheet);
 	}
 
 	function handleDrop(e) {
@@ -99,7 +83,7 @@ var DropSheet = function DropSheet(opts) {
 			var name = f.name;
 			reader.onload = function(e) {
 				var data = e.target.result;
-				var wb, arr, xls = false;
+				var wb, arr;
 				var readtype = {type: rABS ? 'binary' : 'base64' };
 				if(!rABS) {
 					arr = fixdata(data);
@@ -107,13 +91,13 @@ var DropSheet = function DropSheet(opts) {
 				}
 				function doit() {
 					try {
-						if(useworker) { sheetjsw(data, process_wb, readtype, xls); return; }
+						if(useworker) { sheetjsw(data, process_wb, readtype); return; }
 						wb = XLSX.read(data, readtype);
-						process_wb(wb, 'XLSX');
+						process_wb(wb);
 					} catch(e) { console.log(e); opts.errors.failed(e); }
 				}
 
-				if(e.target.result.length > 500000) opts.errors.large(e.target.result.length, function(e) { if(e) doit(); });
+				if(e.target.result.length > 1e6) opts.errors.large(e.target.result.length, function(e) { if(e) doit(); });
 				else { doit(); }
 			};
 			if(rABS) reader.readAsBinaryString(f);
