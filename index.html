@@ -8,10 +8,8 @@
     </head>
     <body>
         <script src="assets/vendor/alertify.js"></script>
-        <script src="assets/vendor/jquery.min.js"></script>
-        <script src="assets/vendor/jquery.handsontable.full.js"></script>
+        <script src="//unpkg.com/canvas-datagrid/dist/canvas-datagrid.js"></script>
 
-        <link rel="stylesheet" media="screen" href="assets/vendor/jquery.handsontable.full.css">
         <link rel="stylesheet" media="screen" href="assets/vendor/samples.css">
         <link rel="stylesheet" media="screen" href="assets/vendor/alertify.css">
 
@@ -21,6 +19,7 @@
                     <a href="http://sheetjs.com"><img src="assets/img/logo.png" class="logo" alt="SheetJS Logo" width=128px height=128px /></a>
                 </div>
             <div id="drop">Drop a file here</div>
+            <input type="file" id="file" value=""/><label for="file">... or click here to select a file</label>
             <h3> Choose a worksheet:</h3>
             <div id="buttons"></div>
         </div>
@@ -33,7 +32,7 @@
                     Need a file?  Why not the <a href="https://obamawhitehouse.archives.gov/sites/default/files/omb/budget/fy2014/assets/receipts.xls">OMB FY 2014 Federal Receipts?</a>
                 </h3>
                 <table id="tt">
-                  <tr><td colspan="6"><a href="http://github.com/SheetJS/SheetJS.github.io">View This Page Source</a>; <a href="http://github.com/SheetJS/js-xlsx">XLSX Library</a> (for parsing)</tr>
+                  <tr><td colspan="6"><a href="http://github.com/SheetJS/SheetJS.github.io">View This Page Source</a>; <a href="http://github.com/SheetJS/js-xlsx">XLSX Library</a> (for parsing); <a href="https://github.com/TonyGermaneri/canvas-datagrid">Grid Library</a></tr>
                   <tr>
                     <th>File Formats</th>
                     <td><a href="http://github.com/SheetJS/js-xlsx">Library Source</a></td>
@@ -44,7 +43,7 @@
                   </tr>
                 </table>
             </div>
-            <div id="hot" style="overflow: scroll" class="handsontable"></div>
+            <div id="grid"></div>
             <div id="footnote">
                 <h3>
                     This particular parser assumes that <b>the first row of the table is a header.</b><br/>
@@ -58,7 +57,7 @@
         </div>
 
         <script src="assets/js/shim.js"></script>
-        <script src="//rawgit.com/SheetJS/js-xlsx/master/dist/xlsx.full.min.js"></script>
+        <script src="//unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
         <script src="assets/js/dropsheet.js"></script>
         <script src="assets/js/main.js"></script>
 

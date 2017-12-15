@@ -1,5 +1,8 @@
 /* sheetjs.css (C) 2014-present SheetJS -- http://sheetjs.com */
 /* vim: set ts=2: */
+html {
+  overflow: hidden;
+}
 #drop{
   border:2px dashed #bbb;
   -moz-border-radius:5px;
@@ -25,6 +28,10 @@
 }
 #header {
   height:168px;
+}
+#grid {
+  height: 100px;
+  display: none;
 }
 
 .winpt { width:98%; }
