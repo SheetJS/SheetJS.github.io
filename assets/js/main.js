@@ -46,6 +46,8 @@ var make_buttons = function(sheetnames, cb) {
 var cdg = canvasDatagrid({
   parentNode: _grid
 });
+cdg.style.height = '100%';
+cdg.style.width = '100%';
 
 function _resize() {
   _grid.style.height = (window.innerHeight - 200) + "px";
