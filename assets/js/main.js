@@ -1,3 +1,6 @@
+/* oss.sheetjs.com (C) 2014-present SheetJS -- http://sheetjs.com */
+/* vim: set ts=2: */
+
 /** drop target **/
 var _target = document.getElementById('drop');
 var _file = document.getElementById('file');
@@ -64,16 +67,16 @@ var _onsheet = function(json, sheetnames, select_sheet_cb) {
   _grid.style.display = "block";
   _resize();
 
-  /* load data */
-  cdg.data = json;
-
   /* set up table headers */
   var L = 0;
   json.forEach(function(r) { if(L < r.length) L = r.length; });
-  for(var i = 0; i < L; ++i) {
-    cdg.schema[i].title = XLSX.utils.encode_col(i);
+  console.log(L);
+  for(var i = json[0].length; i < L; ++i) {
+    json[0][i] = "";
   }
 
+  /* load data */
+  cdg.data = json;
 };
 
 /** Drop it like it's hot **/
