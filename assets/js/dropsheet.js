@@ -56,7 +56,7 @@ var DropSheet = function DropSheet(opts) {
     if(useworker && workbook.SSF) XLSX.SSF.load_table(workbook.SSF);
     var result = {};
     workbook.SheetNames.forEach(function(sheetName) {
-      var roa = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], {header:1});
+      var roa = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], {raw:false, header:1});
       if(roa.length > 0) result[sheetName] = roa;
     });
     return result;
