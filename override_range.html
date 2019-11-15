@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<!-- xlsx.js (C) 2013-present  SheetJS http://sheetjs.com -->
+<!-- vim: set ts=2: -->
+<html>
+  <head>
+    <title>SheetJS Live Grid Demo</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="icon" type="image/png" href="assets/img/logo.png" />
+    <link rel="stylesheet" href="assets/css/sheetjs.css">
+  </head>
+  <body>
+    <script src="assets/vendor/alertify.js"></script>
+    <script src="//unpkg.com/canvas-datagrid/dist/canvas-datagrid.js"></script>
+
+    <link rel="stylesheet" media="screen" href="assets/vendor/samples.css">
+    <link rel="stylesheet" media="screen" href="assets/vendor/alertify.css">
+
+    <div id="body">
+      <div id="left">
+        <div id="logo">
+          <a href="http://sheetjs.com"><img src="assets/img/logo.png" class="logo" alt="SheetJS Logo" width=128px height=128px /></a>
+        </div>
+      <div id="drop">Drop a file here</div>
+      <input type="file" id="file" value=""/><label for="file">... or click here to select a file</label>
+      <h3> Choose a worksheet:</h3>
+      <div id="buttons"></div>
+    </div>
+    <div id="right">
+      <div id="header">
+        <pre id="out"></pre>
+        <h2>SheetJS In-Browser Live Grid Demo</h2>
+        <h3>
+          Drop a spreadsheet in the box to the left to see a preview.<br/>
+          Need a file?  Why not the <a href="https://obamawhitehouse.archives.gov/sites/default/files/omb/budget/fy2014/assets/receipts.xls">OMB FY 2014 Federal Receipts?</a>
+        </h3>
+        <table id="tt">
+          <tr><td colspan="6"><a href="http://github.com/SheetJS/SheetJS.github.io">View This Page Source</a>; <a href="http://github.com/SheetJS/js-xlsx">XLSX Library</a> (for parsing); <a href="https://github.com/TonyGermaneri/canvas-datagrid">Grid Library</a></tr>
+          <tr>
+          <th>File Formats</th>
+          <td><a href="http://github.com/SheetJS/js-xlsx">Library Source</a></td>
+          <td><a href="http://SheetJS.github.io/js-xlsx">Interactive Demo</a></td>
+          <td><a href="http://npm.im/xlsx">"xlsx" on npm</a></td>
+          <td><a href="https://travis-ci.org/SheetJS/js-xlsx">node CI status</a></td>
+          <td><a href="stress.html">browser stress test</a></td>
+          </tr>
+        </table>
+      </div>
+      <div id="grid"></div>
+      <div id="footnote">
+        <h3>
+          This particular parser assumes that <b>the first row of the table is a header.</b><br/>
+          For parsing a more general file, check the Interactive Demos
+        </h3><br/>
+        <h3>The entire process occurs within your browser <br />
+          <b>NO SPREADSHEET DATA IS SENT TO ANY SERVER (parsing and rendering done in your browser)</b></br>
+        <h3>This is a work in progress.  Every bit helps.  Please email <a href="mailto:dev@sheetjs.com">dev@sheetjs.com</a> with your feedback.
+        <h3>Follow us on Twitter <a href="https://twitter.com/SheetJS">@SheetJS</a></h3>
+      </div>
+    </div>
+
+    <script src="assets/js/shim.js"></script>
+    <script src="//unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+    <script src="assets/js/dropsheet_override_range.js"></script>
+    <script src="assets/js/main.js"></script>
+
+    <script src="assets/vendor/spin.js"></script>
+
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-36810333-1']);
+      _gaq.push(['_setDomainName', 'sheetjs.com']);
+      _gaq.push(['_setAllowLinker', true]);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </body>
+</html>
