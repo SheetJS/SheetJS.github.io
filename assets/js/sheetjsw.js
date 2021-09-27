@@ -1,4 +1,4 @@
-importScripts('//unpkg.com/xlsx/dist/xlsx.full.min.js');
+importScripts('//cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js');
 postMessage({t:'ready'});
 onmessage = function(evt) {
   var v;
