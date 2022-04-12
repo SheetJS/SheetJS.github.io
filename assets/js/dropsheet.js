@@ -15,16 +15,9 @@ var DropSheet = function DropSheet(opts) {
   if(!opts.on.sheet) opts.on.sheet = nullfunc;
   if(!opts.on.wb) opts.on.wb = nullfunc;
 
-  var rABS = typeof FileReader !== 'undefined' && FileReader.prototype && FileReader.prototype.readAsBinaryString;
+  var rABS = false; // typeof FileReader !== 'undefined' && FileReader.prototype && FileReader.prototype.readAsBinaryString;
   var useworker = typeof Worker !== 'undefined';
   var pending = false;
-  function fixdata(data) {
-    var o = "", l = 0, w = 10240;
-    for(; l<data.byteLength/w; ++l)
-      o+=String.fromCharCode.apply(null,new Uint8Array(data.slice(l*w,l*w+w)));
-    o+=String.fromCharCode.apply(null, new Uint8Array(data.slice(o.length)));
-    return o;
-  }
 
   function sheetjsw(data, cb, readtype) {
     pending = true;
@@ -33,7 +26,7 @@ var DropSheet = function DropSheet(opts) {
     var dropsheetPath;
     for (var i = 0; i < scripts.length; i++) {
       if (scripts[i].src.indexOf('dropsheet') != -1) {
-        dropsheetPath = scripts[i].src.split('dropsheet.js')[0];
+        dropsheetPath = scripts[i].src.split('dropsheet')[0];
       }
     }
     var worker = new Worker(dropsheetPath + 'sheetjsw.js');
@@ -69,6 +62,7 @@ var DropSheet = function DropSheet(opts) {
     opts.on.wb(wb, sheetidx);
     var sheet = wb.SheetNames[sheetidx||0];
     var json = to_json(wb)[sheet];
+		console.log(wb);
     opts.on.sheet(json, wb.SheetNames, choose_sheet);
   }
 
@@ -84,11 +78,7 @@ var DropSheet = function DropSheet(opts) {
       reader.onload = function(e) {
         var data = e.target.result;
         var wb, arr;
-        var readtype = {type: rABS ? 'binary' : 'base64' };
-        if(!rABS) {
-          arr = fixdata(data);
-          data = btoa(arr);
-        }
+        var readtype = {type: rABS ? 'binary' : 'array' };
         function doit() {
           try {
             if(useworker) { sheetjsw(data, process_wb, readtype); return; }
@@ -127,11 +117,7 @@ var DropSheet = function DropSheet(opts) {
       reader.onload = function(e) {
         var data = e.target.result;
         var wb, arr;
-        var readtype = {type: rABS ? 'binary' : 'base64' };
-        if(!rABS) {
-          arr = fixdata(data);
-          data = btoa(arr);
-        }
+        var readtype = {type: rABS ? 'binary' : 'array' };
         function doit() {
           try {
             if(useworker) { sheetjsw(data, process_wb, readtype); return; }

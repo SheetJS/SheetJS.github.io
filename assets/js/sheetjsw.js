@@ -1,4 +1,4 @@
-importScripts('//cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js');
+importScripts('https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js');
 postMessage({t:'ready'});
 onmessage = function(evt) {
   var v;
